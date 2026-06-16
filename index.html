@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GatorPath — UF Graduation Navigator</title>
+<style>
+  :root {
+    --gator-blue: #003087;
+    --gator-orange: #FA4616;
+    --gator-orange-light: #fff3ee;
+    --blue-light: #e8eef7;
+    --green: #1a7a3c;
+    --green-light: #e6f4ec;
+    --red: #c0392b;
+    --red-light: #fdecea;
+    --yellow: #e67e22;
+    --yellow-light: #fef9e7;
+    --gray: #6c757d;
+    --gray-light: #f8f9fa;
+    --border: #dee2e6;
+    --shadow: 0 2px 8px rgba(0,0,0,.1);
+    --radius: 10px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f4fa; color: #222; }
+
+  /* ── Header ── */
+  header {
+    background: var(--gator-blue);
+    color: white;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+    box-shadow: 0 2px 6px rgba(0,0,0,.3);
+    position: sticky; top: 0; z-index: 100;
+  }
+  .logo { display: flex; align-items: center; gap: 10px; font-size: 1.3rem; font-weight: 700; }
+  .logo-gator { font-size: 1.8rem; }
+  .logo-subtitle { font-size: .75rem; opacity: .8; font-weight: 400; }
+  .mode-tabs { display: flex; gap: 4px; }
+  .mode-tab {
+    padding: 6px 18px; border-radius: 20px; cursor: pointer; font-size: .85rem;
+    border: 2px solid rgba(255,255,255,.3); color: rgba(255,255,255,.8);
+    background: transparent; transition: all .2s;
+  }
+  .mode-tab.active, .mode-tab:hover { background: var(--gator-orange); border-color: var(--gator-orange); color: white; }
+
+  /* ── Layout ── */
+  .container { max-width: 1100px; margin: 0 auto; padding: 24px 16px; }
+  .card {
+    background: white; border-radius: var(--radius); box-shadow: var(--shadow);
+    padding: 24px; margin-bottom: 20px;
+  }
+  .card-title { font-size: 1.1rem; font-weight: 700; color: var(--gator-blue); margin-bottom: 16px;
+    border-bottom: 2px solid var(--gator-orange); padding-bottom: 8px; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  @media(max-width:700px) { .two-col { grid-template-columns: 1fr; } }
+
+  /* ── Forms ── */
+  label { display: block; font-size: .85rem; font-weight: 600; color: #555; margin-bottom: 4px; }
+  input, select, textarea {
+    width: 100%; padding: 10px 12px; border: 1.5px solid var(--border);
+    border-radius: 7px; font-size: .95rem; outline: none; transition: border .2s;
+  }
+  input:focus, select:focus, textarea:focus { border-color: var(--gator-blue); }
+  .form-group { margin-bottom: 14px; }
+
+  /* ── Buttons ── */
+  .btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 10px 22px; border: none; border-radius: 7px; cursor: pointer;
+    font-size: .95rem; font-weight: 600; transition: all .2s;
+  }
+  .btn-primary { background: var(--gator-blue); color: white; }
+  .btn-primary:hover { background: #002060; }
+  .btn-orange { background: var(--gator-orange); color: white; }
+  .btn-orange:hover { background: #d93a0f; }
+  .btn-sm { padding: 5px 12px; font-size: .82rem; }
+  .btn-ghost { background: transparent; border: 1.5px solid var(--border); color: #555; }
+  .btn-ghost:hover { background: var(--gray-light); }
+
+  /* ── Course Input ── */
+  .course-input-area { display: flex; gap: 8px; margin-bottom: 8px; }
+  .course-input-area input { flex: 1; }
+  .tag-list { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .tag {
+    background: var(--blue-light); color: var(--gator-blue);
+    border-radius: 20px; padding: 3px 10px; font-size: .82rem;
+    display: flex; align-items: center; gap: 4px;
+  }
+  .tag-remove { cursor: pointer; font-size: .9rem; opacity: .6; }
+  .tag-remove:hover { opacity: 1; color: var(--red); }
+
+  /* ── Progress Bar ── */
+  .progress-wrap { background: var(--gray-light); border-radius: 20px; height: 14px; overflow: hidden; }
+  .progress-bar {
+    height: 100%; border-radius: 20px; transition: width .6s ease;
+    background: linear-gradient(90deg, var(--gator-blue), var(--gator-orange));
+  }
+  .progress-label { font-size: .8rem; color: var(--gray); margin-top: 4px; }
+
+  /* ── Status Badges ── */
+  .badge {
+    display: inline-block; padding: 2px 10px; border-radius: 20px;
+    font-size: .75rem; font-weight: 700; letter-spacing: .03em;
+  }
+  .badge-green { background: var(--green-light); color: var(--green); }
+  .badge-red { background: var(--red-light); color: var(--red); }
+  .badge-yellow { background: var(--yellow-light); color: var(--yellow); }
+  .badge-blue { background: var(--blue-light); color: var(--gator-blue); }
+
+  /* ── Course Status List ── */
+  .course-list { list-style: none; }
+  .course-list li {
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 8px 0; border-bottom: 1px solid var(--border); font-size: .88rem;
+  }
+  .course-list li:last-child { border-bottom: none; }
+  .ci { font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
+  .ci-done { color: var(--green); }
+  .ci-missing { color: var(--red); }
+  .ci-warn { color: var(--yellow); }
+  .course-code { font-weight: 700; color: var(--gator-blue); min-width: 80px; }
+  .course-credits { color: var(--gray); font-size: .8rem; margin-left: auto; white-space: nowrap; }
+
+  /* ── Major Switch Cards ── */
+  .switch-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+  .switch-card {
+    border: 1.5px solid var(--border); border-radius: var(--radius); padding: 16px;
+    cursor: pointer; transition: all .2s;
+  }
+  .switch-card:hover, .switch-card.selected {
+    border-color: var(--gator-orange); box-shadow: 0 0 0 3px rgba(250,70,22,.12);
+  }
+  .switch-card h4 { font-size: .95rem; color: var(--gator-blue); margin-bottom: 6px; }
+  .switch-card .match-pct { font-size: 1.6rem; font-weight: 800; color: var(--gator-orange); }
+  .switch-card .college-name { font-size: .78rem; color: var(--gray); margin-bottom: 8px; }
+
+  /* ── Semester Plan ── */
+  .semester-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+  .semester-box {
+    border: 1.5px solid var(--border); border-radius: 8px; overflow: hidden;
+  }
+  .semester-header {
+    background: var(--gator-blue); color: white; padding: 6px 12px;
+    font-size: .82rem; font-weight: 700; display: flex; justify-content: space-between;
+  }
+  .semester-body { padding: 8px 12px; }
+  .semester-body .sc { font-size: .8rem; padding: 2px 0; }
+  .semester-body .sc.completed { color: var(--green); }
+  .semester-body .sc.missing { color: var(--red); }
+
+  /* ── Panels (student / advisor) ── */
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* ── Alert box ── */
+  .alert {
+    border-radius: 8px; padding: 12px 16px; margin-bottom: 16px; font-size: .88rem;
+    display: flex; gap: 10px; align-items: flex-start;
+  }
+  .alert-info { background: var(--blue-light); color: var(--gator-blue); }
+  .alert-success { background: var(--green-light); color: var(--green); }
+  .alert-warning { background: var(--yellow-light); color: var(--yellow); }
+  .alert-danger { background: var(--red-light); color: var(--red); }
+
+  /* ── Stats row ── */
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 20px; }
+  @media(max-width:600px) { .stats { grid-template-columns: 1fr 1fr; } }
+  .stat-box { background: white; border-radius: 10px; padding: 16px; box-shadow: var(--shadow); text-align: center; }
+  .stat-value { font-size: 2rem; font-weight: 800; color: var(--gator-blue); }
+  .stat-label { font-size: .75rem; color: var(--gray); margin-top: 2px; }
+
+  /* ── Advisor table ── */
+  table { width: 100%; border-collapse: collapse; font-size: .88rem; }
+  th { background: var(--gator-blue); color: white; padding: 10px 12px; text-align: left; font-size: .82rem; }
+  td { padding: 9px 12px; border-bottom: 1px solid var(--border); }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: var(--gray-light); }
+
+  /* ── Loading spinner ── */
+  .spinner { text-align: center; padding: 40px; color: var(--gray); }
+  .spinner::before { content: '⏳ '; }
+
+  /* ── Tooltip ── */
+  [data-tip] { position: relative; cursor: help; }
+  [data-tip]:hover::after {
+    content: attr(data-tip);
+    position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%);
+    background: #333; color: white; padding: 4px 8px; border-radius: 5px;
+    font-size: .75rem; white-space: nowrap; pointer-events: none; z-index: 200;
+    margin-bottom: 4px;
+  }
+
+  /* ── Empty state ── */
+  .empty { text-align: center; padding: 40px 20px; color: var(--gray); }
+  .empty .empty-icon { font-size: 3rem; margin-bottom: 10px; }
+  .empty p { font-size: .9rem; }
+
+  /* ── Print styles ── */
+  @media print { header { display: none; } .btn { display: none; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <span class="logo-gator">🐊</span>
+    <div>
+      <div>GatorPath</div>
+      <div class="logo-subtitle">UF Graduation Navigator</div>
+    </div>
+  </div>
+  <div class="mode-tabs">
+    <button class="mode-tab active" onclick="switchMode('student')">🎓 Student</button>
+    <button class="mode-tab" onclick="switchMode('advisor')">📋 Advisor</button>
+  </div>
+</header>
+
+<!-- ══════════════════════════════════════════════════════════════════════════ -->
+<!--  STUDENT PANEL                                                            -->
+<!-- ══════════════════════════════════════════════════════════════════════════ -->
+<div id="panel-student" class="panel active">
+<div class="container">
+
+  <!-- Input Card -->
+  <div class="card">
+    <div class="card-title">📝 Student Profile</div>
+    <div class="two-col">
+      <div>
+        <div class="form-group">
+          <label>Student Name</label>
+          <input id="stu-name" type="text" placeholder="e.g. Rafael Veloz">
+        </div>
+        <div class="form-group">
+          <label>Current Major</label>
+          <select id="stu-major">
+            <option value="">— loading majors —</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Credits Completed So Far</label>
+          <input id="stu-total-credits" type="number" min="0" max="200" placeholder="e.g. 60">
+        </div>
+        <div class="form-group">
+          <label>Current GPA</label>
+          <input id="stu-gpa" type="number" step="0.01" min="0" max="4.0" placeholder="e.g. 3.40">
+        </div>
+      </div>
+      <div>
+        <div class="form-group">
+          <label>Completed Courses <span style="font-weight:400;color:#888">(type code + Enter)</span></label>
+          <div class="course-input-area">
+            <input id="course-input" type="text" placeholder="e.g. MAC 2311" autocomplete="off"
+              onkeydown="if(event.key==='Enter')addCourse()">
+            <button class="btn btn-orange btn-sm" onclick="addCourse()">Add</button>
+          </div>
+          <div id="course-tags" class="tag-list"></div>
+        </div>
+        <div class="form-group" style="margin-top:8px">
+          <label>Quick-add common courses</label>
+          <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:4px">
+            <button class="btn btn-ghost btn-sm" onclick="quickAdd(['ENC 1101','ENC 1102','MAC 2311','STA 2023','BSC 2010','BSC 2010L','CHM 2045'])">Gen Ed Starter Pack</button>
+            <button class="btn btn-ghost btn-sm" onclick="quickAdd(['COP 3502C','COP 3503C','COT 3100','MAC 2312','EEL 3701C'])">CS Year 1-2</button>
+            <button class="btn btn-ghost btn-sm" onclick="quickAdd(['ACG 2021','ACG 2071','ECO 2013','ECO 2023','MAC 2233'])">Business Core</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;gap:10px;margin-top:8px">
+      <button class="btn btn-primary" onclick="analyzeStudent()">🔍 Analyze My Path</button>
+      <button class="btn btn-ghost" onclick="clearStudent()">Clear</button>
+      <button class="btn btn-ghost" onclick="printReport()">🖨️ Print Report</button>
+    </div>
+  </div>
+
+  <!-- Results area -->
+  <div id="student-results" style="display:none">
+
+    <!-- Stats row -->
+    <div class="stats" id="stat-boxes"></div>
+
+    <!-- Alert -->
+    <div id="graduation-alert"></div>
+
+    <!-- Two-col: remaining + critical tracking -->
+    <div class="two-col">
+      <div class="card">
+        <div class="card-title">📚 Required Courses Status</div>
+        <ul class="course-list" id="course-status-list"></ul>
+      </div>
+      <div class="card">
+        <div class="card-title">⚠️ Critical Tracking Status</div>
+        <ul class="course-list" id="ct-status-list"></ul>
+        <div id="ct-warning" style="margin-top:12px"></div>
+      </div>
+    </div>
+
+    <!-- Semester plan -->
+    <div class="card">
+      <div class="card-title">📅 Remaining Path (Estimated Semester Plan)</div>
+      <div class="semester-grid" id="semester-plan"></div>
+    </div>
+
+    <!-- Credit Progress -->
+    <div class="card">
+      <div class="card-title">📊 Degree Progress</div>
+      <div id="progress-bars"></div>
+    </div>
+
+    <!-- Major Switch Section -->
+    <div class="card">
+      <div class="card-title">🔄 Major Switch Advisor</div>
+      <div class="alert alert-info" style="margin-bottom:16px">
+        ℹ️ Based on your completed courses, here are other UF majors where your credits transfer best.
+        A higher match % means fewer extra semesters needed.
+      </div>
+      <div class="switch-grid" id="major-switch-grid"></div>
+      <div id="switch-detail" style="margin-top:20px;display:none"></div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════════════ -->
+<!--  ADVISOR PANEL                                                            -->
+<!-- ══════════════════════════════════════════════════════════════════════════ -->
+<div id="panel-advisor" class="panel">
+<div class="container">
+
+  <div class="card">
+    <div class="card-title">🏫 Advisor Dashboard — Manage Students</div>
+    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+      <input id="adv-search" type="text" placeholder="Search students…" style="max-width:250px"
+        oninput="renderAdvisorTable()">
+      <select id="adv-filter-major" onchange="renderAdvisorTable()" style="max-width:220px">
+        <option value="">All Majors</option>
+      </select>
+      <button class="btn btn-orange" onclick="openAddStudent()">➕ Add Student</button>
+      <button class="btn btn-ghost" onclick="exportCSV()">⬇️ Export CSV</button>
+    </div>
+  </div>
+
+  <!-- Add / Edit Student modal -->
+  <div id="adv-form-card" class="card" style="display:none">
+    <div class="card-title" id="adv-form-title">➕ Add Student</div>
+    <div class="two-col">
+      <div>
+        <div class="form-group"><label>Name</label><input id="adv-stu-name" type="text"></div>
+        <div class="form-group"><label>Student ID</label><input id="adv-stu-id" type="text" placeholder="UFID"></div>
+        <div class="form-group"><label>Email</label><input id="adv-stu-email" type="email"></div>
+        <div class="form-group"><label>Major</label>
+          <select id="adv-stu-major"></select>
+        </div>
+      </div>
+      <div>
+        <div class="form-group"><label>GPA</label><input id="adv-stu-gpa" type="number" step="0.01" min="0" max="4"></div>
+        <div class="form-group"><label>Credits Completed</label><input id="adv-stu-credits" type="number" min="0"></div>
+        <div class="form-group">
+          <label>Completed Courses (comma-separated)</label>
+          <textarea id="adv-stu-courses" rows="4" placeholder="COP 3502C, MAC 2311, ENC 1101…"></textarea>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;gap:10px">
+      <button class="btn btn-primary" onclick="saveStudent()">💾 Save Student</button>
+      <button class="btn btn-ghost" onclick="cancelAddStudent()">Cancel</button>
+    </div>
+  </div>
+
+  <!-- Student table -->
+  <div class="card" id="adv-table-card">
+    <div id="adv-stats" class="stats" style="margin-bottom:20px"></div>
+    <table id="student-table">
+      <thead>
+        <tr>
+          <th>Student</th><th>UFID</th><th>Major</th><th>GPA</th>
+          <th>Credits</th><th>Progress</th><th>CT Status</th><th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="student-tbody"></tbody>
+    </table>
+    <div id="adv-empty" class="empty" style="display:none">
+      <div class="empty-icon">🎓</div>
+      <p>No students yet. Click <strong>Add Student</strong> to get started.</p>
+    </div>
+  </div>
+
+  <!-- Selected student detail -->
+  <div id="adv-student-detail" style="display:none">
+    <div class="card">
+      <div class="card-title" id="adv-detail-title"></div>
+      <div id="adv-detail-content"></div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════════════════════
+//  DATA LAYER
+// ═══════════════════════════════════════════════════════════════════════════
+
+let DB = { majors: [], gen_ed: {} };
+let students = JSON.parse(localStorage.getItem('gatorpath_students') || '[]');
+let completedCourses = new Set();
+let editingStudentId = null;
+let currentMode = 'student';
+
+async function loadData() {
+  try {
+    const r = await fetch('data/majors.json');
+    const json = await r.json();
+    DB.majors = json.majors || [];
+    DB.gen_ed = json.gen_ed_requirements || {};
+  } catch(e) {
+    // Fallback: embed minimal data if file not found
+    console.warn('Could not load data/majors.json — using embedded demo data.');
+    DB.majors = DEMO_MAJORS;
+  }
+  populateMajorSelects();
+}
+
+function saveMajors() {}  // data is read-only; students persist via localStorage
+
+function saveStudents() {
+  localStorage.setItem('gatorpath_students', JSON.stringify(students));
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+//  CORE ENGINE
+// ═══════════════════════════════════════════════════════════════════════════
+
+/**
+ * Analyze a student's path in a given major.
+ * @returns analysis object with completedRequired, missing, ctStatus, switchMatches, etc.
+ */
+function analyzePath(majorId, completedSet, totalCredits, gpa) {
+  const major = DB.majors.find(m => m.id === majorId);
+  if (!major) return null;
+
+  const done = new Set([...completedSet].map(c => normalizeCode(c)));
+
+  // Required course status
+  const courseStatus = (major.required_courses || []).map(c => ({
+    ...c,
+    completed: done.has(normalizeCode(c.code))
+  }));
+  const completedRequired = courseStatus.filter(c => c.completed);
+  const missingRequired = courseStatus.filter(c => !c.completed);
+
+  // Critical tracking status
+  const ctStatus = (major.critical_tracking?.courses || []).map(c => ({
+    ...c,
+    completed: done.has(normalizeCode(c.code))
+  }));
+  const ctMissing = ctStatus.filter(c => !c.completed);
+  const ctComplete = ctStatus.filter(c => c.completed);
+  const ctOK = ctMissing.length === 0;
+  const ctAtRisk = !ctOK;
+
+  // Credit totals
+  const earnedRequiredCredits = completedRequired.reduce((s, c) => s + (c.credits||3), 0);
+  const totalRequired = courseStatus.reduce((s, c) => s + (c.credits||3), 0);
+  const pct = Math.min(100, Math.round((totalCredits / major.total_credits) * 100));
+
+  // Estimated semesters remaining
+  const remainingCredits = Math.max(0, major.total_credits - totalCredits);
+  const semestersLeft = Math.ceil(remainingCredits / 15);
+
+  // Major switch matches
+  const switchMatches = DB.majors
+    .filter(m => m.id !== majorId)
+    .map(m => {
+      const targetDone = new Set([...completedSet].map(c => normalizeCode(c)));
+      const targetReq = m.required_courses || [];
+      const matched = targetReq.filter(c => targetDone.has(normalizeCode(c.code)));
+      const matchPct = Math.round((matched.length / Math.max(1, targetReq.length)) * 100);
+      const savedCredits = matched.reduce((s, c) => s + (c.credits||3), 0);
+      return { major: m, matchPct, matched, savedCredits };
+    })
+    .sort((a, b) => b.matchPct - a.matchPct);
+
+  return {
+    major, courseStatus, completedRequired, missingRequired,
+    ctStatus, ctMissing, ctComplete, ctOK, ctAtRisk,
+    earnedRequiredCredits, totalRequired, pct, remainingCredits, semestersLeft,
+    switchMatches, gpa,
+    onTrack: gpa >= major.min_gpa && ctOK,
+    hasHold: gpa < (major.critical_tracking?.min_gpa || 2.0) || ctAtRisk
+  };
+}
+
+function normalizeCode(code) {
+  return (code || '').toUpperCase().replace(/\s+/g, ' ').trim();
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+//  STUDENT PANEL
+// ═══════════════════════════════════════════════════════════════════════════
+
+function addCourse() {
+  const input = document.getElementById('course-input');
+  const val = normalizeCode(input.value);
+  if (!val) return;
+  completedCourses.add(val);
+  input.value = '';
+  renderCourseTags();
+  input.focus();
+}
+
+function removeCourse(code) {
+  completedCourses.delete(code);
+  renderCourseTags();
+}
+
+function quickAdd(codes) {
+  codes.forEach(c => completedCourses.add(normalizeCode(c)));
+  renderCourseTags();
+}
+
+function renderCourseTags() {
+  const container = document.getElementById('course-tags');
+  container.innerHTML = [...completedCourses].map(c =>
+    `<span class="tag">${c}<span class="tag-remove" onclick="removeCourse('${c}')">✕</span></span>`
+  ).join('');
+}
+
+function analyzeStudent() {
+  const majorId = document.getElementById('stu-major').value;
+  const totalCredits = parseInt(document.getElementById('stu-total-credits').value) || completedCourses.size * 3;
+  const gpa = parseFloat(document.getElementById('stu-gpa').value) || 0;
+
+  if (!majorId) { alert('Please select your major.'); return; }
+
+  const analysis = analyzePath(majorId, completedCourses, totalCredits, gpa);
+  if (!analysis) return;
+
+  renderStudentResults(analysis, totalCredits, gpa);
+  document.getElementById('student-results').style.display = 'block';
+  document.getElementById('student-results').scrollIntoView({ behavior: 'smooth' });
+}
+
+function renderStudentResults(a, totalCredits, gpa) {
+  // Stats
+  document.getElementById('stat-boxes').innerHTML = `
+    <div class="stat-box">
+      <div class="stat-value">${a.pct}%</div>
+      <div class="stat-label">Degree Complete</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-value">${totalCredits} / ${a.major.total_credits}</div>
+      <div class="stat-label">Credits</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-value">${a.semestersLeft}</div>
+      <div class="stat-label">Semesters Left (est.)</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-value">${gpa > 0 ? gpa.toFixed(2) : '—'}</div>
+      <div class="stat-label">Current GPA (min ${a.major.min_gpa})</div>
+    </div>
+  `;
+
+  // Alert
+  let alertHtml = '';
+  if (a.hasHold) {
+    alertHtml = `<div class="alert alert-danger">🚨 <strong>Registration Hold Risk</strong>: You may have a hold due to ${a.ctAtRisk ? 'incomplete critical-tracking courses' : ''}${a.ctAtRisk && gpa < a.major.min_gpa ? ' and ' : ''}${gpa > 0 && gpa < a.major.min_gpa ? 'GPA below minimum' : ''}. Contact your academic advisor immediately.</div>`;
+  } else if (a.pct >= 80) {
+    alertHtml = `<div class="alert alert-success">🎉 <strong>Almost there!</strong> You are ${100 - a.pct}% away from completing your degree requirements in ${a.major.name}.</div>`;
+  } else if (a.onTrack) {
+    alertHtml = `<div class="alert alert-info">✅ <strong>On track!</strong> GPA and critical-tracking look good. Keep it up!</div>`;
+  } else {
+    alertHtml = `<div class="alert alert-warning">⚠️ Review the items below with your advisor before next registration.</div>`;
+  }
+  document.getElementById('graduation-alert').innerHTML = alertHtml;
+
+  // Course status list
+  const csl = document.getElementById('course-status-list');
+  if (a.courseStatus.length === 0) {
+    csl.innerHTML = '<li style="color:#888">No required courses defined for this major yet.</li>';
+  } else {
+    csl.innerHTML = a.courseStatus.map(c => `
+      <li>
+        <span class="ci ${c.completed ? 'ci-done' : 'ci-missing'}">${c.completed ? '✅' : '❌'}</span>
+        <div>
+          <span class="course-code">${c.code}</span>
+          <span style="color:#555"> ${c.name}</span>
+        </div>
+        <span class="course-credits">${c.credits} cr · <span class="badge ${c.completed ? 'badge-green' : 'badge-red'}">${c.completed ? 'Done' : 'Needed'}</span></span>
+      </li>
+    `).join('');
+  }
+
+  // CT status
+  const ctl = document.getElementById('ct-status-list');
+  if (a.ctStatus.length === 0) {
+    ctl.innerHTML = '<li style="color:#888">No critical-tracking data for this major.</li>';
+  } else {
+    ctl.innerHTML = a.ctStatus.map(c => `
+      <li>
+        <span class="ci ${c.completed ? 'ci-done' : 'ci-missing'}">${c.completed ? '✅' : '⚠️'}</span>
+        <div>
+          <span class="course-code">${c.code}</span>
+          <span style="color:#555"> ${c.name}</span>
+          ${c.required_by_semester ? `<div style="font-size:.75rem;color:#888">Required by Semester ${c.required_by_semester}</div>` : ''}
+        </div>
+        <span class="course-credits badge ${c.completed ? 'badge-green' : 'badge-red'}">${c.completed ? 'Done' : 'Missing'}</span>
+      </li>
+    `).join('');
+  }
+
+  const ctWarn = document.getElementById('ct-warning');
+  if (a.ctAtRisk) {
+    ctWarn.innerHTML = `<div class="alert alert-warning">Missing ${a.ctMissing.length} critical-tracking course(s). A registration hold may be placed if not completed on schedule.</div>`;
+  } else {
+    ctWarn.innerHTML = `<div class="alert alert-success">✅ All critical-tracking courses complete.</div>`;
+  }
+
+  // Semester plan
+  renderSemesterPlan(a);
+
+  // Progress bars
+  renderProgressBars(a, totalCredits);
+
+  // Major switch grid
+  renderSwitchGrid(a.switchMatches);
+}
+
+function renderSemesterPlan(a) {
+  const plan = a.major.model_plan || [];
+  if (plan.length === 0) {
+    document.getElementById('semester-plan').innerHTML = '<p style="color:#888">No model plan available for this major.</p>';
+    return;
+  }
+  document.getElementById('semester-plan').innerHTML = plan.map(sem => {
+    const courseHtml = sem.courses.map(c => {
+      const done = completedCourses.has(normalizeCode(c));
+      return `<div class="sc ${done ? 'completed' : 'missing'}">${done ? '✅' : '○'} ${c}</div>`;
+    }).join('');
+    return `
+      <div class="semester-box">
+        <div class="semester-header">
+          <span>Semester ${sem.semester}</span>
+          <span>${sem.credits} cr</span>
+        </div>
+        <div class="semester-body">${courseHtml}</div>
+      </div>
+    `;
+  }).join('');
+}
+
+function renderProgressBars(a, totalCredits) {
+  const categories = {};
+  (a.major.required_courses || []).forEach(c => {
+    if (!categories[c.category]) categories[c.category] = { total: 0, done: 0 };
+    categories[c.category].total += c.credits || 3;
+    if (completedCourses.has(normalizeCode(c.code))) categories[c.category].done += c.credits || 3;
+  });
+
+  const barsHtml = [
+    // Overall
+    `<div style="margin-bottom:14px">
+      <div style="display:flex;justify-content:space-between;font-size:.85rem;margin-bottom:4px">
+        <strong>Overall Degree Progress</strong>
+        <span>${totalCredits} / ${a.major.total_credits} credits (${a.pct}%)</span>
+      </div>
+      <div class="progress-wrap"><div class="progress-bar" style="width:${a.pct}%"></div></div>
+    </div>`,
+    // Per category
+    ...Object.entries(categories).map(([cat, v]) => {
+      const pct = v.total > 0 ? Math.round((v.done / v.total) * 100) : 0;
+      return `
+        <div style="margin-bottom:10px">
+          <div style="display:flex;justify-content:space-between;font-size:.82rem;margin-bottom:3px">
+            <span style="text-transform:capitalize">${cat.replace('_', ' ')}</span>
+            <span>${v.done}/${v.total} cr (${pct}%)</span>
+          </div>
+          <div class="progress-wrap" style="height:10px"><div class="progress-bar" style="width:${pct}%"></div></div>
+        </div>
+      `;
+    })
+  ].join('');
+  document.getElementById('progress-bars').innerHTML = barsHtml;
+}
+
+function renderSwitchGrid(switchMatches) {
+  const top5 = switchMatches.slice(0, 6);
+  document.getElementById('major-switch-grid').innerHTML = top5.map(sw => `
+    <div class="switch-card" onclick="showSwitchDetail('${sw.major.id}', this)">
+      <div class="match-pct">${sw.matchPct}%</div>
+      <h4>${sw.major.name} (${sw.major.degree})</h4>
+      <div class="college-name">${sw.major.college}</div>
+      <div style="font-size:.8rem;color:#555">
+        <strong>${sw.matched.length}</strong> of your courses transfer ·
+        <strong>${sw.savedCredits}</strong> credits saved
+      </div>
+    </div>
+  `).join('');
+}
+
+function showSwitchDetail(majorId, card) {
+  document.querySelectorAll('.switch-card').forEach(c => c.classList.remove('selected'));
+  card.classList.add('selected');
+
+  const studentMajorId = document.getElementById('stu-major').value;
+  const totalCredits = parseInt(document.getElementById('stu-total-credits').value) || 60;
+  const gpa = parseFloat(document.getElementById('stu-gpa').value) || 0;
+  const a = analyzePath(majorId, completedCourses, totalCredits, gpa);
+  if (!a) return;
+
+  const detail = document.getElementById('switch-detail');
+  detail.style.display = 'block';
+  detail.innerHTML = `
+    <div class="card" style="margin-top:0;border:2px solid var(--gator-orange)">
+      <div class="card-title">Switch Analysis: ${a.major.name} (${a.major.degree})</div>
+      <div class="two-col">
+        <div>
+          <p style="font-size:.88rem;margin-bottom:12px">
+            <strong>College:</strong> ${a.major.college}<br>
+            <strong>Total Credits Required:</strong> ${a.major.total_credits}<br>
+            <strong>Estimated Semesters After Switch:</strong> ~${a.semestersLeft}
+          </p>
+          <div class="alert ${a.matchPct >= 60 ? 'alert-success' : a.matchPct >= 30 ? 'alert-warning' : 'alert-danger'}">
+            ${a.matchPct >= 60 ? '✅ Strong match — most of your credits carry over.' :
+              a.matchPct >= 30 ? '⚠️ Moderate match — some courses will need to be retaken.' :
+              '❌ Low match — significant new coursework required.'}
+          </div>
+        </div>
+        <div>
+          <p style="font-size:.82rem;font-weight:600;margin-bottom:8px">Missing Critical-Tracking Courses:</p>
+          ${a.ctMissing.length === 0
+            ? `<span class="badge badge-green">None — all CT courses complete!</span>`
+            : a.ctMissing.map(c => `<div style="font-size:.82rem;color:var(--red)">❌ ${c.code} — ${c.name}</div>`).join('')
+          }
+        </div>
+      </div>
+      <div style="margin-top:12px">
+        <p style="font-size:.82rem;font-weight:600;margin-bottom:8px">Courses You'd Still Need:</p>
+        <div style="display:flex;flex-wrap:wrap;gap:6px">
+          ${a.missingRequired.slice(0, 20).map(c =>
+            `<span class="tag" style="background:var(--red-light);color:var(--red)">${c.code} (${c.credits}cr)</span>`
+          ).join('')}
+          ${a.missingRequired.length > 20 ? `<span class="tag">+${a.missingRequired.length - 20} more</span>` : ''}
+        </div>
+      </div>
+    </div>
+  `;
+  detail.scrollIntoView({ behavior: 'smooth' });
+}
+
+function clearStudent() {
+  completedCourses.clear();
+  renderCourseTags();
+  document.getElementById('student-results').style.display = 'none';
+  document.getElementById('stu-name').value = '';
+  document.getElementById('stu-gpa').value = '';
+  document.getElementById('stu-total-credits').value = '';
+}
+
+function printReport() { window.print(); }
+
+// ═══════════════════════════════════════════════════════════════════════════
+//  ADVISOR PANEL
+// ═══════════════════════════════════════════════════════════════════════════
+
+function renderAdvisorTable() {
+  const search = document.getElementById('adv-search').value.toLowerCase();
+  const majorFilter = document.getElementById('adv-filter-major').value;
+
+  let filtered = students.filter(s => {
+    const matchSearch = !search ||
+      s.name.toLowerCase().includes(search) ||
+      (s.id || '').toLowerCase().includes(search);
+    const matchMajor = !majorFilter || s.majorId === majorFilter;
+    return matchSearch && matchMajor;
+  });
+
+  const tbody = document.getElementById('student-tbody');
+  const empty = document.getElementById('adv-empty');
+
+  if (filtered.length === 0) {
+    tbody.innerHTML = '';
+    empty.style.display = 'block';
+  } else {
+    empty.style.display = 'none';
+    tbody.innerHTML = filtered.map(s => {
+      const major = DB.majors.find(m => m.id === s.majorId);
+      const courses = new Set((s.courses || '').split(',').map(c => normalizeCode(c)).filter(Boolean));
+      const a = major ? analyzePath(s.majorId, courses, s.credits || 0, s.gpa || 0) : null;
+      const pct = a ? a.pct : 0;
+      const ctBadge = a
+        ? (a.ctOK ? '<span class="badge badge-green">✅ On Track</span>' : '<span class="badge badge-red">⚠️ At Risk</span>')
+        : '—';
+      return `
+        <tr>
+          <td><strong>${s.name}</strong></td>
+          <td>${s.id || '—'}</td>
+          <td>${major ? major.name : s.majorId || '—'}</td>
+          <td>${s.gpa || '—'}</td>
+          <td>${s.credits || 0}</td>
+          <td>
+            <div class="progress-wrap" style="height:8px;width:100px">
+              <div class="progress-bar" style="width:${pct}%"></div>
+            </div>
+            <span style="font-size:.75rem;color:#888">${pct}%</span>
+          </td>
+          <td>${ctBadge}</td>
+          <td>
+            <button class="btn btn-ghost btn-sm" onclick="viewStudentDetail('${s._key}')">View</button>
+            <button class="btn btn-ghost btn-sm" onclick="editStudent('${s._key}')">Edit</button>
+            <button class="btn btn-ghost btn-sm" style="color:var(--red)" onclick="deleteStudent('${s._key}')">Del</button>
+          </td>
+        </tr>
+      `;
+    }).join('');
+  }
+
+  // Advisor stats
+  const totalStudents = students.length;
+  const atRisk = students.filter(s => {
+    const major = DB.majors.find(m => m.id === s.majorId);
+    if (!major) return false;
+    const courses = new Set((s.courses || '').split(',').map(c => normalizeCode(c)).filter(Boolean));
+    const a = analyzePath(s.majorId, courses, s.credits || 0, s.gpa || 0);
+    return a && !a.onTrack;
+  }).length;
+
+  document.getElementById('adv-stats').innerHTML = `
+    <div class="stat-box"><div class="stat-value">${totalStudents}</div><div class="stat-label">Total Students</div></div>
+    <div class="stat-box"><div class="stat-value">${atRisk}</div><div class="stat-label" style="color:var(--red)">At Risk</div></div>
+    <div class="stat-box"><div class="stat-value">${totalStudents - atRisk}</div><div class="stat-label" style="color:var(--green)">On Track</div></div>
+    <div class="stat-box"><div class="stat-value">${DB.majors.length}</div><div class="stat-label">Majors Available</div></div>
+  `;
+}
+
+function openAddStudent() {
+  editingStudentId = null;
+  document.getElementById('adv-form-title').textContent = '➕ Add Student';
+  ['adv-stu-name','adv-stu-id','adv-stu-email','adv-stu-gpa','adv-stu-credits','adv-stu-courses'].forEach(id => {
+    document.getElementById(id).value = '';
+  });
+  document.getElementById('adv-stu-major').value = '';
+  document.getElementById('adv-form-card').style.display = 'block';
+  document.getElementById('adv-form-card').scrollIntoView({ behavior: 'smooth' });
+}
+
+function cancelAddStudent() {
+  document.getElementById('adv-form-card').style.display = 'none';
+  editingStudentId = null;
+}
+
+function saveStudent() {
+  const name = document.getElementById('adv-stu-name').value.trim();
+  if (!name) { alert('Name is required.'); return; }
+  const student = {
+    _key: editingStudentId || Date.now().toString(),
+    name,
+    id: document.getElementById('adv-stu-id').value.trim(),
+    email: document.getElementById('adv-stu-email').value.trim(),
+    majorId: document.getElementById('adv-stu-major').value,
+    gpa: parseFloat(document.getElementById('adv-stu-gpa').value) || 0,
+    credits: parseInt(document.getElementById('adv-stu-credits').value) || 0,
+    courses: document.getElementById('adv-stu-courses').value.trim()
+  };
+
+  if (editingStudentId) {
+    const idx = students.findIndex(s => s._key === editingStudentId);
+    if (idx !== -1) students[idx] = student;
+  } else {
+    students.push(student);
+  }
+  saveStudents();
+  cancelAddStudent();
+  renderAdvisorTable();
+}
+
+function editStudent(key) {
+  const s = students.find(s => s._key === key);
+  if (!s) return;
+  editingStudentId = key;
+  document.getElementById('adv-form-title').textContent = '✏️ Edit Student';
+  document.getElementById('adv-stu-name').value = s.name || '';
+  document.getElementById('adv-stu-id').value = s.id || '';
+  document.getElementById('adv-stu-email').value = s.email || '';
+  document.getElementById('adv-stu-major').value = s.majorId || '';
+  document.getElementById('adv-stu-gpa').value = s.gpa || '';
+  document.getElementById('adv-stu-credits').value = s.credits || '';
+  document.getElementById('adv-stu-courses').value = s.courses || '';
+  document.getElementById('adv-form-card').style.display = 'block';
+  document.getElementById('adv-form-card').scrollIntoView({ behavior: 'smooth' });
+}
+
+function deleteStudent(key) {
+  if (!confirm('Delete this student?')) return;
+  students = students.filter(s => s._key !== key);
+  saveStudents();
+  renderAdvisorTable();
+}
+
+function viewStudentDetail(key) {
+  const s = students.find(s => s._key === key);
+  if (!s) return;
+  const major = DB.majors.find(m => m.id === s.majorId);
+  const courses = new Set((s.courses || '').split(',').map(c => normalizeCode(c)).filter(Boolean));
+  const a = major ? analyzePath(s.majorId, courses, s.credits || 0, s.gpa || 0) : null;
+
+  document.getElementById('adv-detail-title').textContent = `🎓 ${s.name} — ${major ? major.name : 'Unknown Major'}`;
+  const detailContent = document.getElementById('adv-detail-content');
+
+  if (!a) {
+    detailContent.innerHTML = '<p>No analysis available. Make sure a valid major is selected.</p>';
+  } else {
+    detailContent.innerHTML = `
+      <div class="stats">
+        <div class="stat-box"><div class="stat-value">${a.pct}%</div><div class="stat-label">Progress</div></div>
+        <div class="stat-box"><div class="stat-value">${s.credits||0}/${a.major.total_credits}</div><div class="stat-label">Credits</div></div>
+        <div class="stat-box"><div class="stat-value">${a.semestersLeft}</div><div class="stat-label">Semesters Left</div></div>
+        <div class="stat-box"><div class="stat-value">${s.gpa||'—'}</div><div class="stat-label">GPA</div></div>
+      </div>
+      <div class="two-col">
+        <div>
+          <p style="font-weight:700;margin-bottom:8px">Critical Tracking:</p>
+          ${a.ctStatus.map(c => `
+            <div style="font-size:.85rem;padding:4px 0">
+              ${c.completed ? '✅' : '❌'} ${c.code} — ${c.name}
+            </div>`).join('')}
+        </div>
+        <div>
+          <p style="font-weight:700;margin-bottom:8px">Top Major Switch Matches:</p>
+          ${a.switchMatches.slice(0,3).map(sw => `
+            <div style="font-size:.85rem;padding:4px 0">
+              <strong>${sw.major.name}</strong>: ${sw.matchPct}% match (${sw.savedCredits} cr saved)
+            </div>`).join('')}
+        </div>
+      </div>
+    `;
+  }
+
+  document.getElementById('adv-student-detail').style.display = 'block';
+  document.getElementById('adv-student-detail').scrollIntoView({ behavior: 'smooth' });
+}
+
+function exportCSV() {
+  const headers = ['Name','UFID','Email','Major','GPA','Credits','Progress %','CT Status'];
+  const rows = students.map(s => {
+    const major = DB.majors.find(m => m.id === s.majorId);
+    const courses = new Set((s.courses || '').split(',').map(c => normalizeCode(c)).filter(Boolean));
+    const a = major ? analyzePath(s.majorId, courses, s.credits || 0, s.gpa || 0) : null;
+    return [
+      s.name, s.id, s.email,
+      major ? major.name : s.majorId,
+      s.gpa, s.credits,
+      a ? a.pct + '%' : '—',
+      a ? (a.onTrack ? 'On Track' : 'At Risk') : '—'
+    ].map(v => `"${v||''}"`).join(',');
+  });
+  const csv = [headers.join(','), ...rows].join('\n');
+  const blob = new Blob([csv], { type: 'text/csv' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'gatorpath_students.csv';
+  a.click();
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+//  SHARED HELPERS
+// ═══════════════════════════════════════════════════════════════════════════
+
+function switchMode(mode) {
+  currentMode = mode;
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.getElementById(`panel-${mode}`).classList.add('active');
+  document.querySelectorAll('.mode-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.mode-tab')[mode === 'student' ? 0 : 1].classList.add('active');
+  if (mode === 'advisor') renderAdvisorTable();
+}
+
+function populateMajorSelects() {
+  const opts = DB.majors.map(m =>
+    `<option value="${m.id}">${m.name} (${m.degree}) — ${m.college}</option>`
+  ).join('');
+
+  document.getElementById('stu-major').innerHTML = '<option value="">— Select your major —</option>' + opts;
+  document.getElementById('adv-stu-major').innerHTML = '<option value="">— Select major —</option>' + opts;
+
+  const filterOpts = DB.majors.map(m => `<option value="${m.id}">${m.name}</option>`).join('');
+  document.getElementById('adv-filter-major').innerHTML = '<option value="">All Majors</option>' + filterOpts;
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+//  DEMO FALLBACK DATA  (used if data/majors.json can't be fetched)
+// ═══════════════════════════════════════════════════════════════════════════
+const DEMO_MAJORS = [
+  {
+    id: "computer_science", name: "Computer Science", degree: "B.S.",
+    college: "Herbert Wertheim College of Engineering", total_credits: 120, min_gpa: 2.0,
+    critical_tracking: { min_gpa: 2.0, courses: [
+      {code:"MAC 2311",name:"Analytic Geometry and Calculus 1",credits:4,required_by_semester:2},
+      {code:"COP 3502C",name:"Computer Science 1",credits:3,required_by_semester:2},
+      {code:"COP 3503C",name:"Computer Science 2",credits:3,required_by_semester:3},
+      {code:"COT 3100",name:"Applications of Discrete Structures",credits:3,required_by_semester:3}
+    ]},
+    required_courses: [
+      {code:"MAC 2311",name:"Calculus 1",credits:4,category:"math"},
+      {code:"MAC 2312",name:"Calculus 2",credits:4,category:"math"},
+      {code:"COP 3502C",name:"CS 1",credits:3,category:"core"},
+      {code:"COP 3503C",name:"CS 2",credits:3,category:"core"},
+      {code:"COT 3100",name:"Discrete Structures",credits:3,category:"core"},
+      {code:"COP 3530",name:"Data Structures",credits:3,category:"core"},
+      {code:"CDA 3101",name:"Computer Organization",credits:3,category:"core"},
+      {code:"COP 4020",name:"Programming Languages",credits:3,category:"core"},
+      {code:"COP 4600",name:"Operating Systems",credits:3,category:"core"},
+      {code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"},
+      {code:"ENC 1102",name:"Composition 2",credits:3,category:"gen_ed"}
+    ],
+    model_plan: [
+      {semester:1,courses:["ENC 1101","MAC 2311","COP 3502C"],credits:10},
+      {semester:2,courses:["ENC 1102","MAC 2312","COP 3503C","COT 3100"],credits:13},
+      {semester:3,courses:["MAC 2313","COP 3530","CDA 3101"],credits:10},
+      {semester:4,courses:["COP 4020","COP 4600","Elective"],credits:9}
+    ]
+  },
+  {
+    id: "psychology", name: "Psychology", degree: "B.S.",
+    college: "College of Liberal Arts and Sciences", total_credits: 120, min_gpa: 2.0,
+    critical_tracking: { min_gpa: 2.0, courses: [
+      {code:"PSY 2012",name:"General Psychology",credits:3,required_by_semester:2},
+      {code:"STA 2023",name:"Statistics 1",credits:3,required_by_semester:3}
+    ]},
+    required_courses: [
+      {code:"PSY 2012",name:"General Psychology",credits:3,category:"core"},
+      {code:"STA 2023",name:"Statistics 1",credits:3,category:"core"},
+      {code:"PSY 3213C",name:"Research Methods",credits:3,category:"core"},
+      {code:"PSY 3604",name:"Brain and Behavior",credits:3,category:"core"},
+      {code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"},
+      {code:"ENC 1102",name:"Composition 2",credits:3,category:"gen_ed"}
+    ],
+    model_plan: [
+      {semester:1,courses:["ENC 1101","PSY 2012"],credits:6},
+      {semester:2,courses:["ENC 1102","STA 2023"],credits:6},
+      {semester:3,courses:["PSY 3213C","PSY 3604"],credits:6}
+    ]
+  }
+];
+
+// ═══════════════════════════════════════════════════════════════════════════
+//  INIT
+// ═══════════════════════════════════════════════════════════════════════════
+loadData().then(() => {
+  renderAdvisorTable();
+});
+
+// Allow pressing Enter in course input
+document.addEventListener('DOMContentLoaded', () => {
+  const ci = document.getElementById('course-input');
+  if (ci) ci.addEventListener('keydown', e => { if (e.key === 'Enter') addCourse(); });
+});
+</script>
+</body>
+</html>
