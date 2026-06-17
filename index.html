@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GatorPath — UF Graduation Navigator</title>
+<title>GatorPath â UF Graduation Navigator</title>
 <style>
   :root {
     --gator-blue: #003087;
@@ -25,7 +25,7 @@
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f4fa; color: #222; }
 
-  /* ── Header ── */
+  /* ââ Header ââ */
   header {
     background: var(--gator-blue);
     color: white;
@@ -48,7 +48,7 @@
   }
   .mode-tab.active, .mode-tab:hover { background: var(--gator-orange); border-color: var(--gator-orange); color: white; }
 
-  /* ── Layout ── */
+  /* ââ Layout ââ */
   .container { max-width: 1100px; margin: 0 auto; padding: 24px 16px; }
   .card {
     background: white; border-radius: var(--radius); box-shadow: var(--shadow);
@@ -59,7 +59,7 @@
   .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
   @media(max-width:700px) { .two-col { grid-template-columns: 1fr; } }
 
-  /* ── Forms ── */
+  /* ââ Forms ââ */
   label { display: block; font-size: .85rem; font-weight: 600; color: #555; margin-bottom: 4px; }
   input, select, textarea {
     width: 100%; padding: 10px 12px; border: 1.5px solid var(--border);
@@ -68,7 +68,7 @@
   input:focus, select:focus, textarea:focus { border-color: var(--gator-blue); }
   .form-group { margin-bottom: 14px; }
 
-  /* ── Buttons ── */
+  /* ââ Buttons ââ */
   .btn {
     display: inline-flex; align-items: center; gap: 6px;
     padding: 10px 22px; border: none; border-radius: 7px; cursor: pointer;
@@ -82,7 +82,7 @@
   .btn-ghost { background: transparent; border: 1.5px solid var(--border); color: #555; }
   .btn-ghost:hover { background: var(--gray-light); }
 
-  /* ── Course Input ── */
+  /* ââ Course Input ââ */
   .course-input-area { display: flex; gap: 8px; margin-bottom: 8px; }
   .course-input-area input { flex: 1; }
   .tag-list { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
@@ -94,7 +94,7 @@
   .tag-remove { cursor: pointer; font-size: .9rem; opacity: .6; }
   .tag-remove:hover { opacity: 1; color: var(--red); }
 
-  /* ── Progress Bar ── */
+  /* ââ Progress Bar ââ */
   .progress-wrap { background: var(--gray-light); border-radius: 20px; height: 14px; overflow: hidden; }
   .progress-bar {
     height: 100%; border-radius: 20px; transition: width .6s ease;
@@ -102,7 +102,7 @@
   }
   .progress-label { font-size: .8rem; color: var(--gray); margin-top: 4px; }
 
-  /* ── Status Badges ── */
+  /* ââ Status Badges ââ */
   .badge {
     display: inline-block; padding: 2px 10px; border-radius: 20px;
     font-size: .75rem; font-weight: 700; letter-spacing: .03em;
@@ -112,7 +112,7 @@
   .badge-yellow { background: var(--yellow-light); color: var(--yellow); }
   .badge-blue { background: var(--blue-light); color: var(--gator-blue); }
 
-  /* ── Course Status List ── */
+  /* ââ Course Status List ââ */
   .course-list { list-style: none; }
   .course-list li {
     display: flex; align-items: flex-start; gap: 10px;
@@ -126,7 +126,7 @@
   .course-code { font-weight: 700; color: var(--gator-blue); min-width: 80px; }
   .course-credits { color: var(--gray); font-size: .8rem; margin-left: auto; white-space: nowrap; }
 
-  /* ── Major Switch Cards ── */
+  /* ââ Major Switch Cards ââ */
   .switch-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
   .switch-card {
     border: 1.5px solid var(--border); border-radius: var(--radius); padding: 16px;
@@ -139,7 +139,7 @@
   .switch-card .match-pct { font-size: 1.6rem; font-weight: 800; color: var(--gator-orange); }
   .switch-card .college-name { font-size: .78rem; color: var(--gray); margin-bottom: 8px; }
 
-  /* ── Semester Plan ── */
+  /* ââ Semester Plan ââ */
   .semester-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
   .semester-box {
     border: 1.5px solid var(--border); border-radius: 8px; overflow: hidden;
@@ -153,11 +153,11 @@
   .semester-body .sc.completed { color: var(--green); }
   .semester-body .sc.missing { color: var(--red); }
 
-  /* ── Panels (student / advisor) ── */
+  /* ââ Panels (student / advisor) ââ */
   .panel { display: none; }
   .panel.active { display: block; }
 
-  /* ── Alert box ── */
+  /* ââ Alert box ââ */
   .alert {
     border-radius: 8px; padding: 12px 16px; margin-bottom: 16px; font-size: .88rem;
     display: flex; gap: 10px; align-items: flex-start;
@@ -167,25 +167,25 @@
   .alert-warning { background: var(--yellow-light); color: var(--yellow); }
   .alert-danger { background: var(--red-light); color: var(--red); }
 
-  /* ── Stats row ── */
+  /* ââ Stats row ââ */
   .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 20px; }
   @media(max-width:600px) { .stats { grid-template-columns: 1fr 1fr; } }
   .stat-box { background: white; border-radius: 10px; padding: 16px; box-shadow: var(--shadow); text-align: center; }
   .stat-value { font-size: 2rem; font-weight: 800; color: var(--gator-blue); }
   .stat-label { font-size: .75rem; color: var(--gray); margin-top: 2px; }
 
-  /* ── Advisor table ── */
+  /* ââ Advisor table ââ */
   table { width: 100%; border-collapse: collapse; font-size: .88rem; }
   th { background: var(--gator-blue); color: white; padding: 10px 12px; text-align: left; font-size: .82rem; }
   td { padding: 9px 12px; border-bottom: 1px solid var(--border); }
   tr:last-child td { border-bottom: none; }
   tr:hover td { background: var(--gray-light); }
 
-  /* ── Loading spinner ── */
+  /* ââ Loading spinner ââ */
   .spinner { text-align: center; padding: 40px; color: var(--gray); }
-  .spinner::before { content: '⏳ '; }
+  .spinner::before { content: 'â³ '; }
 
-  /* ── Tooltip ── */
+  /* ââ Tooltip ââ */
   [data-tip] { position: relative; cursor: help; }
   [data-tip]:hover::after {
     content: attr(data-tip);
@@ -195,12 +195,12 @@
     margin-bottom: 4px;
   }
 
-  /* ── Empty state ── */
+  /* ââ Empty state ââ */
   .empty { text-align: center; padding: 40px 20px; color: var(--gray); }
   .empty .empty-icon { font-size: 3rem; margin-bottom: 10px; }
   .empty p { font-size: .9rem; }
 
-  /* ── Print styles ── */
+  /* ââ Print styles ââ */
   @media print { header { display: none; } .btn { display: none; } }
 </style>
 </head>
@@ -208,27 +208,27 @@
 
 <header>
   <div class="logo">
-    <span class="logo-gator">🐊</span>
+    <span class="logo-gator">ð</span>
     <div>
       <div>GatorPath</div>
       <div class="logo-subtitle">UF Graduation Navigator</div>
     </div>
   </div>
   <div class="mode-tabs">
-    <button class="mode-tab active" onclick="switchMode('student')">🎓 Student</button>
-    <button class="mode-tab" onclick="switchMode('advisor')">📋 Advisor</button>
+    <button class="mode-tab active" onclick="switchMode('student')">ð Student</button>
+    <button class="mode-tab" onclick="switchMode('advisor')">ð Advisor</button>
   </div>
 </header>
 
-<!-- ══════════════════════════════════════════════════════════════════════════ -->
+<!-- ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ -->
 <!--  STUDENT PANEL                                                            -->
-<!-- ══════════════════════════════════════════════════════════════════════════ -->
+<!-- ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ -->
 <div id="panel-student" class="panel active">
 <div class="container">
 
   <!-- Input Card -->
   <div class="card">
-    <div class="card-title">📝 Student Profile</div>
+    <div class="card-title">ð Student Profile</div>
     <div class="two-col">
       <div>
         <div class="form-group">
@@ -238,7 +238,7 @@
         <div class="form-group">
           <label>Current Major</label>
           <select id="stu-major">
-            <option value="">— loading majors —</option>
+            <option value="">â loading majors â</option>
           </select>
         </div>
         <div class="form-group">
@@ -265,15 +265,15 @@
           <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:4px">
             <button class="btn btn-ghost btn-sm" onclick="quickAdd(['ENC 1101','ENC 1102','MAC 2311','STA 2023','BSC 2010','BSC 2010L','CHM 2045'])">Gen Ed Starter Pack</button>
             <button class="btn btn-ghost btn-sm" onclick="quickAdd(['COP 3502C','COP 3503C','COT 3100','MAC 2312','EEL 3701C'])">CS Year 1-2</button>
-            <button class="btn btn-ghost btn-sm" onclick="quickAdd(['ACG 2021','ACG 2071','ECO 2013','ECO 2023','MAC 2233'])">Business Core</button>
+            <button class="btn btn-ghost btn-sm" onclick="quickAdd(['ACG 2021','ACG 2071','ECO 2013','ECO 2023','MAC 2237'])">Business Core</button>
           </div>
         </div>
       </div>
     </div>
     <div style="display:flex;gap:10px;margin-top:8px">
-      <button class="btn btn-primary" onclick="analyzeStudent()">🔍 Analyze My Path</button>
+      <button class="btn btn-primary" onclick="analyzeStudent()">ð Analyze My Path</button>
       <button class="btn btn-ghost" onclick="clearStudent()">Clear</button>
-      <button class="btn btn-ghost" onclick="printReport()">🖨️ Print Report</button>
+      <button class="btn btn-ghost" onclick="printReport()">ð¨ï¸ Print Report</button>
     </div>
   </div>
 
@@ -289,11 +289,11 @@
     <!-- Two-col: remaining + critical tracking -->
     <div class="two-col">
       <div class="card">
-        <div class="card-title">📚 Required Courses Status</div>
+        <div class="card-title">ð Required Courses Status</div>
         <ul class="course-list" id="course-status-list"></ul>
       </div>
       <div class="card">
-        <div class="card-title">⚠️ Critical Tracking Status</div>
+        <div class="card-title">â ï¸ Critical Tracking Status</div>
         <ul class="course-list" id="ct-status-list"></ul>
         <div id="ct-warning" style="margin-top:12px"></div>
       </div>
@@ -301,21 +301,21 @@
 
     <!-- Semester plan -->
     <div class="card">
-      <div class="card-title">📅 Remaining Path (Estimated Semester Plan)</div>
+      <div class="card-title">ð Remaining Path (Estimated Semester Plan)</div>
       <div class="semester-grid" id="semester-plan"></div>
     </div>
 
     <!-- Credit Progress -->
     <div class="card">
-      <div class="card-title">📊 Degree Progress</div>
+      <div class="card-title">ð Degree Progress</div>
       <div id="progress-bars"></div>
     </div>
 
     <!-- Major Switch Section -->
     <div class="card">
-      <div class="card-title">🔄 Major Switch Advisor</div>
+      <div class="card-title">ð Major Switch Advisor</div>
       <div class="alert alert-info" style="margin-bottom:16px">
-        ℹ️ Based on your completed courses, here are other UF majors where your credits transfer best.
+        â¹ï¸ Based on your completed courses, here are other UF majors where your credits transfer best.
         A higher match % means fewer extra semesters needed.
       </div>
       <div class="switch-grid" id="major-switch-grid"></div>
@@ -326,28 +326,28 @@
 </div>
 </div>
 
-<!-- ══════════════════════════════════════════════════════════════════════════ -->
+<!-- ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ -->
 <!--  ADVISOR PANEL                                                            -->
-<!-- ══════════════════════════════════════════════════════════════════════════ -->
+<!-- ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ -->
 <div id="panel-advisor" class="panel">
 <div class="container">
 
   <div class="card">
-    <div class="card-title">🏫 Advisor Dashboard — Manage Students</div>
+    <div class="card-title">ð« Advisor Dashboard â Manage Students</div>
     <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
-      <input id="adv-search" type="text" placeholder="Search students…" style="max-width:250px"
+      <input id="adv-search" type="text" placeholder="Search studentsâ¦" style="max-width:250px"
         oninput="renderAdvisorTable()">
       <select id="adv-filter-major" onchange="renderAdvisorTable()" style="max-width:220px">
         <option value="">All Majors</option>
       </select>
-      <button class="btn btn-orange" onclick="openAddStudent()">➕ Add Student</button>
-      <button class="btn btn-ghost" onclick="exportCSV()">⬇️ Export CSV</button>
+      <button class="btn btn-orange" onclick="openAddStudent()">â Add Student</button>
+      <button class="btn btn-ghost" onclick="exportCSV()">â¬ï¸ Export CSV</button>
     </div>
   </div>
 
   <!-- Add / Edit Student modal -->
   <div id="adv-form-card" class="card" style="display:none">
-    <div class="card-title" id="adv-form-title">➕ Add Student</div>
+    <div class="card-title" id="adv-form-title">â Add Student</div>
     <div class="two-col">
       <div>
         <div class="form-group"><label>Name</label><input id="adv-stu-name" type="text"></div>
@@ -362,12 +362,12 @@
         <div class="form-group"><label>Credits Completed</label><input id="adv-stu-credits" type="number" min="0"></div>
         <div class="form-group">
           <label>Completed Courses (comma-separated)</label>
-          <textarea id="adv-stu-courses" rows="4" placeholder="COP 3502C, MAC 2311, ENC 1101…"></textarea>
+          <textarea id="adv-stu-courses" rows="4" placeholder="COP 3502C, MAC 2311, ENC 1101â¦"></textarea>
         </div>
       </div>
     </div>
     <div style="display:flex;gap:10px">
-      <button class="btn btn-primary" onclick="saveStudent()">💾 Save Student</button>
+      <button class="btn btn-primary" onclick="saveStudent()">ð¾ Save Student</button>
       <button class="btn btn-ghost" onclick="cancelAddStudent()">Cancel</button>
     </div>
   </div>
@@ -385,7 +385,7 @@
       <tbody id="student-tbody"></tbody>
     </table>
     <div id="adv-empty" class="empty" style="display:none">
-      <div class="empty-icon">🎓</div>
+      <div class="empty-icon">ð</div>
       <p>No students yet. Click <strong>Add Student</strong> to get started.</p>
     </div>
   </div>
@@ -402,9 +402,9 @@
 </div>
 
 <script>
-// ═══════════════════════════════════════════════════════════════════════════
+// ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 //  DATA LAYER
-// ═══════════════════════════════════════════════════════════════════════════
+// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 
 let DB = { majors: [], gen_ed: {} };
 let students = JSON.parse(localStorage.getItem('gatorpath_students') || '[]');
@@ -420,7 +420,7 @@ async function loadData() {
     DB.gen_ed = json.gen_ed_requirements || {};
   } catch(e) {
     // Fallback: embed minimal data if file not found
-    console.warn('Could not load data/majors.json — using embedded demo data.');
+    console.warn('Could not load data/majors.json â using embedded demo data.');
     DB.majors = DEMO_MAJORS;
   }
   populateMajorSelects();
@@ -432,9 +432,9 @@ function saveStudents() {
   localStorage.setItem('gatorpath_students', JSON.stringify(students));
 }
 
-// ═══════════════════════════════════════════════════════════════════════════
+// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 //  CORE ENGINE
-// ═══════════════════════════════════════════════════════════════════════════
+// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 
 /**
  * Analyze a student's path in a given major.
@@ -473,18 +473,56 @@ function analyzePath(majorId, completedSet, totalCredits, gpa) {
   const remainingCredits = Math.max(0, major.total_credits - totalCredits);
   const semestersLeft = Math.ceil(remainingCredits / 15);
 
-  // Major switch matches
+  // ââ Major switch matches (fixed engine) âââââââââââââââââââââââââââââââââââââ
+  // Problems fixed:
+  //   1. Credit-weighted match (not just course count)
+  //   2. Core-course match ignores gen-ed filler courses
+  //   3. Wasted-credits penalty when most earned credits don't transfer
+  //   4. Same-college bonus keeps suggestions academically relevant
+  //   5. Composite score filters out nonsense recommendations like Psych for engineers
+  const completedNorm = new Set([...completedSet].map(c => normalizeCode(c)));
+
   const switchMatches = DB.majors
     .filter(m => m.id !== majorId)
     .map(m => {
-      const targetDone = new Set([...completedSet].map(c => normalizeCode(c)));
       const targetReq = m.required_courses || [];
-      const matched = targetReq.filter(c => targetDone.has(normalizeCode(c.code)));
-      const matchPct = Math.round((matched.length / Math.max(1, targetReq.length)) * 100);
-      const savedCredits = matched.reduce((s, c) => s + (c.credits||3), 0);
-      return { major: m, matchPct, matched, savedCredits };
+
+      // FIX 1 â Credit-weighted: sum credits of matched courses vs total required credits
+      const totalReqCredits = targetReq.reduce((s, c) => s + (c.credits || 3), 0);
+      const matched = targetReq.filter(c => completedNorm.has(normalizeCode(c.code)));
+      const savedCredits = matched.reduce((s, c) => s + (c.credits || 3), 0);
+      const creditMatchPct = Math.round((savedCredits / Math.max(1, totalReqCredits)) * 100);
+
+      // FIX 2 â Core-course match: strip gen-ed prefixes, measure only major-specific overlap
+      const coreReq = targetReq.filter(c => !GENERIC_PREFIXES.has(coursePrefix(c.code)));
+      const coreMatched = coreReq.filter(c => completedNorm.has(normalizeCode(c.code)));
+      const coreReqCredits = coreReq.reduce((s, c) => s + (c.credits || 3), 0);
+      const coreMatchedCredits = coreMatched.reduce((s, c) => s + (c.credits || 3), 0);
+      const coreMatchPct = Math.round((coreMatchedCredits / Math.max(1, coreReqCredits)) * 100);
+
+      // FIX 3 â Wasted-credits penalty: credits that don't count toward new major
+      const wastedCredits = Math.max(0, totalCredits - savedCredits);
+      const wastePct = totalCredits > 0 ? (wastedCredits / totalCredits) : 0;
+      const wastePenalty = Math.round(wastePct * 35); // up to -35 pts
+
+      // FIX 4 â Same-college bonus (keeps STEM in STEM, etc.)
+      const sameCollege = (major.college || '') === (m.college || '');
+      const collegeBonus = sameCollege ? 15 : 0;
+
+      // FIX 5 â Composite score
+      const compositeScore = Math.max(0, Math.round(
+        (creditMatchPct  * 0.45) +
+        (coreMatchPct    * 0.35) +
+        collegeBonus             -
+        wastePenalty
+      ));
+
+      return { major: m, matchPct: creditMatchPct, coreMatchPct, compositeScore,
+               matched, savedCredits, wastedCredits, sameCollege };
     })
-    .sort((a, b) => b.matchPct - a.matchPct);
+    // Only show majors where the student has meaningful overlap AND a decent composite score
+    .filter(sw => sw.compositeScore >= 8 && sw.matchPct >= 5)
+    .sort((a, b) => b.compositeScore - a.compositeScore);
 
   return {
     major, courseStatus, completedRequired, missingRequired,
@@ -500,9 +538,26 @@ function normalizeCode(code) {
   return (code || '').toUpperCase().replace(/\s+/g, ' ').trim();
 }
 
-// ═══════════════════════════════════════════════════════════════════════════
+// Extract course prefix, e.g. "MAC" from "MAC 2311"
+function coursePrefix(code) {
+  const m = (code || '').match(/^([A-Z]{2,4})/);
+  return m ? m[1] : '';
+}
+
+// Generic/gen-ed prefixes that appear in almost every major â not major-specific indicators
+const GENERIC_PREFIXES = new Set([
+  'MAC','MGF','MHF','STA','MAP',   // math
+  'ENC','ENG','LIT','AML',          // english/writing
+  'SPC','COM',                      // speech/comm
+  'PHI','HUM',                      // humanities
+  'AMH','WOH','EUH','ANT','SYG',   // social science gen-ed
+  'POS','CPO','INR',                // political science gen-ed
+  'ECO','EVR'                       // economics/env gen-ed
+]);
+
+// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 //  STUDENT PANEL
-// ═══════════════════════════════════════════════════════════════════════════
+// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 
 function addCourse() {
   const input = document.getElementById('course-input');
@@ -527,7 +582,7 @@ function quickAdd(codes) {
 function renderCourseTags() {
   const container = document.getElementById('course-tags');
   container.innerHTML = [...completedCourses].map(c =>
-    `<span class="tag">${c}<span class="tag-remove" onclick="removeCourse('${c}')">✕</span></span>`
+    `<span class="tag">${c}<span class="tag-remove" onclick="removeCourse('${c}')">â</span></span>`
   ).join('');
 }
 
@@ -562,7 +617,7 @@ function renderStudentResults(a, totalCredits, gpa) {
       <div class="stat-label">Semesters Left (est.)</div>
     </div>
     <div class="stat-box">
-      <div class="stat-value">${gpa > 0 ? gpa.toFixed(2) : '—'}</div>
+      <div class="stat-value">${gpa > 0 ? gpa.toFixed(2) : 'â'}</div>
       <div class="stat-label">Current GPA (min ${a.major.min_gpa})</div>
     </div>
   `;
@@ -570,13 +625,13 @@ function renderStudentResults(a, totalCredits, gpa) {
   // Alert
   let alertHtml = '';
   if (a.hasHold) {
-    alertHtml = `<div class="alert alert-danger">🚨 <strong>Registration Hold Risk</strong>: You may have a hold due to ${a.ctAtRisk ? 'incomplete critical-tracking courses' : ''}${a.ctAtRisk && gpa < a.major.min_gpa ? ' and ' : ''}${gpa > 0 && gpa < a.major.min_gpa ? 'GPA below minimum' : ''}. Contact your academic advisor immediately.</div>`;
+    alertHtml = `<div class="alert alert-danger">ð¨ <strong>Registration Hold Risk</strong>: You may have a hold due to ${a.ctAtRisk ? 'incomplete critical-tracking courses' : ''}${a.ctAtRisk && gpa < a.major.min_gpa ? ' and ' : ''}${gpa > 0 && gpa < a.major.min_gpa ? 'GPA below minimum' : ''}. Contact your academic advisor immediately.</div>`;
   } else if (a.pct >= 80) {
-    alertHtml = `<div class="alert alert-success">🎉 <strong>Almost there!</strong> You are ${100 - a.pct}% away from completing your degree requirements in ${a.major.name}.</div>`;
+    alertHtml = `<div class="alert alert-success">ð <strong>Almost there!</strong> You are ${100 - a.pct}% away from completing your degree requirements in ${a.major.name}.</div>`;
   } else if (a.onTrack) {
-    alertHtml = `<div class="alert alert-info">✅ <strong>On track!</strong> GPA and critical-tracking look good. Keep it up!</div>`;
+    alertHtml = `<div class="alert alert-info">â <strong>On track!</strong> GPA and critical-tracking look good. Keep it up!</div>`;
   } else {
-    alertHtml = `<div class="alert alert-warning">⚠️ Review the items below with your advisor before next registration.</div>`;
+    alertHtml = `<div class="alert alert-warning">â ï¸ Review the items below with your advisor before next registration.</div>`;
   }
   document.getElementById('graduation-alert').innerHTML = alertHtml;
 
@@ -587,12 +642,12 @@ function renderStudentResults(a, totalCredits, gpa) {
   } else {
     csl.innerHTML = a.courseStatus.map(c => `
       <li>
-        <span class="ci ${c.completed ? 'ci-done' : 'ci-missing'}">${c.completed ? '✅' : '❌'}</span>
+        <span class="ci ${c.completed ? 'ci-done' : 'ci-missing'}">${c.completed ? 'â' : 'â'}</span>
         <div>
           <span class="course-code">${c.code}</span>
           <span style="color:#555"> ${c.name}</span>
         </div>
-        <span class="course-credits">${c.credits} cr · <span class="badge ${c.completed ? 'badge-green' : 'badge-red'}">${c.completed ? 'Done' : 'Needed'}</span></span>
+        <span class="course-credits">${c.credits} cr Â· <span class="badge ${c.completed ? 'badge-green' : 'badge-red'}">${c.completed ? 'Done' : 'Needed'}</span></span>
       </li>
     `).join('');
   }
@@ -604,7 +659,7 @@ function renderStudentResults(a, totalCredits, gpa) {
   } else {
     ctl.innerHTML = a.ctStatus.map(c => `
       <li>
-        <span class="ci ${c.completed ? 'ci-done' : 'ci-missing'}">${c.completed ? '✅' : '⚠️'}</span>
+        <span class="ci ${c.completed ? 'ci-done' : 'ci-missing'}">${c.completed ? 'â' : 'â ï¸'}</span>
         <div>
           <span class="course-code">${c.code}</span>
           <span style="color:#555"> ${c.name}</span>
@@ -619,7 +674,7 @@ function renderStudentResults(a, totalCredits, gpa) {
   if (a.ctAtRisk) {
     ctWarn.innerHTML = `<div class="alert alert-warning">Missing ${a.ctMissing.length} critical-tracking course(s). A registration hold may be placed if not completed on schedule.</div>`;
   } else {
-    ctWarn.innerHTML = `<div class="alert alert-success">✅ All critical-tracking courses complete.</div>`;
+    ctWarn.innerHTML = `<div class="alert alert-success">â All critical-tracking courses complete.</div>`;
   }
 
   // Semester plan
@@ -641,7 +696,7 @@ function renderSemesterPlan(a) {
   document.getElementById('semester-plan').innerHTML = plan.map(sem => {
     const courseHtml = sem.courses.map(c => {
       const done = completedCourses.has(normalizeCode(c));
-      return `<div class="sc ${done ? 'completed' : 'missing'}">${done ? '✅' : '○'} ${c}</div>`;
+      return `<div class="sc ${done ? 'completed' : 'missing'}">${done ? 'â' : 'â'} ${c}</div>`;
     }).join('');
     return `
       <div class="semester-box">
@@ -691,14 +746,22 @@ function renderProgressBars(a, totalCredits) {
 
 function renderSwitchGrid(switchMatches) {
   const top5 = switchMatches.slice(0, 6);
+  if (top5.length === 0) {
+    document.getElementById('major-switch-grid').innerHTML =
+      '<p style="color:#555;font-size:.9rem">No strong switch matches found. Your completed coursework is highly specialized for your current major â switching would require significant additional work.</p>';
+    return;
+  }
   document.getElementById('major-switch-grid').innerHTML = top5.map(sw => `
     <div class="switch-card" onclick="showSwitchDetail('${sw.major.id}', this)">
       <div class="match-pct">${sw.matchPct}%</div>
       <h4>${sw.major.name} (${sw.major.degree})</h4>
-      <div class="college-name">${sw.major.college}</div>
+      <div class="college-name">${sw.major.college}${sw.sameCollege ? ' â Same College' : ''}</div>
       <div style="font-size:.8rem;color:#555">
-        <strong>${sw.matched.length}</strong> of your courses transfer ·
-        <strong>${sw.savedCredits}</strong> credits saved
+        <strong>${sw.matched.length}</strong> courses transfer Â·
+        <strong>${sw.savedCredits}</strong> cr saved Â·
+        <span style="color:${sw.wastedCredits > 40 ? '#c0392b' : '#555'}">
+          ${sw.wastedCredits} cr lost
+        </span>
       </div>
     </div>
   `).join('');
@@ -727,16 +790,16 @@ function showSwitchDetail(majorId, card) {
             <strong>Estimated Semesters After Switch:</strong> ~${a.semestersLeft}
           </p>
           <div class="alert ${a.matchPct >= 60 ? 'alert-success' : a.matchPct >= 30 ? 'alert-warning' : 'alert-danger'}">
-            ${a.matchPct >= 60 ? '✅ Strong match — most of your credits carry over.' :
-              a.matchPct >= 30 ? '⚠️ Moderate match — some courses will need to be retaken.' :
-              '❌ Low match — significant new coursework required.'}
+            ${a.matchPct >= 60 ? 'â Strong match â most of your credits carry over.' :
+              a.matchPct >= 30 ? 'â ï¸ Moderate match â some courses will need to be retaken.' :
+              'â Low match â significant new coursework required.'}
           </div>
         </div>
         <div>
           <p style="font-size:.82rem;font-weight:600;margin-bottom:8px">Missing Critical-Tracking Courses:</p>
           ${a.ctMissing.length === 0
-            ? `<span class="badge badge-green">None — all CT courses complete!</span>`
-            : a.ctMissing.map(c => `<div style="font-size:.82rem;color:var(--red)">❌ ${c.code} — ${c.name}</div>`).join('')
+            ? `<span class="badge badge-green">None â all CT courses complete!</span>`
+            : a.ctMissing.map(c => `<div style="font-size:.82rem;color:var(--red)">â ${c.code} â ${c.name}</div>`).join('')
           }
         </div>
       </div>
@@ -765,9 +828,9 @@ function clearStudent() {
 
 function printReport() { window.print(); }
 
-// ═══════════════════════════════════════════════════════════════════════════
+// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 //  ADVISOR PANEL
-// ═══════════════════════════════════════════════════════════════════════════
+// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 
 function renderAdvisorTable() {
   const search = document.getElementById('adv-search').value.toLowerCase();
@@ -795,14 +858,14 @@ function renderAdvisorTable() {
       const a = major ? analyzePath(s.majorId, courses, s.credits || 0, s.gpa || 0) : null;
       const pct = a ? a.pct : 0;
       const ctBadge = a
-        ? (a.ctOK ? '<span class="badge badge-green">✅ On Track</span>' : '<span class="badge badge-red">⚠️ At Risk</span>')
-        : '—';
+        ? (a.ctOK ? '<span class="badge badge-green">â On Track</span>' : '<span class="badge badge-red">â ï¸ At Risk</span>')
+        : 'â';
       return `
         <tr>
           <td><strong>${s.name}</strong></td>
-          <td>${s.id || '—'}</td>
-          <td>${major ? major.name : s.majorId || '—'}</td>
-          <td>${s.gpa || '—'}</td>
+          <td>${s.id || 'â'}</td>
+          <td>${major ? major.name : s.majorId || 'â'}</td>
+          <td>${s.gpa || 'â'}</td>
           <td>${s.credits || 0}</td>
           <td>
             <div class="progress-wrap" style="height:8px;width:100px">
@@ -841,7 +904,7 @@ function renderAdvisorTable() {
 
 function openAddStudent() {
   editingStudentId = null;
-  document.getElementById('adv-form-title').textContent = '➕ Add Student';
+  document.getElementById('adv-form-title').textContent = 'â Add Student';
   ['adv-stu-name','adv-stu-id','adv-stu-email','adv-stu-gpa','adv-stu-credits','adv-stu-courses'].forEach(id => {
     document.getElementById(id).value = '';
   });
@@ -884,7 +947,7 @@ function editStudent(key) {
   const s = students.find(s => s._key === key);
   if (!s) return;
   editingStudentId = key;
-  document.getElementById('adv-form-title').textContent = '✏️ Edit Student';
+  document.getElementById('adv-form-title').textContent = 'âï¸ Edit Student';
   document.getElementById('adv-stu-name').value = s.name || '';
   document.getElementById('adv-stu-id').value = s.id || '';
   document.getElementById('adv-stu-email').value = s.email || '';
@@ -910,7 +973,7 @@ function viewStudentDetail(key) {
   const courses = new Set((s.courses || '').split(',').map(c => normalizeCode(c)).filter(Boolean));
   const a = major ? analyzePath(s.majorId, courses, s.credits || 0, s.gpa || 0) : null;
 
-  document.getElementById('adv-detail-title').textContent = `🎓 ${s.name} — ${major ? major.name : 'Unknown Major'}`;
+  document.getElementById('adv-detail-title').textContent = `ð ${s.name} â ${major ? major.name : 'Unknown Major'}`;
   const detailContent = document.getElementById('adv-detail-content');
 
   if (!a) {
@@ -921,14 +984,14 @@ function viewStudentDetail(key) {
         <div class="stat-box"><div class="stat-value">${a.pct}%</div><div class="stat-label">Progress</div></div>
         <div class="stat-box"><div class="stat-value">${s.credits||0}/${a.major.total_credits}</div><div class="stat-label">Credits</div></div>
         <div class="stat-box"><div class="stat-value">${a.semestersLeft}</div><div class="stat-label">Semesters Left</div></div>
-        <div class="stat-box"><div class="stat-value">${s.gpa||'—'}</div><div class="stat-label">GPA</div></div>
+        <div class="stat-box"><div class="stat-value">${s.gpa||'â'}</div><div class="stat-label">GPA</div></div>
       </div>
       <div class="two-col">
         <div>
           <p style="font-weight:700;margin-bottom:8px">Critical Tracking:</p>
           ${a.ctStatus.map(c => `
             <div style="font-size:.85rem;padding:4px 0">
-              ${c.completed ? '✅' : '❌'} ${c.code} — ${c.name}
+              ${c.completed ? 'â' : 'â'} ${c.code} â ${c.name}
             </div>`).join('')}
         </div>
         <div>
@@ -956,8 +1019,8 @@ function exportCSV() {
       s.name, s.id, s.email,
       major ? major.name : s.majorId,
       s.gpa, s.credits,
-      a ? a.pct + '%' : '—',
-      a ? (a.onTrack ? 'On Track' : 'At Risk') : '—'
+      a ? a.pct + '%' : 'â',
+      a ? (a.onTrack ? 'On Track' : 'At Risk') : 'â'
     ].map(v => `"${v||''}"`).join(',');
   });
   const csv = [headers.join(','), ...rows].join('\n');
@@ -968,9 +1031,9 @@ function exportCSV() {
   a.click();
 }
 
-// ═══════════════════════════════════════════════════════════════════════════
+// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 //  SHARED HELPERS
-// ═══════════════════════════════════════════════════════════════════════════
+// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 
 function switchMode(mode) {
   currentMode = mode;
@@ -983,84 +1046,22 @@ function switchMode(mode) {
 
 function populateMajorSelects() {
   const opts = DB.majors.map(m =>
-    `<option value="${m.id}">${m.name} (${m.degree}) — ${m.college}</option>`
+    `<option value="${m.id}">${m.name} (${m.degree}) â ${m.college}</option>`
   ).join('');
 
-  document.getElementById('stu-major').innerHTML = '<option value="">— Select your major —</option>' + opts;
-  document.getElementById('adv-stu-major').innerHTML = '<option value="">— Select major —</option>' + opts;
+  document.getElementById('stu-major').innerHTML = '<option value="">â Select your major â</option>' + opts;
+  document.getElementById('adv-stu-major').innerHTML = '<option value="">â Select major â</option>' + opts;
 
   const filterOpts = DB.majors.map(m => `<option value="${m.id}">${m.name}</option>`).join('');
   document.getElementById('adv-filter-major').innerHTML = '<option value="">All Majors</option>' + filterOpts;
 }
 
-// ═══════════════════════════════════════════════════════════════════════════
+// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 //  DEMO FALLBACK DATA  (used if data/majors.json can't be fetched)
-// ═══════════════════════════════════════════════════════════════════════════
+// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 const DEMO_MAJORS = [
   {
     id: "computer_science", name: "Computer Science", degree: "B.S.",
     college: "Herbert Wertheim College of Engineering", total_credits: 120, min_gpa: 2.0,
     critical_tracking: { min_gpa: 2.0, courses: [
-      {code:"MAC 2311",name:"Analytic Geometry and Calculus 1",credits:4,required_by_semester:2},
-      {code:"COP 3502C",name:"Computer Science 1",credits:3,required_by_semester:2},
-      {code:"COP 3503C",name:"Computer Science 2",credits:3,required_by_semester:3},
-      {code:"COT 3100",name:"Applications of Discrete Structures",credits:3,required_by_semester:3}
-    ]},
-    required_courses: [
-      {code:"MAC 2311",name:"Calculus 1",credits:4,category:"math"},
-      {code:"MAC 2312",name:"Calculus 2",credits:4,category:"math"},
-      {code:"COP 3502C",name:"CS 1",credits:3,category:"core"},
-      {code:"COP 3503C",name:"CS 2",credits:3,category:"core"},
-      {code:"COT 3100",name:"Discrete Structures",credits:3,category:"core"},
-      {code:"COP 3530",name:"Data Structures",credits:3,category:"core"},
-      {code:"CDA 3101",name:"Computer Organization",credits:3,category:"core"},
-      {code:"COP 4020",name:"Programming Languages",credits:3,category:"core"},
-      {code:"COP 4600",name:"Operating Systems",credits:3,category:"core"},
-      {code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"},
-      {code:"ENC 1102",name:"Composition 2",credits:3,category:"gen_ed"}
-    ],
-    model_plan: [
-      {semester:1,courses:["ENC 1101","MAC 2311","COP 3502C"],credits:10},
-      {semester:2,courses:["ENC 1102","MAC 2312","COP 3503C","COT 3100"],credits:13},
-      {semester:3,courses:["MAC 2313","COP 3530","CDA 3101"],credits:10},
-      {semester:4,courses:["COP 4020","COP 4600","Elective"],credits:9}
-    ]
-  },
-  {
-    id: "psychology", name: "Psychology", degree: "B.S.",
-    college: "College of Liberal Arts and Sciences", total_credits: 120, min_gpa: 2.0,
-    critical_tracking: { min_gpa: 2.0, courses: [
-      {code:"PSY 2012",name:"General Psychology",credits:3,required_by_semester:2},
-      {code:"STA 2023",name:"Statistics 1",credits:3,required_by_semester:3}
-    ]},
-    required_courses: [
-      {code:"PSY 2012",name:"General Psychology",credits:3,category:"core"},
-      {code:"STA 2023",name:"Statistics 1",credits:3,category:"core"},
-      {code:"PSY 3213C",name:"Research Methods",credits:3,category:"core"},
-      {code:"PSY 3604",name:"Brain and Behavior",credits:3,category:"core"},
-      {code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"},
-      {code:"ENC 1102",name:"Composition 2",credits:3,category:"gen_ed"}
-    ],
-    model_plan: [
-      {semester:1,courses:["ENC 1101","PSY 2012"],credits:6},
-      {semester:2,courses:["ENC 1102","STA 2023"],credits:6},
-      {semester:3,courses:["PSY 3213C","PSY 3604"],credits:6}
-    ]
-  }
-];
-
-// ═══════════════════════════════════════════════════════════════════════════
-//  INIT
-// ═══════════════════════════════════════════════════════════════════════════
-loadData().then(() => {
-  renderAdvisorTable();
-});
-
-// Allow pressing Enter in course input
-document.addEventListener('DOMContentLoaded', () => {
-  const ci = document.getElementById('course-input');
-  if (ci) ci.addEventListener('keydown', e => { if (e.key === 'Enter') addCourse(); });
-});
-</script>
-</body>
-</html>
+      {code:"MAC 2311",name:"Analytic Ge
