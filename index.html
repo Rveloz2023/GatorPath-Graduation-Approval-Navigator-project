@@ -220,9 +220,9 @@
   </div>
 </header>
 
-<!-- ══════════════════════════════════════════════════════════════════════════ -->
+<!-- ════════════════════════════════════════════════════════════════════════════ -->
 <!--  STUDENT PANEL                                                            -->
-<!-- ══════════════════════════════════════════════════════════════════════════ -->
+<!-- ════════════════════════════════════════════════════════════════════════════ -->
 <div id="panel-student" class="panel active">
 <div class="container">
 
@@ -326,9 +326,9 @@
 </div>
 </div>
 
-<!-- ══════════════════════════════════════════════════════════════════════════ -->
+<!-- ════════════════════════════════════════════════════════════════════════════ -->
 <!--  ADVISOR PANEL                                                            -->
-<!-- ══════════════════════════════════════════════════════════════════════════ -->
+<!-- ════════════════════════════════════════════════════════════════════════════ -->
 <div id="panel-advisor" class="panel">
 <div class="container">
 
@@ -1064,4 +1064,49 @@ const DEMO_MAJORS = [
     id: "computer_science", name: "Computer Science", degree: "B.S.",
     college: "Herbert Wertheim College of Engineering", total_credits: 120, min_gpa: 2.0,
     critical_tracking: { min_gpa: 2.0, courses: [
-      {code:"MAC 2311",name:"Analytic Ge
+      {code:"MAC 2311",name:"Analytic Geometry and Calculus 1",credits:4},{code:"COP 3502C",name:"Computer Science 1",credits:3},{code:"COP 3503C",name:"Computer Science 2",credits:3},{code:"COT 3100",name:"Applications of Discrete Structures",credits:3},{code:"COP 3530",name:"Data Structures and Algorithm Analysis",credits:3},{code:"COT 4501",name:"Analysis of Numerical Algorithms",credits:3}
+    ],min_gpa:2.0},
+    required_courses:[{code:"MAC 2311",name:"Analytic Geometry and Calculus 1",credits:4},{code:"MAC 2312",name:"Analytic Geometry and Calculus 2",credits:4},{code:"MAC 2313",name:"Analytic Geometry and Calculus 3",credits:4},{code:"MAS 3114",name:"Computational Linear Algebra",credits:3},{code:"STA 3032",name:"Engineering Statistics",credits:3},{code:"COP 3502C",name:"Computer Science 1",credits:3},{code:"COP 3503C",name:"Computer Science 2",credits:3},{code:"COT 3100",name:"Applications of Discrete Structures",credits:3},{code:"COP 3530",name:"Data Structures and Algorithm Analysis",credits:3},{code:"COT 4501",name:"Analysis of Numerical Algorithms",credits:3},{code:"CDA 3101",name:"Introduction to Computer Organization",credits:3},{code:"COP 4020",name:"Programming Language Concepts",credits:3},{code:"COP 4600",name:"Operating Systems",credits:3},{code:"CEN 3031",name:"Introduction to Software Engineering",credits:3},{code:"CIS 4301",name:"Information and Database Systems 1",credits:3},{code:"EEL 3701C",name:"Digital Logic and Computer Systems",credits:3},{code:"ENC 3246",name:"Professional Communication for Engineers",credits:3},{code:"EGN 4912",name:"Engineering Ethics",credits:1}],electives:[],gen_ed_required:true
+  }
+  ,{
+    id:"computer_engineering",name:"Computer Engineering",degree:"B.S.",
+    college:"Herbert Wertheim College of Engineering",total_credits:128,min_gpa:2.0,
+    critical_tracking:{min_gpa:2.0,courses:[{code:"MAC 2311",name:"Analytic Geometry and Calculus 1",credits:4},{code:"PHY 2048",name:"Physics with Calculus 1",credits:3},{code:"COP 3502C",name:"Computer Science 1",credits:3},{code:"EEL 3701C",name:"Digital Logic and Computer Systems",credits:3},{code:"EEL 4712C",name:"Digital Design",credits:3}]},
+    required_courses:[{code:"MAC 2311",name:"Analytic Geometry and Calculus 1",credits:4},{code:"MAC 2312",name:"Analytic Geometry and Calculus 2",credits:4},{code:"MAC 2313",name:"Analytic Geometry and Calculus 3",credits:4},{code:"MAP 2302",name:"Ordinary Differential Equations",credits:3},{code:"PHY 2048",name:"Physics with Calculus 1",credits:3},{code:"PHY 2048L",name:"Physics Laboratory 1",credits:1},{code:"PHY 2049",name:"Physics with Calculus 2",credits:3},{code:"PHY 2049L",name:"Physics Laboratory 2",credits:1},{code:"COP 3502C",name:"Computer Science 1",credits:3},{code:"EEL 3701C",name:"Digital Logic and Computer Systems",credits:3},{code:"EEL 4712C",name:"Digital Design",credits:3},{code:"CDA 4150C",name:"Computer Architecture",credits:3},{code:"EEL 4746",name:"Embedded Systems",credits:3},{code:"EEL 4810",name:"Random Signals and Systems",credits:3},{code:"EEL 3135",name:"Signals and Systems",credits:3},{code:"EEL 3111C",name:"Circuits 1",credits:3},{code:"EEL 3112",name:"Circuits 2",credits:3},{code:"EEL 4851C",name:"Senior Design 1",credits:3},{code:"EEL 4852",name:"Senior Design 2",credits:3},{code:"ENC 3246",name:"Professional Communication for Engineers",credits:3},{code:"EGN 4912",name:"Engineering Ethics",credits:1}],electives:[],gen_ed_required:true
+  }
+  ,{
+    id:"biology",name:"Biology",degree:"B.S.",
+    college:"College of Liberal Arts and Sciences",total_credits:120,min_gpa:2.0,
+    critical_tracking:{min_gpa:2.0,courses:[{code:"BSC 2010",name:"Integrated Principles of Biology 1",credits:3},{code:"BSC 2010L",name:"Integrated Principles of Biology 1 Lab",credits:1},{code:"BSC 2011",name:"Integrated Principles of Biology 2",credits:3},{code:"BSC 2011L",name:"Integrated Principles of Biology 2 Lab",credits:1},{code:"MAC 2311",name:"Analytic Geometry and Calculus 1",credits:4},{code:"CHM 2045",name:"General Chemistry 1",credits:3},{code:"CHM 2046",name:"General Chemistry 2",credits:3}]},
+    required_courses:[{code:"BSC 2010",name:"Integrated Principles of Biology 1",credits:3},{code:"BSC 2010L",name:"Lab for BSC 2010",credits:1},{code:"BSC 2011",name:"Integrated Principles of Biology 2",credits:3},{code:"BSC 2011L",name:"Lab for BSC 2011",credits:1},{code:"CHM 2045",name:"General Chemistry 1",credits:3},{code:"CHM 2045L",name:"General Chemistry 1 Lab",credits:1},{code:"CHM 2046",name:"General Chemistry 2",credits:3},{code:"CHM 2046L",name:"General Chemistry 2 Lab",credits:1},{code:"CHM 3120",name:"Analytical Chemistry",credits:3},{code:"BCH 3023",name:"Introduction to Biochemistry",credits:3},{code:"MAC 2311",name:"Analytic Geometry and Calculus 1",credits:4},{code:"STA 2023",name:"Introduction to Statistics 1",credits:3},{code:"PHY 2053",name:"Physics 1",credits:3},{code:"PHY 2053L",name:"Physics Lab 1",credits:1},{code:"PHY 2054",name:"Physics 2",credits:3},{code:"PHY 2054L",name:"Physics Lab 2",credits:1},{code:"MCB 3020",name:"General Microbiology",credits:3},{code:"BSC 3402",name:"Advanced Cell Biology",credits:3},{code:"BSC 4933",name:"Senior Seminar in Biology",credits:2}],electives:[],gen_ed_required:true
+  }
+  ,{
+    id:"psychology",name:"Psychology",degree:"B.S.",
+    college:"College of Liberal Arts and Sciences",total_credits:120,min_gpa:2.0,
+    critical_tracking:{min_gpa:2.0,courses:[{code:"PSY 2012",name:"General Psychology",credits:3},{code:"STA 2023",name:"Introduction to Statistics 1",credits:3},{code:"PSY 3213C",name:"Research Methods in Psychology",credits:3},{code:"PSY 3604",name:"Brain and Behavior",credits:3}]},
+    required_courses:[{code:"PSY 2012",name:"General Psychology",credits:3},{code:"STA 2023",name:"Introduction to Statistics 1",credits:3},{code:"PSY 3213C",name:"Research Methods in Psychology",credits:3},{code:"PSY 3604",name:"Brain and Behavior",credits:3},{code:"PSY 3401",name:"Abnormal Psychology",credits:3},{code:"PSY 3002",name:"Experimental Psychology",credits:3},{code:"PSY 4930",name:"Senior Seminar in Psychology",credits:3},{code:"BSC 2010",name:"Integrated Principles of Biology 1",credits:3},{code:"BSC 2010L",name:"Integrated Principles of Biology 1 Lab",credits:1}],electives:[],gen_ed_required:true
+  }
+  ,{
+    id:"business_administration",name:"Business Administration",degree:"B.S.B.A.",
+    college:"Warrington College of Business",total_credits:120,min_gpa:2.0,
+    critical_tracking:{min_gpa:2.0,courses:[{code:"MAC 2233",name:"Survey of Calculus 1",credits:3},{code:"ACG 2021",name:"Introduction to Financial Accounting",credits:3},{code:"ACG 2071",name:"Introduction to Managerial Accounting",credits:3},{code:"ECO 2013",name:"Principles of Macroeconomics",credits:3},{code:"ECO 2023",name:"Principles of Microeconomics",credits:3},{code:"QMB 3250",name:"Statistics for Business Decisions",credits:3}]},
+    required_courses:[{code:"ACG 2021",name:"Introduction to Financial Accounting",credits:3},{code:"ACG 2071",name:"Introduction to Managerial Accounting",credits:3},{code:"ECO 2013",name:"Principles of Macroeconomics",credits:3},{code:"ECO 2023",name:"Principles of Microeconomics",credits:3},{code:"MAC 2233",name:"Survey of Calculus 1",credits:3},{code:"QMB 3250",name:"Statistics for Business Decisions",credits:3},{code:"BUL 4310",name:"The Legal Environment of Business",credits:3},{code:"FIN 3403",name:"Business Finance",credits:3},{code:"MAN 3025",name:"Management of Organizations",credits:3},{code:"MAR 3023",name:"Basic Marketing",credits:3},{code:"MAN 4720",name:"Business Policy and Strategy",credits:3},{code:"ISM 3011",name:"Information Systems in Organizations",credits:3},{code:"GEB 3031",name:"Communicating in Business",credits:3},{code:"ENT 3003",name:"Entrepreneurship",credits:3}],electives:[],gen_ed_required:true
+  }
+  ,{
+    id:"civil_engineering",name:"Civil Engineering",degree:"B.S.",
+    college:"Herbert Wertheim College of Engineering",total_credits:128,min_gpa:2.0,
+    critical_tracking:{min_gpa:2.0,courses:[{code:"MAC 2311",name:"Analytic Geometry and Calculus 1",credits:4},{code:"MAC 2312",name:"Analytic Geometry and Calculus 2",credits:4},{code:"PHY 2048",name:"Physics with Calculus 1",credits:3},{code:"EGN 3321",name:"Engineering Mechanics: Statics",credits:3},{code:"CEG 3012",name:"Geotechnical Engineering",credits:3}]},
+    required_courses:[{code:"MAC 2311",name:"Analytic Geometry and Calculus 1",credits:4},{code:"MAC 2312",name:"Analytic Geometry and Calculus 2",credits:4},{code:"MAC 2313",name:"Analytic Geometry and Calculus 3",credits:4},{code:"MAP 2302",name:"Ordinary Differential Equations",credits:3},{code:"PHY 2048",name:"Physics with Calculus 1",credits:3},{code:"PHY 2048L",name:"Physics Lab 1",credits:1},{code:"PHY 2049",name:"Physics with Calculus 2",credits:3},{code:"CHM 2045",name:"General Chemistry 1",credits:3},{code:"EGN 3321",name:"Engineering Mechanics: Statics",credits:3},{code:"EGN 3310",name:"Engineering Mechanics: Dynamics",credits:3},{code:"EGN 3331",name:"Mechanics of Materials",credits:3},{code:"CEG 3012",name:"Geotechnical Engineering",credits:3},{code:"CEG 3012L",name:"Geotechnical Engineering Lab",credits:1},{code:"CWR 3201",name:"Fluid Mechanics",credits:3},{code:"ENV 3001",name:"Environmental Engineering Principles",credits:3},{code:"STA 3032",name:"Engineering Statistics",credits:3},{code:"TTE 3110",name:"Transportation Engineering",credits:3},{code:"STC 3240",name:"Structural Analysis",credits:3},{code:"EES 3040C",name:"Engineering Measurements",credits:3},{code:"EGN 4912",name:"Engineering Ethics",credits:1},{code:"ENC 3246",name:"Professional Communication for Engineers",credits:3}],electives:[],gen_ed_required:true
+  }
+  ,{
+    id:"mechanical_engineering",name:"Mechanical Engineering",degree:"B.S.",
+    college:"Herbert Wertheim College of Engineering",total_credits:128,min_gpa:2.0,
+    critical_tracking:{min_gpa:2.0,courses:[{code:"MAC 2311",name:"Analytic Geometry and Calculus 1",credits:4},{code:"PHY 2048",name:"Physics with Calculus 1",credits:3},{code:"EGN 3321",name:"Engineering Mechanics: Statics",credits:3},{code:"EGN 3331",name:"Mechanics of Materials",credits:3},{code:"EML 3034C",name:"Thermodynamics",credits:3}]},
+    required_courses:[{code:"MAC 2311",name:"Analytic Geometry and Calculus 1",credits:4},{code:"MAC 2312",name:"Analytic Geometry and Calculus 2",credits:4},{code:"MAC 2313",name:"Analytic Geometry and Calculus 3",credits:4},{code:"MAP 2302",name:"Ordinary Differential Equations",credits:3},{code:"PHY 2048",name:"Physics with Calculus 1",credits:3},{code:"PHY 2048L",name:"Physics Lab 1",credits:1},{code:"PHY 2049",name:"Physics with Calculus 2",credits:3},{code:"CHM 2045",name:"General Chemistry 1",credits:3},{code:"EGN 3321",name:"Engineering Mechanics: Statics",credits:3},{code:"EGN 3310",name:"Engineering Mechanics: Dynamics",credits:3},{code:"EGN 3331",name:"Mechanics of Materials",credits:3},{code:"EML 3034C",name:"Thermodynamics",credits:3},{code:"EML 3100",name:"Engineering Thermodynamics",credits:3},{code:"EML 3301C",name:"Mechanics of Machines",credits:3},{code:"EML 4140",name:"Heat Transfer",credits:3},{code:"EML 4312",name:"Control of Mechanical Systems",credits:3},{code:"EML 4501C",name:"Machine Design",credits:3},{code:"EML 4552C",name:"Mechanical Engineering Lab",credits:2},{code:"EML 4905",name:"Senior Design",credits:3},{code:"STA 3032",name:"Engineering Statistics",credits:3},{code:"EGN 4912",name:"Engineering Ethics",credits:1},{code:"ENC 3246",name:"Professional Communication for Engineers",credits:3}],electives:[],gen_ed_required:true
+  }
+];
+
+document.addEventListener("DOMContentLoaded", loadData);
+</script>
+</body>
+</html>
