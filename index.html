@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GatorPath — UF Graduation Navigator</title>
+<title>DegreeMap — Graduation Navigator</title>
 <style>
   :root {
-    --gator-blue: #003087;
-    --gator-orange: #FA4616;
-    --gator-orange-light: #fff3ee;
-    --blue-light: #e8eef7;
+    --dm-blue: #1A3A5C;
+    --dm-green: #2E7D32;
+    --dm-green-light: #E8F5E9;
+    --blue-light: #E3EEF8;
     --green: #1a7a3c;
     --green-light: #e6f4ec;
     --red: #c0392b;
@@ -23,11 +23,11 @@
     --radius: 10px;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f4fa; color: #222; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #F2F8F4; color: #222; }
 
   /* ── Header ── */
   header {
-    background: var(--gator-blue);
+    background: linear-gradient(135deg,#1A3A5C 0%,#1B5E3B 100%);
     color: white;
     padding: 0 24px;
     display: flex;
@@ -46,7 +46,7 @@
     border: 2px solid rgba(255,255,255,.3); color: rgba(255,255,255,.8);
     background: transparent; transition: all .2s;
   }
-  .mode-tab.active, .mode-tab:hover { background: var(--gator-orange); border-color: var(--gator-orange); color: white; }
+  .mode-tab.active, .mode-tab:hover { background: var(--dm-green); border-color: var(--dm-green); color: white; }
 
   /* ── Layout ── */
   .container { max-width: 1100px; margin: 0 auto; padding: 24px 16px; }
@@ -54,8 +54,8 @@
     background: white; border-radius: var(--radius); box-shadow: var(--shadow);
     padding: 24px; margin-bottom: 20px;
   }
-  .card-title { font-size: 1.1rem; font-weight: 700; color: var(--gator-blue); margin-bottom: 16px;
-    border-bottom: 2px solid var(--gator-orange); padding-bottom: 8px; }
+  .card-title { font-size: 1.1rem; font-weight: 700; color: var(--dm-blue); margin-bottom: 16px;
+    border-bottom: 2px solid var(--dm-green); padding-bottom: 8px; }
   .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
   @media(max-width:700px) { .two-col { grid-template-columns: 1fr; } }
 
@@ -65,7 +65,7 @@
     width: 100%; padding: 10px 12px; border: 1.5px solid var(--border);
     border-radius: 7px; font-size: .95rem; outline: none; transition: border .2s;
   }
-  input:focus, select:focus, textarea:focus { border-color: var(--gator-blue); }
+  input:focus, select:focus, textarea:focus { border-color: var(--dm-blue); }
   .form-group { margin-bottom: 14px; }
 
   /* ── Buttons ── */
@@ -74,10 +74,10 @@
     padding: 10px 22px; border: none; border-radius: 7px; cursor: pointer;
     font-size: .95rem; font-weight: 600; transition: all .2s;
   }
-  .btn-primary { background: var(--gator-blue); color: white; }
-  .btn-primary:hover { background: #002060; }
-  .btn-orange { background: var(--gator-orange); color: white; }
-  .btn-orange:hover { background: #d93a0f; }
+  .btn-primary { background: var(--dm-blue); color: white; }
+  .btn-primary:hover { background: #122840; }
+  .btn-green { background: var(--dm-green); color: white; }
+  .btn-green:hover { background: #1B5E2A; }
   .btn-sm { padding: 5px 12px; font-size: .82rem; }
   .btn-ghost { background: transparent; border: 1.5px solid var(--border); color: #555; }
   .btn-ghost:hover { background: var(--gray-light); }
@@ -87,7 +87,7 @@
   .course-input-area input { flex: 1; }
   .tag-list { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
   .tag {
-    background: var(--blue-light); color: var(--gator-blue);
+    background: var(--blue-light); color: var(--dm-blue);
     border-radius: 20px; padding: 3px 10px; font-size: .82rem;
     display: flex; align-items: center; gap: 4px;
   }
@@ -98,7 +98,7 @@
   .progress-wrap { background: var(--gray-light); border-radius: 20px; height: 14px; overflow: hidden; }
   .progress-bar {
     height: 100%; border-radius: 20px; transition: width .6s ease;
-    background: linear-gradient(90deg, var(--gator-blue), var(--gator-orange));
+    background: linear-gradient(90deg, var(--dm-blue), var(--dm-green));
   }
   .progress-label { font-size: .8rem; color: var(--gray); margin-top: 4px; }
 
@@ -110,7 +110,7 @@
   .badge-green { background: var(--green-light); color: var(--green); }
   .badge-red { background: var(--red-light); color: var(--red); }
   .badge-yellow { background: var(--yellow-light); color: var(--yellow); }
-  .badge-blue { background: var(--blue-light); color: var(--gator-blue); }
+  .badge-blue { background: var(--blue-light); color: var(--dm-blue); }
 
   /* ── Course Status List ── */
   .course-list { list-style: none; }
@@ -123,7 +123,7 @@
   .ci-done { color: var(--green); }
   .ci-missing { color: var(--red); }
   .ci-warn { color: var(--yellow); }
-  .course-code { font-weight: 700; color: var(--gator-blue); min-width: 80px; }
+  .course-code { font-weight: 700; color: var(--dm-blue); min-width: 80px; }
   .course-credits { color: var(--gray); font-size: .8rem; margin-left: auto; white-space: nowrap; }
 
   /* ── Major Switch Cards ── */
@@ -133,10 +133,10 @@
     cursor: pointer; transition: all .2s;
   }
   .switch-card:hover, .switch-card.selected {
-    border-color: var(--gator-orange); box-shadow: 0 0 0 3px rgba(250,70,22,.12);
+    border-color: var(--dm-green); box-shadow: 0 0 0 3px rgba(46,125,50,.12);
   }
-  .switch-card h4 { font-size: .95rem; color: var(--gator-blue); margin-bottom: 6px; }
-  .switch-card .match-pct { font-size: 1.6rem; font-weight: 800; color: var(--gator-orange); }
+  .switch-card h4 { font-size: .95rem; color: var(--dm-blue); margin-bottom: 6px; }
+  .switch-card .match-pct { font-size: 1.6rem; font-weight: 800; color: var(--dm-green); }
   .switch-card .college-name { font-size: .78rem; color: var(--gray); margin-bottom: 8px; }
 
   /* ── Semester Plan ── */
@@ -145,7 +145,7 @@
     border: 1.5px solid var(--border); border-radius: 8px; overflow: hidden;
   }
   .semester-header {
-    background: var(--gator-blue); color: white; padding: 6px 12px;
+    background: var(--dm-blue); color: white; padding: 6px 12px;
     font-size: .82rem; font-weight: 700; display: flex; justify-content: space-between;
   }
   .semester-body { padding: 8px 12px; }
@@ -162,7 +162,7 @@
     border-radius: 8px; padding: 12px 16px; margin-bottom: 16px; font-size: .88rem;
     display: flex; gap: 10px; align-items: flex-start;
   }
-  .alert-info { background: var(--blue-light); color: var(--gator-blue); }
+  .alert-info { background: var(--blue-light); color: var(--dm-blue); }
   .alert-success { background: var(--green-light); color: var(--green); }
   .alert-warning { background: var(--yellow-light); color: var(--yellow); }
   .alert-danger { background: var(--red-light); color: var(--red); }
@@ -171,12 +171,12 @@
   .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 20px; }
   @media(max-width:600px) { .stats { grid-template-columns: 1fr 1fr; } }
   .stat-box { background: white; border-radius: 10px; padding: 16px; box-shadow: var(--shadow); text-align: center; }
-  .stat-value { font-size: 2rem; font-weight: 800; color: var(--gator-blue); }
+  .stat-value { font-size: 2rem; font-weight: 800; color: var(--dm-blue); }
   .stat-label { font-size: .75rem; color: var(--gray); margin-top: 2px; }
 
   /* ── Advisor table ── */
   table { width: 100%; border-collapse: collapse; font-size: .88rem; }
-  th { background: var(--gator-blue); color: white; padding: 10px 12px; text-align: left; font-size: .82rem; }
+  th { background: var(--dm-blue); color: white; padding: 10px 12px; text-align: left; font-size: .82rem; }
   td { padding: 9px 12px; border-bottom: 1px solid var(--border); }
   tr:last-child td { border-bottom: none; }
   tr:hover td { background: var(--gray-light); }
@@ -208,10 +208,10 @@
 
 <header>
   <div class="logo">
-    <span class="logo-gator">🐊</span>
+    <span class="logo-gator">🎓</span>
     <div>
-      <div>GatorPath</div>
-      <div class="logo-subtitle">UF Graduation Navigator</div>
+      <div>DegreeMap</div>
+      <div class="logo-subtitle">Graduation Navigator</div>
     </div>
   </div>
   <div class="mode-tabs">
@@ -220,9 +220,9 @@
   </div>
 </header>
 
-<!-- ════════════════════════════════════════════════════════════════════════════ -->
+<!-- ══════════════════════════════════════════════════════════════════════════ -->
 <!--  STUDENT PANEL                                                            -->
-<!-- ════════════════════════════════════════════════════════════════════════════ -->
+<!-- ══════════════════════════════════════════════════════════════════════════ -->
 <div id="panel-student" class="panel active">
 <div class="container">
 
@@ -256,7 +256,7 @@
           <div class="course-input-area">
             <input id="course-input" type="text" placeholder="e.g. MAC 2311" autocomplete="off"
               onkeydown="if(event.key==='Enter')addCourse()">
-            <button class="btn btn-orange btn-sm" onclick="addCourse()">Add</button>
+            <button class="btn btn-green btn-sm" onclick="addCourse()">Add</button>
           </div>
           <div id="course-tags" class="tag-list"></div>
         </div>
@@ -326,9 +326,9 @@
 </div>
 </div>
 
-<!-- ════════════════════════════════════════════════════════════════════════════ -->
+<!-- ══════════════════════════════════════════════════════════════════════════ -->
 <!--  ADVISOR PANEL                                                            -->
-<!-- ════════════════════════════════════════════════════════════════════════════ -->
+<!-- ══════════════════════════════════════════════════════════════════════════ -->
 <div id="panel-advisor" class="panel">
 <div class="container">
 
@@ -340,7 +340,7 @@
       <select id="adv-filter-major" onchange="renderAdvisorTable()" style="max-width:220px">
         <option value="">All Majors</option>
       </select>
-      <button class="btn btn-orange" onclick="openAddStudent()">➕ Add Student</button>
+      <button class="btn btn-green" onclick="openAddStudent()">➕ Add Student</button>
       <button class="btn btn-ghost" onclick="exportCSV()">⬇️ Export CSV</button>
     </div>
   </div>
@@ -407,7 +407,7 @@
 // ═══════════════════════════════════════════════════════════════════════════
 
 let DB = { majors: [], gen_ed: {} };
-let students = JSON.parse(localStorage.getItem('gatorpath_students') || '[]');
+let students = JSON.parse(localStorage.getItem('degreemap_students') || '[]');
 let completedCourses = new Set();
 let editingStudentId = null;
 let currentMode = 'student';
@@ -429,7 +429,7 @@ async function loadData() {
 function saveMajors() {}  // data is read-only; students persist via localStorage
 
 function saveStudents() {
-  localStorage.setItem('gatorpath_students', JSON.stringify(students));
+  localStorage.setItem('degreemap_students', JSON.stringify(students));
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -780,7 +780,7 @@ function showSwitchDetail(majorId, card) {
   const detail = document.getElementById('switch-detail');
   detail.style.display = 'block';
   detail.innerHTML = `
-    <div class="card" style="margin-top:0;border:2px solid var(--gator-orange)">
+    <div class="card" style="margin-top:0;border:2px solid var(--dm-green)">
       <div class="card-title">Switch Analysis: ${a.major.name} (${a.major.degree})</div>
       <div class="two-col">
         <div>
@@ -1027,7 +1027,7 @@ function exportCSV() {
   const blob = new Blob([csv], { type: 'text/csv' });
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
-  a.download = 'gatorpath_students.csv';
+  a.download = 'degreemap_students.csv';
   a.click();
 }
 
