@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DegreeMap — Graduation Navigator</title>
+<title>GatorPath â UF Graduation Navigator</title>
 <style>
   :root {
-    --dm-blue: #1A3A5C;
-    --dm-green: #2E7D32;
-    --dm-green-light: #E8F5E9;
-    --blue-light: #E3EEF8;
+    --gator-blue: #003087;
+    --gator-orange: #FA4616;
+    --gator-orange-light: #fff3ee;
+    --blue-light: #e8eef7;
     --green: #1a7a3c;
     --green-light: #e6f4ec;
     --red: #c0392b;
@@ -23,11 +23,11 @@
     --radius: 10px;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Segoe UI', Arial, sans-serif; background: #F2F8F4; color: #222; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f4fa; color: #222; }
 
-  /* ── Header ── */
+  /* ââ Header ââ */
   header {
-    background: linear-gradient(135deg,#1A3A5C 0%,#1B5E3B 100%);
+    background: var(--gator-blue);
     color: white;
     padding: 0 24px;
     display: flex;
@@ -46,63 +46,63 @@
     border: 2px solid rgba(255,255,255,.3); color: rgba(255,255,255,.8);
     background: transparent; transition: all .2s;
   }
-  .mode-tab.active, .mode-tab:hover { background: var(--dm-green); border-color: var(--dm-green); color: white; }
+  .mode-tab.active, .mode-tab:hover { background: var(--gator-orange); border-color: var(--gator-orange); color: white; }
 
-  /* ── Layout ── */
+  /* ââ Layout ââ */
   .container { max-width: 1100px; margin: 0 auto; padding: 24px 16px; }
   .card {
     background: white; border-radius: var(--radius); box-shadow: var(--shadow);
     padding: 24px; margin-bottom: 20px;
   }
-  .card-title { font-size: 1.1rem; font-weight: 700; color: var(--dm-blue); margin-bottom: 16px;
-    border-bottom: 2px solid var(--dm-green); padding-bottom: 8px; }
+  .card-title { font-size: 1.1rem; font-weight: 700; color: var(--gator-blue); margin-bottom: 16px;
+    border-bottom: 2px solid var(--gator-orange); padding-bottom: 8px; }
   .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
   @media(max-width:700px) { .two-col { grid-template-columns: 1fr; } }
 
-  /* ── Forms ── */
+  /* ââ Forms ââ */
   label { display: block; font-size: .85rem; font-weight: 600; color: #555; margin-bottom: 4px; }
   input, select, textarea {
     width: 100%; padding: 10px 12px; border: 1.5px solid var(--border);
     border-radius: 7px; font-size: .95rem; outline: none; transition: border .2s;
   }
-  input:focus, select:focus, textarea:focus { border-color: var(--dm-blue); }
+  input:focus, select:focus, textarea:focus { border-color: var(--gator-blue); }
   .form-group { margin-bottom: 14px; }
 
-  /* ── Buttons ── */
+  /* ââ Buttons ââ */
   .btn {
     display: inline-flex; align-items: center; gap: 6px;
     padding: 10px 22px; border: none; border-radius: 7px; cursor: pointer;
     font-size: .95rem; font-weight: 600; transition: all .2s;
   }
-  .btn-primary { background: var(--dm-blue); color: white; }
-  .btn-primary:hover { background: #122840; }
-  .btn-green { background: var(--dm-green); color: white; }
-  .btn-green:hover { background: #1B5E2A; }
+  .btn-primary { background: var(--gator-blue); color: white; }
+  .btn-primary:hover { background: #002060; }
+  .btn-orange { background: var(--gator-orange); color: white; }
+  .btn-orange:hover { background: #d93a0f; }
   .btn-sm { padding: 5px 12px; font-size: .82rem; }
   .btn-ghost { background: transparent; border: 1.5px solid var(--border); color: #555; }
   .btn-ghost:hover { background: var(--gray-light); }
 
-  /* ── Course Input ── */
+  /* ââ Course Input ââ */
   .course-input-area { display: flex; gap: 8px; margin-bottom: 8px; }
   .course-input-area input { flex: 1; }
   .tag-list { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
   .tag {
-    background: var(--blue-light); color: var(--dm-blue);
+    background: var(--blue-light); color: var(--gator-blue);
     border-radius: 20px; padding: 3px 10px; font-size: .82rem;
     display: flex; align-items: center; gap: 4px;
   }
   .tag-remove { cursor: pointer; font-size: .9rem; opacity: .6; }
   .tag-remove:hover { opacity: 1; color: var(--red); }
 
-  /* ── Progress Bar ── */
+  /* ââ Progress Bar ââ */
   .progress-wrap { background: var(--gray-light); border-radius: 20px; height: 14px; overflow: hidden; }
   .progress-bar {
     height: 100%; border-radius: 20px; transition: width .6s ease;
-    background: linear-gradient(90deg, var(--dm-blue), var(--dm-green));
+    background: linear-gradient(90deg, var(--gator-blue), var(--gator-orange));
   }
   .progress-label { font-size: .8rem; color: var(--gray); margin-top: 4px; }
 
-  /* ── Status Badges ── */
+  /* ââ Status Badges ââ */
   .badge {
     display: inline-block; padding: 2px 10px; border-radius: 20px;
     font-size: .75rem; font-weight: 700; letter-spacing: .03em;
@@ -110,9 +110,9 @@
   .badge-green { background: var(--green-light); color: var(--green); }
   .badge-red { background: var(--red-light); color: var(--red); }
   .badge-yellow { background: var(--yellow-light); color: var(--yellow); }
-  .badge-blue { background: var(--blue-light); color: var(--dm-blue); }
+  .badge-blue { background: var(--blue-light); color: var(--gator-blue); }
 
-  /* ── Course Status List ── */
+  /* ââ Course Status List ââ */
   .course-list { list-style: none; }
   .course-list li {
     display: flex; align-items: flex-start; gap: 10px;
@@ -123,29 +123,29 @@
   .ci-done { color: var(--green); }
   .ci-missing { color: var(--red); }
   .ci-warn { color: var(--yellow); }
-  .course-code { font-weight: 700; color: var(--dm-blue); min-width: 80px; }
+  .course-code { font-weight: 700; color: var(--gator-blue); min-width: 80px; }
   .course-credits { color: var(--gray); font-size: .8rem; margin-left: auto; white-space: nowrap; }
 
-  /* ── Major Switch Cards ── */
+  /* ââ Major Switch Cards ââ */
   .switch-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
   .switch-card {
     border: 1.5px solid var(--border); border-radius: var(--radius); padding: 16px;
     cursor: pointer; transition: all .2s;
   }
   .switch-card:hover, .switch-card.selected {
-    border-color: var(--dm-green); box-shadow: 0 0 0 3px rgba(46,125,50,.12);
+    border-color: var(--gator-orange); box-shadow: 0 0 0 3px rgba(250,70,22,.12);
   }
-  .switch-card h4 { font-size: .95rem; color: var(--dm-blue); margin-bottom: 6px; }
-  .switch-card .match-pct { font-size: 1.6rem; font-weight: 800; color: var(--dm-green); }
+  .switch-card h4 { font-size: .95rem; color: var(--gator-blue); margin-bottom: 6px; }
+  .switch-card .match-pct { font-size: 1.6rem; font-weight: 800; color: var(--gator-orange); }
   .switch-card .college-name { font-size: .78rem; color: var(--gray); margin-bottom: 8px; }
 
-  /* ── Semester Plan ── */
+  /* ââ Semester Plan ââ */
   .semester-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
   .semester-box {
     border: 1.5px solid var(--border); border-radius: 8px; overflow: hidden;
   }
   .semester-header {
-    background: var(--dm-blue); color: white; padding: 6px 12px;
+    background: var(--gator-blue); color: white; padding: 6px 12px;
     font-size: .82rem; font-weight: 700; display: flex; justify-content: space-between;
   }
   .semester-body { padding: 8px 12px; }
@@ -153,39 +153,39 @@
   .semester-body .sc.completed { color: var(--green); }
   .semester-body .sc.missing { color: var(--red); }
 
-  /* ── Panels (student / advisor) ── */
+  /* ââ Panels (student / advisor) ââ */
   .panel { display: none; }
   .panel.active { display: block; }
 
-  /* ── Alert box ── */
+  /* ââ Alert box ââ */
   .alert {
     border-radius: 8px; padding: 12px 16px; margin-bottom: 16px; font-size: .88rem;
     display: flex; gap: 10px; align-items: flex-start;
   }
-  .alert-info { background: var(--blue-light); color: var(--dm-blue); }
+  .alert-info { background: var(--blue-light); color: var(--gator-blue); }
   .alert-success { background: var(--green-light); color: var(--green); }
   .alert-warning { background: var(--yellow-light); color: var(--yellow); }
   .alert-danger { background: var(--red-light); color: var(--red); }
 
-  /* ── Stats row ── */
+  /* ââ Stats row ââ */
   .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 20px; }
   @media(max-width:600px) { .stats { grid-template-columns: 1fr 1fr; } }
   .stat-box { background: white; border-radius: 10px; padding: 16px; box-shadow: var(--shadow); text-align: center; }
-  .stat-value { font-size: 2rem; font-weight: 800; color: var(--dm-blue); }
+  .stat-value { font-size: 2rem; font-weight: 800; color: var(--gator-blue); }
   .stat-label { font-size: .75rem; color: var(--gray); margin-top: 2px; }
 
-  /* ── Advisor table ── */
+  /* ââ Advisor table ââ */
   table { width: 100%; border-collapse: collapse; font-size: .88rem; }
-  th { background: var(--dm-blue); color: white; padding: 10px 12px; text-align: left; font-size: .82rem; }
+  th { background: var(--gator-blue); color: white; padding: 10px 12px; text-align: left; font-size: .82rem; }
   td { padding: 9px 12px; border-bottom: 1px solid var(--border); }
   tr:last-child td { border-bottom: none; }
   tr:hover td { background: var(--gray-light); }
 
-  /* ── Loading spinner ── */
+  /* ââ Loading spinner ââ */
   .spinner { text-align: center; padding: 40px; color: var(--gray); }
-  .spinner::before { content: '⏳ '; }
+  .spinner::before { content: 'â³ '; }
 
-  /* ── Tooltip ── */
+  /* ââ Tooltip ââ */
   [data-tip] { position: relative; cursor: help; }
   [data-tip]:hover::after {
     content: attr(data-tip);
@@ -195,12 +195,12 @@
     margin-bottom: 4px;
   }
 
-  /* ── Empty state ── */
+  /* ââ Empty state ââ */
   .empty { text-align: center; padding: 40px 20px; color: var(--gray); }
   .empty .empty-icon { font-size: 3rem; margin-bottom: 10px; }
   .empty p { font-size: .9rem; }
 
-  /* ── Print styles ── */
+  /* ââ Print styles ââ */
   @media print { header { display: none; } .btn { display: none; } }
 </style>
 </head>
@@ -208,27 +208,27 @@
 
 <header>
   <div class="logo">
-    <span class="logo-gator">🎓</span>
+    <span class="logo-gator">ð</span>
     <div>
-      <div>DegreeMap</div>
-      <div class="logo-subtitle">Graduation Navigator</div>
+      <div>GatorPath</div>
+      <div class="logo-subtitle">UF Graduation Navigator</div>
     </div>
   </div>
   <div class="mode-tabs">
-    <button class="mode-tab active" onclick="switchMode('student')">🎓 Student</button>
-    <button class="mode-tab" onclick="switchMode('advisor')">📋 Advisor</button>
+    <button class="mode-tab active" onclick="switchMode('student')">ð Student</button>
+    <button class="mode-tab" onclick="switchMode('advisor')">ð Advisor</button>
   </div>
 </header>
 
-<!-- ══════════════════════════════════════════════════════════════════════════ -->
+<!-- ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ -->
 <!--  STUDENT PANEL                                                            -->
-<!-- ══════════════════════════════════════════════════════════════════════════ -->
+<!-- ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ -->
 <div id="panel-student" class="panel active">
 <div class="container">
 
   <!-- Input Card -->
   <div class="card">
-    <div class="card-title">📝 Student Profile</div>
+    <div class="card-title">ð Student Profile</div>
     <div class="two-col">
       <div>
         <div class="form-group">
@@ -238,7 +238,7 @@
         <div class="form-group">
           <label>Current Major</label>
           <select id="stu-major">
-            <option value="">— loading majors —</option>
+            <option value="">â loading majors â</option>
           </select>
         </div>
         <div class="form-group">
@@ -256,7 +256,7 @@
           <div class="course-input-area">
             <input id="course-input" type="text" placeholder="e.g. MAC 2311" autocomplete="off"
               onkeydown="if(event.key==='Enter')addCourse()">
-            <button class="btn btn-green btn-sm" onclick="addCourse()">Add</button>
+            <button class="btn btn-orange btn-sm" onclick="addCourse()">Add</button>
           </div>
           <div id="course-tags" class="tag-list"></div>
         </div>
@@ -271,9 +271,9 @@
       </div>
     </div>
     <div style="display:flex;gap:10px;margin-top:8px">
-      <button class="btn btn-primary" onclick="analyzeStudent()">🔍 Analyze My Path</button>
+      <button class="btn btn-primary" onclick="analyzeStudent()">ð Analyze My Path</button>
       <button class="btn btn-ghost" onclick="clearStudent()">Clear</button>
-      <button class="btn btn-ghost" onclick="printReport()">🖨️ Print Report</button>
+      <button class="btn btn-ghost" onclick="printReport()">ð¨ï¸ Print Report</button>
     </div>
   </div>
 
@@ -289,11 +289,11 @@
     <!-- Two-col: remaining + critical tracking -->
     <div class="two-col">
       <div class="card">
-        <div class="card-title">📚 Required Courses Status</div>
+        <div class="card-title">ð Required Courses Status</div>
         <ul class="course-list" id="course-status-list"></ul>
       </div>
       <div class="card">
-        <div class="card-title">⚠️ Critical Tracking Status</div>
+        <div class="card-title">â ï¸ Critical Tracking Status</div>
         <ul class="course-list" id="ct-status-list"></ul>
         <div id="ct-warning" style="margin-top:12px"></div>
       </div>
@@ -301,21 +301,21 @@
 
     <!-- Semester plan -->
     <div class="card">
-      <div class="card-title">📅 Remaining Path (Estimated Semester Plan)</div>
+      <div class="card-title">ð Remaining Path (Estimated Semester Plan)</div>
       <div class="semester-grid" id="semester-plan"></div>
     </div>
 
     <!-- Credit Progress -->
     <div class="card">
-      <div class="card-title">📊 Degree Progress</div>
+      <div class="card-title">ð Degree Progress</div>
       <div id="progress-bars"></div>
     </div>
 
     <!-- Major Switch Section -->
     <div class="card">
-      <div class="card-title">🔄 Major Switch Advisor</div>
+      <div class="card-title">ð Major Switch Advisor</div>
       <div class="alert alert-info" style="margin-bottom:16px">
-        ℹ️ Based on your completed courses, here are other UF majors where your credits transfer best.
+        â¹ï¸ Based on your completed courses, here are other UF majors where your credits transfer best.
         A higher match % means fewer extra semesters needed.
       </div>
       <div class="switch-grid" id="major-switch-grid"></div>
@@ -326,28 +326,28 @@
 </div>
 </div>
 
-<!-- ══════════════════════════════════════════════════════════════════════════ -->
+<!-- ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ -->
 <!--  ADVISOR PANEL                                                            -->
-<!-- ══════════════════════════════════════════════════════════════════════════ -->
+<!-- ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ -->
 <div id="panel-advisor" class="panel">
 <div class="container">
 
   <div class="card">
-    <div class="card-title">🏫 Advisor Dashboard — Manage Students</div>
+    <div class="card-title">ð« Advisor Dashboard â Manage Students</div>
     <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
-      <input id="adv-search" type="text" placeholder="Search students…" style="max-width:250px"
+      <input id="adv-search" type="text" placeholder="Search studentsâ¦" style="max-width:250px"
         oninput="renderAdvisorTable()">
       <select id="adv-filter-major" onchange="renderAdvisorTable()" style="max-width:220px">
         <option value="">All Majors</option>
       </select>
-      <button class="btn btn-green" onclick="openAddStudent()">➕ Add Student</button>
-      <button class="btn btn-ghost" onclick="exportCSV()">⬇️ Export CSV</button>
+      <button class="btn btn-orange" onclick="openAddStudent()">â Add Student</button>
+      <button class="btn btn-ghost" onclick="exportCSV()">â¬ï¸ Export CSV</button>
     </div>
   </div>
 
   <!-- Add / Edit Student modal -->
   <div id="adv-form-card" class="card" style="display:none">
-    <div class="card-title" id="adv-form-title">➕ Add Student</div>
+    <div class="card-title" id="adv-form-title">â Add Student</div>
     <div class="two-col">
       <div>
         <div class="form-group"><label>Name</label><input id="adv-stu-name" type="text"></div>
@@ -362,12 +362,12 @@
         <div class="form-group"><label>Credits Completed</label><input id="adv-stu-credits" type="number" min="0"></div>
         <div class="form-group">
           <label>Completed Courses (comma-separated)</label>
-          <textarea id="adv-stu-courses" rows="4" placeholder="COP 3502C, MAC 2311, ENC 1101…"></textarea>
+          <textarea id="adv-stu-courses" rows="4" placeholder="COP 3502C, MAC 2311, ENC 1101â¦"></textarea>
         </div>
       </div>
     </div>
     <div style="display:flex;gap:10px">
-      <button class="btn btn-primary" onclick="saveStudent()">💾 Save Student</button>
+      <button class="btn btn-primary" onclick="saveStudent()">ð¾ Save Student</button>
       <button class="btn btn-ghost" onclick="cancelAddStudent()">Cancel</button>
     </div>
   </div>
@@ -385,7 +385,7 @@
       <tbody id="student-tbody"></tbody>
     </table>
     <div id="adv-empty" class="empty" style="display:none">
-      <div class="empty-icon">🎓</div>
+      <div class="empty-icon">ð</div>
       <p>No students yet. Click <strong>Add Student</strong> to get started.</p>
     </div>
   </div>
@@ -402,12 +402,12 @@
 </div>
 
 <script>
-// ═══════════════════════════════════════════════════════════════════════════
+// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 //  DATA LAYER
-// ═══════════════════════════════════════════════════════════════════════════
+// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 
 let DB = { majors: [], gen_ed: {} };
-let students = JSON.parse(localStorage.getItem('degreemap_students') || '[]');
+let students = JSON.parse(localStorage.getItem('gatorpath_students') || '[]');
 let completedCourses = new Set();
 let editingStudentId = null;
 let currentMode = 'student';
@@ -420,7 +420,7 @@ async function loadData() {
     DB.gen_ed = json.gen_ed_requirements || {};
   } catch(e) {
     // Fallback: embed minimal data if file not found
-    console.warn('Could not load data/majors.json — using embedded demo data.');
+    console.warn('Could not load data/majors.json â using embedded demo data.');
     DB.majors = DEMO_MAJORS;
   }
   populateMajorSelects();
@@ -429,12 +429,12 @@ async function loadData() {
 function saveMajors() {}  // data is read-only; students persist via localStorage
 
 function saveStudents() {
-  localStorage.setItem('degreemap_students', JSON.stringify(students));
+  localStorage.setItem('gatorpath_students', JSON.stringify(students));
 }
 
-// ═══════════════════════════════════════════════════════════════════════════
+// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 //  CORE ENGINE
-// ═══════════════════════════════════════════════════════════════════════════
+// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 
 /**
  * Analyze a student's path in a given major.
@@ -473,7 +473,7 @@ function analyzePath(majorId, completedSet, totalCredits, gpa) {
   const remainingCredits = Math.max(0, major.total_credits - totalCredits);
   const semestersLeft = Math.ceil(remainingCredits / 15);
 
-  // ── Major switch matches (fixed engine) ─────────────────────────────────────
+  // ââ Major switch matches (fixed engine) âââââââââââââââââââââââââââââââââââââ
   // Problems fixed:
   //   1. Credit-weighted match (not just course count)
   //   2. Core-course match ignores gen-ed filler courses
@@ -487,29 +487,29 @@ function analyzePath(majorId, completedSet, totalCredits, gpa) {
     .map(m => {
       const targetReq = m.required_courses || [];
 
-      // FIX 1 — Credit-weighted: sum credits of matched courses vs total required credits
+      // FIX 1 â Credit-weighted: sum credits of matched courses vs total required credits
       const totalReqCredits = targetReq.reduce((s, c) => s + (c.credits || 3), 0);
       const matched = targetReq.filter(c => completedNorm.has(normalizeCode(c.code)));
       const savedCredits = matched.reduce((s, c) => s + (c.credits || 3), 0);
       const creditMatchPct = Math.round((savedCredits / Math.max(1, totalReqCredits)) * 100);
 
-      // FIX 2 — Core-course match: strip gen-ed prefixes, measure only major-specific overlap
+      // FIX 2 â Core-course match: strip gen-ed prefixes, measure only major-specific overlap
       const coreReq = targetReq.filter(c => !GENERIC_PREFIXES.has(coursePrefix(c.code)));
       const coreMatched = coreReq.filter(c => completedNorm.has(normalizeCode(c.code)));
       const coreReqCredits = coreReq.reduce((s, c) => s + (c.credits || 3), 0);
       const coreMatchedCredits = coreMatched.reduce((s, c) => s + (c.credits || 3), 0);
       const coreMatchPct = Math.round((coreMatchedCredits / Math.max(1, coreReqCredits)) * 100);
 
-      // FIX 3 — Wasted-credits penalty: credits that don't count toward new major
+      // FIX 3 â Wasted-credits penalty: credits that don't count toward new major
       const wastedCredits = Math.max(0, totalCredits - savedCredits);
       const wastePct = totalCredits > 0 ? (wastedCredits / totalCredits) : 0;
       const wastePenalty = Math.round(wastePct * 35); // up to -35 pts
 
-      // FIX 4 — Same-college bonus (keeps STEM in STEM, etc.)
+      // FIX 4 â Same-college bonus (keeps STEM in STEM, etc.)
       const sameCollege = (major.college || '') === (m.college || '');
       const collegeBonus = sameCollege ? 15 : 0;
 
-      // FIX 5 — Composite score
+      // FIX 5 â Composite score
       const compositeScore = Math.max(0, Math.round(
         (creditMatchPct  * 0.45) +
         (coreMatchPct    * 0.35) +
@@ -544,7 +544,7 @@ function coursePrefix(code) {
   return m ? m[1] : '';
 }
 
-// Generic/gen-ed prefixes that appear in almost every major — not major-specific indicators
+// Generic/gen-ed prefixes that appear in almost every major â not major-specific indicators
 const GENERIC_PREFIXES = new Set([
   'MAC','MGF','MHF','STA','MAP',   // math
   'ENC','ENG','LIT','AML',          // english/writing
@@ -555,9 +555,9 @@ const GENERIC_PREFIXES = new Set([
   'ECO','EVR'                       // economics/env gen-ed
 ]);
 
-// ═══════════════════════════════════════════════════════════════════════════
+// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 //  STUDENT PANEL
-// ═══════════════════════════════════════════════════════════════════════════
+// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 
 function addCourse() {
   const input = document.getElementById('course-input');
@@ -582,7 +582,7 @@ function quickAdd(codes) {
 function renderCourseTags() {
   const container = document.getElementById('course-tags');
   container.innerHTML = [...completedCourses].map(c =>
-    `<span class="tag">${c}<span class="tag-remove" onclick="removeCourse('${c}')">✕</span></span>`
+    `<span class="tag">${c}<span class="tag-remove" onclick="removeCourse('${c}')">â</span></span>`
   ).join('');
 }
 
@@ -617,7 +617,7 @@ function renderStudentResults(a, totalCredits, gpa) {
       <div class="stat-label">Semesters Left (est.)</div>
     </div>
     <div class="stat-box">
-      <div class="stat-value">${gpa > 0 ? gpa.toFixed(2) : '—'}</div>
+      <div class="stat-value">${gpa > 0 ? gpa.toFixed(2) : 'â'}</div>
       <div class="stat-label">Current GPA (min ${a.major.min_gpa})</div>
     </div>
   `;
@@ -625,13 +625,13 @@ function renderStudentResults(a, totalCredits, gpa) {
   // Alert
   let alertHtml = '';
   if (a.hasHold) {
-    alertHtml = `<div class="alert alert-danger">🚨 <strong>Registration Hold Risk</strong>: You may have a hold due to ${a.ctAtRisk ? 'incomplete critical-tracking courses' : ''}${a.ctAtRisk && gpa < a.major.min_gpa ? ' and ' : ''}${gpa > 0 && gpa < a.major.min_gpa ? 'GPA below minimum' : ''}. Contact your academic advisor immediately.</div>`;
+    alertHtml = `<div class="alert alert-danger">ð¨ <strong>Registration Hold Risk</strong>: You may have a hold due to ${a.ctAtRisk ? 'incomplete critical-tracking courses' : ''}${a.ctAtRisk && gpa < a.major.min_gpa ? ' and ' : ''}${gpa > 0 && gpa < a.major.min_gpa ? 'GPA below minimum' : ''}. Contact your academic advisor immediately.</div>`;
   } else if (a.pct >= 80) {
-    alertHtml = `<div class="alert alert-success">🎉 <strong>Almost there!</strong> You are ${100 - a.pct}% away from completing your degree requirements in ${a.major.name}.</div>`;
+    alertHtml = `<div class="alert alert-success">ð <strong>Almost there!</strong> You are ${100 - a.pct}% away from completing your degree requirements in ${a.major.name}.</div>`;
   } else if (a.onTrack) {
-    alertHtml = `<div class="alert alert-info">✅ <strong>On track!</strong> GPA and critical-tracking look good. Keep it up!</div>`;
+    alertHtml = `<div class="alert alert-info">â <strong>On track!</strong> GPA and critical-tracking look good. Keep it up!</div>`;
   } else {
-    alertHtml = `<div class="alert alert-warning">⚠️ Review the items below with your advisor before next registration.</div>`;
+    alertHtml = `<div class="alert alert-warning">â ï¸ Review the items below with your advisor before next registration.</div>`;
   }
   document.getElementById('graduation-alert').innerHTML = alertHtml;
 
@@ -642,12 +642,12 @@ function renderStudentResults(a, totalCredits, gpa) {
   } else {
     csl.innerHTML = a.courseStatus.map(c => `
       <li>
-        <span class="ci ${c.completed ? 'ci-done' : 'ci-missing'}">${c.completed ? '✅' : '❌'}</span>
+        <span class="ci ${c.completed ? 'ci-done' : 'ci-missing'}">${c.completed ? 'â' : 'â'}</span>
         <div>
           <span class="course-code">${c.code}</span>
           <span style="color:#555"> ${c.name}</span>
         </div>
-        <span class="course-credits">${c.credits} cr · <span class="badge ${c.completed ? 'badge-green' : 'badge-red'}">${c.completed ? 'Done' : 'Needed'}</span></span>
+        <span class="course-credits">${c.credits} cr Â· <span class="badge ${c.completed ? 'badge-green' : 'badge-red'}">${c.completed ? 'Done' : 'Needed'}</span></span>
       </li>
     `).join('');
   }
@@ -659,7 +659,7 @@ function renderStudentResults(a, totalCredits, gpa) {
   } else {
     ctl.innerHTML = a.ctStatus.map(c => `
       <li>
-        <span class="ci ${c.completed ? 'ci-done' : 'ci-missing'}">${c.completed ? '✅' : '⚠️'}</span>
+        <span class="ci ${c.completed ? 'ci-done' : 'ci-missing'}">${c.completed ? 'â' : 'â ï¸'}</span>
         <div>
           <span class="course-code">${c.code}</span>
           <span style="color:#555"> ${c.name}</span>
@@ -674,7 +674,7 @@ function renderStudentResults(a, totalCredits, gpa) {
   if (a.ctAtRisk) {
     ctWarn.innerHTML = `<div class="alert alert-warning">Missing ${a.ctMissing.length} critical-tracking course(s). A registration hold may be placed if not completed on schedule.</div>`;
   } else {
-    ctWarn.innerHTML = `<div class="alert alert-success">✅ All critical-tracking courses complete.</div>`;
+    ctWarn.innerHTML = `<div class="alert alert-success">â All critical-tracking courses complete.</div>`;
   }
 
   // Semester plan
@@ -696,7 +696,7 @@ function renderSemesterPlan(a) {
   document.getElementById('semester-plan').innerHTML = plan.map(sem => {
     const courseHtml = sem.courses.map(c => {
       const done = completedCourses.has(normalizeCode(c));
-      return `<div class="sc ${done ? 'completed' : 'missing'}">${done ? '✅' : '○'} ${c}</div>`;
+      return `<div class="sc ${done ? 'completed' : 'missing'}">${done ? 'â' : 'â'} ${c}</div>`;
     }).join('');
     return `
       <div class="semester-box">
@@ -748,17 +748,17 @@ function renderSwitchGrid(switchMatches) {
   const top5 = switchMatches.slice(0, 6);
   if (top5.length === 0) {
     document.getElementById('major-switch-grid').innerHTML =
-      '<p style="color:#555;font-size:.9rem">No strong switch matches found. Your completed coursework is highly specialized for your current major — switching would require significant additional work.</p>';
+      '<p style="color:#555;font-size:.9rem">No strong switch matches found. Your completed coursework is highly specialized for your current major â switching would require significant additional work.</p>';
     return;
   }
   document.getElementById('major-switch-grid').innerHTML = top5.map(sw => `
     <div class="switch-card" onclick="showSwitchDetail('${sw.major.id}', this)">
       <div class="match-pct">${sw.matchPct}%</div>
       <h4>${sw.major.name} (${sw.major.degree})</h4>
-      <div class="college-name">${sw.major.college}${sw.sameCollege ? ' ✓ Same College' : ''}</div>
+      <div class="college-name">${sw.major.college}${sw.sameCollege ? ' â Same College' : ''}</div>
       <div style="font-size:.8rem;color:#555">
-        <strong>${sw.matched.length}</strong> courses transfer ·
-        <strong>${sw.savedCredits}</strong> cr saved ·
+        <strong>${sw.matched.length}</strong> courses transfer Â·
+        <strong>${sw.savedCredits}</strong> cr saved Â·
         <span style="color:${sw.wastedCredits > 40 ? '#c0392b' : '#555'}">
           ${sw.wastedCredits} cr lost
         </span>
@@ -780,7 +780,7 @@ function showSwitchDetail(majorId, card) {
   const detail = document.getElementById('switch-detail');
   detail.style.display = 'block';
   detail.innerHTML = `
-    <div class="card" style="margin-top:0;border:2px solid var(--dm-green)">
+    <div class="card" style="margin-top:0;border:2px solid var(--gator-orange)">
       <div class="card-title">Switch Analysis: ${a.major.name} (${a.major.degree})</div>
       <div class="two-col">
         <div>
@@ -790,16 +790,16 @@ function showSwitchDetail(majorId, card) {
             <strong>Estimated Semesters After Switch:</strong> ~${a.semestersLeft}
           </p>
           <div class="alert ${a.matchPct >= 60 ? 'alert-success' : a.matchPct >= 30 ? 'alert-warning' : 'alert-danger'}">
-            ${a.matchPct >= 60 ? '✅ Strong match — most of your credits carry over.' :
-              a.matchPct >= 30 ? '⚠️ Moderate match — some courses will need to be retaken.' :
-              '❌ Low match — significant new coursework required.'}
+            ${a.matchPct >= 60 ? 'â Strong match â most of your credits carry over.' :
+              a.matchPct >= 30 ? 'â ï¸ Moderate match â some courses will need to be retaken.' :
+              'â Low match â significant new coursework required.'}
           </div>
         </div>
         <div>
           <p style="font-size:.82rem;font-weight:600;margin-bottom:8px">Missing Critical-Tracking Courses:</p>
           ${a.ctMissing.length === 0
-            ? `<span class="badge badge-green">None — all CT courses complete!</span>`
-            : a.ctMissing.map(c => `<div style="font-size:.82rem;color:var(--red)">❌ ${c.code} — ${c.name}</div>`).join('')
+            ? `<span class="badge badge-green">None â all CT courses complete!</span>`
+            : a.ctMissing.map(c => `<div style="font-size:.82rem;color:var(--red)">â ${c.code} â ${c.name}</div>`).join('')
           }
         </div>
       </div>
@@ -828,9 +828,9 @@ function clearStudent() {
 
 function printReport() { window.print(); }
 
-// ═══════════════════════════════════════════════════════════════════════════
+// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 //  ADVISOR PANEL
-// ═══════════════════════════════════════════════════════════════════════════
+// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 
 function renderAdvisorTable() {
   const search = document.getElementById('adv-search').value.toLowerCase();
@@ -858,14 +858,14 @@ function renderAdvisorTable() {
       const a = major ? analyzePath(s.majorId, courses, s.credits || 0, s.gpa || 0) : null;
       const pct = a ? a.pct : 0;
       const ctBadge = a
-        ? (a.ctOK ? '<span class="badge badge-green">✅ On Track</span>' : '<span class="badge badge-red">⚠️ At Risk</span>')
-        : '—';
+        ? (a.ctOK ? '<span class="badge badge-green">â On Track</span>' : '<span class="badge badge-red">â ï¸ At Risk</span>')
+        : 'â';
       return `
         <tr>
           <td><strong>${s.name}</strong></td>
-          <td>${s.id || '—'}</td>
-          <td>${major ? major.name : s.majorId || '—'}</td>
-          <td>${s.gpa || '—'}</td>
+          <td>${s.id || 'â'}</td>
+          <td>${major ? major.name : s.majorId || 'â'}</td>
+          <td>${s.gpa || 'â'}</td>
           <td>${s.credits || 0}</td>
           <td>
             <div class="progress-wrap" style="height:8px;width:100px">
@@ -904,7 +904,7 @@ function renderAdvisorTable() {
 
 function openAddStudent() {
   editingStudentId = null;
-  document.getElementById('adv-form-title').textContent = '➕ Add Student';
+  document.getElementById('adv-form-title').textContent = 'â Add Student';
   ['adv-stu-name','adv-stu-id','adv-stu-email','adv-stu-gpa','adv-stu-credits','adv-stu-courses'].forEach(id => {
     document.getElementById(id).value = '';
   });
@@ -947,7 +947,7 @@ function editStudent(key) {
   const s = students.find(s => s._key === key);
   if (!s) return;
   editingStudentId = key;
-  document.getElementById('adv-form-title').textContent = '✏️ Edit Student';
+  document.getElementById('adv-form-title').textContent = 'âï¸ Edit Student';
   document.getElementById('adv-stu-name').value = s.name || '';
   document.getElementById('adv-stu-id').value = s.id || '';
   document.getElementById('adv-stu-email').value = s.email || '';
@@ -973,7 +973,7 @@ function viewStudentDetail(key) {
   const courses = new Set((s.courses || '').split(',').map(c => normalizeCode(c)).filter(Boolean));
   const a = major ? analyzePath(s.majorId, courses, s.credits || 0, s.gpa || 0) : null;
 
-  document.getElementById('adv-detail-title').textContent = `🎓 ${s.name} — ${major ? major.name : 'Unknown Major'}`;
+  document.getElementById('adv-detail-title').textContent = `ð ${s.name} â ${major ? major.name : 'Unknown Major'}`;
   const detailContent = document.getElementById('adv-detail-content');
 
   if (!a) {
@@ -984,14 +984,14 @@ function viewStudentDetail(key) {
         <div class="stat-box"><div class="stat-value">${a.pct}%</div><div class="stat-label">Progress</div></div>
         <div class="stat-box"><div class="stat-value">${s.credits||0}/${a.major.total_credits}</div><div class="stat-label">Credits</div></div>
         <div class="stat-box"><div class="stat-value">${a.semestersLeft}</div><div class="stat-label">Semesters Left</div></div>
-        <div class="stat-box"><div class="stat-value">${s.gpa||'—'}</div><div class="stat-label">GPA</div></div>
+        <div class="stat-box"><div class="stat-value">${s.gpa||'â'}</div><div class="stat-label">GPA</div></div>
       </div>
       <div class="two-col">
         <div>
           <p style="font-weight:700;margin-bottom:8px">Critical Tracking:</p>
           ${a.ctStatus.map(c => `
             <div style="font-size:.85rem;padding:4px 0">
-              ${c.completed ? '✅' : '❌'} ${c.code} — ${c.name}
+              ${c.completed ? 'â' : 'â'} ${c.code} â ${c.name}
             </div>`).join('')}
         </div>
         <div>
@@ -1019,21 +1019,21 @@ function exportCSV() {
       s.name, s.id, s.email,
       major ? major.name : s.majorId,
       s.gpa, s.credits,
-      a ? a.pct + '%' : '—',
-      a ? (a.onTrack ? 'On Track' : 'At Risk') : '—'
+      a ? a.pct + '%' : 'â',
+      a ? (a.onTrack ? 'On Track' : 'At Risk') : 'â'
     ].map(v => `"${v||''}"`).join(',');
   });
   const csv = [headers.join(','), ...rows].join('\n');
   const blob = new Blob([csv], { type: 'text/csv' });
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
-  a.download = 'degreemap_students.csv';
+  a.download = 'gatorpath_students.csv';
   a.click();
 }
 
-// ═══════════════════════════════════════════════════════════════════════════
+// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 //  SHARED HELPERS
-// ═══════════════════════════════════════════════════════════════════════════
+// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 
 function switchMode(mode) {
   currentMode = mode;
@@ -1046,67 +1046,593 @@ function switchMode(mode) {
 
 function populateMajorSelects() {
   const opts = DB.majors.map(m =>
-    `<option value="${m.id}">${m.name} (${m.degree}) — ${m.college}</option>`
+    `<option value="${m.id}">${m.name} (${m.degree}) â ${m.college}</option>`
   ).join('');
 
-  document.getElementById('stu-major').innerHTML = '<option value="">— Select your major —</option>' + opts;
-  document.getElementById('adv-stu-major').innerHTML = '<option value="">— Select major —</option>' + opts;
+  document.getElementById('stu-major').innerHTML = '<option value="">â Select your major â</option>' + opts;
+  document.getElementById('adv-stu-major').innerHTML = '<option value="">â Select major â</option>' + opts;
 
   const filterOpts = DB.majors.map(m => `<option value="${m.id}">${m.name}</option>`).join('');
   document.getElementById('adv-filter-major').innerHTML = '<option value="">All Majors</option>' + filterOpts;
 }
 
-// ═══════════════════════════════════════════════════════════════════════════
+// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 //  DEMO FALLBACK DATA  (used if data/majors.json can't be fetched)
-// ═══════════════════════════════════════════════════════════════════════════
+// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 const DEMO_MAJORS = [
+  // ââ ENGINEERING ââââââââââââââââââââââââââââââââââââââââââââââââââââââ
   {
     id: "computer_science", name: "Computer Science", degree: "B.S.",
     college: "Herbert Wertheim College of Engineering", total_credits: 120, min_gpa: 2.0,
     critical_tracking: { min_gpa: 2.0, courses: [
-      {code:"MAC 2311",name:"Analytic Geometry and Calculus 1",credits:4},{code:"COP 3502C",name:"Computer Science 1",credits:3},{code:"COP 3503C",name:"Computer Science 2",credits:3},{code:"COT 3100",name:"Applications of Discrete Structures",credits:3},{code:"COP 3530",name:"Data Structures and Algorithm Analysis",credits:3},{code:"COT 4501",name:"Analysis of Numerical Algorithms",credits:3}
-    ],min_gpa:2.0},
-    required_courses:[{code:"MAC 2311",name:"Analytic Geometry and Calculus 1",credits:4},{code:"MAC 2312",name:"Analytic Geometry and Calculus 2",credits:4},{code:"MAC 2313",name:"Analytic Geometry and Calculus 3",credits:4},{code:"MAS 3114",name:"Computational Linear Algebra",credits:3},{code:"STA 3032",name:"Engineering Statistics",credits:3},{code:"COP 3502C",name:"Computer Science 1",credits:3},{code:"COP 3503C",name:"Computer Science 2",credits:3},{code:"COT 3100",name:"Applications of Discrete Structures",credits:3},{code:"COP 3530",name:"Data Structures and Algorithm Analysis",credits:3},{code:"COT 4501",name:"Analysis of Numerical Algorithms",credits:3},{code:"CDA 3101",name:"Introduction to Computer Organization",credits:3},{code:"COP 4020",name:"Programming Language Concepts",credits:3},{code:"COP 4600",name:"Operating Systems",credits:3},{code:"CEN 3031",name:"Introduction to Software Engineering",credits:3},{code:"CIS 4301",name:"Information and Database Systems 1",credits:3},{code:"EEL 3701C",name:"Digital Logic and Computer Systems",credits:3},{code:"ENC 3246",name:"Professional Communication for Engineers",credits:3},{code:"EGN 4912",name:"Engineering Ethics",credits:1}],electives:[],gen_ed_required:true
-  }
-  ,{
-    id:"computer_engineering",name:"Computer Engineering",degree:"B.S.",
-    college:"Herbert Wertheim College of Engineering",total_credits:128,min_gpa:2.0,
-    critical_tracking:{min_gpa:2.0,courses:[{code:"MAC 2311",name:"Analytic Geometry and Calculus 1",credits:4},{code:"PHY 2048",name:"Physics with Calculus 1",credits:3},{code:"COP 3502C",name:"Computer Science 1",credits:3},{code:"EEL 3701C",name:"Digital Logic and Computer Systems",credits:3},{code:"EEL 4712C",name:"Digital Design",credits:3}]},
-    required_courses:[{code:"MAC 2311",name:"Analytic Geometry and Calculus 1",credits:4},{code:"MAC 2312",name:"Analytic Geometry and Calculus 2",credits:4},{code:"MAC 2313",name:"Analytic Geometry and Calculus 3",credits:4},{code:"MAP 2302",name:"Ordinary Differential Equations",credits:3},{code:"PHY 2048",name:"Physics with Calculus 1",credits:3},{code:"PHY 2048L",name:"Physics Laboratory 1",credits:1},{code:"PHY 2049",name:"Physics with Calculus 2",credits:3},{code:"PHY 2049L",name:"Physics Laboratory 2",credits:1},{code:"COP 3502C",name:"Computer Science 1",credits:3},{code:"EEL 3701C",name:"Digital Logic and Computer Systems",credits:3},{code:"EEL 4712C",name:"Digital Design",credits:3},{code:"CDA 4150C",name:"Computer Architecture",credits:3},{code:"EEL 4746",name:"Embedded Systems",credits:3},{code:"EEL 4810",name:"Random Signals and Systems",credits:3},{code:"EEL 3135",name:"Signals and Systems",credits:3},{code:"EEL 3111C",name:"Circuits 1",credits:3},{code:"EEL 3112",name:"Circuits 2",credits:3},{code:"EEL 4851C",name:"Senior Design 1",credits:3},{code:"EEL 4852",name:"Senior Design 2",credits:3},{code:"ENC 3246",name:"Professional Communication for Engineers",credits:3},{code:"EGN 4912",name:"Engineering Ethics",credits:1}],electives:[],gen_ed_required:true
-  }
-  ,{
-    id:"biology",name:"Biology",degree:"B.S.",
-    college:"College of Liberal Arts and Sciences",total_credits:120,min_gpa:2.0,
-    critical_tracking:{min_gpa:2.0,courses:[{code:"BSC 2010",name:"Integrated Principles of Biology 1",credits:3},{code:"BSC 2010L",name:"Integrated Principles of Biology 1 Lab",credits:1},{code:"BSC 2011",name:"Integrated Principles of Biology 2",credits:3},{code:"BSC 2011L",name:"Integrated Principles of Biology 2 Lab",credits:1},{code:"MAC 2311",name:"Analytic Geometry and Calculus 1",credits:4},{code:"CHM 2045",name:"General Chemistry 1",credits:3},{code:"CHM 2046",name:"General Chemistry 2",credits:3}]},
-    required_courses:[{code:"BSC 2010",name:"Integrated Principles of Biology 1",credits:3},{code:"BSC 2010L",name:"Lab for BSC 2010",credits:1},{code:"BSC 2011",name:"Integrated Principles of Biology 2",credits:3},{code:"BSC 2011L",name:"Lab for BSC 2011",credits:1},{code:"CHM 2045",name:"General Chemistry 1",credits:3},{code:"CHM 2045L",name:"General Chemistry 1 Lab",credits:1},{code:"CHM 2046",name:"General Chemistry 2",credits:3},{code:"CHM 2046L",name:"General Chemistry 2 Lab",credits:1},{code:"CHM 3120",name:"Analytical Chemistry",credits:3},{code:"BCH 3023",name:"Introduction to Biochemistry",credits:3},{code:"MAC 2311",name:"Analytic Geometry and Calculus 1",credits:4},{code:"STA 2023",name:"Introduction to Statistics 1",credits:3},{code:"PHY 2053",name:"Physics 1",credits:3},{code:"PHY 2053L",name:"Physics Lab 1",credits:1},{code:"PHY 2054",name:"Physics 2",credits:3},{code:"PHY 2054L",name:"Physics Lab 2",credits:1},{code:"MCB 3020",name:"General Microbiology",credits:3},{code:"BSC 3402",name:"Advanced Cell Biology",credits:3},{code:"BSC 4933",name:"Senior Seminar in Biology",credits:2}],electives:[],gen_ed_required:true
-  }
-  ,{
-    id:"psychology",name:"Psychology",degree:"B.S.",
-    college:"College of Liberal Arts and Sciences",total_credits:120,min_gpa:2.0,
-    critical_tracking:{min_gpa:2.0,courses:[{code:"PSY 2012",name:"General Psychology",credits:3},{code:"STA 2023",name:"Introduction to Statistics 1",credits:3},{code:"PSY 3213C",name:"Research Methods in Psychology",credits:3},{code:"PSY 3604",name:"Brain and Behavior",credits:3}]},
-    required_courses:[{code:"PSY 2012",name:"General Psychology",credits:3},{code:"STA 2023",name:"Introduction to Statistics 1",credits:3},{code:"PSY 3213C",name:"Research Methods in Psychology",credits:3},{code:"PSY 3604",name:"Brain and Behavior",credits:3},{code:"PSY 3401",name:"Abnormal Psychology",credits:3},{code:"PSY 3002",name:"Experimental Psychology",credits:3},{code:"PSY 4930",name:"Senior Seminar in Psychology",credits:3},{code:"BSC 2010",name:"Integrated Principles of Biology 1",credits:3},{code:"BSC 2010L",name:"Integrated Principles of Biology 1 Lab",credits:1}],electives:[],gen_ed_required:true
-  }
-  ,{
-    id:"business_administration",name:"Business Administration",degree:"B.S.B.A.",
-    college:"Warrington College of Business",total_credits:120,min_gpa:2.0,
-    critical_tracking:{min_gpa:2.0,courses:[{code:"MAC 2233",name:"Survey of Calculus 1",credits:3},{code:"ACG 2021",name:"Introduction to Financial Accounting",credits:3},{code:"ACG 2071",name:"Introduction to Managerial Accounting",credits:3},{code:"ECO 2013",name:"Principles of Macroeconomics",credits:3},{code:"ECO 2023",name:"Principles of Microeconomics",credits:3},{code:"QMB 3250",name:"Statistics for Business Decisions",credits:3}]},
-    required_courses:[{code:"ACG 2021",name:"Introduction to Financial Accounting",credits:3},{code:"ACG 2071",name:"Introduction to Managerial Accounting",credits:3},{code:"ECO 2013",name:"Principles of Macroeconomics",credits:3},{code:"ECO 2023",name:"Principles of Microeconomics",credits:3},{code:"MAC 2233",name:"Survey of Calculus 1",credits:3},{code:"QMB 3250",name:"Statistics for Business Decisions",credits:3},{code:"BUL 4310",name:"The Legal Environment of Business",credits:3},{code:"FIN 3403",name:"Business Finance",credits:3},{code:"MAN 3025",name:"Management of Organizations",credits:3},{code:"MAR 3023",name:"Basic Marketing",credits:3},{code:"MAN 4720",name:"Business Policy and Strategy",credits:3},{code:"ISM 3011",name:"Information Systems in Organizations",credits:3},{code:"GEB 3031",name:"Communicating in Business",credits:3},{code:"ENT 3003",name:"Entrepreneurship",credits:3}],electives:[],gen_ed_required:true
-  }
-  ,{
-    id:"civil_engineering",name:"Civil Engineering",degree:"B.S.",
-    college:"Herbert Wertheim College of Engineering",total_credits:128,min_gpa:2.0,
-    critical_tracking:{min_gpa:2.0,courses:[{code:"MAC 2311",name:"Analytic Geometry and Calculus 1",credits:4},{code:"MAC 2312",name:"Analytic Geometry and Calculus 2",credits:4},{code:"PHY 2048",name:"Physics with Calculus 1",credits:3},{code:"EGN 3321",name:"Engineering Mechanics: Statics",credits:3},{code:"CEG 3012",name:"Geotechnical Engineering",credits:3}]},
-    required_courses:[{code:"MAC 2311",name:"Analytic Geometry and Calculus 1",credits:4},{code:"MAC 2312",name:"Analytic Geometry and Calculus 2",credits:4},{code:"MAC 2313",name:"Analytic Geometry and Calculus 3",credits:4},{code:"MAP 2302",name:"Ordinary Differential Equations",credits:3},{code:"PHY 2048",name:"Physics with Calculus 1",credits:3},{code:"PHY 2048L",name:"Physics Lab 1",credits:1},{code:"PHY 2049",name:"Physics with Calculus 2",credits:3},{code:"CHM 2045",name:"General Chemistry 1",credits:3},{code:"EGN 3321",name:"Engineering Mechanics: Statics",credits:3},{code:"EGN 3310",name:"Engineering Mechanics: Dynamics",credits:3},{code:"EGN 3331",name:"Mechanics of Materials",credits:3},{code:"CEG 3012",name:"Geotechnical Engineering",credits:3},{code:"CEG 3012L",name:"Geotechnical Engineering Lab",credits:1},{code:"CWR 3201",name:"Fluid Mechanics",credits:3},{code:"ENV 3001",name:"Environmental Engineering Principles",credits:3},{code:"STA 3032",name:"Engineering Statistics",credits:3},{code:"TTE 3110",name:"Transportation Engineering",credits:3},{code:"STC 3240",name:"Structural Analysis",credits:3},{code:"EES 3040C",name:"Engineering Measurements",credits:3},{code:"EGN 4912",name:"Engineering Ethics",credits:1},{code:"ENC 3246",name:"Professional Communication for Engineers",credits:3}],electives:[],gen_ed_required:true
-  }
-  ,{
-    id:"mechanical_engineering",name:"Mechanical Engineering",degree:"B.S.",
-    college:"Herbert Wertheim College of Engineering",total_credits:128,min_gpa:2.0,
-    critical_tracking:{min_gpa:2.0,courses:[{code:"MAC 2311",name:"Analytic Geometry and Calculus 1",credits:4},{code:"PHY 2048",name:"Physics with Calculus 1",credits:3},{code:"EGN 3321",name:"Engineering Mechanics: Statics",credits:3},{code:"EGN 3331",name:"Mechanics of Materials",credits:3},{code:"EML 3034C",name:"Thermodynamics",credits:3}]},
-    required_courses:[{code:"MAC 2311",name:"Analytic Geometry and Calculus 1",credits:4},{code:"MAC 2312",name:"Analytic Geometry and Calculus 2",credits:4},{code:"MAC 2313",name:"Analytic Geometry and Calculus 3",credits:4},{code:"MAP 2302",name:"Ordinary Differential Equations",credits:3},{code:"PHY 2048",name:"Physics with Calculus 1",credits:3},{code:"PHY 2048L",name:"Physics Lab 1",credits:1},{code:"PHY 2049",name:"Physics with Calculus 2",credits:3},{code:"CHM 2045",name:"General Chemistry 1",credits:3},{code:"EGN 3321",name:"Engineering Mechanics: Statics",credits:3},{code:"EGN 3310",name:"Engineering Mechanics: Dynamics",credits:3},{code:"EGN 3331",name:"Mechanics of Materials",credits:3},{code:"EML 3034C",name:"Thermodynamics",credits:3},{code:"EML 3100",name:"Engineering Thermodynamics",credits:3},{code:"EML 3301C",name:"Mechanics of Machines",credits:3},{code:"EML 4140",name:"Heat Transfer",credits:3},{code:"EML 4312",name:"Control of Mechanical Systems",credits:3},{code:"EML 4501C",name:"Machine Design",credits:3},{code:"EML 4552C",name:"Mechanical Engineering Lab",credits:2},{code:"EML 4905",name:"Senior Design",credits:3},{code:"STA 3032",name:"Engineering Statistics",credits:3},{code:"EGN 4912",name:"Engineering Ethics",credits:1},{code:"ENC 3246",name:"Professional Communication for Engineers",credits:3}],electives:[],gen_ed_required:true
+      {code:"MAC 2311",name:"Calculus 1",credits:4,required_by_semester:2},
+      {code:"COP 3502C",name:"CS 1",credits:3,required_by_semester:2},
+      {code:"COP 3503C",name:"CS 2",credits:3,required_by_semester:3},
+      {code:"COT 3100",name:"Discrete Structures",credits:3,required_by_semester:3}
+    ]},
+    required_courses: [
+      {code:"MAC 2311",name:"Calculus 1",credits:4,category:"math"},
+      {code:"MAC 2312",name:"Calculus 2",credits:4,category:"math"},
+      {code:"COP 3502C",name:"CS 1",credits:3,category:"core"},
+      {code:"COP 3503C",name:"CS 2",credits:3,category:"core"},
+      {code:"COT 3100",name:"Discrete Structures",credits:3,category:"core"},
+      {code:"COP 3530",name:"Data Structures",credits:3,category:"core"},
+      {code:"CDA 3101",name:"Computer Organization",credits:3,category:"core"},
+      {code:"COP 4020",name:"Programming Languages",credits:3,category:"core"},
+      {code:"COP 4600",name:"Operating Systems",credits:3,category:"core"},
+      {code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"},
+      {code:"ENC 1102",name:"Composition 2",credits:3,category:"gen_ed"}
+    ],
+    model_plan: [
+      {semester:1,courses:["ENC 1101","MAC 2311","COP 3502C"],credits:10},
+      {semester:2,courses:["ENC 1102","MAC 2312","COP 3503C","COT 3100"],credits:13},
+      {semester:3,courses:["MAC 2313","COP 3530","CDA 3101"],credits:10},
+      {semester:4,courses:["COP 4020","COP 4600","Elective"],credits:9}
+    ]
+  },
+  {
+    id: "computer_engineering", name: "Computer Engineering", degree: "B.S.",
+    college: "Herbert Wertheim College of Engineering", total_credits: 128, min_gpa: 2.0,
+    critical_tracking: { min_gpa: 2.0, courses: [
+      {code:"MAC 2311",name:"Calculus 1",credits:4,required_by_semester:2},
+      {code:"COP 3502C",name:"CS 1",credits:3,required_by_semester:2},
+      {code:"EEL 3701C",name:"Digital Logic",credits:3,required_by_semester:3}
+    ]},
+    required_courses: [
+      {code:"MAC 2311",name:"Calculus 1",credits:4,category:"math"},
+      {code:"MAC 2312",name:"Calculus 2",credits:4,category:"math"},
+      {code:"MAC 2313",name:"Calculus 3",credits:4,category:"math"},
+      {code:"COP 3502C",name:"CS 1",credits:3,category:"core"},
+      {code:"COP 3503C",name:"CS 2",credits:3,category:"core"},
+      {code:"COT 3100",name:"Discrete Structures",credits:3,category:"core"},
+      {code:"EEL 3701C",name:"Digital Logic",credits:3,category:"core"},
+      {code:"EEL 4712C",name:"Digital Design",credits:3,category:"core"},
+      {code:"CDA 3101",name:"Computer Organization",credits:3,category:"core"},
+      {code:"PHY 2048C",name:"Physics with Calculus 1",credits:4,category:"science"},
+      {code:"PHY 2049C",name:"Physics with Calculus 2",credits:4,category:"science"},
+      {code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"}
+    ],
+    model_plan: [
+      {semester:1,courses:["ENC 1101","MAC 2311","PHY 2048C"],credits:11},
+      {semester:2,courses:["MAC 2312","COP 3502C","PHY 2049C"],credits:10},
+      {semester:3,courses:["MAC 2313","COP 3503C","EEL 3701C"],credits:10},
+      {semester:4,courses:["COT 3100","CDA 3101","EEL 4712C"],credits:9}
+    ]
+  },
+  {
+    id: "electrical_engineering", name: "Electrical Engineering", degree: "B.S.",
+    college: "Herbert Wertheim College of Engineering", total_credits: 128, min_gpa: 2.0,
+    critical_tracking: { min_gpa: 2.0, courses: [
+      {code:"MAC 2311",name:"Calculus 1",credits:4,required_by_semester:2},
+      {code:"PHY 2048C",name:"Physics 1",credits:4,required_by_semester:2},
+      {code:"EEL 3111C",name:"Circuits 1",credits:3,required_by_semester:3}
+    ]},
+    required_courses: [
+      {code:"MAC 2311",name:"Calculus 1",credits:4,category:"math"},
+      {code:"MAC 2312",name:"Calculus 2",credits:4,category:"math"},
+      {code:"MAC 2313",name:"Calculus 3",credits:4,category:"math"},
+      {code:"PHY 2048C",name:"Physics with Calculus 1",credits:4,category:"science"},
+      {code:"PHY 2049C",name:"Physics with Calculus 2",credits:4,category:"science"},
+      {code:"EEL 3111C",name:"Circuits 1",credits:3,category:"core"},
+      {code:"EEL 3112",name:"Circuits 2",credits:3,category:"core"},
+      {code:"EEL 4309",name:"Electronics 1",credits:3,category:"core"},
+      {code:"EEL 3701C",name:"Digital Logic",credits:3,category:"core"},
+      {code:"COP 3502C",name:"CS 1",credits:3,category:"core"},
+      {code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"}
+    ],
+    model_plan: [
+      {semester:1,courses:["ENC 1101","MAC 2311","PHY 2048C"],credits:11},
+      {semester:2,courses:["MAC 2312","PHY 2049C","EEL 3111C"],credits:10},
+      {semester:3,courses:["MAC 2313","EEL 3112","EEL 3701C"],credits:10},
+      {semester:4,courses:["EEL 4309","COP 3502C","Elective"],credits:9}
+    ]
+  },
+  {
+    id: "industrial_systems_engineering", name: "Industrial & Systems Engineering", degree: "B.S.",
+    college: "Herbert Wertheim College of Engineering", total_credits: 128, min_gpa: 2.0,
+    critical_tracking: { min_gpa: 2.0, courses: [
+      {code:"MAC 2311",name:"Calculus 1",credits:4,required_by_semester:2},
+      {code:"STA 3032",name:"Engineering Statistics",credits:3,required_by_semester:3}
+    ]},
+    required_courses: [
+      {code:"MAC 2311",name:"Calculus 1",credits:4,category:"math"},
+      {code:"MAC 2312",name:"Calculus 2",credits:4,category:"math"},
+      {code:"STA 3032",name:"Engineering Statistics",credits:3,category:"core"},
+      {code:"ISE 3213",name:"Engineering Economy",credits:3,category:"core"},
+      {code:"ISE 4234",name:"Production Systems",credits:3,category:"core"},
+      {code:"EGN 3613",name:"Engineering Economic Analysis",credits:3,category:"core"},
+      {code:"COP 3502C",name:"CS 1",credits:3,category:"core"},
+      {code:"PHY 2048C",name:"Physics 1",credits:4,category:"science"},
+      {code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"}
+    ],
+    model_plan: [
+      {semester:1,courses:["ENC 1101","MAC 2311","PHY 2048C"],credits:11},
+      {semester:2,courses:["MAC 2312","COP 3502C","STA 3032"],credits:10},
+      {semester:3,courses:["ISE 3213","ISE 4234","Elective"],credits:9},
+      {semester:4,courses:["EGN 3613","Elective","Elective"],credits:9}
+    ]
+  },
+  {
+    id: "biomedical_engineering", name: "Biomedical Engineering", degree: "B.S.",
+    college: "Herbert Wertheim College of Engineering", total_credits: 128, min_gpa: 2.0,
+    critical_tracking: { min_gpa: 2.0, courses: [
+      {code:"MAC 2311",name:"Calculus 1",credits:4,required_by_semester:2},
+      {code:"CHM 2045",name:"General Chemistry 1",credits:3,required_by_semester:2},
+      {code:"PHY 2048C",name:"Physics 1",credits:4,required_by_semester:3}
+    ]},
+    required_courses: [
+      {code:"MAC 2311",name:"Calculus 1",credits:4,category:"math"},
+      {code:"MAC 2312",name:"Calculus 2",credits:4,category:"math"},
+      {code:"CHM 2045",name:"General Chemistry 1",credits:3,category:"science"},
+      {code:"CHM 2046",name:"General Chemistry 2",credits:3,category:"science"},
+      {code:"PHY 2048C",name:"Physics 1",credits:4,category:"science"},
+      {code:"PHY 2049C",name:"Physics 2",credits:4,category:"science"},
+      {code:"BSC 2010C",name:"Biology 1",credits:3,category:"science"},
+      {code:"BME 3403",name:"Intro to Biomedical Engineering",credits:3,category:"core"},
+      {code:"EGM 3520",name:"Mechanics of Materials",credits:3,category:"core"},
+      {code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"}
+    ],
+    model_plan: [
+      {semester:1,courses:["ENC 1101","MAC 2311","CHM 2045"],credits:10},
+      {semester:2,courses:["MAC 2312","PHY 2048C","BSC 2010C"],credits:11},
+      {semester:3,courses:["CHM 2046","PHY 2049C","BME 3403"],credits:10},
+      {semester:4,courses:["EGM 3520","Elective","Elective"],credits:9}
+    ]
+  },
+  {
+    id: "civil_engineering", name: "Civil Engineering", degree: "B.S.",
+    college: "Herbert Wertheim College of Engineering", total_credits: 128, min_gpa: 2.0,
+    critical_tracking: { min_gpa: 2.0, courses: [
+      {code:"MAC 2311",name:"Calculus 1",credits:4,required_by_semester:2},
+      {code:"PHY 2048C",name:"Physics 1",credits:4,required_by_semester:2}
+    ]},
+    required_courses: [
+      {code:"MAC 2311",name:"Calculus 1",credits:4,category:"math"},
+      {code:"MAC 2312",name:"Calculus 2",credits:4,category:"math"},
+      {code:"MAC 2313",name:"Calculus 3",credits:4,category:"math"},
+      {code:"PHY 2048C",name:"Physics 1",credits:4,category:"science"},
+      {code:"CHM 2045",name:"General Chemistry 1",credits:3,category:"science"},
+      {code:"EGM 2511",name:"Engineering Mechanics 1",credits:3,category:"core"},
+      {code:"CEG 3012C",name:"Soil Mechanics",credits:4,category:"core"},
+      {code:"CES 3100",name:"Structural Analysis",credits:3,category:"core"},
+      {code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"}
+    ],
+    model_plan: [
+      {semester:1,courses:["ENC 1101","MAC 2311","PHY 2048C"],credits:11},
+      {semester:2,courses:["MAC 2312","CHM 2045","EGM 2511"],credits:10},
+      {semester:3,courses:["MAC 2313","CEG 3012C","Elective"],credits:11},
+      {semester:4,courses:["CES 3100","Elective","Elective"],credits:9}
+    ]
+  },
+  // ââ BUSINESS ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+  {
+    id: "information_systems", name: "Information Systems & Operations Mgmt", degree: "B.S.B.A.",
+    college: "Warrington College of Business", total_credits: 120, min_gpa: 2.0,
+    critical_tracking: { min_gpa: 2.0, courses: [
+      {code:"CGS 2100",name:"Microcomputer Applications",credits:3,required_by_semester:2},
+      {code:"ISM 3004",name:"Intro to Information Systems",credits:3,required_by_semester:2},
+      {code:"QMB 3250",name:"Statistics for Business",credits:3,required_by_semester:3},
+      {code:"ISM 3113",name:"Systems Analysis & Design",credits:3,required_by_semester:4}
+    ]},
+    required_courses: [
+      {code:"CGS 2100",name:"Microcomputer Applications",credits:3,category:"core"},
+      {code:"ISM 3004",name:"Intro to Information Systems",credits:3,category:"core"},
+      {code:"ISM 3113",name:"Systems Analysis & Design",credits:3,category:"core"},
+      {code:"ISM 4300",name:"IT Management",credits:3,category:"core"},
+      {code:"ISM 4212",name:"Database Management",credits:3,category:"core"},
+      {code:"ISM 4220",name:"Business Data Comm & Networks",credits:3,category:"core"},
+      {code:"QMB 3250",name:"Statistics for Business",credits:3,category:"core"},
+      {code:"ACG 2021",name:"Financial Accounting",credits:3,category:"business"},
+      {code:"ECO 2013",name:"Macroeconomics",credits:3,category:"business"},
+      {code:"ECO 2023",name:"Microeconomics",credits:3,category:"business"},
+      {code:"MAN 3025",name:"Principles of Management",credits:3,category:"business"},
+      {code:"MAR 3023",name:"Basic Marketing",credits:3,category:"business"},
+      {code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"},
+      {code:"ENC 1102",name:"Composition 2",credits:3,category:"gen_ed"}
+    ],
+    model_plan: [
+      {semester:1,courses:["ENC 1101","CGS 2100","ECO 2013"],credits:9},
+      {semester:2,courses:["ENC 1102","ISM 3004","ACG 2021","ECO 2023"],credits:12},
+      {semester:3,courses:["ISM 3113","QMB 3250","MAN 3025"],credits:9},
+      {semester:4,courses:["ISM 4300","ISM 4212","ISM 4220","MAR 3023"],credits:12}
+    ]
+  },
+  {
+    id: "finance", name: "Finance", degree: "B.S.B.A.",
+    college: "Warrington College of Business", total_credits: 120, min_gpa: 2.0,
+    critical_tracking: { min_gpa: 2.0, courses: [
+      {code:"ACG 2021",name:"Financial Accounting",credits:3,required_by_semester:2},
+      {code:"ECO 2013",name:"Macroeconomics",credits:3,required_by_semester:2},
+      {code:"FIN 3403",name:"Business Finance",credits:3,required_by_semester:3}
+    ]},
+    required_courses: [
+      {code:"ACG 2021",name:"Financial Accounting",credits:3,category:"core"},
+      {code:"ACG 2071",name:"Managerial Accounting",credits:3,category:"core"},
+      {code:"FIN 3403",name:"Business Finance",credits:3,category:"core"},
+      {code:"FIN 4414",name:"Advanced Financial Management",credits:3,category:"core"},
+      {code:"FIN 4604",name:"International Financial Management",credits:3,category:"core"},
+      {code:"ECO 2013",name:"Macroeconomics",credits:3,category:"business"},
+      {code:"ECO 2023",name:"Microeconomics",credits:3,category:"business"},
+      {code:"QMB 3250",name:"Statistics for Business",credits:3,category:"core"},
+      {code:"MAN 3025",name:"Principles of Management",credits:3,category:"business"},
+      {code:"MAR 3023",name:"Basic Marketing",credits:3,category:"business"},
+      {code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"},
+      {code:"ENC 1102",name:"Composition 2",credits:3,category:"gen_ed"}
+    ],
+    model_plan: [
+      {semester:1,courses:["ENC 1101","ACG 2021","ECO 2013"],credits:9},
+      {semester:2,courses:["ENC 1102","ACG 2071","ECO 2023"],credits:9},
+      {semester:3,courses:["FIN 3403","QMB 3250","MAN 3025"],credits:9},
+      {semester:4,courses:["FIN 4414","FIN 4604","MAR 3023"],credits:9}
+    ]
+  },
+  {
+    id: "management", name: "Management", degree: "B.S.B.A.",
+    college: "Warrington College of Business", total_credits: 120, min_gpa: 2.0,
+    critical_tracking: { min_gpa: 2.0, courses: [
+      {code:"ACG 2021",name:"Financial Accounting",credits:3,required_by_semester:2},
+      {code:"MAN 3025",name:"Principles of Management",credits:3,required_by_semester:3}
+    ]},
+    required_courses: [
+      {code:"ACG 2021",name:"Financial Accounting",credits:3,category:"core"},
+      {code:"MAN 3025",name:"Principles of Management",credits:3,category:"core"},
+      {code:"MAN 4301",name:"Human Resource Management",credits:3,category:"core"},
+      {code:"MAN 4504",name:"Operations Management",credits:3,category:"core"},
+      {code:"GEB 3213",name:"Business Communication",credits:3,category:"core"},
+      {code:"ECO 2013",name:"Macroeconomics",credits:3,category:"business"},
+      {code:"ECO 2023",name:"Microeconomics",credits:3,category:"business"},
+      {code:"QMB 3250",name:"Statistics for Business",credits:3,category:"core"},
+      {code:"MAR 3023",name:"Basic Marketing",credits:3,category:"business"},
+      {code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"}
+    ],
+    model_plan: [
+      {semester:1,courses:["ENC 1101","ACG 2021","ECO 2013"],credits:9},
+      {semester:2,courses:["ECO 2023","QMB 3250","MAN 3025"],credits:9},
+      {semester:3,courses:["GEB 3213","MAN 4301","MAR 3023"],credits:9},
+      {semester:4,courses:["MAN 4504","Elective","Elective"],credits:9}
+    ]
+  },
+  {
+    id: "marketing", name: "Marketing", degree: "B.S.B.A.",
+    college: "Warrington College of Business", total_credits: 120, min_gpa: 2.0,
+    critical_tracking: { min_gpa: 2.0, courses: [
+      {code:"MAR 3023",name:"Basic Marketing",credits:3,required_by_semester:2},
+      {code:"ECO 2013",name:"Macroeconomics",credits:3,required_by_semester:2}
+    ]},
+    required_courses: [
+      {code:"MAR 3023",name:"Basic Marketing",credits:3,category:"core"},
+      {code:"MAR 3231",name:"Marketing Communication",credits:3,category:"core"},
+      {code:"MAR 3611",name:"International Marketing",credits:3,category:"core"},
+      {code:"MAR 4156",name:"Marketing Research",credits:3,category:"core"},
+      {code:"ACG 2021",name:"Financial Accounting",credits:3,category:"business"},
+      {code:"ECO 2013",name:"Macroeconomics",credits:3,category:"business"},
+      {code:"ECO 2023",name:"Microeconomics",credits:3,category:"business"},
+      {code:"QMB 3250",name:"Statistics for Business",credits:3,category:"core"},
+      {code:"MAN 3025",name:"Principles of Management",credits:3,category:"business"},
+      {code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"}
+    ],
+    model_plan: [
+      {semester:1,courses:["ENC 1101","MAR 3023","ECO 2013"],credits:9},
+      {semester:2,courses:["ACG 2021","ECO 2023","MAR 3231"],credits:9},
+      {semester:3,courses:["QMB 3250","MAR 3611","MAN 3025"],credits:9},
+      {semester:4,courses:["MAR 4156","Elective","Elective"],credits:9}
+    ]
+  },
+  {
+    id: "accounting", name: "Accounting", degree: "B.S.A.",
+    college: "Fisher School of Accounting", total_credits: 120, min_gpa: 2.5,
+    critical_tracking: { min_gpa: 2.5, courses: [
+      {code:"ACG 2021",name:"Financial Accounting",credits:3,required_by_semester:2},
+      {code:"ACG 2071",name:"Managerial Accounting",credits:3,required_by_semester:3},
+      {code:"ACG 3101",name:"Intermediate Accounting 1",credits:3,required_by_semester:4}
+    ]},
+    required_courses: [
+      {code:"ACG 2021",name:"Financial Accounting",credits:3,category:"core"},
+      {code:"ACG 2071",name:"Managerial Accounting",credits:3,category:"core"},
+      {code:"ACG 3101",name:"Intermediate Accounting 1",credits:3,category:"core"},
+      {code:"ACG 3111",name:"Intermediate Accounting 2",credits:3,category:"core"},
+      {code:"ACG 4401",name:"Accounting Information Systems",credits:3,category:"core"},
+      {code:"ACG 4632",name:"Auditing 1",credits:3,category:"core"},
+      {code:"TAX 4001",name:"Individual Income Tax",credits:3,category:"core"},
+      {code:"ECO 2013",name:"Macroeconomics",credits:3,category:"business"},
+      {code:"QMB 3250",name:"Statistics for Business",credits:3,category:"core"},
+      {code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"}
+    ],
+    model_plan: [
+      {semester:1,courses:["ENC 1101","ACG 2021","ECO 2013"],credits:9},
+      {semester:2,courses:["ACG 2071","QMB 3250","Elective"],credits:9},
+      {semester:3,courses:["ACG 3101","ACG 4401","Elective"],credits:9},
+      {semester:4,courses:["ACG 3111","ACG 4632","TAX 4001"],credits:9}
+    ]
+  },
+  // ââ LIBERAL ARTS & SCIENCES âââââââââââââââââââââââââââââââââââââââââââ
+  {
+    id: "mathematics", name: "Mathematics", degree: "B.S.",
+    college: "College of Liberal Arts and Sciences", total_credits: 120, min_gpa: 2.0,
+    critical_tracking: { min_gpa: 2.0, courses: [
+      {code:"MAC 2311",name:"Calculus 1",credits:4,required_by_semester:1},
+      {code:"MAC 2312",name:"Calculus 2",credits:4,required_by_semester:2},
+      {code:"MAS 3114",name:"Computational Linear Algebra",credits:3,required_by_semester:3}
+    ]},
+    required_courses: [
+      {code:"MAC 2311",name:"Calculus 1",credits:4,category:"math"},
+      {code:"MAC 2312",name:"Calculus 2",credits:4,category:"math"},
+      {code:"MAC 2313",name:"Calculus 3",credits:4,category:"math"},
+      {code:"MAP 2302",name:"Differential Equations",credits:3,category:"math"},
+      {code:"MAS 3114",name:"Computational Linear Algebra",credits:3,category:"core"},
+      {code:"MAD 2104",name:"Discrete Mathematics 1",credits:3,category:"core"},
+      {code:"MAS 4105",name:"Linear Algebra 1",credits:4,category:"core"},
+      {code:"MAA 4211",name:"Advanced Calculus 1",credits:4,category:"core"},
+      {code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"},
+      {code:"ENC 1102",name:"Composition 2",credits:3,category:"gen_ed"}
+    ],
+    model_plan: [
+      {semester:1,courses:["ENC 1101","MAC 2311","MAD 2104"],credits:10},
+      {semester:2,courses:["ENC 1102","MAC 2312","MAS 3114"],credits:10},
+      {semester:3,courses:["MAC 2313","MAP 2302","Elective"],credits:11},
+      {semester:4,courses:["MAS 4105","MAA 4211","Elective"],credits:11}
+    ]
+  },
+  {
+    id: "statistics", name: "Statistics", degree: "B.S.",
+    college: "College of Liberal Arts and Sciences", total_credits: 120, min_gpa: 2.0,
+    critical_tracking: { min_gpa: 2.0, courses: [
+      {code:"MAC 2311",name:"Calculus 1",credits:4,required_by_semester:1},
+      {code:"STA 2023",name:"Statistics 1",credits:3,required_by_semester:2},
+      {code:"STA 3024",name:"Statistics 2",credits:3,required_by_semester:3}
+    ]},
+    required_courses: [
+      {code:"MAC 2311",name:"Calculus 1",credits:4,category:"math"},
+      {code:"MAC 2312",name:"Calculus 2",credits:4,category:"math"},
+      {code:"STA 2023",name:"Statistics 1",credits:3,category:"core"},
+      {code:"STA 3024",name:"Statistics 2",credits:3,category:"core"},
+      {code:"STA 4210",name:"Regression Analysis",credits:3,category:"core"},
+      {code:"STA 4211",name:"Design of Experiments",credits:3,category:"core"},
+      {code:"STA 4321",name:"Mathematical Statistics 1",credits:3,category:"core"},
+      {code:"COP 3502C",name:"CS 1",credits:3,category:"core"},
+      {code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"},
+      {code:"ENC 1102",name:"Composition 2",credits:3,category:"gen_ed"}
+    ],
+    model_plan: [
+      {semester:1,courses:["ENC 1101","MAC 2311","STA 2023"],credits:10},
+      {semester:2,courses:["ENC 1102","MAC 2312","STA 3024"],credits:10},
+      {semester:3,courses:["COP 3502C","STA 4210","Elective"],credits:9},
+      {semester:4,courses:["STA 4211","STA 4321","Elective"],credits:9}
+    ]
+  },
+  {
+    id: "data_science", name: "Data Science", degree: "B.S.",
+    college: "College of Liberal Arts and Sciences", total_credits: 120, min_gpa: 2.0,
+    critical_tracking: { min_gpa: 2.0, courses: [
+      {code:"MAC 2311",name:"Calculus 1",credits:4,required_by_semester:2},
+      {code:"COP 3502C",name:"CS 1",credits:3,required_by_semester:2},
+      {code:"STA 2023",name:"Statistics 1",credits:3,required_by_semester:3}
+    ]},
+    required_courses: [
+      {code:"MAC 2311",name:"Calculus 1",credits:4,category:"math"},
+      {code:"MAC 2312",name:"Calculus 2",credits:4,category:"math"},
+      {code:"STA 2023",name:"Statistics 1",credits:3,category:"core"},
+      {code:"STA 4210",name:"Regression Analysis",credits:3,category:"core"},
+      {code:"COP 3502C",name:"CS 1",credits:3,category:"core"},
+      {code:"COP 3503C",name:"CS 2",credits:3,category:"core"},
+      {code:"COP 4530",name:"Data Structures",credits:3,category:"core"},
+      {code:"CAP 4630",name:"Artificial Intelligence",credits:3,category:"core"},
+      {code:"CIS 4301",name:"Information & Database Systems",credits:3,category:"core"},
+      {code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"},
+      {code:"ENC 1102",name:"Composition 2",credits:3,category:"gen_ed"}
+    ],
+    model_plan: [
+      {semester:1,courses:["ENC 1101","MAC 2311","COP 3502C"],credits:10},
+      {semester:2,courses:["ENC 1102","MAC 2312","STA 2023","COP 3503C"],credits:13},
+      {semester:3,courses:["COP 4530","STA 4210","Elective"],credits:9},
+      {semester:4,courses:["CAP 4630","CIS 4301","Elective"],credits:9}
+    ]
+  },
+  {
+    id: "digital_arts_sciences", name: "Digital Arts & Sciences", degree: "B.S.",
+    college: "College of Liberal Arts and Sciences", total_credits: 120, min_gpa: 2.0,
+    critical_tracking: { min_gpa: 2.0, courses: [
+      {code:"DIG 2000",name:"Intro to Digital Studies",credits:3,required_by_semester:2},
+      {code:"COP 3502C",name:"CS 1",credits:3,required_by_semester:3}
+    ]},
+    required_courses: [
+      {code:"DIG 2000",name:"Intro to Digital Studies",credits:3,category:"core"},
+      {code:"COP 3502C",name:"CS 1",credits:3,category:"core"},
+      {code:"COP 3503C",name:"CS 2",credits:3,category:"core"},
+      {code:"DIG 3134",name:"Authoring for New Media",credits:3,category:"core"},
+      {code:"DIG 4401",name:"Digital Humanities",credits:3,category:"core"},
+      {code:"ART 2203C",name:"Design 1",credits:3,category:"core"},
+      {code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"},
+      {code:"ENC 1102",name:"Composition 2",credits:3,category:"gen_ed"}
+    ],
+    model_plan: [
+      {semester:1,courses:["ENC 1101","DIG 2000","ART 2203C"],credits:9},
+      {semester:2,courses:["ENC 1102","COP 3502C","DIG 3134"],credits:9},
+      {semester:3,courses:["COP 3503C","DIG 4401","Elective"],credits:9},
+      {semester:4,courses:["Elective","Elective","Elective"],credits:9}
+    ]
+  },
+  {
+    id: "economics", name: "Economics", degree: "B.S.",
+    college: "College of Liberal Arts and Sciences", total_credits: 120, min_gpa: 2.0,
+    critical_tracking: { min_gpa: 2.0, courses: [
+      {code:"ECO 2013",name:"Macroeconomics",credits:3,required_by_semester:2},
+      {code:"ECO 2023",name:"Microeconomics",credits:3,required_by_semester:2},
+      {code:"STA 2023",name:"Statistics 1",credits:3,required_by_semester:3}
+    ]},
+    required_courses: [
+      {code:"ECO 2013",name:"Macroeconomics",credits:3,category:"core"},
+      {code:"ECO 2023",name:"Microeconomics",credits:3,category:"core"},
+      {code:"STA 2023",name:"Statistics 1",credits:3,category:"core"},
+      {code:"ECO 3101",name:"Intermediate Microeconomic Theory",credits:3,category:"core"},
+      {code:"ECO 3203",name:"Intermediate Macroeconomic Theory",credits:3,category:"core"},
+      {code:"ECO 4400",name:"Game Theory",credits:3,category:"elective"},
+      {code:"MAC 2233",name:"Survey of Calculus",credits:3,category:"math"},
+      {code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"},
+      {code:"ENC 1102",name:"Composition 2",credits:3,category:"gen_ed"}
+    ],
+    model_plan: [
+      {semester:1,courses:["ENC 1101","ECO 2013","MAC 2233"],credits:9},
+      {semester:2,courses:["ENC 1102","ECO 2023","STA 2023"],credits:9},
+      {semester:3,courses:["ECO 3101","ECO 3203","Elective"],credits:9},
+      {semester:4,courses:["ECO 4400","Elective","Elective"],credits:9}
+    ]
+  },
+  {
+    id: "biology", name: "Biology", degree: "B.S.",
+    college: "College of Liberal Arts and Sciences", total_credits: 120, min_gpa: 2.0,
+    critical_tracking: { min_gpa: 2.0, courses: [
+      {code:"BSC 2010C",name:"Biology 1",credits:3,required_by_semester:2},
+      {code:"BSC 2011C",name:"Biology 2",credits:3,required_by_semester:2},
+      {code:"CHM 2045",name:"General Chemistry 1",credits:3,required_by_semester:2}
+    ]},
+    required_courses: [
+      {code:"BSC 2010C",name:"Biology 1",credits:3,category:"core"},
+      {code:"BSC 2011C",name:"Biology 2",credits:3,category:"core"},
+      {code:"CHM 2045",name:"General Chemistry 1",credits:3,category:"science"},
+      {code:"CHM 2046",name:"General Chemistry 2",credits:3,category:"science"},
+      {code:"CHM 2210",name:"Organic Chemistry 1",credits:3,category:"science"},
+      {code:"MAC 2311",name:"Calculus 1",credits:4,category:"math"},
+      {code:"STA 2023",name:"Statistics 1",credits:3,category:"math"},
+      {code:"PCB 3023",name:"Cell Biology",credits:3,category:"core"},
+      {code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"},
+      {code:"ENC 1102",name:"Composition 2",credits:3,category:"gen_ed"}
+    ],
+    model_plan: [
+      {semester:1,courses:["ENC 1101","BSC 2010C","CHM 2045"],credits:9},
+      {semester:2,courses:["ENC 1102","BSC 2011C","CHM 2046"],credits:9},
+      {semester:3,courses:["MAC 2311","CHM 2210","STA 2023"],credits:10},
+      {semester:4,courses:["PCB 3023","Elective","Elective"],credits:9}
+    ]
+  },
+  {
+    id: "psychology", name: "Psychology", degree: "B.S.",
+    college: "College of Liberal Arts and Sciences", total_credits: 120, min_gpa: 2.0,
+    critical_tracking: { min_gpa: 2.0, courses: [
+      {code:"PSY 2012",name:"General Psychology",credits:3,required_by_semester:2},
+      {code:"STA 2023",name:"Statistics 1",credits:3,required_by_semester:3}
+    ]},
+    required_courses: [
+      {code:"PSY 2012",name:"General Psychology",credits:3,category:"core"},
+      {code:"STA 2023",name:"Statistics 1",credits:3,category:"core"},
+      {code:"PSY 3213C",name:"Research Methods",credits:3,category:"core"},
+      {code:"PSY 3604",name:"Brain and Behavior",credits:3,category:"core"},
+      {code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"},
+      {code:"ENC 1102",name:"Composition 2",credits:3,category:"gen_ed"}
+    ],
+    model_plan: [
+      {semester:1,courses:["ENC 1101","PSY 2012"],credits:6},
+      {semester:2,courses:["ENC 1102","STA 2023"],credits:6},
+      {semester:3,courses:["PSY 3213C","PSY 3604"],credits:6}
+    ]
+  },
+  // ââ JOURNALISM & COMMUNICATIONS âââââââââââââââââââââââââââââââââââââââ
+  {
+    id: "telecommunication", name: "Telecommunication", degree: "B.S.T.",
+    college: "College of Journalism and Communications", total_credits: 120, min_gpa: 2.0,
+    critical_tracking: { min_gpa: 2.0, courses: [
+      {code:"MMC 1009",name:"Introduction to Media",credits:3,required_by_semester:2},
+      {code:"RTV 3305",name:"Principles of Electronic Media",credits:3,required_by_semester:3}
+    ]},
+    required_courses: [
+      {code:"MMC 1009",name:"Introduction to Media",credits:3,category:"core"},
+      {code:"RTV 3305",name:"Principles of Electronic Media",credits:3,category:"core"},
+      {code:"RTV 3320",name:"History of Broadcasting",credits:3,category:"core"},
+      {code:"RTV 4300",name:"Media Regulation",credits:3,category:"core"},
+      {code:"RTV 4446",name:"Digital Media Strategy",credits:3,category:"core"},
+      {code:"STA 2023",name:"Statistics 1",credits:3,category:"math"},
+      {code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"},
+      {code:"ENC 1102",name:"Composition 2",credits:3,category:"gen_ed"}
+    ],
+    model_plan: [
+      {semester:1,courses:["ENC 1101","MMC 1009","Elective"],credits:9},
+      {semester:2,courses:["ENC 1102","RTV 3305","STA 2023"],credits:9},
+      {semester:3,courses:["RTV 3320","RTV 4300","Elective"],credits:9},
+      {semester:4,courses:["RTV 4446","Elective","Elective"],credits:9}
+    ]
+  },
+  {
+    id: "journalism", name: "Journalism", degree: "B.S.J.C.",
+    college: "College of Journalism and Communications", total_credits: 120, min_gpa: 2.0,
+    critical_tracking: { min_gpa: 2.0, courses: [
+      {code:"MMC 1009",name:"Introduction to Media",credits:3,required_by_semester:2},
+      {code:"JOU 3101",name:"News Reporting",credits:3,required_by_semester:3}
+    ]},
+    required_courses: [
+      {code:"MMC 1009",name:"Introduction to Media",credits:3,category:"core"},
+      {code:"JOU 3101",name:"News Reporting",credits:3,category:"core"},
+      {code:"JOU 3301",name:"News Writing",credits:3,category:"core"},
+      {code:"JOU 4204",name:"Multimedia Journalism",credits:3,category:"core"},
+      {code:"STA 2023",name:"Statistics 1",credits:3,category:"math"},
+      {code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"},
+      {code:"ENC 1102",name:"Composition 2",credits:3,category:"gen_ed"}
+    ],
+    model_plan: [
+      {semester:1,courses:["ENC 1101","MMC 1009","Elective"],credits:9},
+      {semester:2,courses:["ENC 1102","JOU 3101","STA 2023"],credits:9},
+      {semester:3,courses:["JOU 3301","JOU 4204","Elective"],credits:9},
+      {semester:4,courses:["Elective","Elective","Elective"],credits:9}
+    ]
+  },
+  // ââ HEALTH ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+  {
+    id: "health_science", name: "Health Science", degree: "B.H.S.",
+    college: "College of Public Health and Health Professions", total_credits: 120, min_gpa: 2.5,
+    critical_tracking: { min_gpa: 2.5, courses: [
+      {code:"HSC 3537",name:"Pathophysiology 1",credits:3,required_by_semester:3},
+      {code:"STA 2023",name:"Statistics 1",credits:3,required_by_semester:2}
+    ]},
+    required_courses: [
+      {code:"HSC 3537",name:"Pathophysiology 1",credits:3,category:"core"},
+      {code:"HSC 4555",name:"Community Health",credits:3,category:"core"},
+      {code:"HCA 3002",name:"Intro to Health Care Administration",credits:3,category:"core"},
+      {code:"STA 2023",name:"Statistics 1",credits:3,category:"core"},
+      {code:"BSC 2010C",name:"Biology 1",credits:3,category:"science"},
+      {code:"CHM 2045",name:"General Chemistry 1",credits:3,category:"science"},
+      {code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"},
+      {code:"ENC 1102",name:"Composition 2",credits:3,category:"gen_ed"}
+    ],
+    model_plan: [
+      {semester:1,courses:["ENC 1101","BSC 2010C","CHM 2045"],credits:9},
+      {semester:2,courses:["ENC 1102","STA 2023","HCA 3002"],credits:9},
+      {semester:3,courses:["HSC 3537","HSC 4555","Elective"],credits:9},
+      {semester:4,courses:["Elective","Elective","Elective"],credits:9}
+    ]
   }
 ];
 
-document.addEventListener("DOMContentLoaded", loadData);
+// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+//  INIT
+// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+loadData().then(() => {
+  renderAdvisorTable();
+});
+
+// Allow pressing Enter in course input
+document.addEventListener('DOMContentLoaded', () => {
+  const ci = document.getElementById('course-input');
+  if (ci) ci.addEventListener('keypress', e => e.key === 'Enter' && addCourse());
+});
 </script>
 </body>
 </html>
