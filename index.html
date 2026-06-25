@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GatorPath — UF Graduation Navigator</title>
+<title>DegreeMap — Graduation Navigator</title>
 <style>
   :root {
     --gator-blue: #003087;
@@ -222,8 +222,8 @@
   <div class="logo">
     <span class="logo-gator">🐊</span>
     <div>
-      <div>GatorPath</div>
-      <div class="logo-subtitle">UF Graduation Navigator</div>
+      <div>DegreeMap</div>
+      <div class="logo-subtitle">Graduation Navigator</div>
     </div>
   </div>
   <div style="display:flex;align-items:center;gap:6px">
@@ -607,6 +607,7 @@ function analyzeStudent() {
   const gpa = parseFloat(document.getElementById('stu-gpa').value) || 0;
 
   if (!majorId) { alert('Please select your major.'); return; }
+  if (gpa < 0 || gpa > 4.0) { alert('GPA must be between 0.00 and 4.00.'); document.getElementById('stu-gpa').focus(); return; }
 
   const analysis = analyzePath(majorId, completedCourses, totalCredits, gpa);
   if (!analysis) return;
@@ -951,6 +952,8 @@ function cancelAddStudent() {
 function saveStudent() {
   const name = document.getElementById('adv-stu-name').value.trim();
   if (!name) { alert('Name is required.'); return; }
+  const advGpa = parseFloat(document.getElementById('adv-stu-gpa').value);
+  if (!isNaN(advGpa) && (advGpa < 0 || advGpa > 4.0)) { alert('GPA must be between 0.00 and 4.00.'); document.getElementById('adv-stu-gpa').focus(); return; }
   const student = {
     _key: editingStudentId || Date.now().toString(),
     name,
@@ -1751,13 +1754,13 @@ function speakWelcome() {
   if (!('speechSynthesis' in window)) return;
   window.speechSynthesis.cancel();
   const script = [
-    "Welcome to GatorPath — the University of Florida Graduation Navigator.",
+    "Welcome to DegreeMap — the University of Florida Graduation Navigator.",
     "Here is how it works.",
     "Step 1: Select your current major from the dropdown.",
     "Step 2: Enter all the courses you have already completed.",
     "Step 3: Click Analyze My Path — and I will show you exactly where you stand.",
     "You will see your graduation status, critical tracking requirements, remaining courses, and even other UF majors where your credits transfer best.",
-    "Whether you are on track or considering a switch — GatorPath has you covered.",
+    "Whether you are on track or considering a switch — DegreeMap has you covered.",
     "Go Gators!"
   ];
   let i = 0;
