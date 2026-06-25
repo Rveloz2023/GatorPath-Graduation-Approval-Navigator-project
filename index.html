@@ -431,7 +431,7 @@ async function loadData() {
   try {
     const r = await fetch('data/majors.json');
     const json = await r.json();
-    DB.majors = json.majors || [];
+    DB.majors = (json.majors && json.majors.length >= DEMO_MAJORS.length) ? json.majors : DEMO_MAJORS;
     DB.gen_ed = json.gen_ed_requirements || {};
   } catch(e) {
     // Fallback: embed minimal data if file not found
