@@ -265,11 +265,46 @@ tr:hover td{background:var(--gray-lt)}
 }
 @media print{.site-nav,.app-header,.btn{display:none}}
 
+
+/* ── Governance section ── */
+.gov-section{background:#fff;padding:4.5rem 2rem;border-top:1px solid var(--border)}
+.gov-inner{max-width:1100px;margin:0 auto}
+.gov-badge{display:inline-flex;align-items:center;gap:6px;
+  background:var(--dp-pale);color:var(--dp-dk);
+  font-size:.72rem;font-weight:700;padding:.28rem .85rem;
+  border-radius:20px;letter-spacing:1px;text-transform:uppercase;margin-bottom:1rem}
+.gov-section h2{font-size:2rem;font-weight:800;color:#111;letter-spacing:-1px;margin-bottom:.5rem}
+.gov-section .gov-sub{font-size:1rem;color:var(--gray);margin-bottom:2.5rem;max-width:640px;line-height:1.65}
+.gov-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;margin-bottom:2rem}
+.gov-card{border:1.5px solid var(--border);border-radius:12px;padding:1.4rem 1.5rem;transition:border .2s}
+.gov-card:hover{border-color:var(--dp)}
+.gov-card-icon{font-size:1.6rem;margin-bottom:.6rem}
+.gov-card h3{font-size:.95rem;font-weight:700;color:#111;margin-bottom:.45rem}
+.gov-card p{font-size:.83rem;color:#555;line-height:1.65}
+.gov-card ul{margin:.4rem 0 0 1rem;font-size:.82rem;color:#555;line-height:1.7}
+.gov-notice{background:var(--dp-pale);border:1.5px solid rgba(29,158,117,.25);
+  border-radius:12px;padding:1.25rem 1.5rem;
+  display:flex;gap:14px;align-items:flex-start;font-size:.86rem;color:var(--dp-dk);line-height:1.65}
+.gov-notice-icon{font-size:1.3rem;flex-shrink:0;margin-top:1px}
+/* ── App disclaimer ── */
+.app-disclaimer{
+  background:linear-gradient(135deg,#fffbf0,#fff8e1);
+  border:1.5px solid #f0c040;border-radius:10px;
+  padding:14px 18px;margin-bottom:20px;
+  display:flex;gap:12px;align-items:flex-start;font-size:.84rem;color:#7a5c00;line-height:1.6;
+}
+.app-disclaimer-icon{font-size:1.2rem;flex-shrink:0;margin-top:1px}
+.app-disclaimer strong{display:block;margin-bottom:3px;font-size:.87rem}
+
 /* ── Footer ── */
 .site-footer{background:var(--dark);padding:2.5rem 2rem;
   border-top:1px solid rgba(255,255,255,.05);text-align:center}
 .site-footer .logo{justify-content:center;margin-bottom:.6rem}
-.site-footer p{font-size:.78rem;color:rgba(255,255,255,.22);line-height:1.7;max-width:500px;margin:0 auto}
+.site-footer p{font-size:.78rem;color:rgba(255,255,255,.22);line-height:1.7;max-width:600px;margin:0 auto}
+.footer-links{display:flex;gap:1.25rem;justify-content:center;flex-wrap:wrap;
+  margin:.75rem 0 .4rem;list-style:none}
+.footer-links a{font-size:.75rem;color:rgba(255,255,255,.35);text-decoration:none;transition:color .15s}
+.footer-links a:hover{color:rgba(255,255,255,.75)}
 </style>
 </head>
 <body>
@@ -288,6 +323,7 @@ tr:hover td{background:var(--gray-lt)}
   </a>
   <ul class="nav-links">
     <li><a href="#top">Home</a></li>
+    <li><a href="#governance">Privacy</a></li>
     <li><a href="#app">Planner</a></li>
   </ul>
   <a href="#app" class="nav-cta">Open Planner →</a>
@@ -380,6 +416,61 @@ tr:hover td{background:var(--gray-lt)}
   </div>
 </div>
 
+
+<!-- ════ DATA GOVERNANCE & PRIVACY ════ -->
+<section class="gov-section" id="governance">
+  <div class="gov-inner">
+    <div class="gov-badge">🔒 Data Governance &amp; Student Privacy</div>
+    <h2>Your data. Your control. Always.</h2>
+    <p class="gov-sub">DegreePath is a planning companion — not an official student information system. All academic information you analyze here is voluntarily submitted and used exclusively to generate graduation planning recommendations.</p>
+    <div class="gov-grid">
+      <div class="gov-card">
+        <div class="gov-card-icon">🙋</div>
+        <h3>Student-Controlled Information</h3>
+        <p>All academic information analyzed by DegreePath is voluntarily submitted by you. We do not retrieve official student records from colleges or universities unless an authorized institutional integration is in place.</p>
+      </div>
+      <div class="gov-card">
+        <div class="gov-card-icon">📋</div>
+        <h3>Minimum Data Collection</h3>
+        <p>The MVP collects only what's needed to generate recommendations. Required fields are limited to university, catalog year, major, completed courses, and earned credits.</p>
+        <ul>
+          <li>No Student ID numbers</li>
+          <li>No Social Security Numbers</li>
+          <li>No Financial Aid or Medical records</li>
+          <li>No Banking or Immigration data</li>
+        </ul>
+      </div>
+      <div class="gov-card">
+        <div class="gov-card-icon">📄</div>
+        <h3>Transcript Processing</h3>
+        <p>If a transcript is uploaded, DegreePath extracts only the academic information required for analysis. The original document may be deleted after processing unless you choose to retain it.</p>
+      </div>
+      <div class="gov-card">
+        <div class="gov-card-icon">🎯</div>
+        <h3>Planning Estimates Only</h3>
+        <p>Recommendations are based on official published degree requirements, public university catalogs, and your self-reported academic history. Always confirm with your advisor before registering or applying to graduate.</p>
+      </div>
+      <div class="gov-card">
+        <div class="gov-card-icon">⚖️</div>
+        <h3>Student Ownership</h3>
+        <p>You maintain full control over your submitted information. You may update, delete, or export your academic profile and remove any uploaded documents at any time.</p>
+      </div>
+      <div class="gov-card">
+        <div class="gov-card-icon">🔐</div>
+        <h3>Data Security</h3>
+        <p>DegreePath applies industry-standard administrative, technical, and physical safeguards. Your academic data is used exclusively for planning recommendations. We do not sell student information.</p>
+      </div>
+    </div>
+    <div class="gov-notice">
+      <div class="gov-notice-icon">🏛️</div>
+      <div>
+        <strong>No Institutional Authority.</strong>
+        DegreePath does not certify graduation eligibility, approve transfer credit, replace official degree audits, modify institutional records, or issue academic decisions on behalf of any college or university. Final academic decisions remain the responsibility of your educational institution. DegreePath serves as a <em>planning companion</em> — not an official academic record.
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ════ APP SECTION ════ -->
 <div class="app-section" id="app">
 
@@ -410,6 +501,15 @@ tr:hover td{background:var(--gray-lt)}
   <!-- ══ STUDENT PANEL ══ -->
   <div id="panel-student" class="panel active">
   <div class="container">
+
+    <div class="app-disclaimer">
+      <div class="app-disclaimer-icon">⚠️</div>
+      <div>
+        <strong>Planning Tool Only — Not an Official Degree Audit</strong>
+        All information you enter is voluntary and stays on your device. Results are estimates based on published degree requirements and your self-reported coursework — always confirm with your academic advisor before registering or applying to graduate.
+        <a href="#governance" style="color:#7a5c00;font-weight:700;white-space:nowrap">View Privacy &amp; Data Principles ↗</a>
+      </div>
+    </div>
 
     <div class="card">
       <div class="card-title">📝 Student Profile</div>
@@ -577,8 +677,14 @@ tr:hover td{background:var(--gray-lt)}
     </svg>
     Degree<span>Path</span>
   </a>
-  <p style="margin-top:.5rem">Stop guessing. Start graduating. · Preview build — not yet released</p>
-  <p style="margin-top:.25rem">Course and credit information is for planning purposes only. Always verify requirements with your institution's official catalog and academic advisor.</p>
+  <ul class="footer-links">
+    <li><a href="#top">Home</a></li>
+    <li><a href="#app">Planner</a></li>
+    <li><a href="#governance">Privacy &amp; Data Principles</a></li>
+  </ul>
+  <p>Stop guessing. Start graduating. &nbsp;·&nbsp; Planning companion — not an official degree audit.</p>
+  <p style="margin-top:.35rem">DegreePath does not sell student information. Academic data is voluntarily submitted and used exclusively for planning recommendations. Always verify requirements with your institution's official catalog and academic advisor before registering or applying to graduate.</p>
+  <p style="margin-top:.6rem;font-size:.7rem;color:rgba(255,255,255,.15)">&copy; 2025 DegreePath &nbsp;·&nbsp; MVP Preview Build</p>
 </footer>
 
 <script>
