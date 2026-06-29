@@ -296,6 +296,84 @@ tr:hover td{background:var(--gray-lt)}
 .app-disclaimer-icon{font-size:1.2rem;flex-shrink:0;margin-top:1px}
 .app-disclaimer strong{display:block;margin-bottom:3px;font-size:.87rem}
 
+
+/* ── Charter / Mission Section ── */
+.charter-section{background:linear-gradient(160deg,#080e1d 0%,#0d1a2e 100%);
+  padding:5rem 2rem;border-top:2px solid rgba(29,158,117,.2)}
+.charter-inner{max-width:1100px;margin:0 auto}
+.charter-badge{display:inline-flex;align-items:center;gap:6px;
+  background:rgba(29,158,117,.15);color:#34D399;
+  font-size:.72rem;font-weight:700;padding:.28rem .85rem;
+  border-radius:20px;letter-spacing:1px;text-transform:uppercase;margin-bottom:1.2rem}
+.charter-section h2{font-size:2.2rem;font-weight:800;color:#fff;letter-spacing:-1px;margin-bottom:.6rem}
+.charter-section .charter-sub{font-size:1.05rem;color:rgba(255,255,255,.55);
+  margin-bottom:3rem;max-width:680px;line-height:1.7}
+.charter-mission{background:rgba(29,158,117,.08);border:1.5px solid rgba(29,158,117,.2);
+  border-radius:14px;padding:1.8rem 2rem;margin-bottom:3rem}
+.charter-mission h3{font-size:1rem;font-weight:700;color:#34D399;margin-bottom:.8rem;
+  text-transform:uppercase;letter-spacing:1px}
+.charter-mission p{font-size:1rem;color:rgba(255,255,255,.8);line-height:1.75}
+.principles-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+  gap:16px;margin-bottom:3rem}
+.principle-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
+  border-radius:12px;padding:1.4rem 1.5rem;transition:border .2s}
+.principle-card:hover{border-color:rgba(29,158,117,.4)}
+.principle-num{font-size:.68rem;font-weight:800;color:var(--dp);letter-spacing:2px;
+  text-transform:uppercase;margin-bottom:.4rem}
+.principle-card h4{font-size:.95rem;font-weight:700;color:#fff;margin-bottom:.5rem}
+.principle-card p{font-size:.83rem;color:rgba(255,255,255,.5);line-height:1.65}
+.principle-card em{color:rgba(29,158,117,.9);font-style:normal;font-size:.81rem;
+  display:block;margin-top:.5rem;background:rgba(29,158,117,.08);
+  border-left:2px solid var(--dp);padding:.3rem .6rem;border-radius:0 4px 4px 0}
+/* Workflow timeline */
+.workflow-section{margin-bottom:3rem}
+.workflow-section h3{font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:1.5rem;
+  display:flex;align-items:center;gap:.5rem}
+.workflow-steps{display:flex;flex-direction:column;gap:0}
+.workflow-step{display:flex;gap:1.25rem;position:relative}
+.workflow-step:not(:last-child)::before{content:'';position:absolute;left:18px;top:40px;
+  width:2px;height:calc(100% - 10px);background:rgba(29,158,117,.2)}
+.step-icon{width:36px;height:36px;border-radius:50%;background:rgba(29,158,117,.15);
+  border:2px solid rgba(29,158,117,.3);display:flex;align-items:center;justify-content:center;
+  font-size:.85rem;font-weight:800;color:#34D399;flex-shrink:0;margin-top:4px;z-index:1}
+.step-body{padding-bottom:1.5rem;flex:1}
+.step-body h4{font-size:.9rem;font-weight:700;color:#fff;margin-bottom:.3rem}
+.step-body p{font-size:.81rem;color:rgba(255,255,255,.45);line-height:1.65}
+.step-body .step-tag{font-size:.7rem;font-weight:700;background:rgba(29,158,117,.1);
+  color:var(--dp);padding:.15rem .5rem;border-radius:20px;display:inline-block;margin-top:.3rem}
+/* Scope table */
+.scope-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:2.5rem}
+.scope-card{border-radius:12px;padding:1.4rem 1.5rem}
+.scope-card.included{background:rgba(29,158,117,.08);border:1px solid rgba(29,158,117,.2)}
+.scope-card.deferred{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06)}
+.scope-card h4{font-size:.82rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;
+  margin-bottom:.8rem}
+.scope-card.included h4{color:#34D399}
+.scope-card.deferred h4{color:rgba(255,255,255,.25)}
+.scope-card ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.45rem}
+.scope-card li{font-size:.8rem;line-height:1.5;display:flex;gap:.5rem;align-items:flex-start}
+.scope-card.included li::before{content:'✓';color:var(--dp);font-weight:700;flex-shrink:0}
+.scope-card.deferred li::before{content:'◦';color:rgba(255,255,255,.2);flex-shrink:0}
+.scope-card.included li{color:rgba(255,255,255,.7)}
+.scope-card.deferred li{color:rgba(255,255,255,.3)}
+/* Product Promise */
+.product-promise{background:rgba(29,158,117,.06);border:1.5px solid rgba(29,158,117,.25);
+  border-radius:14px;padding:1.8rem 2rem;margin-top:1rem}
+.product-promise h3{font-size:.85rem;font-weight:800;color:#34D399;text-transform:uppercase;
+  letter-spacing:1px;margin-bottom:1rem}
+.promise-vs{display:flex;gap:1rem;flex-wrap:wrap}
+.promise-no{background:rgba(216,90,48,.08);border:1px solid rgba(216,90,48,.2);
+  border-radius:10px;padding:1rem 1.25rem;flex:1;min-width:240px}
+.promise-no span{display:block;font-size:.68rem;font-weight:700;color:var(--accent);
+  text-transform:uppercase;letter-spacing:1px;margin-bottom:.4rem}
+.promise-no p{font-size:.82rem;color:rgba(255,255,255,.45);line-height:1.6;font-style:italic}
+.promise-yes{background:rgba(29,158,117,.1);border:1px solid rgba(29,158,117,.3);
+  border-radius:10px;padding:1rem 1.25rem;flex:1;min-width:240px}
+.promise-yes span{display:block;font-size:.68rem;font-weight:700;color:#34D399;
+  text-transform:uppercase;letter-spacing:1px;margin-bottom:.4rem}
+.promise-yes p{font-size:.82rem;color:rgba(255,255,255,.65);line-height:1.6}
+@media(max-width:640px){.scope-grid{grid-template-columns:1fr}.promise-vs{flex-direction:column}}
+
 /* ── Footer ── */
 .site-footer{background:var(--dark);padding:2.5rem 2rem;
   border-top:1px solid rgba(255,255,255,.05);text-align:center}
@@ -324,6 +402,7 @@ tr:hover td{background:var(--gray-lt)}
   <ul class="nav-links">
     <li><a href="#top">Home</a></li>
     <li><a href="#governance">Privacy</a></li>
+    <li><a href="#charter">Charter</a></li>
     <li><a href="#app">Planner</a></li>
   </ul>
   <a href="#app" class="nav-cta">Open Planner →</a>
@@ -471,6 +550,175 @@ tr:hover td{background:var(--gray-lt)}
   </div>
 </section>
 
+
+<!-- ════ MVP CHARTER ════ -->
+<section class="charter-section" id="charter">
+  <div class="charter-inner">
+    <div class="charter-badge">📋 MVP Charter v1.0</div>
+    <h2>Governing Principles</h2>
+    <p class="charter-sub">Every feature in DegreePath is measured against this charter. If it doesn't help a student graduate faster or make better academic decisions, it doesn't belong in the MVP.</p>
+
+    <!-- Mission -->
+    <div class="charter-mission">
+      <h3>Mission Statement</h3>
+      <p>DegreePath is an AI-powered academic planning platform that helps college students understand their progress toward graduation by analyzing student-provided academic information while protecting their privacy and presenting clear, trustworthy, and actionable recommendations.<br><br>
+      The MVP is not intended to replace university degree audits or academic advisors. Its purpose is to simplify academic planning and help students make informed decisions before meeting with their institution.</p>
+    </div>
+
+    <!-- 5 Core Design Principles -->
+    <h3 style="font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:1.25rem">Core Design Principles</h3>
+    <div class="principles-grid">
+      <div class="principle-card">
+        <div class="principle-num">Principle 1</div>
+        <h4>Student First</h4>
+        <p>Every feature must answer one question: <em>Does this help a student graduate faster or make better academic decisions?</em> If the answer is "no," it does not belong in the MVP.</p>
+      </div>
+      <div class="principle-card">
+        <div class="principle-num">Principle 2</div>
+        <h4>Privacy by Design</h4>
+        <p>DegreePath collects only the information necessary to perform an academic analysis. The platform does not function as a student records repository — it creates a temporary Academic Profile based on student-provided information.</p>
+      </div>
+      <div class="principle-card">
+        <div class="principle-num">Principle 3</div>
+        <h4>Explainable AI</h4>
+        <p>Every recommendation must include an understandable explanation. Students should never wonder why the system made a recommendation.</p>
+        <em>"Calculus II is recommended because it unlocks four required courses and is offered only in the Fall."</em>
+      </div>
+      <div class="principle-card">
+        <div class="principle-num">Principle 4</div>
+        <h4>Simplicity</h4>
+        <p>The application should be understandable in less than one minute by a first-time user. No technical language. No catalog terminology unless requested.</p>
+      </div>
+      <div class="principle-card">
+        <div class="principle-num">Principle 5</div>
+        <h4>Trust</h4>
+        <p>Every recommendation must originate from official university catalogs, Florida degree requirements, published prerequisite rules, the Florida SCNS, and student-provided academic information. The AI never invents academic requirements.</p>
+      </div>
+    </div>
+
+    <!-- Privacy Workflow -->
+    <div class="workflow-section">
+      <h3>🔒 Privacy-First Processing Workflow</h3>
+      <div class="workflow-steps">
+        <div class="workflow-step">
+          <div class="step-icon">1</div>
+          <div class="step-body">
+            <h4>Student Retrieves Academic Progress</h4>
+            <p>The student signs into their university portal and downloads their Curriculum Progress, Degree Audit, or Academic Progress Report. Accepted: PDF, Screenshot (PNG/JPG), or degree audit export. No institutional login credentials are shared with DegreePath.</p>
+          </div>
+        </div>
+        <div class="workflow-step">
+          <div class="step-icon">2</div>
+          <div class="step-body">
+            <h4>Upload</h4>
+            <p>The student uploads the document to DegreePath. The document is held only for processing.</p>
+          </div>
+        </div>
+        <div class="workflow-step">
+          <div class="step-icon">3</div>
+          <div class="step-body">
+            <h4>OCR &amp; Document Recognition</h4>
+            <p>The AI identifies university, degree program, catalog year, completed courses, credit hours, GPA (optional), and degree requirements shown in the report.</p>
+            <span class="step-tag">AI Processing</span>
+          </div>
+        </div>
+        <div class="workflow-step">
+          <div class="step-icon">4</div>
+          <div class="step-body">
+            <h4>Privacy Scan</h4>
+            <p>Before analysis begins, DegreePath automatically detects and masks: student name, Student ID, email, phone, postal address, date of birth, QR codes, barcodes, and any other recognized personal identifiers.</p>
+            <span class="step-tag">Auto-Masking</span>
+          </div>
+        </div>
+        <div class="workflow-step">
+          <div class="step-icon">5</div>
+          <div class="step-body">
+            <h4>Student Privacy Review</h4>
+            <p>The student is shown a sanitized preview — masked personal info alongside visible academic data. The student must confirm personal information has been removed and academic information is accurate. Analysis begins only after confirmation.</p>
+            <span class="step-tag">Student Confirms</span>
+          </div>
+        </div>
+        <div class="workflow-step">
+          <div class="step-icon">6</div>
+          <div class="step-body">
+            <h4>Academic Profile Creation</h4>
+            <p>DegreePath creates a temporary Academic Profile containing only: institution, catalog year, intended major, completed courses, earned credits, and optional GPA. The original uploaded document is deleted automatically unless the student explicitly chooses to retain it.</p>
+            <span class="step-tag">Minimal Data</span>
+          </div>
+        </div>
+        <div class="workflow-step">
+          <div class="step-icon">7</div>
+          <div class="step-body">
+            <h4>AI Analysis</h4>
+            <p>The AI compares the Academic Profile against official program requirements and generates: degree completion %, remaining requirements, recommended next courses, prerequisite analysis, graduation timeline estimate, and academic alerts.</p>
+            <span class="step-tag">AI Analysis</span>
+          </div>
+        </div>
+        <div class="workflow-step">
+          <div class="step-icon">8</div>
+          <div class="step-body">
+            <h4>Results Dashboard</h4>
+            <p>Student receives: Academic Health Score, Degree Progress %, Remaining Credits, Recommended Next Courses (prioritized by prerequisite dependencies), Graduation Estimate, Academic Alerts, and plain-language AI Explanations.</p>
+            <span class="step-tag">Results</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MVP Scope -->
+    <h3 style="font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:1.25rem">MVP Scope</h3>
+    <div class="scope-grid">
+      <div class="scope-card included">
+        <h4>✓ Included in MVP</h4>
+        <ul>
+          <li>Transcript / Degree Audit upload</li>
+          <li>OCR processing</li>
+          <li>Automatic privacy masking</li>
+          <li>Student confirmation screen</li>
+          <li>Academic Profile generation</li>
+          <li>Degree progress calculation</li>
+          <li>Graduation timeline estimate</li>
+          <li>Next-course recommendations</li>
+          <li>Academic Health Score</li>
+          <li>Academic alerts</li>
+          <li>Explainable AI recommendations</li>
+        </ul>
+      </div>
+      <div class="scope-card deferred">
+        <h4>◦ Deferred to Later Phases</h4>
+        <ul>
+          <li>University integrations</li>
+          <li>Advisor portals</li>
+          <li>Faculty dashboards</li>
+          <li>Financial aid planning</li>
+          <li>Career planning</li>
+          <li>Internship recommendations</li>
+          <li>Scholarship matching</li>
+          <li>Mobile notifications</li>
+          <li>Student social features</li>
+          <li>Statewide analytics</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Product Promise -->
+    <div class="product-promise">
+      <h3>Product Promise</h3>
+      <div class="promise-vs">
+        <div class="promise-no">
+          <span>DegreePath will never say</span>
+          <p>"You are approved to graduate."</p>
+        </div>
+        <div class="promise-yes">
+          <span>DegreePath will always say</span>
+          <p>"Based on the academic information you submitted and the official published degree requirements, this analysis estimates your progress toward graduation and recommends the most efficient academic pathway."</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 <!-- ════ APP SECTION ════ -->
 <div class="app-section" id="app">
 
@@ -506,7 +754,7 @@ tr:hover td{background:var(--gray-lt)}
       <div class="app-disclaimer-icon">⚠️</div>
       <div>
         <strong>Planning Tool Only — Not an Official Degree Audit</strong>
-        All information you enter is voluntary and stays on your device. Results are estimates based on published degree requirements and your self-reported coursework — always confirm with your academic advisor before registering or applying to graduate.
+        Based on the academic information you submit and official published degree requirements, DegreePath estimates your progress and recommends an efficient pathway — it does not certify graduation eligibility or replace your institution's official degree audit. Always confirm with your academic advisor.
         <a href="#governance" style="color:#7a5c00;font-weight:700;white-space:nowrap">View Privacy &amp; Data Principles ↗</a>
       </div>
     </div>
@@ -680,6 +928,7 @@ tr:hover td{background:var(--gray-lt)}
   <ul class="footer-links">
     <li><a href="#top">Home</a></li>
     <li><a href="#app">Planner</a></li>
+    <li><a href="#charter">MVP Charter</a></li>
     <li><a href="#governance">Privacy &amp; Data Principles</a></li>
   </ul>
   <p>Stop guessing. Start graduating. &nbsp;·&nbsp; Planning companion — not an official degree audit.</p>
