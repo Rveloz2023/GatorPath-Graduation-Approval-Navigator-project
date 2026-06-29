@@ -266,6 +266,56 @@ tr:hover td{background:var(--gray-lt)}
 @media print{.site-nav,.app-header,.btn{display:none}}
 
 
+
+/* ── Loading Zone ── */
+.load-zone{background:linear-gradient(135deg,#f0fdf8,#e6f7f2);
+  border:2px solid rgba(29,158,117,.2);border-radius:16px;
+  padding:1.75rem 1.5rem;margin-bottom:20px}
+.load-zone-title{font-size:.72rem;font-weight:800;text-transform:uppercase;
+  letter-spacing:1.5px;color:var(--dp-dk);margin-bottom:1rem}
+.load-methods{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:0}
+.load-btn{background:#fff;border:2px solid var(--border);border-radius:12px;
+  padding:1rem 1.25rem;cursor:pointer;text-align:left;transition:all .2s;
+  display:flex;gap:.9rem;align-items:flex-start;width:100%}
+.load-btn:hover{border-color:var(--dp);box-shadow:0 2px 10px rgba(29,158,117,.12)}
+.load-btn.active{border-color:var(--dp);background:linear-gradient(135deg,#f0fdf8,#e6f7f2);
+  box-shadow:0 2px 14px rgba(29,158,117,.18)}
+.load-btn-icon{font-size:1.5rem;flex-shrink:0;margin-top:1px}
+.load-btn-text strong{display:block;font-size:.9rem;font-weight:700;color:#111;margin-bottom:.2rem}
+.load-btn-text span{font-size:.78rem;color:var(--gray);line-height:1.4}
+.load-btn.active .load-btn-text strong{color:var(--dp-dk)}
+@media(max-width:600px){.load-methods{grid-template-columns:1fr}}
+/* Upload drop area */
+.upload-zone{margin-top:1.25rem;animation:fadeIn .25s ease}
+.drop-area{border:2px dashed rgba(29,158,117,.35);border-radius:12px;
+  background:#fff;padding:2rem 1.5rem;text-align:center;
+  transition:border .2s,background .2s;cursor:pointer}
+.drop-area.dragover{border-color:var(--dp);background:#f0fdf8}
+.drop-icon{font-size:2.4rem;margin-bottom:.75rem}
+.drop-area h4{font-size:.95rem;font-weight:700;color:#111;margin-bottom:.4rem}
+.drop-area p{font-size:.8rem;color:var(--gray);margin-bottom:.9rem;line-height:1.5}
+.drop-formats{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap;margin-bottom:1rem}
+.drop-fmt{font-size:.7rem;font-weight:700;background:#f1f5f9;color:#555;
+  padding:.2rem .6rem;border-radius:20px;letter-spacing:.5px}
+.drop-choose{display:inline-block;background:var(--dp);color:#fff;
+  font-size:.82rem;font-weight:700;padding:.55rem 1.4rem;border-radius:8px;
+  cursor:pointer;transition:background .15s}
+.drop-choose:hover{background:var(--dp-dk)}
+.drop-privacy{font-size:.74rem;color:var(--dp-dk);margin-top:.9rem;
+  background:rgba(29,158,117,.07);border-radius:8px;padding:.5rem .75rem;
+  display:inline-block}
+/* Uploaded file preview chip */
+.file-chip{display:flex;align-items:center;gap:.75rem;background:#f0fdf8;
+  border:1.5px solid rgba(29,158,117,.25);border-radius:10px;
+  padding:.75rem 1rem;margin-top:1rem;font-size:.84rem}
+.file-chip-icon{font-size:1.25rem;flex-shrink:0}
+.file-chip-name{font-weight:700;color:#111;flex:1}
+.file-chip-size{font-size:.73rem;color:var(--gray)}
+.file-chip-remove{background:none;border:none;cursor:pointer;
+  color:var(--gray);font-size:1rem;padding:.15rem .3rem;border-radius:4px}
+.file-chip-remove:hover{color:#c00;background:#fee2e2}
+.upload-cta{margin-top:1rem;width:100%}
+
 /* ── Governance section ── */
 .gov-section{background:#fff;padding:4.5rem 2rem;border-top:1px solid var(--border)}
 .gov-inner{max-width:1100px;margin:0 auto}
@@ -750,6 +800,55 @@ tr:hover td{background:var(--gray-lt)}
   <div id="panel-student" class="panel active">
   <div class="container">
 
+    <!-- ══ LOADING ZONE ══ -->
+    <div class="load-zone" id="load-zone">
+      <div class="load-zone-title">📂 Start by choosing how to load your academic information</div>
+      <div class="load-methods">
+        <button class="load-btn active" id="btn-manual" onclick="setLoadMethod('manual')">
+          <div class="load-btn-icon">✏️</div>
+          <div class="load-btn-text">
+            <strong>Manual Entry</strong>
+            <span>Type in your courses, credits, and major directly</span>
+          </div>
+        </button>
+        <button class="load-btn" id="btn-upload" onclick="setLoadMethod('upload')">
+          <div class="load-btn-icon">📄</div>
+          <div class="load-btn-text">
+            <strong>Upload Transcript</strong>
+            <span>Drag & drop a PDF, screenshot, or degree audit export</span>
+          </div>
+        </button>
+      </div>
+
+      <!-- Upload drop zone (hidden until upload mode) -->
+      <div class="upload-zone" id="upload-zone" style="display:none">
+        <div class="drop-area" id="drop-area"
+             ondragover="event.preventDefault();this.classList.add('dragover')"
+             ondragleave="this.classList.remove('dragover')"
+             ondrop="handleDrop(event)">
+          <div class="drop-icon">📤</div>
+          <h4>Drop your document here</h4>
+          <p>Transcript, Degree Audit, or Academic Progress Report<br>No institutional login required — you control what you share.</p>
+          <div class="drop-formats">
+            <span class="drop-fmt">PDF</span>
+            <span class="drop-fmt">PNG</span>
+            <span class="drop-fmt">JPG</span>
+            <span class="drop-fmt">JPEG</span>
+          </div>
+          <label class="drop-choose">
+            Choose File
+            <input type="file" id="transcript-file" accept=".pdf,.png,.jpg,.jpeg"
+                   style="display:none" onchange="handleFileSelect(this)">
+          </label>
+          <div class="drop-privacy">🔒 Personal info (name, ID, DOB) is masked before analysis begins</div>
+        </div>
+        <div id="file-chip-area"></div>
+        <div id="upload-status" style="margin-top:.75rem;font-size:.82rem;color:var(--dp-dk);display:none"></div>
+      </div>
+    </div>
+
+    <!-- ══ MANUAL ENTRY FIELDS ══ -->
+    <div id="manual-fields">
     <div class="app-disclaimer">
       <div class="app-disclaimer-icon">⚠️</div>
       <div>
@@ -842,6 +941,7 @@ tr:hover td{background:var(--gray-lt)}
     </div>
 
   </div>
+    </div><!-- /manual-fields -->
   </div>
 
   <!-- ══ ADVISOR PANEL ══ -->
@@ -1581,6 +1681,74 @@ function toggleAudio() {
 //  INIT
 // ═══════════════════════════════════════════════════════════════════
 loadData().then(()=>{ renderAdvisorTable(); });
+
+// ── Load Method Toggle ─────────────────────────────────────────
+function setLoadMethod(method) {
+  const manualBtn  = document.getElementById('btn-manual');
+  const uploadBtn  = document.getElementById('btn-upload');
+  const uploadZone = document.getElementById('upload-zone');
+  const manualFlds = document.getElementById('manual-fields');
+
+  if (method === 'manual') {
+    manualBtn.classList.add('active');
+    uploadBtn.classList.remove('active');
+    uploadZone.style.display = 'none';
+    manualFlds.style.display = '';
+  } else {
+    uploadBtn.classList.add('active');
+    manualBtn.classList.remove('active');
+    uploadZone.style.display = '';
+    manualFlds.style.display = 'none';
+  }
+}
+
+function handleDrop(e) {
+  e.preventDefault();
+  document.getElementById('drop-area').classList.remove('dragover');
+  const file = e.dataTransfer.files[0];
+  if (file) showFileChip(file);
+}
+
+function handleFileSelect(input) {
+  const file = input.files[0];
+  if (file) showFileChip(file);
+}
+
+function showFileChip(file) {
+  const area = document.getElementById('file-chip-area');
+  const kb = (file.size / 1024).toFixed(0);
+  const ext = file.name.split('.').pop().toUpperCase();
+  area.innerHTML = `
+    <div class="file-chip">
+      <div class="file-chip-icon">${ext === 'PDF' ? '📕' : '🖼️'}</div>
+      <div class="file-chip-name">${file.name}</div>
+      <div class="file-chip-size">${kb} KB</div>
+      <button class="file-chip-remove" onclick="clearFile()" title="Remove">✕</button>
+    </div>
+    <div style="margin-top:.85rem;padding:1rem 1.25rem;background:#fffbf0;border:1.5px solid #f0c040;
+      border-radius:10px;font-size:.82rem;color:#7a5c00;line-height:1.6">
+      <strong style="display:block;margin-bottom:.3rem">📋 Privacy Review</strong>
+      Your document will be scanned and personal identifiers (name, Student ID, date of birth, 
+      contact info) will be masked before analysis. You will confirm the sanitized preview before 
+      any processing begins.
+      <br><br>
+      <em style="color:#555">OCR transcript parsing is coming in the next release. 
+      For now, please use <strong style="color:var(--dp-dk)">Manual Entry</strong> to enter your courses.</em>
+    </div>`;
+  document.getElementById('drop-area').style.display = 'none';
+  const status = document.getElementById('upload-status');
+  status.style.display = 'block';
+  status.innerHTML = '✅ File received — OCR parsing coming soon. Switch to Manual Entry to continue.';
+}
+
+function clearFile() {
+  document.getElementById('file-chip-area').innerHTML = '';
+  document.getElementById('drop-area').style.display = '';
+  document.getElementById('upload-status').style.display = 'none';
+  document.getElementById('transcript-file').value = '';
+}
+
+
 </script>
 </body>
 </html>
