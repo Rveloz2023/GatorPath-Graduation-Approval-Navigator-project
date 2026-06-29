@@ -267,6 +267,80 @@ tr:hover td{background:var(--gray-lt)}
 
 
 
+
+
+/* ── Pensum Quick-Add ── */
+.pensum-zone{margin-top:10px}
+.pensum-major-label{font-size:.67rem;font-weight:700;color:#888;
+  margin-bottom:.3rem;display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:4px}
+.pensum-major-label span{color:var(--dp-dk)}
+.pensum-major-label .add-all-btn{font-size:.65rem;font-weight:700;
+  background:var(--dp-pale);color:var(--dp-dk);border:none;
+  padding:.15rem .55rem;border-radius:14px;cursor:pointer;transition:background .15s}
+.pensum-major-label .add-all-btn:hover{background:rgba(29,158,117,.25)}
+.pensum-chips{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px}
+.pensum-chip{display:inline-flex;align-items:center;gap:.2rem;
+  font-size:.69rem;font-weight:700;padding:.2rem .52rem;border-radius:14px;
+  border:1.5px solid var(--border);background:#fff;cursor:pointer;
+  transition:all .13s;white-space:nowrap;color:#444}
+.pensum-chip:hover{border-color:var(--dp);color:var(--dp-dk);
+  background:var(--dp-pale)}
+.pensum-chip.added{background:var(--dp-pale);border-color:var(--dp);
+  color:var(--dp-dk);border-style:solid}
+.pensum-chip.added::before{content:'✓';margin-right:.15rem;font-size:.65rem}
+/* category color dots */
+.pensum-chip[data-cat="math"]    {border-left:3px solid #818CF8}
+.pensum-chip[data-cat="science"] {border-left:3px solid #34D399}
+.pensum-chip[data-cat="core"]    {border-left:3px solid #F59E0B}
+.pensum-chip[data-cat="gen_ed"]  {border-left:3px solid #60A5FA}
+.pensum-chip[data-cat="ct_only"] {border-left:3px solid #F87171}
+.pensum-chip[data-cat="elective"]{border-left:3px solid #A78BFA}
+.pensum-chip[data-cat="other"]   {border-left:3px solid #CBD5E1}
+.pensum-placeholder{font-size:.8rem;color:#aaa;padding:.5rem 0}
+
+/* ── Upgraded Course Status ── */
+.course-cat-group{margin-bottom:1.25rem}
+.course-cat-header{display:flex;align-items:center;justify-content:space-between;
+  padding:.5rem 0 .4rem;border-bottom:1.5px solid var(--border);margin-bottom:.5rem}
+.course-cat-label{font-size:.72rem;font-weight:800;text-transform:uppercase;
+  letter-spacing:1px;color:#555;display:flex;align-items:center;gap:.4rem}
+.cat-prog-wrap{display:flex;align-items:center;gap:.5rem}
+.cat-prog-bar{width:90px;height:6px;background:#e5e7eb;border-radius:3px;overflow:hidden}
+.cat-prog-fill{height:100%;border-radius:3px;background:var(--dp);transition:width .4s}
+.cat-prog-txt{font-size:.7rem;font-weight:700;color:var(--gray)}
+/* Prereq chain */
+.prereq-chain{font-size:.72rem;color:#b45309;background:#fffbeb;
+  border-left:2px solid #f59e0b;padding:.2rem .5rem;border-radius:0 4px 4px 0;
+  margin-top:.2rem;display:inline-block}
+/* CT urgency badges */
+.urgency-overdue{color:#dc2626;background:#fee2e2;border:1px solid #fca5a5;
+  font-size:.68rem;font-weight:700;padding:.15rem .5rem;border-radius:20px}
+.urgency-upcoming{color:#d97706;background:#fffbeb;border:1px solid #fcd34d;
+  font-size:.68rem;font-weight:700;padding:.15rem .5rem;border-radius:20px}
+.urgency-clear{color:var(--dp-dk);background:var(--dp-pale);border:1px solid rgba(29,158,117,.3);
+  font-size:.68rem;font-weight:700;padding:.15rem .5rem;border-radius:20px}
+.ct-overdue-section,.ct-upcoming-section{margin-bottom:.75rem}
+.ct-section-label{font-size:.68rem;font-weight:800;text-transform:uppercase;
+  letter-spacing:1px;padding:.25rem .6rem;border-radius:4px;display:inline-block;margin-bottom:.5rem}
+.ct-section-label.overdue{background:#fee2e2;color:#dc2626}
+.ct-section-label.upcoming{background:#fffbeb;color:#d97706}
+.ct-section-label.done{background:var(--dp-pale);color:var(--dp-dk)}
+/* GPA Gauge */
+.gpa-gauge-wrap{margin:1rem 0;padding:1rem 1.25rem;
+  background:#f9fafb;border:1.5px solid var(--border);border-radius:10px}
+.gpa-gauge-label{font-size:.72rem;font-weight:700;color:#555;
+  text-transform:uppercase;letter-spacing:1px;margin-bottom:.6rem;
+  display:flex;justify-content:space-between}
+.gpa-bar-track{height:12px;background:#e5e7eb;border-radius:6px;
+  overflow:hidden;position:relative;margin-bottom:.35rem}
+.gpa-bar-fill{height:100%;border-radius:6px;transition:width .5s}
+.gpa-bar-fill.good{background:linear-gradient(90deg,#10b981,#34d399)}
+.gpa-bar-fill.warn{background:linear-gradient(90deg,#f59e0b,#fbbf24)}
+.gpa-bar-fill.danger{background:linear-gradient(90deg,#ef4444,#f87171)}
+.gpa-min-marker{position:absolute;top:0;height:100%;width:2px;background:#374151}
+.gpa-gauge-vals{display:flex;justify-content:space-between;font-size:.7rem;color:#888}
+
 /* ── Loading Zone ── */
 .load-zone{background:linear-gradient(135deg,#f0fdf8,#e6f7f2);
   border:2px solid rgba(29,158,117,.2);border-radius:16px;
@@ -868,7 +942,7 @@ tr:hover td{background:var(--gray-lt)}
           </div>
           <div class="form-group">
             <label>Current Major</label>
-            <select id="stu-major"><option value="">— loading majors —</option></select>
+            <select id="stu-major" onchange="renderPensum(this.value)"><option value="">— loading majors —</option></select>
           </div>
           <div class="form-group">
             <label>Credits Completed</label>
@@ -877,6 +951,15 @@ tr:hover td{background:var(--gray-lt)}
           <div class="form-group">
             <label>Current GPA</label>
             <input id="stu-gpa" type="number" step="0.01" min="0" max="4.0" placeholder="e.g. 3.40">
+          </div>
+          <div class="form-group" style="margin-top:10px">
+            <label style="display:flex;align-items:center;gap:.4rem">
+              🎯 <span>Desired Major <span style="font-weight:400;color:#888;font-size:.78rem">(optional — see switch stats)</span></span>
+            </label>
+            <select id="stu-desired-major" onchange="pinDesiredMajor(this.value)"
+              style="border:1.5px solid var(--dp);background:var(--dp-pale);color:var(--dp-dk);font-weight:600">
+              <option value="">— pick a target major to compare —</option>
+            </select>
           </div>
         </div>
         <div>
@@ -889,12 +972,10 @@ tr:hover td{background:var(--gray-lt)}
             </div>
             <div id="course-tags" class="tag-list"></div>
           </div>
-          <div class="form-group" style="margin-top:8px">
-            <label>Quick-add common courses</label>
-            <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:4px">
-              <button class="btn btn-ghost btn-sm" onclick="quickAdd(['ENC 1101','ENC 1102','MAC 2311','STA 2023','BSC 2010','BSC 2010L','CHM 2045'])">Gen Ed Starter</button>
-              <button class="btn btn-ghost btn-sm" onclick="quickAdd(['COP 3502C','COP 3503C','COT 3100','MAC 2312','EEL 3701C'])">CS Year 1-2</button>
-              <button class="btn btn-ghost btn-sm" onclick="quickAdd(['ACG 2021','ACG 2071','ECO 2013','ECO 2023','MAC 2233'])">Business Core</button>
+          <div class="form-group pensum-zone" style="margin-top:8px" id="pensum-zone">
+            <label>Quick-add from major curriculum</label>
+            <div id="pensum-chips-area" style="margin-top:6px">
+              <div class="pensum-placeholder">← Select your major to see all curriculum courses here</div>
             </div>
           </div>
         </div>
@@ -909,6 +990,7 @@ tr:hover td{background:var(--gray-lt)}
     <!-- Results -->
     <div id="student-results" style="display:none">
       <div class="stats" id="stat-boxes"></div>
+      <div id="gpa-gauge"></div>
       <div id="graduation-alert"></div>
       <div class="two-col">
         <div class="card">
@@ -919,6 +1001,13 @@ tr:hover td{background:var(--gray-lt)}
           <div class="card-title">⚠️ Critical Tracking Status</div>
           <ul class="course-list" id="ct-status-list"></ul>
           <div id="ct-warning" style="margin-top:12px"></div>
+
+          <!-- ══ ELECTIVES SECTION ══ -->
+          <div class="result-section" id="electives-section" style="display:none;margin-top:.75rem">
+            <h3 class="section-title">🗂️ Electives &amp; Free Credits</h3>
+            <div id="elective-summary"></div>
+            <ul id="elective-course-list" style="list-style:none;padding:0;margin:.5rem 0 0 0"></ul>
+          </div>
         </div>
       </div>
       <div class="card">
@@ -935,6 +1024,8 @@ tr:hover td{background:var(--gray-lt)}
           ℹ️ Based on your completed courses, here are other majors where your credits transfer best.
           A higher match % means fewer extra semesters needed.
         </div>
+        <!-- Desired-major pinned analysis -->
+        <div id="desired-major-pin" style="display:none;margin-bottom:18px"></div>
         <div class="switch-grid" id="major-switch-grid"></div>
         <div id="switch-detail" style="margin-top:20px;display:none"></div>
       </div>
@@ -1040,13 +1131,14 @@ tr:hover td{background:var(--gray-lt)}
 // ═══════════════════════════════════════════════════════════════════
 //  DATA LAYER
 // ═══════════════════════════════════════════════════════════════════
-let DB = { majors: [], gen_ed: {} };
-let students = JSON.parse(localStorage.getItem('degreepath_students') || '[]');
-let completedCourses = new Set();
+var DB = { majors: [], gen_ed: {} };
+var students = [];
+var completedCourses = new Set();
 let editingStudentId = null;
 let currentMode = 'student';
 
 async function loadData() {
+  try { students = JSON.parse(localStorage.getItem('degreepath_students') || '[]'); } catch(e) { students = []; }
   try {
     const r = await fetch('data/majors.json');
     const json = await r.json();
@@ -1065,6 +1157,18 @@ function saveStudents() { localStorage.setItem('degreepath_students', JSON.strin
 // ═══════════════════════════════════════════════════════════════════
 function normalizeCode(code) { return (code||'').toUpperCase().replace(/\s+/g,' ').trim(); }
 function coursePrefix(code) { const m=(code||'').match(/^([A-Z]{2,4})/); return m?m[1]:''; }
+
+// Waiver analysis: missing course is "waiveable" if student completed any same-dept course
+function getWaiverStatus(missingCourse, completedSet) {
+  const prefix = coursePrefix(missingCourse.code);
+  if (!prefix) return { status:'missing', evidence:[] };
+  // Exclude ultra-generic gen-ed prefixes where waivers rarely apply
+  const noWaiver = new Set(['ENC','ENG','LIT','AML','SPC','COM','PHI','HUM']);
+  if (noWaiver.has(prefix)) return { status:'missing', evidence:[] };
+  const evidence = [...completedSet].filter(c => coursePrefix(c) === prefix);
+  if (evidence.length > 0) return { status:'waiveable', evidence };
+  return { status:'missing', evidence:[] };
+}
 
 const GENERIC_PREFIXES = new Set([
   'MAC','MGF','MHF','STA','MAP','ENC','ENG','LIT','AML',
@@ -1117,10 +1221,24 @@ function analyzePath(majorId, completedSet, totalCredits, gpa) {
     .filter(sw => sw.compositeScore >= 8 && sw.matchPct >= 5)
     .sort((a,b) => b.compositeScore - a.compositeScore);
 
+  // ── Elective calculation ─────────────────────────────────────
+  const requiredNormCodes = new Set(courseStatus.map(c => normalizeCode(c.code)));
+  const ctNormCodes       = new Set(ctStatus.map(c => normalizeCode(c.code)));
+  // Elective pool = total degree credits minus all defined required-course credits
+  const electivePool = Math.max(0, major.total_credits - totalRequired);
+  // Courses student completed that are NOT in the required list = electives
+  const electiveCodesCompleted = [...done].filter(c => !requiredNormCodes.has(c));
+  // Assign 3 cr default (we don't have stored credit for free-typed codes)
+  const electiveCreditsEarned = electiveCodesCompleted.length * 3;
+  const electiveCreditsNeeded = Math.max(0, electivePool - electiveCreditsEarned);
+  const electivePct = electivePool > 0 ? Math.min(100, Math.round((electiveCreditsEarned / electivePool)*100)) : 100;
+
   return {
     major, courseStatus, completedRequired, missingRequired,
     ctStatus, ctMissing, ctComplete, ctOK, ctAtRisk: !ctOK,
     earnedRequiredCredits, totalRequired, pct, remainingCredits, semestersLeft,
+    electivePool, electiveCodesCompleted, electiveCreditsEarned,
+    electiveCreditsNeeded, electivePct,
     switchMatches, gpa,
     onTrack: gpa >= major.min_gpa && ctOK,
     hasHold: gpa < (major.critical_tracking?.min_gpa||2.0) || !ctOK
@@ -1139,7 +1257,12 @@ function addCourse() {
   renderCourseTags();
   input.focus();
 }
-function removeCourse(code) { completedCourses.delete(code); renderCourseTags(); }
+function removeCourse(code) {
+  completedCourses.delete(code);
+  const chip = document.getElementById('chip-' + code);
+  if (chip) chip.classList.remove('added');
+  renderCourseTags();
+}
 function quickAdd(codes) { codes.forEach(c => completedCourses.add(normalizeCode(c))); renderCourseTags(); }
 function renderCourseTags() {
   document.getElementById('course-tags').innerHTML = [...completedCourses].map(c =>
@@ -1156,7 +1279,7 @@ function analyzeStudent() {
   if (!analysis) return;
   renderStudentResults(analysis, totalCredits, gpa);
   document.getElementById('student-results').style.display = 'block';
-  document.getElementById('student-results').scrollIntoView({ behavior: 'smooth' });
+  try { document.getElementById('student-results').scrollIntoView({ behavior: 'smooth' }); } catch(e) {}
 
   const name = document.getElementById('stu-name').value.trim();
   const g = name ? name + ', ' : '';
@@ -1193,33 +1316,27 @@ function renderStudentResults(a, totalCredits, gpa) {
   }
   document.getElementById('graduation-alert').innerHTML = alertHtml;
 
+  // ── Grouped Required Courses (with prereq chains) ─────────────
+  const doneFull = new Set([...completedCourses].map(c=>normalizeCode(c)));
   const csl = document.getElementById('course-status-list');
   csl.innerHTML = a.courseStatus.length === 0
     ? '<li style="color:#888">No required courses defined for this major yet.</li>'
-    : a.courseStatus.map(c => `
-        <li>
-          <span class="ci ${c.completed?'ci-done':'ci-missing'}">${c.completed?'✅':'❌'}</span>
-          <div><span class="course-code">${c.code}</span> <span style="color:#555">${c.name}</span></div>
-          <span class="course-credits">${c.credits} cr · <span class="badge ${c.completed?'badge-green':'badge-red'}">${c.completed?'Done':'Needed'}</span></span>
-        </li>`).join('');
+    : renderCourseStatusGrouped(a.courseStatus, doneFull);
 
+  // ── GPA Gauge ─────────────────────────────────────────────────
+  const gpaGaugeEl = document.getElementById('gpa-gauge');
+  if (gpaGaugeEl) gpaGaugeEl.innerHTML = renderGpaGauge(gpa, a.major.min_gpa || 2.0);
+
+  // ── CT Urgency Split ──────────────────────────────────────────
+  const estimatedSemester = Math.max(1, Math.ceil(totalCredits / 15));
   const ctl = document.getElementById('ct-status-list');
-  ctl.innerHTML = a.ctStatus.length === 0
-    ? '<li style="color:#888">No critical-tracking data for this major.</li>'
-    : a.ctStatus.map(c => `
-        <li>
-          <span class="ci ${c.completed?'ci-done':'ci-warn'}">${c.completed?'✅':'⚠️'}</span>
-          <div>
-            <span class="course-code">${c.code}</span> <span style="color:#555">${c.name}</span>
-            ${c.required_by_semester?`<div style="font-size:.74rem;color:#888">Required by Semester ${c.required_by_semester}</div>`:''}
-          </div>
-          <span class="course-credits badge ${c.completed?'badge-green':'badge-red'}">${c.completed?'Done':'Missing'}</span>
-        </li>`).join('');
+  ctl.innerHTML = renderCtUpgraded(a.ctStatus, estimatedSemester, a.major.min_gpa || 2.0, gpa);
 
   document.getElementById('ct-warning').innerHTML = a.ctAtRisk
-    ? `<div class="alert alert-warning">Missing ${a.ctMissing.length} critical-tracking course(s). A registration hold may be placed if not completed on schedule.</div>`
-    : `<div class="alert alert-success">✅ All critical-tracking courses complete.</div>`;
+    ? `<div class="alert alert-warning">⚠️ ${a.ctMissing.length} critical-tracking course(s) incomplete. Check Overdue items above — a registration hold may be placed.</div>`
+    : `<div class="alert alert-success">✅ All critical-tracking courses complete or on schedule.</div>`;
 
+  renderElectivesSection(a);
   renderSemesterPlan(a);
   renderProgressBars(a, totalCredits);
   renderSwitchGrid(a.switchMatches);
@@ -1237,7 +1354,55 @@ function renderSemesterPlan(a) {
   }).join('');
 }
 
-function renderProgressBars(a, totalCredits) {
+
+// ── Electives Section ────────────────────────────────────────────
+function renderElectivesSection(a) {
+  const sec  = document.getElementById('electives-section');
+  const sumEl = document.getElementById('elective-summary');
+  const listEl = document.getElementById('elective-course-list');
+  if (!sec || !sumEl || !listEl) return;
+
+  sec.style.display = 'block';
+  const pool    = a.electivePool;
+  const earned  = a.electiveCreditsEarned;
+  const needed  = a.electiveCreditsNeeded;
+  const pct     = a.electivePct;
+  const barColor = needed === 0 ? 'var(--dp)' : '#F59E0B';
+
+  sumEl.innerHTML = `
+    <div style="display:flex;justify-content:space-between;font-size:.84rem;margin-bottom:4px">
+      <span><strong>Elective Credits</strong></span>
+      <span style="color:${needed===0?'var(--dp-dk)':'#B45309'};font-weight:700">
+        ${earned} / ${pool} cr completed${needed>0?' · <span style="color:#B45309">'+needed+' cr still needed</span>':''}
+      </span>
+    </div>
+    <div class="progress-wrap" style="margin-bottom:.6rem">
+      <div class="progress-bar" style="width:${pct}%;background:${barColor}"></div>
+    </div>
+    <p style="font-size:.78rem;color:#666;margin:0 0 .5rem 0">
+      Your degree requires <strong>${a.major.total_credits} total credits</strong>.
+      After accounting for <strong>${a.totalRequired} required-course credits</strong>,
+      you need at least <strong>${pool} elective/free credits</strong> to graduate.
+      ${needed === 0
+        ? '✅ <span style="color:var(--dp-dk)">Elective requirement met!</span>'
+        : `Complete <strong>${needed} more elective credits</strong> — any UCF course not already in your required list counts.`}
+    </p>`;
+
+  // List completed electives
+  if (a.electiveCodesCompleted.length === 0) {
+    listEl.innerHTML = '<li style="color:#aaa;font-size:.8rem">No elective courses recorded yet — add courses not in your required list above.</li>';
+  } else {
+    listEl.innerHTML = a.electiveCodesCompleted.map(code => `
+      <li style="display:flex;align-items:center;gap:.5rem;padding:.25rem 0;
+                 border-bottom:1px solid var(--border);font-size:.82rem">
+        <span style="color:var(--dp);font-weight:700">✓</span>
+        <span style="font-weight:600">${code}</span>
+        <span style="color:#aaa;font-size:.72rem">· ~3 cr · Elective</span>
+      </li>`).join('');
+  }
+}
+
+function renderProgressBars(a, totalCredits) { /* a has elective data */
   const cats = {};
   (a.major.required_courses||[]).forEach(c => {
     if (!cats[c.category]) cats[c.category]={total:0,done:0};
@@ -1261,9 +1426,168 @@ function renderProgressBars(a, totalCredits) {
         </div>
         <div class="progress-wrap" style="height:10px"><div class="progress-bar" style="width:${pct}%"></div></div>
       </div>`;
-    })
+    }),
+    // Elective bar (if pool > 0)
+    ...(a && a.electivePool > 0 ? [`
+      <div style="margin-bottom:10px">
+        <div style="display:flex;justify-content:space-between;font-size:.82rem;margin-bottom:3px">
+          <span>🗂️ Electives / Free Credits</span>
+          <span>${a.electiveCreditsEarned}/${a.electivePool} cr (${a.electivePct}%)</span>
+        </div>
+        <div class="progress-wrap" style="height:10px">
+          <div class="progress-bar" style="width:${a.electivePct}%;background:${a.electiveCreditsNeeded===0?'var(--dp)':'#F59E0B'}"></div>
+        </div>
+      </div>`] : [])
   ].join('');
   document.getElementById('progress-bars').innerHTML = bars;
+}
+
+
+// ── Desired Major Pin ──────────────────────────────────────────
+function pinDesiredMajor(majorId) {
+  const pin = document.getElementById('desired-major-pin');
+  if (!pin) return;
+  if (!majorId) { pin.style.display = 'none'; pin.innerHTML = ''; return; }
+
+  const totalCredits = parseInt(document.getElementById('stu-total-credits').value)||0;
+  const gpa          = parseFloat(document.getElementById('stu-gpa').value)||0;
+  const curMajorId   = document.getElementById('stu-major').value;
+  const a = analyzePath(majorId, completedCourses, totalCredits, gpa);
+  if (!a) return;
+
+  // Compute switch stats against this major
+  const requiredCodes = new Set((a.major.required_courses||[]).map(c=>normalizeCode(c.code)));
+  const matched = [...completedCourses].filter(c => requiredCodes.has(normalizeCode(c)));
+  const savedCr  = matched.reduce((s,c) => {
+    const rc = (a.major.required_courses||[]).find(r=>normalizeCode(r.code)===normalizeCode(c));
+    return s + (rc ? rc.credits||3 : 3);
+  }, 0);
+  const totalReqCr = (a.major.required_courses||[]).reduce((s,c)=>s+(c.credits||3),0);
+  const matchPct   = Math.round((savedCr / Math.max(1, totalReqCr)) * 100);
+  const creditGap  = Math.max(0, a.major.total_credits - totalCredits);
+  const semNeeded  = Math.ceil(creditGap / 15);
+  const barColor   = matchPct >= 60 ? 'var(--dp)' : matchPct >= 35 ? '#F59E0B' : 'var(--accent)';
+  const verdict    = matchPct >= 60
+    ? {icon:'✅', cls:'alert-success', msg:'Strong match — most credits carry over.'}
+    : matchPct >= 35
+    ? {icon:'⚠️', cls:'alert-warning', msg:'Moderate match — some new coursework needed.'}
+    : {icon:'❌', cls:'alert-danger',   msg:'Low match — significant new coursework required.'};
+
+  // Classify each missing course: waiveable vs hard-missing
+  const missingWithWaiver = a.missingRequired.map(c => ({
+    ...c,
+    waiver: getWaiverStatus(c, completedCourses)
+  }));
+  const waiveableCourses = missingWithWaiver.filter(c => c.waiver.status === 'waiveable');
+  const hardMissing      = missingWithWaiver.filter(c => c.waiver.status === 'missing');
+  const waiveableCr      = waiveableCourses.reduce((s,c)=>s+(c.credits||3),0);
+
+  pin.style.display = 'block';
+  pin.innerHTML = `
+    <div style="border:2px solid var(--dp);border-radius:14px;overflow:hidden">
+      <!-- Header -->
+      <div style="background:var(--dp-dk);color:#fff;padding:.6rem 1rem;
+                  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px">
+        <div>
+          <span style="font-size:.68rem;font-weight:800;text-transform:uppercase;
+                       letter-spacing:1px;opacity:.75">🎯 Your Desired Major</span>
+          <div style="font-size:1rem;font-weight:800;margin-top:1px">${a.major.name} (${a.major.degree})</div>
+          <div style="font-size:.75rem;opacity:.8">${a.major.college}</div>
+        </div>
+        <div style="text-align:right">
+          <div style="font-size:2rem;font-weight:900;line-height:1">${matchPct}%</div>
+          <div style="font-size:.68rem;opacity:.8">Credit Match</div>
+        </div>
+      </div>
+      <!-- Stats row — 5 cells including waiveable -->
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:0;
+                  border-bottom:1px solid var(--border)">
+        ${[
+          ['📚 Required', a.major.total_credits + ' cr', '#555'],
+          ['✅ You Have', totalCredits + ' cr', 'var(--dp-dk)'],
+          ['💾 Direct Match', savedCr + ' cr', 'var(--dp-dk)'],
+          ['⚖️ Waiveable', waiveableCr + ' cr', '#B45309'],
+          ['⏳ Semesters', '~' + semNeeded, '#555'],
+        ].map(([lbl,val,clr])=>`
+          <div class="pin-stat" style="padding:.5rem .5rem;text-align:center;border-right:1px solid var(--border)">
+            <div style="font-size:.88rem;font-weight:800;color:${clr}">${val}</div>
+            <div style="font-size:.62rem;color:#888;line-height:1.2">${lbl}</div>
+          </div>`).join('')}
+      </div>
+      <!-- Match bar -->
+      <div style="padding:.6rem 1rem .3rem 1rem">
+        <div style="display:flex;justify-content:space-between;font-size:.75rem;margin-bottom:3px">
+          <span style="font-weight:700;color:#555">Direct credit match toward ${a.major.name}</span>
+          <span style="font-weight:700;color:${barColor}">${savedCr} / ${totalReqCr} cr (${matchPct}%)</span>
+        </div>
+        <div class="progress-wrap" style="height:11px;margin-bottom:.5rem">
+          <div class="progress-bar" style="width:${matchPct}%;background:${barColor}"></div>
+        </div>
+        <div class="alert ${verdict.cls}" style="margin:0 0 .6rem 0;padding:.4rem .75rem;font-size:.82rem">
+          ${verdict.icon} ${verdict.msg}
+        </div>
+      </div>
+      <!-- Missing courses — split by waiver status -->
+      <div style="padding:.2rem 1rem .75rem 1rem">
+        ${waiveableCourses.length > 0 ? `
+        <div style="background:#FFFBEB;border:1px solid #FDE68A;border-radius:10px;
+                    padding:.5rem .75rem;margin-bottom:.65rem">
+          <div style="font-size:.74rem;font-weight:800;color:#92400E;margin-bottom:.35rem">
+            ⚖️ Potentially Waiveable — ${waiveableCourses.length} course${waiveableCourses.length>1?'s':''} (${waiveableCr} cr)
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:.4rem">
+            ${waiveableCourses.map(c=>`
+              <span title="You have: ${c.waiver.evidence.join(', ')}"
+                    style="font-size:.72rem;font-weight:700;padding:.2rem .55rem;border-radius:12px;
+                           background:#FEF3C7;color:#92400E;border:1.5px solid #F59E0B;
+                           cursor:help">
+                ⚖️ ${c.code}
+                <span style="opacity:.65">${c.credits}cr</span>
+              </span>`).join('')}
+          </div>
+          <div style="font-size:.68rem;color:#B45309;line-height:1.4">
+            You have completed related coursework in these departments. A course substitution or waiver may be granted by the department — consult your academic advisor.
+          </div>
+        </div>` : ''}
+
+        <div style="font-size:.76rem;font-weight:800;color:#555;margin-bottom:.35rem">
+          ❌ Hard Missing — ${hardMissing.length} course${hardMissing.length!==1?'s':''} with no related coursework:
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:5px">
+          ${hardMissing.length === 0 && waiveableCourses.length === 0
+            ? '<span style="font-size:.8rem;color:var(--dp-dk);font-weight:700">✅ All required courses completed!</span>'
+            : hardMissing.length === 0
+            ? '<span style="font-size:.78rem;color:var(--dp-dk);font-weight:700">✅ No hard-missing courses — all gaps are waiveable!</span>'
+            : hardMissing.map(c=>`
+                <span style="font-size:.72rem;font-weight:700;padding:.2rem .55rem;border-radius:12px;
+                             background:#FEE2E2;color:#B91C1C;border:1px solid #FECACA">
+                  ${c.code} <span style="opacity:.65">${c.credits}cr</span>
+                </span>`).join('')}
+        </div>
+
+        ${a.ctMissing.length > 0 ? `
+        <div style="font-size:.76rem;font-weight:800;color:#B45309;margin:.6rem 0 .3rem 0">
+          🚨 Critical-Tracking missing (${a.ctMissing.length}):
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:5px">
+          ${a.ctMissing.map(c=>`
+            <span style="font-size:.72rem;font-weight:700;padding:.2rem .55rem;border-radius:12px;
+                         background:#FEF3C7;color:#92400E;border:1px solid #FDE68A">
+              ${c.code} <span style="opacity:.65">${c.credits}cr · sem ${c.required_by_semester||'?'}</span>
+            </span>`).join('')}
+        </div>` : ''}
+
+        <div style="margin-top:.65rem;padding:.35rem .6rem;background:#F0FDF4;border-radius:8px;
+                    border:1px solid #BBF7D0;font-size:.67rem;color:#166534;line-height:1.5">
+          ℹ️ <strong>Waiver note:</strong> Course waivers/substitutions are granted at departmental discretion.
+          Hover a ⚖️ chip to see which of your courses supports the waiver request.
+          Always confirm with your academic advisor before planning a switch.
+        </div>
+      </div>
+    </div>`;
+
+  // Scroll to switch section
+  try { pin.scrollIntoView({ behavior:'smooth', block:'start' }); } catch(e) {}
 }
 
 function renderSwitchGrid(switchMatches) {
@@ -1323,7 +1647,7 @@ function showSwitchDetail(majorId, card) {
         </div>
       </div>
     </div>`;
-  detail.scrollIntoView({ behavior:'smooth' });
+  try { detail.scrollIntoView({ behavior:'smooth' }); } catch(e) {}
 }
 
 function clearStudent() {
@@ -1389,7 +1713,7 @@ function openAddStudent() {
   ['adv-stu-name','adv-stu-id','adv-stu-email','adv-stu-gpa','adv-stu-credits','adv-stu-courses'].forEach(id=>document.getElementById(id).value='');
   document.getElementById('adv-stu-major').value='';
   document.getElementById('adv-form-card').style.display='block';
-  document.getElementById('adv-form-card').scrollIntoView({behavior:'smooth'});
+  try { document.getElementById('adv-form-card').scrollIntoView({behavior:'smooth'}); } catch(e) {}
 }
 function cancelAddStudent() { document.getElementById('adv-form-card').style.display='none'; editingStudentId=null; }
 
@@ -1424,7 +1748,7 @@ function editStudent(key) {
   document.getElementById('adv-stu-credits').value=s.credits||'';
   document.getElementById('adv-stu-courses').value=s.courses||'';
   document.getElementById('adv-form-card').style.display='block';
-  document.getElementById('adv-form-card').scrollIntoView({behavior:'smooth'});
+  try { document.getElementById('adv-form-card').scrollIntoView({behavior:'smooth'}); } catch(e) {}
 }
 function deleteStudent(key) {
   if(!confirm('Delete this student?'))return;
@@ -1456,7 +1780,7 @@ function viewStudentDetail(key) {
       </div>
     </div>`;
   document.getElementById('adv-student-detail').style.display='block';
-  document.getElementById('adv-student-detail').scrollIntoView({behavior:'smooth'});
+  try { document.getElementById('adv-student-detail').scrollIntoView({behavior:'smooth'}); } catch(e) {}
 }
 
 function exportCSV() {
@@ -1485,6 +1809,12 @@ function switchMode(mode) {
 function populateMajorSelects() {
   const opts=DB.majors.map(m=>`<option value="${m.id}">${m.name} (${m.degree}) — ${m.college}</option>`).join('');
   document.getElementById('stu-major').innerHTML='<option value="">— Select your major —</option>'+opts;
+  // Also populate desired-major selector (same list)
+  const dmSel = document.getElementById('stu-desired-major');
+  if (dmSel) {
+    dmSel.innerHTML = '<option value="">— pick a target major to compare —</option>' +
+      DB.majors.map(m => `<option value="${m.id}">${m.name} (${m.degree})</option>`).join('');
+  }
   document.getElementById('adv-stu-major').innerHTML='<option value="">— Select major —</option>'+opts;
   document.getElementById('adv-filter-major').innerHTML='<option value="">All Majors</option>'+DB.majors.map(m=>`<option value="${m.id}">${m.name}</option>`).join('');
 }
@@ -1496,91 +1826,262 @@ const DEMO_MAJORS = [
   // ── ENGINEERING
   {id:"computer_science",name:"Computer Science",degree:"B.S.",college:"College of Engineering",total_credits:120,min_gpa:2.0,
    critical_tracking:{min_gpa:2.0,courses:[{code:"MAC 2311",name:"Calculus 1",credits:4,required_by_semester:2},{code:"COP 3502C",name:"CS 1",credits:3,required_by_semester:2},{code:"COP 3503C",name:"CS 2",credits:3,required_by_semester:3},{code:"COT 3100",name:"Discrete Structures",credits:3,required_by_semester:3}]},
-   required_courses:[{code:"MAC 2311",name:"Calculus 1",credits:4,category:"math"},{code:"MAC 2312",name:"Calculus 2",credits:4,category:"math"},{code:"COP 3502C",name:"CS 1",credits:3,category:"core"},{code:"COP 3503C",name:"CS 2",credits:3,category:"core"},{code:"COT 3100",name:"Discrete Structures",credits:3,category:"core"},{code:"COP 3530",name:"Data Structures",credits:3,category:"core"},{code:"CDA 3101",name:"Computer Organization",credits:3,category:"core"},{code:"COP 4020",name:"Programming Languages",credits:3,category:"core"},{code:"COP 4600",name:"Operating Systems",credits:3,category:"core"},{code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"},{code:"ENC 1102",name:"Composition 2",credits:3,category:"gen_ed"}],
+   required_courses:[{code:"MAC 2311",name:"Calculus 1",credits:4,category:"math"},{code:"MAC 2312",name:"Calculus 2",credits:4,category:"math"},{code:"COP 3502C",name:"CS 1",credits:3,category:"core"},{code:"COP 3503C",name:"CS 2",credits:3,category:"core"},{code:"COT 3100",name:"Discrete Structures",credits:3,category:"core"},{code:"COP 3530",name:"Data Structures",credits:3,category:"core"},{code:"CDA 3101",name:"Computer Organization",credits:3,category:"core"},{code:"COP 4020",name:"Programming Languages",credits:3,category:"core"},{code:"COP 4600",name:"Operating Systems",credits:3,category:"core"},{code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"},{code:"ENC 1102",name:"Composition 2",credits:3,category:"gen_ed"},
+           {code:"CEN 3031",name:"Intro to Software Engineering",credits:3,category:"core"},
+           {code:"COP 4710",name:"Database Systems",credits:3,category:"core"},
+           {code:"CIS 3360",name:"Security in Computing",credits:3,category:"core"},
+           {code:"PHY 2048C",name:"Physics for Engineers I",credits:4,category:"science"},
+           {code:"PHY 2049C",name:"Physics for Engineers II",credits:4,category:"science"},
+           {code:"AMH 2020",name:"US History Since 1877",credits:3,category:"gen_ed"},
+           {code:"POS 2041",name:"American National Government",credits:3,category:"gen_ed"}],
    model_plan:[{semester:1,courses:["ENC 1101","MAC 2311","COP 3502C"],credits:10},{semester:2,courses:["ENC 1102","MAC 2312","COP 3503C","COT 3100"],credits:13},{semester:3,courses:["MAC 2313","COP 3530","CDA 3101"],credits:10},{semester:4,courses:["COP 4020","COP 4600","Elective"],credits:9}]},
   {id:"computer_engineering",name:"Computer Engineering",degree:"B.S.",college:"College of Engineering",total_credits:128,min_gpa:2.0,
    critical_tracking:{min_gpa:2.0,courses:[{code:"MAC 2311",name:"Calculus 1",credits:4,required_by_semester:2},{code:"COP 3502C",name:"CS 1",credits:3,required_by_semester:2},{code:"EEL 3701C",name:"Digital Logic",credits:3,required_by_semester:3}]},
-   required_courses:[{code:"MAC 2311",name:"Calculus 1",credits:4,category:"math"},{code:"MAC 2312",name:"Calculus 2",credits:4,category:"math"},{code:"MAC 2313",name:"Calculus 3",credits:4,category:"math"},{code:"COP 3502C",name:"CS 1",credits:3,category:"core"},{code:"COP 3503C",name:"CS 2",credits:3,category:"core"},{code:"COT 3100",name:"Discrete Structures",credits:3,category:"core"},{code:"EEL 3701C",name:"Digital Logic",credits:3,category:"core"},{code:"EEL 4712C",name:"Digital Design",credits:3,category:"core"},{code:"CDA 3101",name:"Computer Organization",credits:3,category:"core"},{code:"PHY 2048C",name:"Physics 1",credits:4,category:"science"},{code:"PHY 2049C",name:"Physics 2",credits:4,category:"science"},{code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"}],
+   required_courses:[{code:"MAC 2311",name:"Calculus 1",credits:4,category:"math"},{code:"MAC 2312",name:"Calculus 2",credits:4,category:"math"},{code:"MAC 2313",name:"Calculus 3",credits:4,category:"math"},{code:"COP 3502C",name:"CS 1",credits:3,category:"core"},{code:"COP 3503C",name:"CS 2",credits:3,category:"core"},{code:"COT 3100",name:"Discrete Structures",credits:3,category:"core"},{code:"EEL 3701C",name:"Digital Logic",credits:3,category:"core"},{code:"EEL 4712C",name:"Digital Design",credits:3,category:"core"},{code:"CDA 3101",name:"Computer Organization",credits:3,category:"core"},{code:"PHY 2048C",name:"Physics 1",credits:4,category:"science"},{code:"PHY 2049C",name:"Physics 2",credits:4,category:"science"},{code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"},
+           {code:"CDA 4205",name:"Computer Architecture and Organization",credits:3,category:"core"},
+           {code:"CEN 3031",name:"Intro to Software Engineering",credits:3,category:"core"},
+           {code:"EEL 4657",name:"Linear Control Systems",credits:3,category:"core"},
+           {code:"EEL 4140",name:"Signals and Systems",credits:3,category:"core"},
+           {code:"ENC 1102",name:"Composition II",credits:3,category:"gen_ed"},
+           {code:"AMH 2020",name:"US History Since 1877",credits:3,category:"gen_ed"}],
    model_plan:[{semester:1,courses:["ENC 1101","MAC 2311","PHY 2048C"],credits:11},{semester:2,courses:["MAC 2312","COP 3502C","PHY 2049C"],credits:10},{semester:3,courses:["MAC 2313","COP 3503C","EEL 3701C"],credits:10},{semester:4,courses:["COT 3100","CDA 3101","EEL 4712C"],credits:9}]},
   {id:"electrical_engineering",name:"Electrical Engineering",degree:"B.S.",college:"College of Engineering",total_credits:128,min_gpa:2.0,
    critical_tracking:{min_gpa:2.0,courses:[{code:"MAC 2311",name:"Calculus 1",credits:4,required_by_semester:2},{code:"PHY 2048C",name:"Physics 1",credits:4,required_by_semester:2},{code:"EEL 3111C",name:"Circuits 1",credits:3,required_by_semester:3}]},
-   required_courses:[{code:"MAC 2311",name:"Calculus 1",credits:4,category:"math"},{code:"MAC 2312",name:"Calculus 2",credits:4,category:"math"},{code:"MAC 2313",name:"Calculus 3",credits:4,category:"math"},{code:"PHY 2048C",name:"Physics 1",credits:4,category:"science"},{code:"PHY 2049C",name:"Physics 2",credits:4,category:"science"},{code:"EEL 3111C",name:"Circuits 1",credits:3,category:"core"},{code:"EEL 3112",name:"Circuits 2",credits:3,category:"core"},{code:"EEL 4309",name:"Electronics 1",credits:3,category:"core"},{code:"EEL 3701C",name:"Digital Logic",credits:3,category:"core"},{code:"COP 3502C",name:"CS 1",credits:3,category:"core"},{code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"}],
+   required_courses:[{code:"MAC 2311",name:"Calculus 1",credits:4,category:"math"},{code:"MAC 2312",name:"Calculus 2",credits:4,category:"math"},{code:"MAC 2313",name:"Calculus 3",credits:4,category:"math"},{code:"PHY 2048C",name:"Physics 1",credits:4,category:"science"},{code:"PHY 2049C",name:"Physics 2",credits:4,category:"science"},{code:"EEL 3111C",name:"Circuits 1",credits:3,category:"core"},{code:"EEL 3112",name:"Circuits 2",credits:3,category:"core"},{code:"EEL 4309",name:"Electronics 1",credits:3,category:"core"},{code:"EEL 3701C",name:"Digital Logic",credits:3,category:"core"},{code:"COP 3502C",name:"CS 1",credits:3,category:"core"},{code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"},
+           {code:"EEL 4140",name:"Signals and Systems",credits:3,category:"core"},
+           {code:"EEL 4300",name:"Electromagnetics",credits:3,category:"core"},
+           {code:"EEL 4657",name:"Linear Control Systems",credits:3,category:"core"},
+           {code:"EEL 3657",name:"Automatic Control Systems Lab",credits:1,category:"core"},
+           {code:"EEL 3923C",name:"Engineering Electronic Circuits",credits:3,category:"core"},
+           {code:"ENC 1102",name:"Composition II",credits:3,category:"gen_ed"}],
    model_plan:[{semester:1,courses:["ENC 1101","MAC 2311","PHY 2048C"],credits:11},{semester:2,courses:["MAC 2312","PHY 2049C","EEL 3111C"],credits:10},{semester:3,courses:["MAC 2313","EEL 3112","EEL 3701C"],credits:10},{semester:4,courses:["EEL 4309","COP 3502C","Elective"],credits:9}]},
   {id:"industrial_systems_engineering",name:"Industrial & Systems Engineering",degree:"B.S.",college:"College of Engineering",total_credits:128,min_gpa:2.0,
    critical_tracking:{min_gpa:2.0,courses:[{code:"MAC 2311",name:"Calculus 1",credits:4,required_by_semester:2},{code:"STA 3032",name:"Engineering Statistics",credits:3,required_by_semester:3}]},
-   required_courses:[{code:"MAC 2311",name:"Calculus 1",credits:4,category:"math"},{code:"MAC 2312",name:"Calculus 2",credits:4,category:"math"},{code:"STA 3032",name:"Engineering Statistics",credits:3,category:"core"},{code:"ISE 3213",name:"Engineering Economy",credits:3,category:"core"},{code:"ISE 4234",name:"Production Systems",credits:3,category:"core"},{code:"EGN 3613",name:"Engineering Economic Analysis",credits:3,category:"core"},{code:"COP 3502C",name:"CS 1",credits:3,category:"core"},{code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"},{code:"ENC 1102",name:"Composition 2",credits:3,category:"gen_ed"}],
+   required_courses:[{code:"MAC 2311",name:"Calculus 1",credits:4,category:"math"},{code:"MAC 2312",name:"Calculus 2",credits:4,category:"math"},{code:"STA 3032",name:"Engineering Statistics",credits:3,category:"core"},{code:"ISE 3213",name:"Engineering Economy",credits:3,category:"core"},{code:"ISE 4234",name:"Production Systems",credits:3,category:"core"},{code:"EGN 3613",name:"Engineering Economic Analysis",credits:3,category:"core"},{code:"COP 3502C",name:"CS 1",credits:3,category:"core"},{code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"},{code:"ENC 1102",name:"Composition 2",credits:3,category:"gen_ed"},
+           {code:"EIN 4333",name:"Facilities Planning",credits:3,category:"core"},
+           {code:"EIN 4364",name:"Quality Control",credits:3,category:"core"},
+           {code:"EIN 4905",name:"Senior Design",credits:3,category:"core"},
+           {code:"ESI 4312",name:"Operations Research I",credits:3,category:"core"},
+           {code:"ESI 4313",name:"Operations Research II",credits:3,category:"core"},
+           {code:"STA 3033",name:"Probability & Statistics for Engineers",credits:3,category:"math"},
+           {code:"PHY 2048C",name:"Physics for Engineers I",credits:4,category:"science"},
+           {code:"AMH 2020",name:"US History Since 1877",credits:3,category:"gen_ed"}],
    model_plan:[{semester:1,courses:["ENC 1101","MAC 2311","COP 3502C"],credits:10},{semester:2,courses:["ENC 1102","MAC 2312","STA 3032"],credits:10},{semester:3,courses:["ISE 3213","EGN 3613","Elective"],credits:9},{semester:4,courses:["ISE 4234","Elective","Elective"],credits:9}]},
   {id:"biomedical_engineering",name:"Biomedical Engineering",degree:"B.S.",college:"College of Engineering",total_credits:128,min_gpa:2.0,
    critical_tracking:{min_gpa:2.0,courses:[{code:"MAC 2311",name:"Calculus 1",credits:4,required_by_semester:2},{code:"CHM 2045",name:"General Chemistry 1",credits:3,required_by_semester:2},{code:"PHY 2048C",name:"Physics 1",credits:4,required_by_semester:3}]},
-   required_courses:[{code:"MAC 2311",name:"Calculus 1",credits:4,category:"math"},{code:"MAC 2312",name:"Calculus 2",credits:4,category:"math"},{code:"CHM 2045",name:"General Chemistry 1",credits:3,category:"science"},{code:"CHM 2046",name:"General Chemistry 2",credits:3,category:"science"},{code:"PHY 2048C",name:"Physics 1",credits:4,category:"science"},{code:"BSC 2010C",name:"Biology 1",credits:3,category:"science"},{code:"BME 3401C",name:"Biomed Measurements",credits:3,category:"core"},{code:"BME 4402",name:"Biomedical Instrumentation",credits:3,category:"core"},{code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"}],
+   required_courses:[{code:"MAC 2311",name:"Calculus 1",credits:4,category:"math"},{code:"MAC 2312",name:"Calculus 2",credits:4,category:"math"},{code:"CHM 2045",name:"General Chemistry 1",credits:3,category:"science"},{code:"CHM 2046",name:"General Chemistry 2",credits:3,category:"science"},{code:"PHY 2048C",name:"Physics 1",credits:4,category:"science"},{code:"BSC 2010C",name:"Biology 1",credits:3,category:"science"},{code:"BME 3401C",name:"Biomed Measurements",credits:3,category:"core"},{code:"BME 4402",name:"Biomedical Instrumentation",credits:3,category:"core"},{code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"},
+           {code:"BME 3423",name:"Physiological Signals & Instrumentation",credits:3,category:"core"},
+           {code:"BME 4510",name:"Biomedical Optics",credits:3,category:"core"},
+           {code:"ENC 1102",name:"Composition II",credits:3,category:"gen_ed"},
+           {code:"AMH 2020",name:"US History Since 1877",credits:3,category:"gen_ed"},
+           {code:"MAP 2302",name:"Differential Equations",credits:3,category:"math"},
+           {code:"SPC 1608",name:"Oral Communication",credits:3,category:"gen_ed"}],
    model_plan:[{semester:1,courses:["ENC 1101","MAC 2311","CHM 2045"],credits:10},{semester:2,courses:["MAC 2312","CHM 2046","PHY 2048C"],credits:11},{semester:3,courses:["BSC 2010C","BME 3401C","Elective"],credits:9},{semester:4,courses:["BME 4402","Elective","Elective"],credits:9}]},
   {id:"civil_engineering",name:"Civil Engineering",degree:"B.S.",college:"College of Engineering",total_credits:128,min_gpa:2.0,
    critical_tracking:{min_gpa:2.0,courses:[{code:"MAC 2311",name:"Calculus 1",credits:4,required_by_semester:2},{code:"PHY 2048C",name:"Physics 1",credits:4,required_by_semester:2}]},
-   required_courses:[{code:"MAC 2311",name:"Calculus 1",credits:4,category:"math"},{code:"MAC 2312",name:"Calculus 2",credits:4,category:"math"},{code:"PHY 2048C",name:"Physics 1",credits:4,category:"science"},{code:"CES 3102",name:"Statics",credits:3,category:"core"},{code:"CES 3202",name:"Mechanics of Materials",credits:3,category:"core"},{code:"CEG 4012",name:"Foundation Engineering",credits:3,category:"core"},{code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"},{code:"ENC 1102",name:"Composition 2",credits:3,category:"gen_ed"}],
+   required_courses:[{code:"MAC 2311",name:"Calculus 1",credits:4,category:"math"},{code:"MAC 2312",name:"Calculus 2",credits:4,category:"math"},{code:"PHY 2048C",name:"Physics 1",credits:4,category:"science"},{code:"CES 3102",name:"Statics",credits:3,category:"core"},{code:"CES 3202",name:"Mechanics of Materials",credits:3,category:"core"},{code:"CEG 4012",name:"Foundation Engineering",credits:3,category:"core"},{code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"},{code:"ENC 1102",name:"Composition 2",credits:3,category:"gen_ed"},
+           {code:"CES 4100",name:"Steel Design",credits:3,category:"core"},
+           {code:"CES 4200",name:"Concrete Design",credits:3,category:"core"},
+           {code:"CES 4402",name:"Foundation Engineering",credits:3,category:"core"},
+           {code:"CES 4800",name:"Traffic Engineering",credits:3,category:"core"},
+           {code:"EGN 3703",name:"Engineering Economy",credits:3,category:"core"},
+           {code:"STA 3033",name:"Probability & Statistics",credits:3,category:"math"},
+           {code:"CHM 2045",name:"General Chemistry I",credits:3,category:"science"},
+           {code:"AMH 2020",name:"US History Since 1877",credits:3,category:"gen_ed"},
+           {code:"SPC 1608",name:"Oral Communication",credits:3,category:"gen_ed"}],
    model_plan:[{semester:1,courses:["ENC 1101","MAC 2311","PHY 2048C"],credits:11},{semester:2,courses:["ENC 1102","MAC 2312","CES 3102"],credits:10},{semester:3,courses:["CES 3202","Elective","Elective"],credits:9},{semester:4,courses:["CEG 4012","Elective","Elective"],credits:9}]},
   // ── BUSINESS
   {id:"information_systems",name:"Information Systems & Operations Management",degree:"B.S.B.A.",college:"College of Business",total_credits:120,min_gpa:2.0,
    critical_tracking:{min_gpa:2.0,courses:[{code:"ACG 2021",name:"Financial Accounting",credits:3,required_by_semester:2},{code:"MAC 2233",name:"Survey of Calculus",credits:3,required_by_semester:2}]},
-   required_courses:[{code:"ACG 2021",name:"Financial Accounting",credits:3,category:"core"},{code:"ACG 2071",name:"Managerial Accounting",credits:3,category:"core"},{code:"ECO 2013",name:"Macroeconomics",credits:3,category:"core"},{code:"ECO 2023",name:"Microeconomics",credits:3,category:"core"},{code:"MAC 2233",name:"Survey of Calculus",credits:3,category:"math"},{code:"STA 2023",name:"Statistics 1",credits:3,category:"math"},{code:"ISM 3013",name:"Information Systems",credits:3,category:"core"},{code:"ISM 3232",name:"Business Application Development",credits:3,category:"core"},{code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"},{code:"ENC 1102",name:"Composition 2",credits:3,category:"gen_ed"}],
+   required_courses:[{code:"ACG 2021",name:"Financial Accounting",credits:3,category:"core"},{code:"ACG 2071",name:"Managerial Accounting",credits:3,category:"core"},{code:"ECO 2013",name:"Macroeconomics",credits:3,category:"core"},{code:"ECO 2023",name:"Microeconomics",credits:3,category:"core"},{code:"MAC 2233",name:"Survey of Calculus",credits:3,category:"math"},{code:"STA 2023",name:"Statistics 1",credits:3,category:"math"},{code:"ISM 3013",name:"Information Systems",credits:3,category:"core"},{code:"ISM 3232",name:"Business Application Development",credits:3,category:"core"},{code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"},{code:"ENC 1102",name:"Composition 2",credits:3,category:"gen_ed"},
+           {code:"COP 4710",name:"Database Systems",credits:3,category:"core"},
+           {code:"ISM 4212",name:"Database Administration",credits:3,category:"core"},
+           {code:"ISM 4322",name:"IS Analysis & Design",credits:3,category:"core"},
+           {code:"ISM 4220",name:"Business Data Communications",credits:3,category:"core"},
+           {code:"ISM 4905",name:"Senior IS Project",credits:3,category:"core"},
+           {code:"CIS 3360",name:"Security in Computing",credits:3,category:"core"},
+           {code:"CEN 3031",name:"Intro to Software Engineering",credits:3,category:"core"},
+           {code:"AMH 2020",name:"US History Since 1877",credits:3,category:"gen_ed"}],
    model_plan:[{semester:1,courses:["ENC 1101","ACG 2021","ECO 2013"],credits:9},{semester:2,courses:["ENC 1102","ACG 2071","ECO 2023","MAC 2233"],credits:12},{semester:3,courses:["STA 2023","ISM 3013","Elective"],credits:9},{semester:4,courses:["ISM 3232","Elective","Elective"],credits:9}]},
   {id:"finance",name:"Finance",degree:"B.S.B.A.",college:"College of Business",total_credits:120,min_gpa:2.0,
    critical_tracking:{min_gpa:2.0,courses:[{code:"ACG 2021",name:"Financial Accounting",credits:3,required_by_semester:2},{code:"ECO 2023",name:"Microeconomics",credits:3,required_by_semester:3}]},
-   required_courses:[{code:"ACG 2021",name:"Financial Accounting",credits:3,category:"core"},{code:"ACG 2071",name:"Managerial Accounting",credits:3,category:"core"},{code:"ECO 2013",name:"Macroeconomics",credits:3,category:"core"},{code:"ECO 2023",name:"Microeconomics",credits:3,category:"core"},{code:"FIN 3403",name:"Financial Management",credits:3,category:"core"},{code:"FIN 4414",name:"Advanced Financial Management",credits:3,category:"core"},{code:"MAC 2233",name:"Survey of Calculus",credits:3,category:"math"},{code:"STA 2023",name:"Statistics 1",credits:3,category:"math"},{code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"},{code:"ENC 1102",name:"Composition 2",credits:3,category:"gen_ed"}],
+   required_courses:[{code:"ACG 2021",name:"Financial Accounting",credits:3,category:"core"},{code:"ACG 2071",name:"Managerial Accounting",credits:3,category:"core"},{code:"ECO 2013",name:"Macroeconomics",credits:3,category:"core"},{code:"ECO 2023",name:"Microeconomics",credits:3,category:"core"},{code:"FIN 3403",name:"Financial Management",credits:3,category:"core"},{code:"FIN 4414",name:"Advanced Financial Management",credits:3,category:"core"},{code:"MAC 2233",name:"Survey of Calculus",credits:3,category:"math"},{code:"STA 2023",name:"Statistics 1",credits:3,category:"math"},{code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"},{code:"ENC 1102",name:"Composition 2",credits:3,category:"gen_ed"},
+           {code:"FIN 3244",name:"Investments",credits:3,category:"core"},
+           {code:"FIN 4243",name:"Portfolio Management",credits:3,category:"core"},
+           {code:"FIN 3513",name:"Real Estate Finance",credits:3,category:"core"},
+           {code:"FIN 4505",name:"Futures & Options Markets",credits:3,category:"core"},
+           {code:"FIN 3604",name:"International Finance",credits:3,category:"core"},
+           {code:"FIN 4450",name:"Financial Modeling",credits:3,category:"core"},
+           {code:"ECO 3430",name:"Money, Banking & Financial Markets",credits:3,category:"core"},
+           {code:"AMH 2020",name:"US History Since 1877",credits:3,category:"gen_ed"}],
    model_plan:[{semester:1,courses:["ENC 1101","ACG 2021","ECO 2013"],credits:9},{semester:2,courses:["ENC 1102","ACG 2071","ECO 2023"],credits:9},{semester:3,courses:["MAC 2233","STA 2023","FIN 3403"],credits:9},{semester:4,courses:["FIN 4414","Elective","Elective"],credits:9}]},
   {id:"management",name:"Management",degree:"B.S.B.A.",college:"College of Business",total_credits:120,min_gpa:2.0,
    critical_tracking:{min_gpa:2.0,courses:[{code:"ACG 2021",name:"Financial Accounting",credits:3,required_by_semester:2}]},
-   required_courses:[{code:"ACG 2021",name:"Financial Accounting",credits:3,category:"core"},{code:"ACG 2071",name:"Managerial Accounting",credits:3,category:"core"},{code:"ECO 2013",name:"Macroeconomics",credits:3,category:"core"},{code:"ECO 2023",name:"Microeconomics",credits:3,category:"core"},{code:"MAN 3025",name:"Principles of Management",credits:3,category:"core"},{code:"MAN 4301",name:"Human Resource Management",credits:3,category:"core"},{code:"MAC 2233",name:"Survey of Calculus",credits:3,category:"math"},{code:"STA 2023",name:"Statistics 1",credits:3,category:"math"},{code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"},{code:"ENC 1102",name:"Composition 2",credits:3,category:"gen_ed"}],
+   required_courses:[{code:"ACG 2021",name:"Financial Accounting",credits:3,category:"core"},{code:"ACG 2071",name:"Managerial Accounting",credits:3,category:"core"},{code:"ECO 2013",name:"Macroeconomics",credits:3,category:"core"},{code:"ECO 2023",name:"Microeconomics",credits:3,category:"core"},{code:"MAN 3025",name:"Principles of Management",credits:3,category:"core"},{code:"MAN 4301",name:"Human Resource Management",credits:3,category:"core"},{code:"MAC 2233",name:"Survey of Calculus",credits:3,category:"math"},{code:"STA 2023",name:"Statistics 1",credits:3,category:"math"},{code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"},{code:"ENC 1102",name:"Composition 2",credits:3,category:"gen_ed"},
+           {code:"MAN 4401",name:"Labor Relations Management",credits:3,category:"core"},
+           {code:"MAN 4143",name:"Organizational Behavior",credits:3,category:"core"},
+           {code:"MAN 3240",name:"Applied Organizational Behavior",credits:3,category:"core"},
+           {code:"MAN 4583",name:"Supply Chain Management",credits:3,category:"core"},
+           {code:"MAN 4720",name:"Business Policy & Strategy",credits:3,category:"core"},
+           {code:"MAR 3023",name:"Principles of Marketing",credits:3,category:"core"},
+           {code:"FIN 3403",name:"Business Finance",credits:3,category:"core"}],
    model_plan:[{semester:1,courses:["ENC 1101","ACG 2021","ECO 2013"],credits:9},{semester:2,courses:["ENC 1102","ACG 2071","ECO 2023"],credits:9},{semester:3,courses:["MAC 2233","STA 2023","MAN 3025"],credits:9},{semester:4,courses:["MAN 4301","Elective","Elective"],credits:9}]},
   {id:"marketing",name:"Marketing",degree:"B.S.B.A.",college:"College of Business",total_credits:120,min_gpa:2.0,
    critical_tracking:{min_gpa:2.0,courses:[{code:"ACG 2021",name:"Financial Accounting",credits:3,required_by_semester:2},{code:"MAR 3023",name:"Principles of Marketing",credits:3,required_by_semester:3}]},
-   required_courses:[{code:"ACG 2021",name:"Financial Accounting",credits:3,category:"core"},{code:"ECO 2013",name:"Macroeconomics",credits:3,category:"core"},{code:"ECO 2023",name:"Microeconomics",credits:3,category:"core"},{code:"MAR 3023",name:"Principles of Marketing",credits:3,category:"core"},{code:"MAR 4156",name:"Consumer Behavior",credits:3,category:"core"},{code:"MAR 4418",name:"Marketing Research",credits:3,category:"core"},{code:"MAC 2233",name:"Survey of Calculus",credits:3,category:"math"},{code:"STA 2023",name:"Statistics 1",credits:3,category:"math"},{code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"},{code:"ENC 1102",name:"Composition 2",credits:3,category:"gen_ed"}],
+   required_courses:[{code:"ACG 2021",name:"Financial Accounting",credits:3,category:"core"},{code:"ECO 2013",name:"Macroeconomics",credits:3,category:"core"},{code:"ECO 2023",name:"Microeconomics",credits:3,category:"core"},{code:"MAR 3023",name:"Principles of Marketing",credits:3,category:"core"},{code:"MAR 4156",name:"Consumer Behavior",credits:3,category:"core"},{code:"MAR 4418",name:"Marketing Research",credits:3,category:"core"},{code:"MAC 2233",name:"Survey of Calculus",credits:3,category:"math"},{code:"STA 2023",name:"Statistics 1",credits:3,category:"math"},{code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"},{code:"ENC 1102",name:"Composition 2",credits:3,category:"gen_ed"},
+           {code:"MAR 4340",name:"Marketing Research",credits:3,category:"core"},
+           {code:"MAR 4720",name:"Brand Management",credits:3,category:"core"},
+           {code:"MAR 4502",name:"Consumer Behavior",credits:3,category:"core"},
+           {code:"MAR 4231",name:"Advertising Principles",credits:3,category:"core"},
+           {code:"MAR 4905",name:"Marketing Practicum",credits:3,category:"core"},
+           {code:"MAN 3025",name:"Principles of Management",credits:3,category:"core"},
+           {code:"FIN 3403",name:"Business Finance",credits:3,category:"core"}],
    model_plan:[{semester:1,courses:["ENC 1101","ACG 2021","ECO 2013"],credits:9},{semester:2,courses:["ENC 1102","ECO 2023","MAC 2233"],credits:9},{semester:3,courses:["STA 2023","MAR 3023","Elective"],credits:9},{semester:4,courses:["MAR 4156","MAR 4418","Elective"],credits:9}]},
   {id:"accounting",name:"Accounting",degree:"B.S.A.",college:"College of Business",total_credits:120,min_gpa:2.0,
    critical_tracking:{min_gpa:2.0,courses:[{code:"ACG 2021",name:"Financial Accounting",credits:3,required_by_semester:2},{code:"ACG 2071",name:"Managerial Accounting",credits:3,required_by_semester:2}]},
-   required_courses:[{code:"ACG 2021",name:"Financial Accounting",credits:3,category:"core"},{code:"ACG 2071",name:"Managerial Accounting",credits:3,category:"core"},{code:"ACG 3101",name:"Intermediate Accounting 1",credits:3,category:"core"},{code:"ACG 3111",name:"Intermediate Accounting 2",credits:3,category:"core"},{code:"ACG 3341",name:"Cost Accounting",credits:3,category:"core"},{code:"TAX 4001",name:"Federal Income Tax",credits:3,category:"core"},{code:"MAC 2233",name:"Survey of Calculus",credits:3,category:"math"},{code:"STA 2023",name:"Statistics 1",credits:3,category:"math"},{code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"},{code:"ENC 1102",name:"Composition 2",credits:3,category:"gen_ed"}],
+   required_courses:[{code:"ACG 2021",name:"Financial Accounting",credits:3,category:"core"},{code:"ACG 2071",name:"Managerial Accounting",credits:3,category:"core"},{code:"ACG 3101",name:"Intermediate Accounting 1",credits:3,category:"core"},{code:"ACG 3111",name:"Intermediate Accounting 2",credits:3,category:"core"},{code:"ACG 3341",name:"Cost Accounting",credits:3,category:"core"},{code:"TAX 4001",name:"Federal Income Tax",credits:3,category:"core"},{code:"MAC 2233",name:"Survey of Calculus",credits:3,category:"math"},{code:"STA 2023",name:"Statistics 1",credits:3,category:"math"},{code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"},{code:"ENC 1102",name:"Composition 2",credits:3,category:"gen_ed"},
+           {code:"ACG 4301",name:"Intermediate Accounting III",credits:3,category:"core"},
+           {code:"ACG 4632",name:"Auditing",credits:3,category:"core"},
+           {code:"ACG 4401",name:"Accounting Information Systems",credits:3,category:"core"},
+           {code:"ACG 4501",name:"Cost Accounting",credits:3,category:"core"},
+           {code:"TAX 4011",name:"Partnership & Corporate Tax",credits:3,category:"core"},
+           {code:"BUL 3130",name:"Legal Environment of Business",credits:3,category:"core"},
+           {code:"ACG 4771",name:"Forensic Accounting",credits:3,category:"elective"}],
    model_plan:[{semester:1,courses:["ENC 1101","ACG 2021","MAC 2233"],credits:9},{semester:2,courses:["ENC 1102","ACG 2071","STA 2023"],credits:9},{semester:3,courses:["ACG 3101","ACG 3341","Elective"],credits:9},{semester:4,courses:["ACG 3111","TAX 4001","Elective"],credits:9}]},
   // ── LIBERAL ARTS & SCIENCES
   {id:"mathematics",name:"Mathematics",degree:"B.S.",college:"College of Liberal Arts & Sciences",total_credits:120,min_gpa:2.0,
    critical_tracking:{min_gpa:2.0,courses:[{code:"MAC 2311",name:"Calculus 1",credits:4,required_by_semester:1},{code:"MAC 2312",name:"Calculus 2",credits:4,required_by_semester:2},{code:"MAS 3114",name:"Computational Linear Algebra",credits:3,required_by_semester:3}]},
-   required_courses:[{code:"MAC 2311",name:"Calculus 1",credits:4,category:"math"},{code:"MAC 2312",name:"Calculus 2",credits:4,category:"math"},{code:"MAC 2313",name:"Calculus 3",credits:4,category:"math"},{code:"MAP 2302",name:"Differential Equations",credits:3,category:"math"},{code:"MAS 3114",name:"Computational Linear Algebra",credits:3,category:"core"},{code:"MAD 2104",name:"Discrete Mathematics 1",credits:3,category:"core"},{code:"MAS 4105",name:"Linear Algebra 1",credits:4,category:"core"},{code:"MAA 4211",name:"Advanced Calculus 1",credits:4,category:"core"},{code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"},{code:"ENC 1102",name:"Composition 2",credits:3,category:"gen_ed"}],
+   required_courses:[{code:"MAC 2311",name:"Calculus 1",credits:4,category:"math"},{code:"MAC 2312",name:"Calculus 2",credits:4,category:"math"},{code:"MAC 2313",name:"Calculus 3",credits:4,category:"math"},{code:"MAP 2302",name:"Differential Equations",credits:3,category:"math"},{code:"MAS 3114",name:"Computational Linear Algebra",credits:3,category:"core"},{code:"MAD 2104",name:"Discrete Mathematics 1",credits:3,category:"core"},{code:"MAS 4105",name:"Linear Algebra 1",credits:4,category:"core"},{code:"MAA 4211",name:"Advanced Calculus 1",credits:4,category:"core"},{code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"},{code:"ENC 1102",name:"Composition 2",credits:3,category:"gen_ed"},
+           {code:"MAS 3105",name:"Linear Algebra",credits:3,category:"math"},
+           {code:"MAS 3106",name:"Linear Algebra II",credits:3,category:"math"},
+           {code:"MAA 4226",name:"Advanced Calculus I",credits:3,category:"math"},
+           {code:"MAA 4227",name:"Advanced Calculus II",credits:3,category:"math"},
+           {code:"MAS 4214",name:"Number Theory",credits:3,category:"math"},
+           {code:"MAS 4203",name:"Introduction to Abstract Algebra",credits:3,category:"math"},
+           {code:"STA 4321",name:"Mathematical Statistics I",credits:3,category:"math"}],
    model_plan:[{semester:1,courses:["ENC 1101","MAC 2311","MAD 2104"],credits:10},{semester:2,courses:["ENC 1102","MAC 2312","MAS 3114"],credits:10},{semester:3,courses:["MAC 2313","MAP 2302","Elective"],credits:11},{semester:4,courses:["MAS 4105","MAA 4211","Elective"],credits:11}]},
   {id:"statistics",name:"Statistics",degree:"B.S.",college:"College of Liberal Arts & Sciences",total_credits:120,min_gpa:2.0,
    critical_tracking:{min_gpa:2.0,courses:[{code:"MAC 2311",name:"Calculus 1",credits:4,required_by_semester:1},{code:"STA 2023",name:"Statistics 1",credits:3,required_by_semester:2},{code:"STA 3024",name:"Statistics 2",credits:3,required_by_semester:3}]},
-   required_courses:[{code:"MAC 2311",name:"Calculus 1",credits:4,category:"math"},{code:"MAC 2312",name:"Calculus 2",credits:4,category:"math"},{code:"STA 2023",name:"Statistics 1",credits:3,category:"core"},{code:"STA 3024",name:"Statistics 2",credits:3,category:"core"},{code:"STA 4210",name:"Regression Analysis",credits:3,category:"core"},{code:"STA 4321",name:"Mathematical Statistics 1",credits:3,category:"core"},{code:"COP 3502C",name:"CS 1",credits:3,category:"core"},{code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"},{code:"ENC 1102",name:"Composition 2",credits:3,category:"gen_ed"}],
+   required_courses:[{code:"MAC 2311",name:"Calculus 1",credits:4,category:"math"},{code:"MAC 2312",name:"Calculus 2",credits:4,category:"math"},{code:"STA 2023",name:"Statistics 1",credits:3,category:"core"},{code:"STA 3024",name:"Statistics 2",credits:3,category:"core"},{code:"STA 4210",name:"Regression Analysis",credits:3,category:"core"},{code:"STA 4321",name:"Mathematical Statistics 1",credits:3,category:"core"},{code:"COP 3502C",name:"CS 1",credits:3,category:"core"},{code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"},{code:"ENC 1102",name:"Composition 2",credits:3,category:"gen_ed"},
+           {code:"STA 4322",name:"Mathematical Statistics II",credits:3,category:"math"},
+           {code:"STA 4504",name:"Categorical Data Analysis",credits:3,category:"core"},
+           {code:"STA 4034",name:"Statistical Computing",credits:3,category:"core"},
+           {code:"STA 4853",name:"Time Series Analysis",credits:3,category:"core"},
+           {code:"MAP 2302",name:"Differential Equations",credits:3,category:"math"},
+           {code:"MAS 3105",name:"Linear Algebra",credits:3,category:"math"},
+           {code:"AMH 2020",name:"US History Since 1877",credits:3,category:"gen_ed"}],
    model_plan:[{semester:1,courses:["ENC 1101","MAC 2311","STA 2023"],credits:10},{semester:2,courses:["ENC 1102","MAC 2312","STA 3024"],credits:10},{semester:3,courses:["COP 3502C","STA 4210","Elective"],credits:9},{semester:4,courses:["STA 4321","Elective","Elective"],credits:9}]},
   {id:"data_science",name:"Data Science",degree:"B.S.",college:"College of Liberal Arts & Sciences",total_credits:120,min_gpa:2.0,
    critical_tracking:{min_gpa:2.0,courses:[{code:"MAC 2311",name:"Calculus 1",credits:4,required_by_semester:2},{code:"COP 3502C",name:"CS 1",credits:3,required_by_semester:2},{code:"STA 2023",name:"Statistics 1",credits:3,required_by_semester:3}]},
-   required_courses:[{code:"MAC 2311",name:"Calculus 1",credits:4,category:"math"},{code:"MAC 2312",name:"Calculus 2",credits:4,category:"math"},{code:"STA 2023",name:"Statistics 1",credits:3,category:"core"},{code:"STA 4210",name:"Regression Analysis",credits:3,category:"core"},{code:"COP 3502C",name:"CS 1",credits:3,category:"core"},{code:"COP 3503C",name:"CS 2",credits:3,category:"core"},{code:"COP 4530",name:"Data Structures",credits:3,category:"core"},{code:"CAP 4630",name:"Artificial Intelligence",credits:3,category:"core"},{code:"CIS 4301",name:"Information & Database Systems",credits:3,category:"core"},{code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"},{code:"ENC 1102",name:"Composition 2",credits:3,category:"gen_ed"}],
+   required_courses:[{code:"MAC 2311",name:"Calculus 1",credits:4,category:"math"},{code:"MAC 2312",name:"Calculus 2",credits:4,category:"math"},{code:"STA 2023",name:"Statistics 1",credits:3,category:"core"},{code:"STA 4210",name:"Regression Analysis",credits:3,category:"core"},{code:"COP 3502C",name:"CS 1",credits:3,category:"core"},{code:"COP 3503C",name:"CS 2",credits:3,category:"core"},{code:"COP 4530",name:"Data Structures",credits:3,category:"core"},{code:"CAP 4630",name:"Artificial Intelligence",credits:3,category:"core"},{code:"CIS 4301",name:"Information & Database Systems",credits:3,category:"core"},{code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"},{code:"ENC 1102",name:"Composition 2",credits:3,category:"gen_ed"},
+           {code:"CAP 4770",name:"Data Mining",credits:3,category:"core"},
+           {code:"COP 4710",name:"Database Systems",credits:3,category:"core"},
+           {code:"CAP 4612",name:"Machine Learning",credits:3,category:"core"},
+           {code:"CDA 4621",name:"Big Data Analytics",credits:3,category:"core"},
+           {code:"STA 4504",name:"Categorical Data Analysis",credits:3,category:"core"},
+           {code:"MAP 2302",name:"Differential Equations",credits:3,category:"math"},
+           {code:"MAS 3105",name:"Linear Algebra",credits:3,category:"math"},
+           {code:"AMH 2020",name:"US History Since 1877",credits:3,category:"gen_ed"}],
    model_plan:[{semester:1,courses:["ENC 1101","MAC 2311","COP 3502C"],credits:10},{semester:2,courses:["ENC 1102","MAC 2312","STA 2023","COP 3503C"],credits:13},{semester:3,courses:["COP 4530","STA 4210","Elective"],credits:9},{semester:4,courses:["CAP 4630","CIS 4301","Elective"],credits:9}]},
   {id:"economics",name:"Economics",degree:"B.S.",college:"College of Liberal Arts & Sciences",total_credits:120,min_gpa:2.0,
    critical_tracking:{min_gpa:2.0,courses:[{code:"ECO 2013",name:"Macroeconomics",credits:3,required_by_semester:2},{code:"ECO 2023",name:"Microeconomics",credits:3,required_by_semester:2},{code:"STA 2023",name:"Statistics 1",credits:3,required_by_semester:3}]},
-   required_courses:[{code:"ECO 2013",name:"Macroeconomics",credits:3,category:"core"},{code:"ECO 2023",name:"Microeconomics",credits:3,category:"core"},{code:"STA 2023",name:"Statistics 1",credits:3,category:"core"},{code:"ECO 3101",name:"Intermediate Microeconomic Theory",credits:3,category:"core"},{code:"ECO 3203",name:"Intermediate Macroeconomic Theory",credits:3,category:"core"},{code:"MAC 2233",name:"Survey of Calculus",credits:3,category:"math"},{code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"},{code:"ENC 1102",name:"Composition 2",credits:3,category:"gen_ed"}],
+   required_courses:[{code:"ECO 2013",name:"Macroeconomics",credits:3,category:"core"},{code:"ECO 2023",name:"Microeconomics",credits:3,category:"core"},{code:"STA 2023",name:"Statistics 1",credits:3,category:"core"},{code:"ECO 3101",name:"Intermediate Microeconomic Theory",credits:3,category:"core"},{code:"ECO 3203",name:"Intermediate Macroeconomic Theory",credits:3,category:"core"},{code:"MAC 2233",name:"Survey of Calculus",credits:3,category:"math"},{code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"},{code:"ENC 1102",name:"Composition 2",credits:3,category:"gen_ed"},
+           {code:"ECO 3430",name:"Money, Banking & Financial Markets",credits:3,category:"core"},
+           {code:"ECO 4401",name:"Economics of Public Policy",credits:3,category:"core"},
+           {code:"ECO 4305",name:"Mathematical Economics",credits:3,category:"core"},
+           {code:"ECO 4701",name:"International Economics",credits:3,category:"core"},
+           {code:"ECS 3013",name:"Statistics for Economics",credits:3,category:"math"},
+           {code:"AMH 2020",name:"US History Since 1877",credits:3,category:"gen_ed"},
+           {code:"POS 2041",name:"American National Government",credits:3,category:"gen_ed"}],
    model_plan:[{semester:1,courses:["ENC 1101","ECO 2013","MAC 2233"],credits:9},{semester:2,courses:["ENC 1102","ECO 2023","STA 2023"],credits:9},{semester:3,courses:["ECO 3101","ECO 3203","Elective"],credits:9},{semester:4,courses:["Elective","Elective","Elective"],credits:9}]},
   {id:"biology",name:"Biology",degree:"B.S.",college:"College of Liberal Arts & Sciences",total_credits:120,min_gpa:2.0,
    critical_tracking:{min_gpa:2.0,courses:[{code:"BSC 2010C",name:"Biology 1",credits:3,required_by_semester:2},{code:"CHM 2045",name:"General Chemistry 1",credits:3,required_by_semester:2}]},
-   required_courses:[{code:"BSC 2010C",name:"Biology 1",credits:3,category:"core"},{code:"BSC 2011C",name:"Biology 2",credits:3,category:"core"},{code:"CHM 2045",name:"General Chemistry 1",credits:3,category:"science"},{code:"CHM 2046",name:"General Chemistry 2",credits:3,category:"science"},{code:"CHM 2210",name:"Organic Chemistry 1",credits:3,category:"science"},{code:"MAC 2311",name:"Calculus 1",credits:4,category:"math"},{code:"STA 2023",name:"Statistics 1",credits:3,category:"math"},{code:"PCB 3023",name:"Cell Biology",credits:3,category:"core"},{code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"},{code:"ENC 1102",name:"Composition 2",credits:3,category:"gen_ed"}],
+   required_courses:[{code:"BSC 2010C",name:"Biology 1",credits:3,category:"core"},{code:"BSC 2011C",name:"Biology 2",credits:3,category:"core"},{code:"CHM 2045",name:"General Chemistry 1",credits:3,category:"science"},{code:"CHM 2046",name:"General Chemistry 2",credits:3,category:"science"},{code:"CHM 2210",name:"Organic Chemistry 1",credits:3,category:"science"},{code:"MAC 2311",name:"Calculus 1",credits:4,category:"math"},{code:"STA 2023",name:"Statistics 1",credits:3,category:"math"},{code:"PCB 3023",name:"Cell Biology",credits:3,category:"core"},{code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"},{code:"ENC 1102",name:"Composition 2",credits:3,category:"gen_ed"},
+           {code:"BSC 2011",name:"Biology II",credits:4,category:"science"},
+           {code:"BSC 2011L",name:"Biology II Lab",credits:1,category:"science"},
+           {code:"MCB 3020",name:"General Microbiology",credits:3,category:"science"},
+           {code:"BOT 3015C",name:"Plant Biology",credits:4,category:"science"},
+           {code:"ZOO 3713C",name:"Cell Biology",credits:4,category:"science"},
+           {code:"BSC 4930",name:"Senior Seminar in Biology",credits:1,category:"core"},
+           {code:"CHM 2046L",name:"General Chemistry Lab II",credits:1,category:"science"},
+           {code:"BSC 4052",name:"Bioinformatics",credits:3,category:"core"}],
    model_plan:[{semester:1,courses:["ENC 1101","BSC 2010C","CHM 2045"],credits:9},{semester:2,courses:["ENC 1102","BSC 2011C","CHM 2046"],credits:9},{semester:3,courses:["MAC 2311","CHM 2210","STA 2023"],credits:10},{semester:4,courses:["PCB 3023","Elective","Elective"],credits:9}]},
   {id:"psychology",name:"Psychology",degree:"B.S.",college:"College of Liberal Arts & Sciences",total_credits:120,min_gpa:2.0,
    critical_tracking:{min_gpa:2.0,courses:[{code:"PSY 2012",name:"General Psychology",credits:3,required_by_semester:2},{code:"STA 2023",name:"Statistics 1",credits:3,required_by_semester:3}]},
-   required_courses:[{code:"PSY 2012",name:"General Psychology",credits:3,category:"core"},{code:"STA 2023",name:"Statistics 1",credits:3,category:"core"},{code:"PSY 3213C",name:"Research Methods",credits:3,category:"core"},{code:"PSY 3604",name:"Brain and Behavior",credits:3,category:"core"},{code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"},{code:"ENC 1102",name:"Composition 2",credits:3,category:"gen_ed"}],
+   required_courses:[{code:"PSY 2012",name:"General Psychology",credits:3,category:"core"},{code:"STA 2023",name:"Statistics 1",credits:3,category:"core"},{code:"PSY 3213C",name:"Research Methods",credits:3,category:"core"},{code:"PSY 3604",name:"Brain and Behavior",credits:3,category:"core"},{code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"},{code:"ENC 1102",name:"Composition 2",credits:3,category:"gen_ed"},
+           {code:"PPE 3003",name:"Physiological Psychology",credits:3,category:"core"},
+           {code:"PPE 4004",name:"Sensation & Perception",credits:3,category:"core"},
+           {code:"DEP 3053",name:"Developmental Psychology",credits:3,category:"core"},
+           {code:"SOP 3004",name:"Social Psychology",credits:3,category:"core"},
+           {code:"CLP 3301",name:"Abnormal Psychology",credits:3,category:"core"},
+           {code:"EXP 4204",name:"Cognitive Psychology",credits:3,category:"core"},
+           {code:"INP 4004",name:"Industrial/Organizational Psychology",credits:3,category:"elective"},
+           {code:"BSC 2010",name:"Biology I",credits:4,category:"science"},
+           {code:"CHM 2045",name:"General Chemistry I",credits:3,category:"science"},
+           {code:"PSY 4930",name:"Senior Seminar",credits:3,category:"core"}],
    model_plan:[{semester:1,courses:["ENC 1101","PSY 2012"],credits:6},{semester:2,courses:["ENC 1102","STA 2023"],credits:6},{semester:3,courses:["PSY 3213C","PSY 3604"],credits:6}]},
   // ── JOURNALISM & COMMUNICATIONS
   {id:"journalism",name:"Journalism",degree:"B.S.J.C.",college:"College of Journalism & Communications",total_credits:120,min_gpa:2.0,
    critical_tracking:{min_gpa:2.0,courses:[{code:"MMC 1009",name:"Introduction to Media",credits:3,required_by_semester:2},{code:"JOU 3101",name:"News Reporting",credits:3,required_by_semester:3}]},
-   required_courses:[{code:"MMC 1009",name:"Introduction to Media",credits:3,category:"core"},{code:"JOU 3101",name:"News Reporting",credits:3,category:"core"},{code:"JOU 3301",name:"News Writing",credits:3,category:"core"},{code:"JOU 4204",name:"Multimedia Journalism",credits:3,category:"core"},{code:"STA 2023",name:"Statistics 1",credits:3,category:"math"},{code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"},{code:"ENC 1102",name:"Composition 2",credits:3,category:"gen_ed"}],
+   required_courses:[{code:"MMC 1009",name:"Introduction to Media",credits:3,category:"core"},{code:"JOU 3101",name:"News Reporting",credits:3,category:"core"},{code:"JOU 3301",name:"News Writing",credits:3,category:"core"},{code:"JOU 4204",name:"Multimedia Journalism",credits:3,category:"core"},{code:"STA 2023",name:"Statistics 1",credits:3,category:"math"},{code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"},{code:"ENC 1102",name:"Composition 2",credits:3,category:"gen_ed"},
+           {code:"JOU 4101",name:"Advanced Reporting",credits:3,category:"core"},
+           {code:"MMC 4300",name:"Media Law & Ethics",credits:3,category:"core"},
+           {code:"JOU 4301",name:"Science Journalism",credits:3,category:"elective"},
+           {code:"MMC 4303",name:"Media Management",credits:3,category:"elective"},
+           {code:"JOU 4205",name:"Feature & Magazine Writing",credits:3,category:"core"},
+           {code:"JOU 4939",name:"Journalism Internship",credits:3,category:"core"},
+           {code:"RTV 3310",name:"Video Production",credits:3,category:"core"},
+           {code:"ADV 3003",name:"Advertising Copywriting",credits:3,category:"elective"},
+           {code:"PUR 3000",name:"Principles of Public Relations",credits:3,category:"core"},
+           {code:"MMC 3260",name:"Visual Communication",credits:3,category:"core"},
+           {code:"MMC 2100",name:"Writing for Mass Media",credits:3,category:"core"},
+           {code:"JOU 3003",name:"News Reporting I",credits:3,category:"core"}],
    model_plan:[{semester:1,courses:["ENC 1101","MMC 1009","Elective"],credits:9},{semester:2,courses:["ENC 1102","JOU 3101","STA 2023"],credits:9},{semester:3,courses:["JOU 3301","JOU 4204","Elective"],credits:9},{semester:4,courses:["Elective","Elective","Elective"],credits:9}]},
   {id:"telecommunication",name:"Telecommunication",degree:"B.S.T.",college:"College of Journalism & Communications",total_credits:120,min_gpa:2.0,
    critical_tracking:{min_gpa:2.0,courses:[{code:"MMC 1009",name:"Introduction to Media",credits:3,required_by_semester:2},{code:"RTV 3305",name:"Electronic Media",credits:3,required_by_semester:3}]},
-   required_courses:[{code:"MMC 1009",name:"Introduction to Media",credits:3,category:"core"},{code:"RTV 3305",name:"Electronic Media",credits:3,category:"core"},{code:"RTV 4446",name:"Digital Media Strategy",credits:3,category:"core"},{code:"STA 2023",name:"Statistics 1",credits:3,category:"math"},{code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"},{code:"ENC 1102",name:"Composition 2",credits:3,category:"gen_ed"}],
+   required_courses:[{code:"MMC 1009",name:"Introduction to Media",credits:3,category:"core"},{code:"RTV 3305",name:"Electronic Media",credits:3,category:"core"},{code:"RTV 4446",name:"Digital Media Strategy",credits:3,category:"core"},{code:"STA 2023",name:"Statistics 1",credits:3,category:"math"},{code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"},{code:"ENC 1102",name:"Composition 2",credits:3,category:"gen_ed"},
+           {code:"RTV 3001",name:"Introduction to RTV",credits:3,category:"core"},
+           {code:"RTV 3310",name:"Video Production",credits:3,category:"core"},
+           {code:"RTV 4305",name:"Media Analytics",credits:3,category:"core"},
+           {code:"RTV 4520",name:"Broadcast Sales & Management",credits:3,category:"core"},
+           {code:"MMC 4300",name:"Media Law & Ethics",credits:3,category:"core"},
+           {code:"RTV 4930",name:"Telecommunication Internship",credits:3,category:"core"},
+           {code:"RTV 4325",name:"Multimedia Reporting",credits:3,category:"core"},
+           {code:"MMC 2100",name:"Writing for Mass Media",credits:3,category:"core"},
+           {code:"ADV 3001",name:"Survey of Advertising",credits:3,category:"elective"},
+           {code:"PUR 3000",name:"Public Relations Principles",credits:3,category:"core"},
+           {code:"RTV 4405",name:"Electronic Media Programming",credits:3,category:"core"},
+           {code:"MMC 3260",name:"Visual Communication",credits:3,category:"core"},
+           {code:"RTV 3401",name:"Audio Production",credits:3,category:"core"}],
    model_plan:[{semester:1,courses:["ENC 1101","MMC 1009","Elective"],credits:9},{semester:2,courses:["ENC 1102","RTV 3305","STA 2023"],credits:9},{semester:3,courses:["RTV 4446","Elective","Elective"],credits:9},{semester:4,courses:["Elective","Elective","Elective"],credits:9}]},
   // ── HEALTH
   {id:"health_science",name:"Health Science",degree:"B.H.S.",college:"College of Public Health",total_credits:120,min_gpa:2.5,
    critical_tracking:{min_gpa:2.5,courses:[{code:"HSC 3537",name:"Pathophysiology 1",credits:3,required_by_semester:3},{code:"STA 2023",name:"Statistics 1",credits:3,required_by_semester:2}]},
-   required_courses:[{code:"HSC 3537",name:"Pathophysiology 1",credits:3,category:"core"},{code:"HSC 4555",name:"Community Health",credits:3,category:"core"},{code:"HCA 3002",name:"Intro to Health Care Administration",credits:3,category:"core"},{code:"STA 2023",name:"Statistics 1",credits:3,category:"core"},{code:"BSC 2010C",name:"Biology 1",credits:3,category:"science"},{code:"CHM 2045",name:"General Chemistry 1",credits:3,category:"science"},{code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"},{code:"ENC 1102",name:"Composition 2",credits:3,category:"gen_ed"}],
+   required_courses:[{code:"HSC 3537",name:"Pathophysiology 1",credits:3,category:"core"},{code:"HSC 4555",name:"Community Health",credits:3,category:"core"},{code:"HCA 3002",name:"Intro to Health Care Administration",credits:3,category:"core"},{code:"STA 2023",name:"Statistics 1",credits:3,category:"core"},{code:"BSC 2010C",name:"Biology 1",credits:3,category:"science"},{code:"CHM 2045",name:"General Chemistry 1",credits:3,category:"science"},{code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"},{code:"ENC 1102",name:"Composition 2",credits:3,category:"gen_ed"},
+           {code:"HSC 4558",name:"Health Promotion",credits:3,category:"core"},
+           {code:"HSC 4610",name:"Environmental Health",credits:3,category:"core"},
+           {code:"HSC 3454",name:"Community Health",credits:3,category:"core"},
+           {code:"HSC 3500",name:"Health Care Management",credits:3,category:"core"},
+           {code:"HSC 4730",name:"Epidemiology",credits:3,category:"core"},
+           {code:"BSC 2010",name:"Biology I",credits:4,category:"science"},
+           {code:"PSY 2012",name:"General Psychology",credits:3,category:"gen_ed"},
+           {code:"AMH 2020",name:"US History Since 1877",credits:3,category:"gen_ed"},
+           {code:"POS 2041",name:"American National Government",credits:3,category:"gen_ed"},
+           {code:"SPC 1608",name:"Oral Communication",credits:3,category:"gen_ed"}],
    model_plan:[{semester:1,courses:["ENC 1101","BSC 2010C","CHM 2045"],credits:9},{semester:2,courses:["ENC 1102","STA 2023","HCA 3002"],credits:9},{semester:3,courses:["HSC 3537","HSC 4555","Elective"],credits:9},{semester:4,courses:["Elective","Elective","Elective"],credits:9}]},
   {id:"digital_arts_sciences",name:"Digital Arts & Sciences",degree:"B.S.",college:"College of Liberal Arts & Sciences",total_credits:120,min_gpa:2.0,
    critical_tracking:{min_gpa:2.0,courses:[{code:"DIG 2000",name:"Intro to Digital Studies",credits:3,required_by_semester:2},{code:"COP 3502C",name:"CS 1",credits:3,required_by_semester:3}]},
-   required_courses:[{code:"DIG 2000",name:"Intro to Digital Studies",credits:3,category:"core"},{code:"COP 3502C",name:"CS 1",credits:3,category:"core"},{code:"DIG 3134",name:"Authoring for New Media",credits:3,category:"core"},{code:"DIG 4401",name:"Digital Humanities",credits:3,category:"core"},{code:"ART 2203C",name:"Design 1",credits:3,category:"core"},{code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"},{code:"ENC 1102",name:"Composition 2",credits:3,category:"gen_ed"}],
+   required_courses:[{code:"DIG 2000",name:"Intro to Digital Studies",credits:3,category:"core"},{code:"COP 3502C",name:"CS 1",credits:3,category:"core"},{code:"DIG 3134",name:"Authoring for New Media",credits:3,category:"core"},{code:"DIG 4401",name:"Digital Humanities",credits:3,category:"core"},{code:"ART 2203C",name:"Design 1",credits:3,category:"core"},{code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"},{code:"ENC 1102",name:"Composition 2",credits:3,category:"gen_ed"},
+           {code:"DIG 3503",name:"Human Computer Interaction",credits:3,category:"core"},
+           {code:"DIG 4136",name:"Game Development",credits:3,category:"core"},
+           {code:"DIG 4563",name:"3D Animation",credits:3,category:"core"},
+           {code:"DIG 4552",name:"Virtual Reality & Simulation",credits:3,category:"core"},
+           {code:"DIG 3930",name:"Digital Arts Practicum",credits:3,category:"core"},
+           {code:"DIG 4105",name:"Interactive Media",credits:3,category:"core"},
+           {code:"DIG 4503",name:"UX Design",credits:3,category:"core"},
+           {code:"DIG 3251",name:"Motion Graphics",credits:3,category:"elective"},
+           {code:"ART 3400C",name:"Digital Photography",credits:3,category:"elective"},
+           {code:"DIG 4455",name:"Emerging Technology Studio",credits:3,category:"elective"}],
    model_plan:[{semester:1,courses:["ENC 1101","DIG 2000","ART 2203C"],credits:9},{semester:2,courses:["ENC 1102","COP 3502C","DIG 3134"],credits:9},{semester:3,courses:["DIG 4401","Elective","Elective"],credits:9},{semester:4,courses:["Elective","Elective","Elective"],credits:9}]}
 ];
 
@@ -1681,6 +2182,290 @@ function toggleAudio() {
 //  INIT
 // ═══════════════════════════════════════════════════════════════════
 loadData().then(()=>{ renderAdvisorTable(); });
+
+
+// ── Prerequisite Map ──────────────────────────────────────────────
+const PREREQ_MAP = {
+  'MAC2312': ['MAC2311'], 'MAC2313': ['MAC2312'],
+  'COP3503C': ['COP3502C'],
+  'COP3530': ['COP3502C','COP3503C'],
+  'COP4600': ['COP3530'], 'COP4020': ['COP3530'],
+  'CDA3101': ['COP3502C'],
+  'EEL4712C': ['EEL3701C'],
+  'EEL3112': ['EEL3111C'], 'EEL4309': ['EEL3112'],
+  'ACG2071': ['ACG2021'],
+  'ACG3101': ['ACG2021','ACG2071'], 'ACG3111': ['ACG3101'],
+  'ACG3341': ['ACG2071'], 'TAX4001': ['ACG3101'],
+  'FIN4414': ['FIN3403'],
+  'MAR4156': ['MAR3023'], 'MAR4418': ['MAR3023'],
+  'MAN4301': ['MAN3025'],
+  'PHY2049C': ['PHY2048C'],
+  'CHM2046': ['CHM2045'],
+  'CES3202': ['CES3102'],
+  'EEL3112': ['EEL3111C'],
+  'BME4402': ['BME3401C'],
+};
+
+function getPrereqWarning(code, done) {
+  const key = normalizeCode(code);
+  const prereqs = PREREQ_MAP[key] || [];
+  const missing = prereqs.filter(p => !done.has(p));
+  if (missing.length === 0) return '';
+  return `<span class="prereq-chain">⛓ Blocked — needs: ${missing.join(', ')}</span>`;
+}
+
+// ── Category config ───────────────────────────────────────────────
+const CAT_META = {
+  math:    { label: '📐 Mathematics',         order: 1 },
+  science: { label: '🔬 Sciences',            order: 2 },
+  core:    { label: '🎓 Core Requirements',   order: 3 },
+  gen_ed:  { label: '📖 General Education',   order: 4 },
+  elective:{ label: '🗂️ Electives',           order: 5 },
+  other:   { label: '📦 Other',               order: 6 },
+};
+
+function renderCourseStatusGrouped(courseStatus, done) {
+  // Group by category
+  const groups = {};
+  courseStatus.forEach(c => {
+    const cat = c.category || 'other';
+    if (!groups[cat]) groups[cat] = [];
+    groups[cat].push(c);
+  });
+
+  const orderedCats = Object.keys(groups).sort((a,b) =>
+    (CAT_META[a]?.order||9) - (CAT_META[b]?.order||9));
+
+  return orderedCats.map(cat => {
+    const courses = groups[cat];
+    const total = courses.length;
+    const completed = courses.filter(c=>c.completed).length;
+    const pct = Math.round((completed/total)*100);
+    const label = CAT_META[cat]?.label || cat;
+    const rows = courses.map(c => {
+      const prereqWarn = !c.completed ? getPrereqWarning(c.code, done) : '';
+      return `<li>
+        <span class="ci ${c.completed?'ci-done':'ci-missing'}">${c.completed?'✅':'❌'}</span>
+        <div>
+          <span class="course-code">${c.code}</span>
+          <span style="color:#555"> ${c.name}</span>
+          ${prereqWarn}
+        </div>
+        <span class="course-credits">${c.credits}cr · <span class="badge ${c.completed?'badge-green':'badge-red'}">${c.completed?'Done':'Needed'}</span></span>
+      </li>`;
+    }).join('');
+
+    return `<div class="course-cat-group">
+      <div class="course-cat-header">
+        <div class="course-cat-label">${label}</div>
+        <div class="cat-prog-wrap">
+          <div class="cat-prog-bar"><div class="cat-prog-fill" style="width:${pct}%"></div></div>
+          <span class="cat-prog-txt">${completed}/${total}</span>
+        </div>
+      </div>
+      <ul class="course-list">${rows}</ul>
+    </div>`;
+  }).join('');
+}
+
+function renderGpaGauge(gpa, minGpa) {
+  if (gpa <= 0) return '';
+  const max = 4.0;
+  const fillPct = Math.min(100, (gpa / max) * 100);
+  const minPct  = (minGpa / max) * 100;
+  const cls = gpa >= minGpa ? 'good' : gpa >= minGpa - 0.25 ? 'warn' : 'danger';
+  const status = gpa >= minGpa
+    ? `✅ Above minimum (${minGpa.toFixed(1)} required)`
+    : `⚠️ Below minimum — ${(minGpa - gpa).toFixed(2)} pts needed`;
+  return `<div class="gpa-gauge-wrap">
+    <div class="gpa-gauge-label">
+      <span>GPA Standing</span>
+      <span style="color:${cls==='good'?'#10b981':cls==='warn'?'#d97706':'#dc2626'}">${status}</span>
+    </div>
+    <div class="gpa-bar-track">
+      <div class="gpa-bar-fill ${cls}" style="width:${fillPct}%"></div>
+      <div class="gpa-min-marker" style="left:${minPct}%" title="Min GPA: ${minGpa}"></div>
+    </div>
+    <div class="gpa-gauge-vals">
+      <span>0.0</span>
+      <span style="margin-left:${minPct}%;transform:translateX(-50%)">▲ Min ${minGpa.toFixed(1)}</span>
+      <span>4.0</span>
+    </div>
+  </div>`;
+}
+
+function renderCtUpgraded(ctStatus, estimatedSemester, majorMinGpa, gpa) {
+  if (ctStatus.length === 0)
+    return '<li style="color:#888">No critical-tracking data for this major.</li>';
+
+  const overdue=[], upcoming=[], done=[];
+  ctStatus.forEach(c => {
+    if (c.completed) { done.push(c); return; }
+    const sem = c.required_by_semester || 99;
+    if (estimatedSemester > sem) overdue.push({...c, sem});
+    else upcoming.push({...c, sem});
+  });
+
+  const renderRow = (c, urgencyClass, urgencyLabel, semLabel) => `
+    <li>
+      <span class="ci ${c.completed?'ci-done':urgencyClass==='overdue'?'ci-warn':'ci-missing'}">${c.completed?'✅':urgencyClass==='overdue'?'🔴':'⚠️'}</span>
+      <div>
+        <span class="course-code">${c.code}</span>
+        <span style="color:#555"> ${c.name}</span>
+        ${semLabel ? `<div style="font-size:.72rem;color:#888;margin-top:.1rem">${semLabel}</div>` : ''}
+      </div>
+      <span class="${urgencyClass==='done'?'urgency-clear':urgencyClass==='overdue'?'urgency-overdue':'urgency-upcoming'}">${urgencyLabel}</span>
+    </li>`;
+
+  let html = '';
+  if (overdue.length) {
+    html += `<div class="ct-overdue-section">
+      <div class="ct-section-label overdue">🔴 Overdue — Immediate Action Required (${overdue.length})</div>
+      <ul class="course-list">${overdue.map(c=>renderRow(c,'overdue','OVERDUE',`Required by Semester ${c.sem} · You are at Semester ${estimatedSemester}`)).join('')}</ul>
+    </div>`;
+  }
+  if (upcoming.length) {
+    html += `<div class="ct-upcoming-section">
+      <div class="ct-section-label upcoming">🟡 Upcoming — Plan Ahead (${upcoming.length})</div>
+      <ul class="course-list">${upcoming.map(c=>renderRow(c,'upcoming','DUE SEM '+c.sem,`Complete by Semester ${c.sem}`)).join('')}</ul>
+    </div>`;
+  }
+  if (done.length) {
+    html += `<div class="ct-done-section">
+      <div class="ct-section-label done">✅ Completed (${done.length})</div>
+      <ul class="course-list">${done.map(c=>renderRow(c,'done','Done','')).join('')}</ul>
+    </div>`;
+  }
+  return html;
+}
+
+
+// ── Pensum Quick-Add ──────────────────────────────────────────────
+function renderPensum(majorId) {
+  const area = document.getElementById('pensum-chips-area');
+  if (!area) return;
+  if (!majorId) {
+    area.innerHTML = '<div class="pensum-placeholder">← Select your major to see all curriculum courses here</div>';
+    return;
+  }
+  const major = DB.majors.find(m => m.id === majorId);
+  if (!major) return;
+
+  // Merge required_courses + any CT-only courses, deduplicate
+  const allCourses = [...(major.required_courses||[])];
+  const reqCodes = new Set(allCourses.map(c=>normalizeCode(c.code)));
+  (major.critical_tracking?.courses||[]).forEach(c => {
+    if (!reqCodes.has(normalizeCode(c.code))) allCourses.push({...c, category:'ct_only'});
+  });
+
+  // Group by category
+  const catOrder = ['math','science','core','gen_ed','ct_only','elective','other'];
+  const catLabel = {
+    math:'📐 Mathematics', science:'🔬 Sciences',
+    core:'🎓 Core Requirements', gen_ed:'📖 General Education',
+    ct_only:'⚠️ Critical Tracking', elective:'🗂️ Electives', other:'📦 Other'
+  };
+  const groups = {};
+  allCourses.forEach(c => {
+    const cat = c.category || 'other';
+    if (!groups[cat]) groups[cat] = [];
+    groups[cat].push(c);
+  });
+
+  const allCodes = allCourses.map(c=>c.code);
+
+  let html = `<div class="pensum-major-label">
+    <span>📋 ${major.name} — ${allCourses.length} courses · ${major.total_credits} total credits</span>
+    <div style="display:flex;gap:5px;align-items:center">
+      <button class="add-all-btn" onclick="addAllPensum(${JSON.stringify(allCodes)})">+ Add All</button>
+      <button class="add-all-btn" style="background:#fff;border:1.5px solid var(--dp);color:var(--dp-dk)"
+        onclick="toggleAddCourseInput()">✏️ Add a Course</button>
+    </div>
+  </div>
+  <div id="add-course-row" style="display:none;margin-bottom:6px">
+    <div style="display:flex;gap:6px;align-items:center">
+      <input id="add-course-input" type="text" placeholder="e.g. ENC 1101"
+        style="flex:1;padding:.3rem .6rem;font-size:.78rem;border:1.5px solid var(--dp);
+               border-radius:10px;outline:none;font-family:inherit;text-transform:uppercase"
+        onkeydown="if(event.key==='Enter')addCustomCourse()"
+        oninput="this.value=this.value.toUpperCase()">
+      <button class="add-all-btn" onclick="addCustomCourse()">Add</button>
+    </div>
+  </div>`;
+
+  // Legend row (compact, no headers)
+  const legendEntries = catOrder.filter(c=>groups[c]).map(cat => {
+    const colors = {math:'#818CF8',science:'#34D399',core:'#F59E0B',
+      gen_ed:'#60A5FA',ct_only:'#F87171',elective:'#A78BFA',other:'#CBD5E1'};
+    const short = {math:'Math',science:'Sci',core:'Core',gen_ed:'GenEd',
+      ct_only:'CT',elective:'Elec',other:'Other'};
+    return `<span style="font-size:.62rem;color:#888;display:inline-flex;align-items:center;gap:.2rem">
+      <span style="width:8px;height:8px;border-radius:50%;background:${colors[cat]};display:inline-block"></span>${short[cat]}
+    </span>`;
+  }).join('');
+  if (legendEntries) html += `<div style="display:flex;gap:.55rem;flex-wrap:wrap;margin-bottom:.45rem">${legendEntries}</div>`;
+
+  // All chips flat, left-border color shows category
+  const allChips = catOrder.flatMap(cat => (groups[cat]||[]).map(c => {
+    const n = normalizeCode(c.code);
+    const added = completedCourses.has(n);
+    return `<span class="pensum-chip ${added?'added':''}" data-cat="${cat}"
+      data-code="${c.code}" data-norm="${n}"
+      id="chip-${n}"
+      onclick="togglePensumCourse('${c.code}','${n}')"
+      title="${c.name} · ${c.credits} cr">
+      ${c.code}<span style="opacity:.5;font-size:.6rem;margin-left:.2rem">${c.credits}cr</span>
+    </span>`;
+  }));
+  html += `<div class="pensum-chips">${allChips.join('')}</div>`;
+
+  area.innerHTML = html;
+}
+
+function togglePensumCourse(code, normCode) {
+  const chip = document.getElementById('chip-' + normCode);
+  if (completedCourses.has(normCode)) {
+    completedCourses.delete(normCode);
+    if (chip) chip.classList.remove('added');
+  } else {
+    completedCourses.add(normCode);
+    if (chip) chip.classList.add('added');
+  }
+  renderCourseTags();
+}
+
+function toggleAddCourseInput() {
+  const row = document.getElementById('add-course-row');
+  const inp = document.getElementById('add-course-input');
+  if (!row) return;
+  const showing = row.style.display !== 'none';
+  row.style.display = showing ? 'none' : 'flex';
+  if (!showing && inp) { inp.value=''; inp.focus(); }
+}
+
+function addCustomCourse() {
+  const inp = document.getElementById('add-course-input');
+  if (!inp || !inp.value.trim()) return;
+  const code = inp.value.trim().toUpperCase();
+  const norm = normalizeCode(code);
+  completedCourses.add(norm);
+  // if chip exists in pensum, mark it
+  const chip = document.getElementById('chip-' + norm);
+  if (chip) chip.classList.add('added');
+  renderCourseTags();
+  inp.value = '';
+  inp.focus();
+}
+
+function addAllPensum(codes) {
+  codes.forEach(c => {
+    const n = normalizeCode(c);
+    completedCourses.add(n);
+    const chip = document.getElementById('chip-' + n);
+    if (chip) chip.classList.add('added');
+  });
+  renderCourseTags();
+}
 
 // ── Load Method Toggle ─────────────────────────────────────────
 function setLoadMethod(method) {
