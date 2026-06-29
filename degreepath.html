@@ -1155,7 +1155,7 @@ function saveStudents() { localStorage.setItem('degreepath_students', JSON.strin
 // ═══════════════════════════════════════════════════════════════════
 //  CORE ENGINE
 // ═══════════════════════════════════════════════════════════════════
-function normalizeCode(code) { return (code||'').toUpperCase().replace(/\s+/g,' ').trim(); }
+function normalizeCode(code) { return (code||'').toUpperCase().replace(/\s+/g,'').trim(); }
 function coursePrefix(code) { const m=(code||'').match(/^([A-Z]{2,4})/); return m?m[1]:''; }
 
 // Waiver analysis: missing course is "waiveable" if student completed any same-dept course
@@ -2537,3 +2537,4 @@ function clearFile() {
 </script>
 </body>
 </html>
+ 
