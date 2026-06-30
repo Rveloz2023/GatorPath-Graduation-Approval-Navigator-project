@@ -3084,3 +3084,14 @@ function filterElectives(el, tag, majorId) {
     });
   }
   
+  // Update chip visibility based on new filter
+  document.querySelectorAll('.elec-chip[data-tag]').forEach(chip => {
+    const chipTag = chip.getAttribute('data-tag');
+    chip.style.display = (tag === 'ALL' || chipTag === tag) ? '' : 'none';
+  });
+}
+
+loadData();
+</script>
+</body>
+</html>
