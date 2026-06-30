@@ -1922,6 +1922,68 @@ function analyzeStudent() {
   setTimeout(function(){ narrateResult(narrative); }, 600);
 }
 
+function renderCourseStatusGrouped(courseStatus, doneFull) {
+  const CAT_LABEL = {
+    core:'🎓 Core Requirements', math:'📐 Math & Sciences', science:'🔬 Sciences',
+    gen_ed:'📖 General Education', upper_division:'🏅 Upper Division', elective:'📚 Electives',
+    lab:'🧪 Lab', writing:'✍️ Writing', stats:'📊 Statistics', programming:'💻 Programming'
+  };
+
+  const renderRow = (c) => {
+    const icon = c.completed ? '✅' : '⬜';
+    const badge = c.completed
+      ? '<span class="urgency-clear">Done</span>'
+      : '<span class="urgency-upcoming">Needed</span>';
+    return `<li>
+      <span class="ci ${c.completed ? 'ci-done' : 'ci-missing'}">${icon}</span>
+      <div>
+        <span class="course-code">${c.code}</span>
+        <span style="color:#555"> ${c.name}</span>
+        <span style="font-size:.7rem;color:#aaa;margin-left:.3rem">${c.credits||3} cr</span>
+      </div>
+      ${badge}
+    </li>`;
+  };
+
+  // Group by category
+  const byCategory = {};
+  courseStatus.forEach(c => {
+    const cat = c.category || 'core';
+    if (!byCategory[cat]) byCategory[cat] = { done: [], missing: [] };
+    if (c.completed) byCategory[cat].done.push(c);
+    else byCategory[cat].missing.push(c);
+  });
+
+  // Always show missing first, then done collapsed
+  const missing = courseStatus.filter(c => !c.completed);
+  const done    = courseStatus.filter(c => c.completed);
+
+  let html = '';
+  if (missing.length) {
+    // Group missing by category
+    const missingByCat = {};
+    missing.forEach(c => {
+      const cat = c.category || 'core';
+      if (!missingByCat[cat]) missingByCat[cat] = [];
+      missingByCat[cat].push(c);
+    });
+    Object.entries(missingByCat).forEach(([cat, courses]) => {
+      const label = CAT_LABEL[cat] || ('📋 ' + cat.charAt(0).toUpperCase() + cat.slice(1));
+      html += `<div class="ct-upcoming-section">
+        <div class="ct-section-label upcoming">⬜ ${label} — Still Needed (${courses.length})</div>
+        <ul class="course-list">${courses.map(c => renderRow(c)).join('')}</ul>
+      </div>`;
+    });
+  }
+  if (done.length) {
+    html += `<div class="ct-done-section">
+      <div class="ct-section-label done">✅ Completed Requirements (${done.length})</div>
+      <ul class="course-list">${done.map(c => renderRow(c)).join('')}</ul>
+    </div>`;
+  }
+  return html || '<li style="color:#888">No required courses defined for this major yet.</li>';
+}
+
 function renderStudentResults(a, totalCredits, gpa) {
   document.getElementById('stat-boxes').innerHTML = `
     <div class="stat-box"><div class="stat-value">${a.pct}%</div><div class="stat-label">Degree Complete</div></div>
