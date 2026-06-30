@@ -2430,6 +2430,10 @@ function clearStudent() {
   completedCourses.clear();
   apCourses = [];
   transferCourses = [];
+  // Remove 'added' visual state from all curriculum chips
+  document.querySelectorAll('.pensum-chip.added').forEach(chip => chip.classList.remove('added'));
+  // Reset elective filter back to ALL
+  _electiveFilterTag = 'ALL';
   renderCourseTags();
   renderAPTags();
   renderTransferTags();
@@ -2437,6 +2441,19 @@ function clearStudent() {
   ['stu-name','stu-gpa','stu-total-credits'].forEach(id=>document.getElementById(id).value='');
   const sumCard = document.getElementById('ap-transfer-summary-card');
   if (sumCard) { sumCard.style.display = 'none'; sumCard.innerHTML = ''; }
+  // Re-render elective filter buttons to reflect reset state
+  const filterRow = document.getElementById('elec-filter-row');
+  if (filterRow) {
+    filterRow.querySelectorAll('.elec-filter-btn').forEach(btn => {
+      const isAll = btn.textContent.trim() === 'All Categories';
+      btn.classList.toggle('elec-filter-active', isAll);
+      btn.style.background = btn.style.borderColor = isAll ? '#7C3AED' : '#F3E8FF';
+      btn.style.color = isAll ? '#fff' : '#7C3AED';
+      btn.style.borderColor = isAll ? '#7C3AED' : '#DDD6FE';
+    });
+  }
+  // Show all elective chips (un-hide any that were filtered)
+  document.querySelectorAll('.elec-chip[data-tag]').forEach(chip => chip.style.display = '');
 }
 function printReport() { window.print(); }
 
