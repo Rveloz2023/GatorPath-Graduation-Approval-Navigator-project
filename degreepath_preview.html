@@ -2911,11 +2911,12 @@ function renderPensum(majorId) {
   });
 
   const allCodes = allCourses.map(c=>c.code);
+  window._pensumAllCodes = allCodes;
 
   let html = `<div class="pensum-major-label">
     <span>📋 ${major.name} — ${allCourses.length} courses · ${major.total_credits} total credits</span>
     <div style="display:flex;gap:5px;align-items:center">
-      <button class="add-all-btn" onclick="addAllPensum(${JSON.stringify(allCodes)})">+ Add All</button>
+      <button class="add-all-btn" onclick="addAllPensum()">+ Add All</button>
       <button class="add-all-btn" style="background:#fff;border:1.5px solid var(--dp);color:var(--dp-dk)"
         onclick="toggleAddCourseInput()">✏️ Add a Course</button>
     </div>
@@ -3058,8 +3059,10 @@ function addCustomCourse() {
   inp.focus();
 }
 
-function addAllPensum(codes) {
-  if (!Array.isArray(codes)) return;
+function addAllPensum(codesOrBtn) {
+  // Accept either a direct array (legacy) or read from global set by renderPensum
+  const codes = Array.isArray(codesOrBtn) ? codesOrBtn : (window._pensumAllCodes || []);
+  if (!codes.length) return;
   codes.forEach(c => {
     const n = normalizeCode(c);
     completedCourses.add(n);
