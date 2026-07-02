@@ -3,1816 +3,447 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DegreeMap — Graduation Navigator</title>
+<title>DegreePath — Graduate Faster. Plan Smarter.</title>
+<meta name="description" content="Stop guessing what you need to graduate. DegreePath maps your fastest path to your diploma — free, in under 2 minutes.">
+<meta property="og:title" content="DegreePath — Graduate Faster. Plan Smarter.">
+<meta property="og:description" content="Your personal degree command center. Map your fastest path to graduation.">
+<meta property="og:url" content="https://degreepath.org">
+<meta name="theme-color" content="#16A37F">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --gator-blue: #003087;
-    --gator-orange: #FA4616;
-    --gator-orange-light: #fff3ee;
-    --blue-light: #e8eef7;
-    --green: #1a7a3c;
-    --green-light: #e6f4ec;
-    --red: #c0392b;
-    --red-light: #fdecea;
-    --yellow: #e67e22;
-    --yellow-light: #fef9e7;
-    --gray: #6c757d;
-    --gray-light: #f8f9fa;
-    --border: #dee2e6;
-    --shadow: 0 2px 8px rgba(0,0,0,.1);
-    --radius: 10px;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f4fa; color: #222; }
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+:root{
+  --green:#16A37F;--green-dk:#0F7A60;--green-lt:#E6F7F2;--green-pale:#F0FDF9;
+  --black:#0A0A0A;--gray-700:#374151;--gray-500:#6B7280;
+  --gray-300:#D1D5DB;--gray-100:#F3F4F6;--gray-50:#F9FAFB;
+  --white:#FFFFFF;--border:#E5E7EB;
+  --radius:10px;--radius-lg:16px;--radius-xl:24px;
+  --shadow:0 4px 16px rgba(0,0,0,.08);--shadow-lg:0 16px 48px rgba(0,0,0,.1);
+  --font:'Inter',system-ui,sans-serif;
+}
+body{font-family:var(--font);color:var(--black);background:var(--white);-webkit-font-smoothing:antialiased}
+a{text-decoration:none;color:inherit}
+button{cursor:pointer;font-family:var(--font)}
 
-  /* ── Header ── */
-  header {
-    background: var(--gator-blue);
-    color: white;
-    padding: 0 24px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 64px;
-    box-shadow: 0 2px 6px rgba(0,0,0,.3);
-    position: sticky; top: 0; z-index: 100;
-  }
-  .logo { display: flex; align-items: center; gap: 10px; font-size: 1.3rem; font-weight: 700; }
-  .logo-gator { font-size: 1.8rem; }
-  .logo-subtitle { font-size: .75rem; opacity: .8; font-weight: 400; }
-  .mode-tabs { display: flex; gap: 4px; }
-  .mode-tab {
-    padding: 6px 18px; border-radius: 20px; cursor: pointer; font-size: .85rem;
-    border: 2px solid rgba(255,255,255,.3); color: rgba(255,255,255,.8);
-    background: transparent; transition: all .2s;
-  }
-  .mode-tab.active, .mode-tab:hover { background: var(--gator-orange); border-color: var(--gator-orange); color: white; }
+/* NAV */
+.nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 2rem}
+.nav-inner{max-width:1120px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:64px}
+.nav-logo{display:flex;align-items:center;gap:10px;font-size:1.15rem;font-weight:800;color:var(--black);letter-spacing:-.5px}
+.logo-icon{width:32px;height:32px;background:var(--green);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.nav-links{display:flex;align-items:center;gap:2rem;list-style:none}
+.nav-links a{font-size:.875rem;font-weight:500;color:var(--gray-700);transition:color .15s}
+.nav-links a:hover{color:var(--black)}
+.nav-right{display:flex;align-items:center;gap:.75rem}
+.btn-ghost{font-size:.875rem;font-weight:600;color:var(--gray-700);padding:.45rem 1rem;border-radius:8px;border:1px solid var(--border);background:transparent;transition:all .15s}
+.btn-ghost:hover{background:var(--gray-50)}
+.btn-cta{font-size:.875rem;font-weight:700;color:#fff;padding:.45rem 1.1rem;border-radius:8px;background:var(--green);border:none;transition:background .15s}
+.btn-cta:hover{background:var(--green-dk)}
+@media(max-width:768px){.nav-links,.btn-ghost{display:none}}
 
-  /* ── Layout ── */
-  .container { max-width: 1100px; margin: 0 auto; padding: 24px 16px; }
-  .card {
-    background: white; border-radius: var(--radius); box-shadow: var(--shadow);
-    padding: 24px; margin-bottom: 20px;
-  }
-  .card-title { font-size: 1.1rem; font-weight: 700; color: var(--gator-blue); margin-bottom: 16px;
-    border-bottom: 2px solid var(--gator-orange); padding-bottom: 8px; }
-  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-  @media(max-width:700px) { .two-col { grid-template-columns: 1fr; } }
+/* HERO */
+.hero{padding:6rem 2rem 5rem;text-align:center;border-bottom:1px solid var(--border)}
+.hero-inner{max-width:800px;margin:0 auto}
+.badge{display:inline-flex;align-items:center;gap:6px;background:var(--green-lt);color:var(--green-dk);font-size:.72rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:.3rem .9rem;border-radius:20px;border:1px solid rgba(22,163,127,.2);margin-bottom:1.75rem}
+.hero h1{font-size:clamp(2.4rem,6vw,4rem);font-weight:900;color:var(--black);letter-spacing:-2px;line-height:1.05;margin-bottom:1.25rem}
+.hero h1 em{color:var(--green);font-style:normal}
+.hero-sub{font-size:1.1rem;color:var(--gray-500);max-width:560px;margin:0 auto 2.5rem;line-height:1.7}
+.hero-ctas{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap;margin-bottom:1.25rem}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--green);color:#fff;font-size:1rem;font-weight:700;padding:.85rem 2rem;border-radius:var(--radius);border:none;box-shadow:0 4px 20px rgba(22,163,127,.3);transition:all .2s}
+.btn-primary:hover{background:var(--green-dk);transform:translateY(-1px)}
+.btn-secondary{display:inline-flex;align-items:center;gap:8px;background:var(--white);color:var(--black);font-size:1rem;font-weight:600;padding:.85rem 2rem;border-radius:var(--radius);border:1.5px solid var(--border);transition:all .2s}
+.btn-secondary:hover{border-color:var(--gray-300);background:var(--gray-50)}
+.hero-note{font-size:.77rem;color:var(--gray-300)}
+.hero-note span{margin:0 .4rem}
 
-  /* ── Forms ── */
-  label { display: block; font-size: .85rem; font-weight: 600; color: #555; margin-bottom: 4px; }
-  input, select, textarea {
-    width: 100%; padding: 10px 12px; border: 1.5px solid var(--border);
-    border-radius: 7px; font-size: .95rem; outline: none; transition: border .2s;
-  }
-  input:focus, select:focus, textarea:focus { border-color: var(--gator-blue); }
-  .form-group { margin-bottom: 14px; }
+/* MOCK BROWSER */
+.mock-browser{max-width:680px;margin:3.5rem auto 0;background:var(--white);border:1px solid var(--border);border-radius:var(--radius-xl);box-shadow:var(--shadow-lg);overflow:hidden}
+.mock-bar{background:var(--gray-50);border-bottom:1px solid var(--border);padding:.65rem 1rem;display:flex;align-items:center;gap:.5rem}
+.dot{width:10px;height:10px;border-radius:50%}
+.dot:nth-child(1){background:#FF5F57}.dot:nth-child(2){background:#FFBD2E}.dot:nth-child(3){background:#28C840}
+.mock-url{flex:1;background:var(--white);border:1px solid var(--border);border-radius:6px;padding:.25rem .75rem;margin:0 .75rem;font-size:.72rem;color:var(--gray-500);text-align:center}
+.mock-body{padding:1.5rem}
+.mock-head{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem;margin-bottom:1rem}
+.mock-title{font-size:.85rem;font-weight:700}
+.mock-status{background:var(--green-lt);color:var(--green-dk);font-size:.65rem;font-weight:700;padding:.2rem .65rem;border-radius:20px}
+.mock-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem;margin-bottom:.75rem}
+.mstat{background:var(--gray-50);border:1px solid var(--border);border-radius:8px;padding:.6rem .5rem;text-align:center}
+.mstat-val{font-size:1rem;font-weight:800;color:var(--black)}
+.mstat-lbl{font-size:.58rem;color:var(--gray-500)}
+.prog-row{margin-bottom:1rem}
+.prog-meta{display:flex;justify-content:space-between;font-size:.7rem;color:var(--gray-500);margin-bottom:.3rem}
+.prog-bar{height:7px;background:var(--gray-100);border-radius:4px;overflow:hidden}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--green),#34D399);border-radius:4px}
+.chips{display:flex;flex-wrap:wrap;gap:.35rem}
+.chip{font-size:.67rem;font-weight:600;padding:.22rem .6rem;border-radius:6px;border:1px solid}
+.chip.done{background:var(--green-lt);color:var(--green-dk);border-color:rgba(22,163,127,.2)}
+.chip.warn{background:#FEF3C7;color:#92400E;border-color:#FDE68A}
+.chip.todo{background:var(--gray-50);color:var(--gray-500);border-color:var(--border)}
 
-  /* ── Buttons ── */
-  .btn {
-    display: inline-flex; align-items: center; gap: 6px;
-    padding: 10px 22px; border: none; border-radius: 7px; cursor: pointer;
-    font-size: .95rem; font-weight: 600; transition: all .2s;
-  }
-  .btn-primary { background: var(--gator-blue); color: white; }
-  .btn-primary:hover { background: #002060; }
-  .btn-orange { background: var(--gator-orange); color: white; }
-  .btn-orange:hover { background: #d93a0f; }
-  .btn-sm { padding: 5px 12px; font-size: .82rem; }
-  .btn-ghost { background: transparent; border: 1.5px solid var(--border); color: #555; }
-  .btn-ghost:hover { background: var(--gray-light); }
+/* TRUST */
+.trust{padding:1.25rem 2rem;border-bottom:1px solid var(--border);background:var(--gray-50)}
+.trust-inner{max-width:1120px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:2.5rem;flex-wrap:wrap}
+.ti{display:flex;align-items:center;gap:.5rem;font-size:.82rem;font-weight:500;color:var(--gray-500)}
 
-  /* ── Course Input ── */
-  .course-input-area { display: flex; gap: 8px; margin-bottom: 8px; }
-  .course-input-area input { flex: 1; }
-  .tag-list { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
-  .tag {
-    background: var(--blue-light); color: var(--gator-blue);
-    border-radius: 20px; padding: 3px 10px; font-size: .82rem;
-    display: flex; align-items: center; gap: 4px;
-  }
-  .tag-remove { cursor: pointer; font-size: .9rem; opacity: .6; }
-  .tag-remove:hover { opacity: 1; color: var(--red); }
+/* SECTION BASE */
+.sec{padding:5rem 2rem}
+.sec-inner{max-width:1120px;margin:0 auto}
+.sec-label{font-size:.72rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--green);margin-bottom:.75rem}
+.sec-h{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:900;color:var(--black);letter-spacing:-1.5px;line-height:1.1;margin-bottom:.75rem}
+.sec-sub{font-size:1rem;color:var(--gray-500);max-width:560px;line-height:1.7}
 
-  /* ── Progress Bar ── */
-  .progress-wrap { background: var(--gray-light); border-radius: 20px; height: 14px; overflow: hidden; }
-  .progress-bar {
-    height: 100%; border-radius: 20px; transition: width .6s ease;
-    background: linear-gradient(90deg, var(--gator-blue), var(--gator-orange));
-  }
-  .progress-label { font-size: .8rem; color: var(--gray); margin-top: 4px; }
+/* PROBLEM */
+.problem{background:var(--black)}
+.problem .sec-h{color:#fff}
+.problem .sec-label{color:#34D399}
+.problem .sec-sub{color:rgba(255,255,255,.5)}
+.prob-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem}
+@media(max-width:768px){.prob-grid{grid-template-columns:1fr}}
+.prob-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07);border-radius:var(--radius-lg);padding:1.75rem}
+.prob-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;margin-bottom:1rem}
+.ri{background:rgba(239,68,68,.15)}.yi{background:rgba(234,179,8,.15)}.oi{background:rgba(249,115,22,.15)}
+.prob-card h3{font-size:1rem;font-weight:700;color:#fff;margin-bottom:.5rem}
+.prob-card p{font-size:.875rem;color:rgba(255,255,255,.4);line-height:1.65}
+.prob-quote{margin-top:3rem;padding:2rem 2.5rem;background:rgba(255,255,255,.04);border-left:3px solid var(--green);border-radius:0 var(--radius) var(--radius) 0}
+.prob-quote blockquote{font-size:1.1rem;font-style:italic;color:rgba(255,255,255,.75);line-height:1.65;margin-bottom:.65rem}
+.prob-quote cite{font-size:.75rem;color:rgba(255,255,255,.3);font-style:normal}
 
-  /* ── Status Badges ── */
-  .badge {
-    display: inline-block; padding: 2px 10px; border-radius: 20px;
-    font-size: .75rem; font-weight: 700; letter-spacing: .03em;
-  }
-  .badge-green { background: var(--green-light); color: var(--green); }
-  .badge-red { background: var(--red-light); color: var(--red); }
-  .badge-yellow { background: var(--yellow-light); color: var(--yellow); }
-  .badge-blue { background: var(--blue-light); color: var(--gator-blue); }
+/* FEATURES */
+.feat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;margin-top:3rem}
+@media(max-width:768px){.feat-grid{grid-template-columns:1fr}}
+.feat-card{border:1px solid var(--border);border-radius:var(--radius-lg);padding:2rem;transition:box-shadow .2s,border-color .2s}
+.feat-card:hover{box-shadow:var(--shadow);border-color:var(--gray-300)}
+.feat-icon{width:44px;height:44px;border-radius:12px;background:var(--green-lt);display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin-bottom:1.25rem}
+.feat-card h3{font-size:1rem;font-weight:700;margin-bottom:.4rem}
+.feat-card p{font-size:.875rem;color:var(--gray-500);line-height:1.65}
+.feat-tag{display:inline-block;margin-top:.75rem;font-size:.67rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--green);background:var(--green-lt);padding:.2rem .6rem;border-radius:6px}
 
-  /* ── Course Status List ── */
-  .course-list { list-style: none; }
-  .course-list li {
-    display: flex; align-items: flex-start; gap: 10px;
-    padding: 8px 0; border-bottom: 1px solid var(--border); font-size: .88rem;
-  }
-  .course-list li:last-child { border-bottom: none; }
-  .ci { font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
-  .ci-done { color: var(--green); }
-  .ci-missing { color: var(--red); }
-  .ci-warn { color: var(--yellow); }
-  .course-code { font-weight: 700; color: var(--gator-blue); min-width: 80px; }
-  .course-credits { color: var(--gray); font-size: .8rem; margin-left: auto; white-space: nowrap; }
+/* HOW */
+.how{background:var(--gray-50);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.how-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:3rem}
+@media(max-width:768px){.how-steps{grid-template-columns:1fr}}
+.how-step{text-align:center;padding:1.5rem}
+.step-num{width:48px;height:48px;border-radius:50%;background:var(--green);color:#fff;font-size:1.1rem;font-weight:800;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;box-shadow:0 4px 16px rgba(22,163,127,.3)}
+.how-step h3{font-size:1rem;font-weight:700;margin-bottom:.4rem}
+.how-step p{font-size:.875rem;color:var(--gray-500);line-height:1.65}
 
-  /* ── Major Switch Cards ── */
-  .switch-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
-  .switch-card {
-    border: 1.5px solid var(--border); border-radius: var(--radius); padding: 16px;
-    cursor: pointer; transition: all .2s;
-  }
-  .switch-card:hover, .switch-card.selected {
-    border-color: var(--gator-orange); box-shadow: 0 0 0 3px rgba(250,70,22,.12);
-  }
-  .switch-card h4 { font-size: .95rem; color: var(--gator-blue); margin-bottom: 6px; }
-  .switch-card .match-pct { font-size: 1.6rem; font-weight: 800; color: var(--gator-orange); }
-  .switch-card .college-name { font-size: .78rem; color: var(--gray); margin-bottom: 8px; }
+/* STATS */
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;margin-top:3rem}
+@media(max-width:768px){.stats-grid{grid-template-columns:repeat(2,1fr)}}
+.stat-item{background:var(--white);padding:2rem 1.5rem;text-align:center}
+.stat-val{font-size:2.2rem;font-weight:900;letter-spacing:-1px;line-height:1;margin-bottom:.35rem}
+.stat-val em{color:var(--green);font-style:normal}
+.stat-lbl{font-size:.8rem;color:var(--gray-500);font-weight:500;line-height:1.4}
 
-  /* ── Semester Plan ── */
-  .semester-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
-  .semester-box {
-    border: 1.5px solid var(--border); border-radius: 8px; overflow: hidden;
-  }
-  .semester-header {
-    background: var(--gator-blue); color: white; padding: 6px 12px;
-    font-size: .82rem; font-weight: 700; display: flex; justify-content: space-between;
-  }
-  .semester-body { padding: 8px 12px; }
-  .semester-body .sc { font-size: .8rem; padding: 2px 0; }
-  .semester-body .sc.completed { color: var(--green); }
-  .semester-body .sc.missing { color: var(--red); }
+/* ABOUT */
+.about{background:var(--green-pale);border-top:1px solid rgba(22,163,127,.15);border-bottom:1px solid rgba(22,163,127,.15)}
+.about-inner{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;padding:5rem 2rem}
+@media(max-width:768px){.about-inner{grid-template-columns:1fr;gap:2.5rem;padding:3rem 2rem}}
+.about h2{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:900;letter-spacing:-1px;margin-bottom:.75rem}
+.about p{font-size:.95rem;color:var(--gray-700);line-height:1.75;margin-bottom:.85rem}
+.about-stats{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.astat{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem}
+.astat-val{font-size:1.6rem;font-weight:900;color:var(--green);letter-spacing:-1px}
+.astat-lbl{font-size:.75rem;color:var(--gray-500);font-weight:500;margin-top:2px}
 
-  /* ── Panels (student / advisor) ── */
-  .panel { display: none; }
-  .panel.active { display: block; }
+/* CAPTURE */
+.capture{background:var(--black);padding:5.5rem 2rem}
+.capture-inner{max-width:520px;margin:0 auto;text-align:center}
+.capture h2{font-size:clamp(1.8rem,4vw,2.4rem);font-weight:900;color:#fff;letter-spacing:-1.5px;line-height:1.1;margin-bottom:.75rem}
+.capture > .capture-inner > p{font-size:.95rem;color:rgba(255,255,255,.4);margin-bottom:2rem;line-height:1.65}
+.cap-form{display:flex;gap:.5rem;flex-wrap:wrap}
+.cap-form input[type=email]{flex:1;min-width:200px;padding:.75rem 1rem;border-radius:var(--radius);border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.07);color:#fff;font-size:.9rem;font-family:var(--font);outline:none;transition:border-color .15s}
+.cap-form input::placeholder{color:rgba(255,255,255,.25)}
+.cap-form input:focus{border-color:var(--green)}
+.cap-form button{padding:.75rem 1.4rem;border-radius:var(--radius);background:var(--green);color:#fff;border:none;font-size:.9rem;font-weight:700;font-family:var(--font);white-space:nowrap;transition:background .15s}
+.cap-form button:hover{background:var(--green-dk)}
+.cap-fine{margin-top:.75rem;font-size:.7rem;color:rgba(255,255,255,.18);line-height:1.6}
+.cap-success{display:none;margin-top:1rem;padding:.85rem 1.25rem;background:rgba(22,163,127,.15);border:1px solid rgba(22,163,127,.3);border-radius:var(--radius);color:#34D399;font-size:.875rem;font-weight:600}
 
-  /* ── Alert box ── */
-  .alert {
-    border-radius: 8px; padding: 12px 16px; margin-bottom: 16px; font-size: .88rem;
-    display: flex; gap: 10px; align-items: flex-start;
-  }
-  .alert-info { background: var(--blue-light); color: var(--gator-blue); }
-  .alert-success { background: var(--green-light); color: var(--green); }
-  .alert-warning { background: var(--yellow-light); color: var(--yellow); }
-  .alert-danger { background: var(--red-light); color: var(--red); }
-
-  /* ── Stats row ── */
-  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 20px; }
-  @media(max-width:600px) { .stats { grid-template-columns: 1fr 1fr; } }
-  .stat-box { background: white; border-radius: 10px; padding: 16px; box-shadow: var(--shadow); text-align: center; }
-  .stat-value { font-size: 2rem; font-weight: 800; color: var(--gator-blue); }
-  .stat-label { font-size: .75rem; color: var(--gray); margin-top: 2px; }
-
-  /* ── Advisor table ── */
-  table { width: 100%; border-collapse: collapse; font-size: .88rem; }
-  th { background: var(--gator-blue); color: white; padding: 10px 12px; text-align: left; font-size: .82rem; }
-  td { padding: 9px 12px; border-bottom: 1px solid var(--border); }
-  tr:last-child td { border-bottom: none; }
-  tr:hover td { background: var(--gray-light); }
-
-  /* ── Loading spinner ── */
-  .spinner { text-align: center; padding: 40px; color: var(--gray); }
-  .spinner::before { content: '⏳ '; }
-
-  /* ── Tooltip ── */
-  [data-tip] { position: relative; cursor: help; }
-  [data-tip]:hover::after {
-    content: attr(data-tip);
-    position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%);
-    background: #333; color: white; padding: 4px 8px; border-radius: 5px;
-    font-size: .75rem; white-space: nowrap; pointer-events: none; z-index: 200;
-    margin-bottom: 4px;
-  }
-
-  /* ── Empty state ── */
-  .empty { text-align: center; padding: 40px 20px; color: var(--gray); }
-  .empty .empty-icon { font-size: 3rem; margin-bottom: 10px; }
-  .empty p { font-size: .9rem; }
-
-
-  /* ── Audio Controls ── */
-  .audio-btn {
-    padding: 6px 14px; border-radius: 20px; cursor: pointer; font-size: .82rem;
-    border: 2px solid rgba(255,255,255,.3); color: rgba(255,255,255,.8);
-    background: transparent; transition: all .2s; margin-left: 8px;
-  }
-  .audio-btn.music-on {
-    background: rgba(255,255,255,.2); border-color: rgba(255,255,255,.7); color: white;
-  }
-  .audio-btn:hover { background: rgba(255,255,255,.15); }
-
-  /* ── Print styles ── */
-  @media print { header { display: none; } .btn { display: none; } }
+/* FOOTER */
+footer{background:#060606;padding:3rem 2rem;border-top:1px solid rgba(255,255,255,.05)}
+.footer-inner{max-width:1120px;margin:0 auto;display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:2rem}
+.footer-logo{font-size:1rem;font-weight:800;color:#fff;letter-spacing:-.5px;display:flex;align-items:center;gap:8px;margin-bottom:.5rem}
+.footer-desc{font-size:.77rem;color:rgba(255,255,255,.22);line-height:1.7;max-width:340px}
+.footer-links{display:flex;gap:1.5rem;flex-wrap:wrap;align-items:center}
+.footer-links a{font-size:.8rem;color:rgba(255,255,255,.28);font-weight:500;transition:color .15s}
+.footer-links a:hover{color:#fff}
+.footer-copy{max-width:1120px;margin:2rem auto 0;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.05);display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.7rem;color:rgba(255,255,255,.12)}
 </style>
 </head>
 <body>
 
-<header>
-  <div class="logo">
-    <span class="logo-gator">🐊</span>
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">
+      <div class="logo-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+          <path d="M12 3L2 8l10 5 10-5-10-5z" fill="white" opacity=".95"/>
+          <path d="M2 14l10 5 10-5" stroke="white" stroke-width="2" stroke-linecap="round" opacity=".6"/>
+        </svg>
+      </div>
+      DegreePath
+    </a>
+    <ul class="nav-links">
+      <li><a href="#features">Features</a></li>
+      <li><a href="#how">How It Works</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="privacy.html">Privacy</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="app.html" class="btn-ghost">Open App</a>
+      <a href="app.html" class="btn-cta">Plan My Graduation →</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="badge">🎓 Free &nbsp;·&nbsp; No Account Required</div>
+    <h1>Stop guessing.<br><em>Start graduating.</em></h1>
+    <p class="hero-sub">Your personal degree command center. Map your fastest path to your diploma — compare majors, track every milestone, get your estimated graduation date. Free, in under 2 minutes.</p>
+    <div class="hero-ctas">
+      <a href="app.html" class="btn-primary">Plan My Graduation →</a>
+      <a href="#how" class="btn-secondary">See How It Works</a>
+    </div>
+    <p class="hero-note">Works with any university <span>·</span> 20+ majors <span>·</span> AP &amp; Transfer credits <span>·</span> Always free</p>
+
+    <div class="mock-browser">
+      <div class="mock-bar">
+        <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+        <div class="mock-url">degreepath.org/app</div>
+      </div>
+      <div class="mock-body">
+        <div class="mock-head">
+          <span class="mock-title">📊 Graduation Analysis — Computer Science (BS)</span>
+          <span class="mock-status">✅ On Track</span>
+        </div>
+        <div class="mock-stats">
+          <div class="mstat"><div class="mstat-val">78%</div><div class="mstat-lbl">Complete</div></div>
+          <div class="mstat"><div class="mstat-val">3.6</div><div class="mstat-lbl">GPA</div></div>
+          <div class="mstat"><div class="mstat-val">3</div><div class="mstat-lbl">Sems Left</div></div>
+          <div class="mstat"><div class="mstat-val">Spr '26</div><div class="mstat-lbl">Est. Grad</div></div>
+        </div>
+        <div class="prog-row">
+          <div class="prog-meta"><span>Credit Progress</span><span>93 / 120 credits</span></div>
+          <div class="prog-bar"><div class="prog-fill" style="width:78%"></div></div>
+        </div>
+        <div class="chips">
+          <span class="chip done">✓ MAC 2311</span>
+          <span class="chip done">✓ COP 3502C</span>
+          <span class="chip done">✓ COP 3530</span>
+          <span class="chip warn">⚠ COP 4600 — Due Sem 7</span>
+          <span class="chip todo">○ COP 4020</span>
+          <span class="chip todo">○ CDA 3101</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust">
+  <div class="trust-inner">
+    <div class="ti">✅ No account required</div>
+    <div class="ti">🔒 Data stays in your browser</div>
+    <div class="ti">✅ AP &amp; Transfer credit support</div>
+    <div class="ti">✅ 100% free, always</div>
+  </div>
+</div>
+
+<!-- PROBLEM -->
+<section class="sec problem">
+  <div class="sec-inner">
+    <div class="sec-label">The Real Problem</div>
+    <h2 class="sec-h">Your university has a plan for your degree.<br>You just don't have access to it.</h2>
+    <p class="sec-sub">DegreeWorks is built for advisors, not students. The result? Students blindsided by requirements they never knew existed.</p>
+    <div class="prob-grid">
+      <div class="prob-card">
+        <div class="prob-icon ri">🚨</div>
+        <h3>"You're missing ENC 3246"</h3>
+        <p>A requirement hidden in the fine print, discovered at your graduation check — adding another semester and thousands more to your debt.</p>
+      </div>
+      <div class="prob-card">
+        <div class="prob-icon yi">⏳</div>
+        <h3>The 5-Year Degree</h3>
+        <p>1 in 3 students takes 5+ years to finish a 4-year degree. Not because they're behind — because nobody showed them the map.</p>
+      </div>
+      <div class="prob-card">
+        <div class="prob-icon oi">💸</div>
+        <h3>$8,000 Extra Semester</h3>
+        <p>Every unplanned semester costs real money. Students who graduate on time aren't smarter — they just had better information.</p>
+      </div>
+    </div>
+    <div class="prob-quote">
+      <blockquote>"I had a 3.4 GPA, showed up every day, did the work — and my advisor told me I couldn't graduate because of a course I'd never heard of."</blockquote>
+      <cite>— UCF Junior, Computer Science</cite>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="sec" id="features">
+  <div class="sec-inner">
+    <div class="sec-label">Features</div>
+    <h2 class="sec-h">Everything you need to own your degree.</h2>
+    <p class="sec-sub">Built by a student who got blindsided. Designed so you never have to be.</p>
+    <div class="feat-grid">
+      <div class="feat-card">
+        <div class="feat-icon">🗺️</div>
+        <h3>Full Degree Roadmap</h3>
+        <p>Your complete curriculum by semester — core, electives, math, science, and gen ed. Know exactly what's done and what's next.</p>
+        <span class="feat-tag">20+ Majors</span>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">🎯</div>
+        <h3>Critical Tracking Milestones</h3>
+        <p>Each major has milestone courses due by specific semesters. DegreePath flags overdue milestones before they become graduation blockers.</p>
+        <span class="feat-tag">Semester-by-Semester</span>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">📜</div>
+        <h3>AP &amp; Transfer Credits</h3>
+        <p>Log your AP scores and transfer courses. DegreePath maps them to exact degree requirements so you know what actually counts.</p>
+        <span class="feat-tag">Cross-Institution</span>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">📊</div>
+        <h3>Instant Graduation Analysis</h3>
+        <p>Enter your courses and GPA — get an instant breakdown: percent complete, semesters left, graduation date, and what to do next.</p>
+        <span class="feat-tag">Real-Time</span>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">🔒</div>
+        <h3>Zero Data Collection</h3>
+        <p>Everything runs in your browser. No account, no server ever sees your academic data. You control what you share — always.</p>
+        <span class="feat-tag">Privacy First</span>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">🔊</div>
+        <h3>Voice Narration</h3>
+        <p>Enable voice narration and hear your graduation analysis read aloud — personalized, clear, and built for accessibility.</p>
+        <span class="feat-tag">Accessibility</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="sec how" id="how">
+  <div class="sec-inner">
+    <div class="sec-label">How It Works</div>
+    <h2 class="sec-h">From zero to your graduation plan in 2 minutes.</h2>
+    <p class="sec-sub">No setup. No account. No waiting. Just answers.</p>
+    <div class="how-steps">
+      <div class="how-step">
+        <div class="step-num">1</div>
+        <h3>Select Your Major</h3>
+        <p>Pick from 20+ majors across CS, Business, Engineering, Data Science, and more. Your full curriculum loads instantly.</p>
+      </div>
+      <div class="how-step">
+        <div class="step-num">2</div>
+        <h3>Enter Your Courses</h3>
+        <p>Click courses you've completed or use Quick-Add to add a full semester at once. Add AP scores and transfer credits too.</p>
+      </div>
+      <div class="how-step">
+        <div class="step-num">3</div>
+        <h3>Get Your Plan</h3>
+        <p>Hit Analyze. See your degree progress, critical milestones, estimated graduation date, and exactly what to do next.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="sec" style="border-bottom:1px solid var(--border)">
+  <div class="sec-inner">
+    <div class="sec-label">By The Numbers</div>
+    <h2 class="sec-h">The graduation gap is real.</h2>
+    <p class="sec-sub">DegreePath exists because the data is clear — and the consequences are expensive.</p>
+    <div class="stats-grid">
+      <div class="stat-item"><div class="stat-val">1<em>/3</em></div><div class="stat-lbl">Students take 5+ years for a 4-year degree</div></div>
+      <div class="stat-item"><div class="stat-val"><em>$</em>8K+</div><div class="stat-lbl">Average cost of one unplanned extra semester</div></div>
+      <div class="stat-item"><div class="stat-val">20<em>+</em></div><div class="stat-lbl">Majors with full requirement maps</div></div>
+      <div class="stat-item"><div class="stat-val">2<em> min</em></div><div class="stat-lbl">To get your full graduation analysis</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-inner">
     <div>
-      <div>DegreeMap</div>
-      <div class="logo-subtitle">Graduation Navigator</div>
+      <h2>Built by a student,<br>for every student.</h2>
+      <p>DegreePath started with a simple, infuriating experience: sitting in an advisor's office and learning about a graduation requirement nobody had ever mentioned — with only two semesters left.</p>
+      <p>DegreeWorks is powerful. But it's built for administrators. DegreePath is built for <em>you</em> — the student trying to graduate on time, on budget, without surprises.</p>
+      <p>It's free. It always will be. Because no student should pay an extra semester for not having the right information.</p>
+    </div>
+    <div class="about-stats">
+      <div class="astat"><div class="astat-val">20+</div><div class="astat-lbl">Majors supported</div></div>
+      <div class="astat"><div class="astat-val">Free</div><div class="astat-lbl">Always, no account</div></div>
+      <div class="astat"><div class="astat-val">0</div><div class="astat-lbl">Data collected from you</div></div>
+      <div class="astat"><div class="astat-val">∞</div><div class="astat-lbl">Analyses you can run</div></div>
     </div>
   </div>
-  <div style="display:flex;align-items:center;gap:6px">
-    <div class="mode-tabs">
-      <button class="mode-tab active" onclick="switchMode('student')">🎓 Student</button>
-      <button class="mode-tab" onclick="switchMode('advisor')">📋 Advisor</button>
-    </div>
-    <button class="audio-btn" id="music-btn" onclick="toggleAudio()" title="Toggle music &amp; narration">🔇 Sound Off</button>
+</section>
+
+<!-- EMAIL CAPTURE -->
+<section class="capture" id="waitlist">
+  <div class="capture-inner">
+    <h2>Be first when we add<br>your university.</h2>
+    <p>We're expanding to new universities every month. Drop your email — we'll notify you the moment your school is live.</p>
+    <form class="cap-form" name="waitlist" method="POST" data-netlify="true" onsubmit="handleForm(event)">
+      <input type="hidden" name="form-name" value="waitlist">
+      <input type="email" name="email" placeholder="your@email.edu" required autocomplete="email">
+      <button type="submit">Notify Me</button>
+    </form>
+    <div class="cap-success" id="cap-ok">✅ You're on the list! We'll reach out when your university is ready.</div>
+    <p class="cap-fine">No spam. One email when we launch your university.<br>Your email is never sold or shared.</p>
   </div>
-</header>
+</section>
 
-<!-- ══════════════════════════════════════════════════════════════════════════ -->
-<!--  STUDENT PANEL                                                            -->
-<!-- ══════════════════════════════════════════════════════════════════════════ -->
-<div id="panel-student" class="panel active">
-<div class="container">
-
-  <!-- Input Card -->
-  <div class="card">
-    <div class="card-title">📝 Student Profile</div>
-    <div class="two-col">
-      <div>
-        <div class="form-group">
-          <label>Student Name</label>
-          <input id="stu-name" type="text" placeholder="e.g. Rafael Veloz">
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">
+        <div class="logo-icon" style="width:26px;height:26px;border-radius:6px">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+            <path d="M12 3L2 8l10 5 10-5-10-5z" fill="white" opacity=".95"/>
+            <path d="M2 14l10 5 10-5" stroke="white" stroke-width="2" stroke-linecap="round" opacity=".6"/>
+          </svg>
         </div>
-        <div class="form-group">
-          <label>Current Major</label>
-          <select id="stu-major">
-            <option value="">— loading majors —</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Credits Completed So Far</label>
-          <input id="stu-total-credits" type="number" min="0" max="200" placeholder="e.g. 60">
-        </div>
-        <div class="form-group">
-          <label>Current GPA</label>
-          <input id="stu-gpa" type="number" step="0.01" min="0" max="4.0" placeholder="e.g. 3.40">
-        </div>
+        DegreePath
       </div>
-      <div>
-        <div class="form-group">
-          <label>Completed Courses <span style="font-weight:400;color:#888">(type code + Enter)</span></label>
-          <div class="course-input-area">
-            <input id="course-input" type="text" placeholder="e.g. MAC 2311" autocomplete="off"
-              onkeydown="if(event.key==='Enter')addCourse()">
-            <button class="btn btn-orange btn-sm" onclick="addCourse()">Add</button>
-          </div>
-          <div id="course-tags" class="tag-list"></div>
-        </div>
-        <div class="form-group" style="margin-top:8px">
-          <label>Quick-add common courses</label>
-          <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:4px">
-            <button class="btn btn-ghost btn-sm" onclick="quickAdd(['ENC 1101','ENC 1102','MAC 2311','STA 2023','BSC 2010','BSC 2010L','CHM 2045'])">Gen Ed Starter Pack</button>
-            <button class="btn btn-ghost btn-sm" onclick="quickAdd(['COP 3502C','COP 3503C','COT 3100','MAC 2312','EEL 3701C'])">CS Year 1-2</button>
-            <button class="btn btn-ghost btn-sm" onclick="quickAdd(['ACG 2021','ACG 2071','ECO 2013','ECO 2023','MAC 2233'])">Business Core</button>
-          </div>
-        </div>
-      </div>
+      <p class="footer-desc">Stop guessing. Start graduating. A planning companion — not an official degree audit. Always verify requirements with your institution's official catalog and advisor before registering or applying to graduate.</p>
     </div>
-    <div style="display:flex;gap:10px;margin-top:8px">
-      <button class="btn btn-primary" onclick="analyzeStudent()">🔍 Analyze My Path</button>
-      <button class="btn btn-ghost" onclick="clearStudent()">Clear</button>
-      <button class="btn btn-ghost" onclick="printReport()">🖨️ Print Report</button>
+    <div class="footer-links">
+      <a href="app.html">Open App</a>
+      <a href="#features">Features</a>
+      <a href="#how">How It Works</a>
+      <a href="#about">About</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
     </div>
   </div>
-
-  <!-- Results area -->
-  <div id="student-results" style="display:none">
-
-    <!-- Stats row -->
-    <div class="stats" id="stat-boxes"></div>
-
-    <!-- Alert -->
-    <div id="graduation-alert"></div>
-
-    <!-- Two-col: remaining + critical tracking -->
-    <div class="two-col">
-      <div class="card">
-        <div class="card-title">📚 Required Courses Status</div>
-        <ul class="course-list" id="course-status-list"></ul>
-      </div>
-      <div class="card">
-        <div class="card-title">⚠️ Critical Tracking Status</div>
-        <ul class="course-list" id="ct-status-list"></ul>
-        <div id="ct-warning" style="margin-top:12px"></div>
-      </div>
-    </div>
-
-    <!-- Semester plan -->
-    <div class="card">
-      <div class="card-title">📅 Remaining Path (Estimated Semester Plan)</div>
-      <div class="semester-grid" id="semester-plan"></div>
-    </div>
-
-    <!-- Credit Progress -->
-    <div class="card">
-      <div class="card-title">📊 Degree Progress</div>
-      <div id="progress-bars"></div>
-    </div>
-
-    <!-- Major Switch Section -->
-    <div class="card">
-      <div class="card-title">🔄 Major Switch Advisor</div>
-      <div class="alert alert-info" style="margin-bottom:16px">
-        ℹ️ Based on your completed courses, here are other UF majors where your credits transfer best.
-        A higher match % means fewer extra semesters needed.
-      </div>
-      <div class="switch-grid" id="major-switch-grid"></div>
-      <div id="switch-detail" style="margin-top:20px;display:none"></div>
-    </div>
+  <div class="footer-copy">
+    <span>© 2025 DegreePath · degreepath.org</span>
+    <span>DegreePath is independent and not affiliated with any university.</span>
   </div>
-
-</div>
-</div>
-
-<!-- ══════════════════════════════════════════════════════════════════════════ -->
-<!--  ADVISOR PANEL                                                            -->
-<!-- ══════════════════════════════════════════════════════════════════════════ -->
-<div id="panel-advisor" class="panel">
-<div class="container">
-
-  <div class="card">
-    <div class="card-title">🏫 Advisor Dashboard — Manage Students</div>
-    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
-      <input id="adv-search" type="text" placeholder="Search students…" style="max-width:250px"
-        oninput="renderAdvisorTable()">
-      <select id="adv-filter-major" onchange="renderAdvisorTable()" style="max-width:220px">
-        <option value="">All Majors</option>
-      </select>
-      <button class="btn btn-orange" onclick="openAddStudent()">➕ Add Student</button>
-      <button class="btn btn-ghost" onclick="exportCSV()">⬇️ Export CSV</button>
-    </div>
-  </div>
-
-  <!-- Add / Edit Student modal -->
-  <div id="adv-form-card" class="card" style="display:none">
-    <div class="card-title" id="adv-form-title">➕ Add Student</div>
-    <div class="two-col">
-      <div>
-        <div class="form-group"><label>Name</label><input id="adv-stu-name" type="text"></div>
-        <div class="form-group"><label>Student ID</label><input id="adv-stu-id" type="text" placeholder="UFID"></div>
-        <div class="form-group"><label>Email</label><input id="adv-stu-email" type="email"></div>
-        <div class="form-group"><label>Major</label>
-          <select id="adv-stu-major"></select>
-        </div>
-      </div>
-      <div>
-        <div class="form-group"><label>GPA</label><input id="adv-stu-gpa" type="number" step="0.01" min="0" max="4"></div>
-        <div class="form-group"><label>Credits Completed</label><input id="adv-stu-credits" type="number" min="0"></div>
-        <div class="form-group">
-          <label>Completed Courses (comma-separated)</label>
-          <textarea id="adv-stu-courses" rows="4" placeholder="COP 3502C, MAC 2311, ENC 1101…"></textarea>
-        </div>
-      </div>
-    </div>
-    <div style="display:flex;gap:10px">
-      <button class="btn btn-primary" onclick="saveStudent()">💾 Save Student</button>
-      <button class="btn btn-ghost" onclick="cancelAddStudent()">Cancel</button>
-    </div>
-  </div>
-
-  <!-- Student table -->
-  <div class="card" id="adv-table-card">
-    <div id="adv-stats" class="stats" style="margin-bottom:20px"></div>
-    <table id="student-table">
-      <thead>
-        <tr>
-          <th>Student</th><th>UFID</th><th>Major</th><th>GPA</th>
-          <th>Credits</th><th>Progress</th><th>CT Status</th><th>Actions</th>
-        </tr>
-      </thead>
-      <tbody id="student-tbody"></tbody>
-    </table>
-    <div id="adv-empty" class="empty" style="display:none">
-      <div class="empty-icon">🎓</div>
-      <p>No students yet. Click <strong>Add Student</strong> to get started.</p>
-    </div>
-  </div>
-
-  <!-- Selected student detail -->
-  <div id="adv-student-detail" style="display:none">
-    <div class="card">
-      <div class="card-title" id="adv-detail-title"></div>
-      <div id="adv-detail-content"></div>
-    </div>
-  </div>
-
-</div>
-</div>
+</footer>
 
 <script>
-// ═══════════════════════════════════════════════════════════════════════════
-//  DATA LAYER
-// ═══════════════════════════════════════════════════════════════════════════
-
-let DB = { majors: [], gen_ed: {} };
-let students = JSON.parse(localStorage.getItem('gatorpath_students') || '[]');
-let completedCourses = new Set();
-let editingStudentId = null;
-let currentMode = 'student';
-
-async function loadData() {
-  try {
-    const r = await fetch('data/majors.json');
-    const json = await r.json();
-    DB.majors = (json.majors && json.majors.length >= DEMO_MAJORS.length) ? json.majors : DEMO_MAJORS;
-    DB.gen_ed = json.gen_ed_requirements || {};
-  } catch(e) {
-    // Fallback: embed minimal data if file not found
-    console.warn('Could not load data/majors.json — using embedded demo data.');
-    DB.majors = DEMO_MAJORS;
-  }
-  populateMajorSelects();
+function handleForm(e) {
+  e.preventDefault();
+  const f = e.target;
+  fetch('/', {method:'POST', headers:{'Content-Type':'application/x-www-form-urlencoded'}, body: new URLSearchParams(new FormData(f)).toString()})
+    .then(()=>{ f.style.display='none'; document.getElementById('cap-ok').style.display='block'; })
+    .catch(()=>{ f.style.display='none'; document.getElementById('cap-ok').style.display='block'; });
 }
-
-function saveMajors() {}  // data is read-only; students persist via localStorage
-
-function saveStudents() {
-  localStorage.setItem('gatorpath_students', JSON.stringify(students));
-}
-
-// ═══════════════════════════════════════════════════════════════════════════
-//  CORE ENGINE
-// ═══════════════════════════════════════════════════════════════════════════
-
-/**
- * Analyze a student's path in a given major.
- * @returns analysis object with completedRequired, missing, ctStatus, switchMatches, etc.
- */
-function analyzePath(majorId, completedSet, totalCredits, gpa) {
-  const major = DB.majors.find(m => m.id === majorId);
-  if (!major) return null;
-
-  const done = new Set([...completedSet].map(c => normalizeCode(c)));
-
-  // Required course status
-  const courseStatus = (major.required_courses || []).map(c => ({
-    ...c,
-    completed: done.has(normalizeCode(c.code))
-  }));
-  const completedRequired = courseStatus.filter(c => c.completed);
-  const missingRequired = courseStatus.filter(c => !c.completed);
-
-  // Critical tracking status
-  const ctStatus = (major.critical_tracking?.courses || []).map(c => ({
-    ...c,
-    completed: done.has(normalizeCode(c.code))
-  }));
-  const ctMissing = ctStatus.filter(c => !c.completed);
-  const ctComplete = ctStatus.filter(c => c.completed);
-  const ctOK = ctMissing.length === 0;
-  const ctAtRisk = !ctOK;
-
-  // Credit totals
-  const earnedRequiredCredits = completedRequired.reduce((s, c) => s + (c.credits||3), 0);
-  const totalRequired = courseStatus.reduce((s, c) => s + (c.credits||3), 0);
-  const pct = Math.min(100, Math.round((totalCredits / major.total_credits) * 100));
-
-  // Estimated semesters remaining
-  const remainingCredits = Math.max(0, major.total_credits - totalCredits);
-  const semestersLeft = Math.ceil(remainingCredits / 15);
-
-  // ── Major switch matches (fixed engine) ─────────────────────────────────────
-  // Problems fixed:
-  //   1. Credit-weighted match (not just course count)
-  //   2. Core-course match ignores gen-ed filler courses
-  //   3. Wasted-credits penalty when most earned credits don't transfer
-  //   4. Same-college bonus keeps suggestions academically relevant
-  //   5. Composite score filters out nonsense recommendations like Psych for engineers
-  const completedNorm = new Set([...completedSet].map(c => normalizeCode(c)));
-
-  const switchMatches = DB.majors
-    .filter(m => m.id !== majorId)
-    .map(m => {
-      const targetReq = m.required_courses || [];
-
-      // FIX 1 — Credit-weighted: sum credits of matched courses vs total required credits
-      const totalReqCredits = targetReq.reduce((s, c) => s + (c.credits || 3), 0);
-      const matched = targetReq.filter(c => completedNorm.has(normalizeCode(c.code)));
-      const savedCredits = matched.reduce((s, c) => s + (c.credits || 3), 0);
-      const creditMatchPct = Math.round((savedCredits / Math.max(1, totalReqCredits)) * 100);
-
-      // FIX 2 — Core-course match: strip gen-ed prefixes, measure only major-specific overlap
-      const coreReq = targetReq.filter(c => !GENERIC_PREFIXES.has(coursePrefix(c.code)));
-      const coreMatched = coreReq.filter(c => completedNorm.has(normalizeCode(c.code)));
-      const coreReqCredits = coreReq.reduce((s, c) => s + (c.credits || 3), 0);
-      const coreMatchedCredits = coreMatched.reduce((s, c) => s + (c.credits || 3), 0);
-      const coreMatchPct = Math.round((coreMatchedCredits / Math.max(1, coreReqCredits)) * 100);
-
-      // FIX 3 — Wasted-credits penalty: credits that don't count toward new major
-      const wastedCredits = Math.max(0, totalCredits - savedCredits);
-      const wastePct = totalCredits > 0 ? (wastedCredits / totalCredits) : 0;
-      const wastePenalty = Math.round(wastePct * 35); // up to -35 pts
-
-      // FIX 4 — Same-college bonus (keeps STEM in STEM, etc.)
-      const sameCollege = (major.college || '') === (m.college || '');
-      const collegeBonus = sameCollege ? 15 : 0;
-
-      // FIX 5 — Composite score
-      const compositeScore = Math.max(0, Math.round(
-        (creditMatchPct  * 0.45) +
-        (coreMatchPct    * 0.35) +
-        collegeBonus             -
-        wastePenalty
-      ));
-
-      return { major: m, matchPct: creditMatchPct, coreMatchPct, compositeScore,
-               matched, savedCredits, wastedCredits, sameCollege };
-    })
-    // Only show majors where the student has meaningful overlap AND a decent composite score
-    .filter(sw => sw.compositeScore >= 8 && sw.matchPct >= 5)
-    .sort((a, b) => b.compositeScore - a.compositeScore);
-
-  return {
-    major, courseStatus, completedRequired, missingRequired,
-    ctStatus, ctMissing, ctComplete, ctOK, ctAtRisk,
-    earnedRequiredCredits, totalRequired, pct, remainingCredits, semestersLeft,
-    switchMatches, gpa,
-    onTrack: gpa >= major.min_gpa && ctOK,
-    hasHold: gpa < (major.critical_tracking?.min_gpa || 2.0) || ctAtRisk
-  };
-}
-
-function normalizeCode(code) {
-  return (code || '').toUpperCase().replace(/\s+/g, ' ').trim();
-}
-
-// Extract course prefix, e.g. "MAC" from "MAC 2311"
-function coursePrefix(code) {
-  const m = (code || '').match(/^([A-Z]{2,4})/);
-  return m ? m[1] : '';
-}
-
-// Generic/gen-ed prefixes that appear in almost every major — not major-specific indicators
-const GENERIC_PREFIXES = new Set([
-  'MAC','MGF','MHF','STA','MAP',   // math
-  'ENC','ENG','LIT','AML',          // english/writing
-  'SPC','COM',                      // speech/comm
-  'PHI','HUM',                      // humanities
-  'AMJ','WOJ','EUH','ANT','SYG',   // social science gen-ed
-  'POS','CPO','INR',                // political science gen-ed
-  'ECO','EVR'                       // economics/env gen-ed
-]);
-
-// ═══════════════════════════════════════════════════════════════════════════
-//  STUDENT PANEL
-// ═══════════════════════════════════════════════════════════════════════════
-
-function addCourse() {
-  const input = document.getElementById('course-input');
-  const val = normalizeCode(input.value);
-  if (!val) return;
-  completedCourses.add(val);
-  input.value = '';
-  renderCourseTags();
-  input.focus();
-}
-
-function removeCourse(code) {
-  completedCourses.delete(code);
-  renderCourseTags();
-}
-
-function quickAdd(codes) {
-  codes.forEach(c => completedCourses.add(normalizeCode(c)));
-  renderCourseTags();
-}
-
-function renderCourseTags() {
-  const container = document.getElementById('course-tags');
-  container.innerHTML = [...completedCourses].map(c =>
-    `<span class="tag">${c}<span class="tag-remove" onclick="removeCourse('${c}')">✕</span></span>`
-  ).join('');
-}
-
-function analyzeStudent() {
-  const majorId = document.getElementById('stu-major').value;
-  const totalCredits = parseInt(document.getElementById('stu-total-credits').value) || completedCourses.size * 3;
-  const gpa = parseFloat(document.getElementById('stu-gpa').value) || 0;
-
-  if (!majorId) { alert('Please select your major.'); return; }
-  if (gpa < 0 || gpa > 4.0) { alert('GPA must be between 0.00 and 4.00.'); document.getElementById('stu-gpa').focus(); return; }
-
-  const analysis = analyzePath(majorId, completedCourses, totalCredits, gpa);
-  if (!analysis) return;
-
-  renderStudentResults(analysis, totalCredits, gpa);
-  document.getElementById('student-results').style.display = 'block';
-  document.getElementById('student-results').scrollIntoView({ behavior: 'smooth' });
-
-  // Narrate the result summary
-  const name = document.getElementById('stu-name').value.trim();
-  const greeting = name ? name + ', ' : '';
-  let narrative = '';
-  if (analysis.hasHold) {
-    narrative = greeting + 'heads up — there may be a registration hold on your account. Please contact your academic advisor right away to address your critical tracking or GPA requirements.';
-  } else if (analysis.pct >= 80) {
-    narrative = greeting + 'you are almost there! You have completed ' + analysis.pct + ' percent of your degree in ' + analysis.major.name + '. Just ' + analysis.semestersLeft + ' semester' + (analysis.semestersLeft !== 1 ? 's' : '') + ' to go — finish strong!';
-  } else if (analysis.onTrack) {
-    narrative = greeting + 'you are on track in ' + analysis.major.name + '! Your GPA and critical tracking look solid. You have about ' + analysis.semestersLeft + ' semester' + (analysis.semestersLeft !== 1 ? 's' : '') + ' remaining. Keep up the great work!';
-  } else {
-    narrative = greeting + 'your analysis for ' + analysis.major.name + ' is ready. You have completed ' + analysis.pct + ' percent of your requirements. Review the details below with your advisor before your next registration.';
-  }
-  setTimeout(function(){ narrateResult(narrative); }, 600);
-}
-
-function renderStudentResults(a, totalCredits, gpa) {
-  // Stats
-  document.getElementById('stat-boxes').innerHTML = `
-    <div class="stat-box">
-      <div class="stat-value">${a.pct}%</div>
-      <div class="stat-label">Degree Complete</div>
-    </div>
-    <div class="stat-box">
-      <div class="stat-value">${totalCredits} / ${a.major.total_credits}</div>
-      <div class="stat-label">Credits</div>
-    </div>
-    <div class="stat-box">
-      <div class="stat-value">${a.semestersLeft}</div>
-      <div class="stat-label">Semesters Left (est.)</div>
-    </div>
-    <div class="stat-box">
-      <div class="stat-value">${gpa > 0 ? gpa.toFixed(2) : '—'}</div>
-      <div class="stat-label">Current GPA (min ${a.major.min_gpa})</div>
-    </div>
-  `;
-
-  // Alert
-  let alertHtml = '';
-  if (a.hasHold) {
-    alertHtml = `<div class="alert alert-danger">🚨 <strong>Registration Hold Risk</strong>: You may have a hold due to ${a.ctAtRisk ? 'incomplete critical-tracking courses' : ''}${a.ctAtRisk && gpa < a.major.min_gpa ? ' and ' : ''}${gpa > 0 && gpa < a.major.min_gpa ? 'GPA below minimum' : ''}. Contact your academic advisor immediately.</div>`;
-  } else if (a.pct >= 80) {
-    alertHtml = `<div class="alert alert-success">🎉 <strong>Almost there!</strong> You are ${100 - a.pct}% away from completing your degree requirements in ${a.major.name}.</div>`;
-  } else if (a.onTrack) {
-    alertHtml = `<div class="alert alert-info">✅ <strong>On track!</strong> GPA and critical-tracking look good. Keep it up!</div>`;
-  } else {
-    alertHtml = `<div class="alert alert-warning">⚠️ Review the items below with your advisor before next registration.</div>`;
-  }
-  document.getElementById('graduation-alert').innerHTML = alertHtml;
-
-  // Course status list
-  const csl = document.getElementById('course-status-list');
-  if (a.courseStatus.length === 0) {
-    csl.innerHTML = '<li style="color:#888">No required courses defined for this major yet.</li>';
-  } else {
-    csl.innerHTML = a.courseStatus.map(c => `
-      <li>
-        <span class="ci ${c.completed ? 'ci-done' : 'ci-missing'}">${c.completed ? '✅' : '❌'}</span>
-        <div>
-          <span class="course-code">${c.code}</span>
-          <span style="color:#555"> ${c.name}</span>
-        </div>
-        <span class="course-credits">${c.credits} cr · <span class="badge ${c.completed ? 'badge-green' : 'badge-red'}">${c.completed ? 'Done' : 'Needed'}</span></span>
-      </li>
-    `).join('');
-  }
-
-  // CT status
-  const ctl = document.getElementById('ct-status-list');
-  if (a.ctStatus.length === 0) {
-    ctl.innerHTML = '<li style="color:#888">No critical-tracking data for this major.</li>';
-  } else {
-    ctl.innerHTML = a.ctStatus.map(c => `
-      <li>
-        <span class="ci ${c.completed ? 'ci-done' : 'ci-missing'}">${c.completed ? '✅' : '⚠️'}</span>
-        <div>
-          <span class="course-code">${c.code}</span>
-          <span style="color:#555"> ${c.name}</span>
-          ${c.required_by_semester ? `<div style="font-size:.75rem;color:#888">Required by Semester ${c.required_by_semester}</div>` : ''}
-        </div>
-        <span class="course-credits badge ${c.completed ? 'badge-green' : 'badge-red'}">${c.completed ? 'Done' : 'Missing'}</span>
-      </li>
-    `).join('');
-  }
-
-  const ctWarn = document.getElementById('ct-warning');
-  if (a.ctAtRisk) {
-    ctWarn.innerHTML = `<div class="alert alert-warning">Missing ${a.ctMissing.length} critical-tracking course(s). A registration hold may be placed if not completed on schedule.</div>`;
-  } else {
-    ctWarn.innerHTML = `<div class="alert alert-success">✅ All critical-tracking courses complete.</div>`;
-  }
-
-  // Semester plan
-  renderSemesterPlan(a);
-
-  // Progress bars
-  renderProgressBars(a, totalCredits);
-
-  // Major switch grid
-  renderSwitchGrid(a.switchMatches);
-}
-
-function renderSemesterPlan(a) {
-  const plan = a.major.model_plan || [];
-  if (plan.length === 0) {
-    document.getElementById('semester-plan').innerHTML = '<p style="color:#888">No model plan available for this major.</p>';
-    return;
-  }
-  document.getElementById('semester-plan').innerHTML = plan.map(sem => {
-    const courseHtml = sem.courses.map(c => {
-      const done = completedCourses.has(normalizeCode(c));
-      return `<div class="sc ${done ? 'completed' : 'missing'}">${done ? '✅' : '○'} ${c}</div>`;
-    }).join('');
-    return `
-      <div class="semester-box">
-        <div class="semester-header">
-          <span>Semester ${sem.semester}</span>
-          <span>${sem.credits} cr</span>
-        </div>
-        <div class="semester-body">${courseHtml}</div>
-      </div>
-    `;
-  }).join('');
-}
-
-function renderProgressBars(a, totalCredits) {
-  const categories = {};
-  (a.major.required_courses || []).forEach(c => {
-    if (!categories[c.category]) categories[c.category] = { total: 0, done: 0 };
-    categories[c.category].total += c.credits || 3;
-    if (completedCourses.has(normalizeCode(c.code))) categories[c.category].done += c.credits || 3;
-  });
-
-  const barsHtml = [
-    // Overall
-    `<div style="margin-bottom:14px">
-      <div style="display:flex;justify-content:space-between;font-size:.85rem;margin-bottom:4px">
-        <strong>Overall Degree Progress</strong>
-        <span>${totalCredits} / ${a.major.total_credits} credits (${a.pct}%)</span>
-      </div>
-      <div class="progress-wrap"><div class="progress-bar" style="width:${a.pct}%"></div></div>
-    </div>`,
-    // Per category
-    ...Object.entries(categories).map(([cat, v]) => {
-      const pct = v.total > 0 ? Math.round((v.done / v.total) * 100) : 0;
-      return `
-        <div style="margin-bottom:10px">
-          <div style="display:flex;justify-content:space-between;font-size:.82rem;margin-bottom:3px">
-            <span style="text-transform:capitalize">${cat.replace('_', ' ')}</span>
-            <span>${v.done}/${v.total} cr (${pct}%)</span>
-          </div>
-          <div class="progress-wrap" style="height:10px"><div class="progress-bar" style="width:${pct}%"></div></div>
-        </div>
-      `;
-    })
-  ].join('');
-  document.getElementById('progress-bars').innerHTML = barsHtml;
-}
-
-function renderSwitchGrid(switchMatches) {
-  const top5 = switchMatches.slice(0, 6);
-  if (top5.length === 0) {
-    document.getElementById('major-switch-grid').innerHTML =
-      '<p style="color:#555;font-size:.9rem">No strong switch matches found. Your completed coursework is highly specialized for your current major — switching would require significant additional work.</p>';
-    return;
-  }
-  document.getElementById('major-switch-grid').innerHTML = top5.map(sw => `
-    <div class="switch-card" onclick="showSwitchDetail('${sw.major.id}', this)">
-      <div class="match-pct">${sw.matchPct}%</div>
-      <h4>${sw.major.name} (${sw.major.degree})</h4>
-      <div class="college-name">${sw.major.college}${sw.sameCollege ? ' ✓ Same College' : ''}</div>
-      <div style="font-size:.8rem;color:#555">
-        <strong>${sw.matched.length}</strong> courses transfer ·
-        <strong>${sw.savedCredits}</strong> cr saved ·
-        <span style="color:${sw.wastedCredits > 40 ? '#c0392b' : '#555'}">
-          ${sw.wastedCredits} cr lost
-        </span>
-      </div>
-    </div>
-  `).join('');
-}
-
-function showSwitchDetail(majorId, card) {
-  document.querySelectorAll('.switch-card').forEach(c => c.classList.remove('selected'));
-  card.classList.add('selected');
-
-  const studentMajorId = document.getElementById('stu-major').value;
-  const totalCredits = parseInt(document.getElementById('stu-total-credits').value) || 60;
-  const gpa = parseFloat(document.getElementById('stu-gpa').value) || 0;
-  const a = analyzePath(majorId, completedCourses, totalCredits, gpa);
-  if (!a) return;
-
-  const detail = document.getElementById('switch-detail');
-  detail.style.display = 'block';
-  detail.innerHTML = `
-    <div class="card" style="margin-top:0;border:2px solid var(--gator-orange)">
-      <div class="card-title">Switch Analysis: ${a.major.name} (${a.major.degree})</div>
-      <div class="two-col">
-        <div>
-          <p style="font-size:.88rem;margin-bottom:12px">
-            <strong>College:</strong> ${a.major.college}<br>
-            <strong>Total Credits Required:</strong> ${a.major.total_credits}<br>
-            <strong>Estimated Semesters After Switch:</strong> ~${a.semestersLeft}
-          </p>
-          <div class="alert ${a.matchPct >= 60 ? 'alert-success' : a.matchPct >= 30 ? 'alert-warning' : 'alert-danger'}">
-            ${a.matchPct >= 60 ? '✅ Strong match — most of your credits carry over.' :
-              a.matchPct >= 30 ? '⚠️ Moderate match — some courses will need to be retaken.' :
-              '❌ Low match — significant new coursework required.'}
-          </div>
-        </div>
-        <div>
-          <p style="font-size:.82rem;font-weight:600;margin-bottom:8px">Missing Critical-Tracking Courses:</p>
-          ${a.ctMissing.length === 0
-            ? `<span class="badge badge-green">None — all CT courses complete!</span>`
-            : a.ctMissing.map(c => `<div style="font-size:.82rem;color:var(--red)">❌ ${c.code} — ${c.name}</div>`).join('')
-          }
-        </div>
-      </div>
-      <div style="margin-top:12px">
-        <p style="font-size:.82rem;font-weight:600;margin-bottom:8px">Courses You'd Still Need:</p>
-        <div style="display:flex;flex-wrap:wrap;gap:6px">
-          ${a.missingRequired.slice(0, 20).map(c =>
-            `<span class="tag" style="background:var(--red-light);color:var(--red)">${c.code} (${c.credits}cr)</span>`
-          ).join('')}
-          ${a.missingRequired.length > 20 ? `<span class="tag">+${a.missingRequired.length - 20} more</span>` : ''}
-        </div>
-      </div>
-    </div>
-  `;
-  detail.scrollIntoView({ behavior: 'smooth' });
-}
-
-function clearStudent() {
-  completedCourses.clear();
-  renderCourseTags();
-  document.getElementById('student-results').style.display = 'none';
-  document.getElementById('stu-name').value = '';
-  document.getElementById('stu-gpa').value = '';
-  document.getElementById('stu-total-credits').value = '';
-}
-
-function printReport() { window.print(); }
-
-// ═══════════════════════════════════════════════════════════════════════════
-//  ADVISOR PANEL
-// ═══════════════════════════════════════════════════════════════════════════
-
-function renderAdvisorTable() {
-  const search = document.getElementById('adv-search').value.toLowerCase();
-  const majorFilter = document.getElementById('adv-filter-major').value;
-
-  let filtered = students.filter(s => {
-    const matchSearch = !search ||
-      s.name.toLowerCase().includes(search) ||
-      (s.id || '').toLowerCase().includes(search);
-    const matchMajor = !majorFilter || s.majorId === majorFilter;
-    return matchSearch && matchMajor;
-  });
-
-  const tbody = document.getElementById('student-tbody');
-  const empty = document.getElementById('adv-empty');
-
-  if (filtered.length === 0) {
-    tbody.innerHTML = '';
-    empty.style.display = 'block';
-  } else {
-    empty.style.display = 'none';
-    tbody.innerHTML = filtered.map(s => {
-      const major = DB.majors.find(m => m.id === s.majorId);
-      const courses = new Set((s.courses || '').split(',').map(c => normalizeCode(c)).filter(Boolean));
-      const a = major ? analyzePath(s.majorId, courses, s.credits || 0, s.gpa || 0) : null;
-      const pct = a ? a.pct : 0;
-      const ctBadge = a
-        ? (a.ctOK ? '<span class="badge badge-green">✅ On Track</span>' : '<span class="badge badge-red">⚠️ At Risk</span>')
-        : '—';
-      return `
-        <tr>
-          <td><strong>${s.name}</strong></td>
-          <td>${s.id || '—'}</td>
-          <td>${major ? major.name : s.majorId || '—'}</td>
-          <td>${s.gpa || '—'}</td>
-          <td>${s.credits || 0}</td>
-          <td>
-            <div class="progress-wrap" style="height:8px;width:100px">
-              <div class="progress-bar" style="width:${pct}%"></div>
-            </div>
-            <span style="font-size:.75rem;color:#888">${pct}%</span>
-          </td>
-          <td>${ctBadge}</td>
-          <td>
-            <button class="btn btn-ghost btn-sm" onclick="viewStudentDetail('${s._key}')">View</button>
-            <button class="btn btn-ghost btn-sm" onclick="editStudent('${s._key}')">Edit</button>
-            <button class="btn btn-ghost btn-sm" style="color:var(--red)" onclick="deleteStudent('${s._key}')">Del</button>
-          </td>
-        </tr>
-      `;
-    }).join('');
-  }
-
-  // Advisor stats
-  const totalStudents = students.length;
-  const atRisk = students.filter(s => {
-    const major = DB.majors.find(m => m.id === s.majorId);
-    if (!major) return false;
-    const courses = new Set((s.courses || '').split(',').map(c => normalizeCode(c)).filter(Boolean));
-    const a = analyzePath(s.majorId, courses, s.credits || 0, s.gpa || 0);
-    return a && !a.onTrack;
-  }).length;
-
-  document.getElementById('adv-stats').innerHTML = `
-    <div class="stat-box"><div class="stat-value">${totalStudents}</div><div class="stat-label">Total Students</div></div>
-    <div class="stat-box"><div class="stat-value">${atRisk}</div><div class="stat-label" style="color:var(--red)">At Risk</div></div>
-    <div class="stat-box"><div class="stat-value">${totalStudents - atRisk}</div><div class="stat-label" style="color:var(--green)">On Track</div></div>
-    <div class="stat-box"><div class="stat-value">${DB.majors.length}</div><div class="stat-label">Majors Available</div></div>
-  `;
-}
-
-function openAddStudent() {
-  editingStudentId = null;
-  document.getElementById('adv-form-title').textContent = '➕ Add Student';
-  ['adv-stu-name','adv-stu-id','adv-stu-email','adv-stu-gpa','adv-stu-credits','adv-stu-courses'].forEach(id => {
-    document.getElementById(id).value = '';
-  });
-  document.getElementById('adv-stu-major').value = '';
-  document.getElementById('adv-form-card').style.display = 'block';
-  document.getElementById('adv-form-card').scrollIntoView({ behavior: 'smooth' });
-}
-
-function cancelAddStudent() {
-  document.getElementById('adv-form-card').style.display = 'none';
-  editingStudentId = null;
-}
-
-function saveStudent() {
-  const name = document.getElementById('adv-stu-name').value.trim();
-  if (!name) { alert('Name is required.'); return; }
-  const advGpa = parseFloat(document.getElementById('adv-stu-gpa').value);
-  if (!isNaN(advGpa) && (advGpa < 0 || advGpa > 4.0)) { alert('GPA must be between 0.00 and 4.00.'); document.getElementById('adv-stu-gpa').focus(); return; }
-  const student = {
-    _key: editingStudentId || Date.now().toString(),
-    name,
-    id: document.getElementById('adv-stu-id').value.trim(),
-    email: document.getElementById('adv-stu-email').value.trim(),
-    majorId: document.getElementById('adv-stu-major').value,
-    gpa: parseFloat(document.getElementById('adv-stu-gpa').value) || 0,
-    credits: parseInt(document.getElementById('adv-stu-credits').value) || 0,
-    courses: document.getElementById('adv-stu-courses').value.trim()
-  };
-
-  if (editingStudentId) {
-    const idx = students.findIndex(s => s._key === editingStudentId);
-    if (idx !== -1) students[idx] = student;
-  } else {
-    students.push(student);
-  }
-  saveStudents();
-  cancelAddStudent();
-  renderAdvisorTable();
-}
-
-function editStudent(key) {
-  const s = students.find(s => s._key === key);
-  if (!s) return;
-  editingStudentId = key;
-  document.getElementById('adv-form-title').textContent = '✏️ Edit Student';
-  document.getElementById('adv-stu-name').value = s.name || '';
-  document.getElementById('adv-stu-id').value = s.id || '';
-  document.getElementById('adv-stu-email').value = s.email || '';
-  document.getElementById('adv-stu-major').value = s.majorId || '';
-  document.getElementById('adv-stu-gpa').value = s.gpa || '';
-  document.getElementById('adv-stu-credits').value = s.credits || '';
-  document.getElementById('adv-stu-courses').value = s.courses || '';
-  document.getElementById('adv-form-card').style.display = 'block';
-  document.getElementById('adv-form-card').scrollIntoView({ behavior: 'smooth' });
-}
-
-function deleteStudent(key) {
-  if (!confirm('Delete this student?')) return;
-  students = students.filter(s => s._key !== key);
-  saveStudents();
-  renderAdvisorTable();
-}
-
-function viewStudentDetail(key) {
-  const s = students.find(s => s._key === key);
-  if (!s) return;
-  const major = DB.majors.find(m => m.id === s.majorId);
-  const courses = new Set((s.courses || '').split(',').map(c => normalizeCode(c)).filter(Boolean));
-  const a = major ? analyzePath(s.majorId, courses, s.credits || 0, s.gpa || 0) : null;
-
-  document.getElementById('adv-detail-title').textContent = `🎓 ${s.name} — ${major ? major.name : 'Unknown Major'}`;
-  const detailContent = document.getElementById('adv-detail-content');
-
-  if (!a) {
-    detailContent.innerHTML = '<p>No analysis available. Make sure a valid major is selected.</p>';
-  } else {
-    detailContent.innerHTML = `
-      <div class="stats">
-        <div class="stat-box"><div class="stat-value">${a.pct}%</div><div class="stat-label">Progress</div></div>
-        <div class="stat-box"><div class="stat-value">${s.credits||0}/${a.major.total_credits}</div><div class="stat-label">Credits</div></div>
-        <div class="stat-box"><div class="stat-value">${a.semestersLeft}</div><div class="stat-label">Semesters Left</div></div>
-        <div class="stat-box"><div class="stat-value">${s.gpa||'—'}</div><div class="stat-label">GPA</div></div>
-      </div>
-      <div class="two-col">
-        <div>
-          <p style="font-weight:700;margin-bottom:8px">Critical Tracking:</p>
-          ${a.ctStatus.map(c => `
-            <div style="font-size:.85rem;padding:4px 0">
-              ${c.completed ? '✅' : '❌'} ${c.code} — ${c.name}
-            </div>`).join('')}
-        </div>
-        <div>
-          <p style="font-weight:700;margin-bottom:8px">Top Major Switch Matches:</p>
-          ${a.switchMatches.slice(0,3).map(sw => `
-            <div style="font-size:.85rem;padding:4px 0">
-              <strong>${sw.major.name}</strong>: ${sw.matchPct}% match (${sw.savedCredits} cr saved)
-            </div>`).join('')}
-        </div>
-      </div>
-    `;
-  }
-
-  document.getElementById('adv-student-detail').style.display = 'block';
-  document.getElementById('adv-student-detail').scrollIntoView({ behavior: 'smooth' });
-}
-
-function exportCSV() {
-  const headers = ['Name','UFID','Email','Major','GPA','Credits','Progress %','CT Status'];
-  const rows = students.map(s => {
-    const major = DB.majors.find(m => m.id === s.majorId);
-    const courses = new Set((s.courses || '').split(',').map(c => normalizeCode(c)).filter(Boolean));
-    const a = major ? analyzePath(s.majorId, courses, s.credits || 0, s.gpa || 0) : null;
-    return [
-      s.name, s.id, s.email,
-      major ? major.name : s.majorId,
-      s.gpa, s.credits,
-      a ? a.pct + '%' : '—',
-      a ? (a.onTrack ? 'On Track' : 'At Risk') : '—'
-    ].map(v => `"${v||''}"`).join(',');
-  });
-  const csv = [headers.join(','), ...rows].join('\n');
-  const blob = new Blob([csv], { type: 'text/csv' });
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = 'gatorpath_students.csv';
-  a.click();
-}
-
-// ═══════════════════════════════════════════════════════════════════════════
-//  SHARED HELPERS
-// ═══════════════════════════════════════════════════════════════════════════
-
-function switchMode(mode) {
-  currentMode = mode;
-  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-  document.getElementById(`panel-${mode}`).classList.add('active');
-  document.querySelectorAll('.mode-tab').forEach(t => t.classList.remove('active'));
-  document.querySelectorAll('.mode-tab')[mode === 'student' ? 0 : 1].classList.add('active');
-  if (mode === 'advisor') renderAdvisorTable();
-}
-
-function populateMajorSelects() {
-  const opts = DB.majors.map(m =>
-    `<option value="${m.id}">${m.name} (${m.degree}) — ${m.college}</option>`
-  ).join('');
-
-  document.getElementById('stu-major').innerHTML = '<option value="">— Select your major —</option>' + opts;
-  document.getElementById('adv-stu-major').innerHTML = '<option value="">— Select major —</option>' + opts;
-
-  const filterOpts = DB.majors.map(m => `<option value="${m.id}">${m.name}</option>`).join('');
-  document.getElementById('adv-filter-major').innerHTML = '<option value="">All Majors</option>' + filterOpts;
-}
-
-// ═══════════════════════════════════════════════════════════════════════════
-//  DEMO FALLBACK DATA  (used if data/majors.json can't be fetched)
-// ═══════════════════════════════════════════════════════════════════════════
-const DEMO_MAJORS = [
-  // ── ENGINEERING ──────────────────────────────────────────────────────
-  {
-    id: "computer_science", name: "Computer Science", degree: "B.S.",
-    college: "Herbert Wertheim College of Engineering", total_credits: 120, min_gpa: 2.0,
-    critical_tracking: { min_gpa: 2.0, courses: [
-      {code:"MAC 2311",name:"Calculus 1",credits:4,required_by_semester:2},
-      {code:"COP 3502C",name:"CS 1",credits:3,required_by_semester:2},
-      {code:"COP 3503C",name:"CS 2",credits:3,required_by_semester:3},
-      {code:"COT 3100",name:"Discrete Structures",credits:3,required_by_semester:3}
-    ]},
-    required_courses: [
-      {code:"MAC 2311",name:"Calculus 1",credits:4,category:"math"},
-      {code:"MAC 2312",name:"Calculus 2",credits:4,category:"math"},
-      {code:"COP 3502C",name:"CS 1",credits:3,category:"core"},
-      {code:"COP 3503C",name:"CS 2",credits:3,category:"core"},
-      {code:"COT 3100",name:"Discrete Structures",credits:3,category:"core"},
-      {code:"COP 3530",name:"Data Structures",credits:3,category:"core"},
-      {code:"CDA 3101",name:"Computer Organization",credits:3,category:"core"},
-      {code:"COP 4020",name:"Programming Languages",credits:3,category:"core"},
-      {code:"COP 4600",name:"Operating Systems",credits:3,category:"core"},
-      {code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"},
-      {code:"ENC 1102",name:"Composition 2",credits:3,category:"gen_ed"}
-    ],
-    model_plan: [
-      {semester:1,courses:["ENC 1101","MAC 2311","COP 3502C"],credits:10},
-      {semester:2,courses:["ENC 1102","MAC 2312","COP 3503C","COT 3100"],credits:13},
-      {semester:3,courses:["MAC 2313","COP 3530","CDA 3101"],credits:10},
-      {semester:4,courses:["COP 4020","COP 4600","Elective"],credits:9}
-    ]
-  },
-  {
-    id: "computer_engineering", name: "Computer Engineering", degree: "B.S.",
-    college: "Herbert Wertheim College of Engineering", total_credits: 128, min_gpa: 2.0,
-    critical_tracking: { min_gpa: 2.0, courses: [
-      {code:"MAC 2311",name:"Calculus 1",credits:4,required_by_semester:2},
-      {code:"COP 3502C",name:"CS 1",credits:3,required_by_semester:2},
-      {code:"EEL 3701C",name:"Digital Logic",credits:3,required_by_semester:3}
-    ]},
-    required_courses: [
-      {code:"MAC 2311",name:"Calculus 1",credits:4,category:"math"},
-      {code:"MAC 2312",name:"Calculus 2",credits:4,category:"math"},
-      {code:"MAC 2313",name:"Calculus 3",credits:4,category:"math"},
-      {code:"COP 3502C",name:"CS 1",credits:3,category:"core"},
-      {code:"COP 3503C",name:"CS 2",credits:3,category:"core"},
-      {code:"COT 3100",name:"Discrete Structures",credits:3,category:"core"},
-      {code:"EEL 3701C",name:"Digital Logic",credits:3,category:"core"},
-      {code:"EEL 4712C",name:"Digital Design",credits:3,category:"core"},
-      {code:"CDA 3101",name:"Computer Organization",credits:3,category:"core"},
-      {code:"PHY 2048C",name:"Physics with Calculus 1",credits:4,category:"science"},
-      {code:"PHY 2049C",name:"Physics with Calculus 2",credits:4,category:"science"},
-      {code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"}
-    ],
-    model_plan: [
-      {semester:1,courses:["ENC 1101","MAC 2311","PHY 2048C"],credits:11},
-      {semester:2,courses:["MAC 2312","COP 3502C","PHY 2049C"],credits:10},
-      {semester:3,courses:["MAC 2313","COP 3503C","EEL 3701C"],credits:10},
-      {semester:4,courses:["COT 3100","CDA 3101","EEL 4712C"],credits:9}
-    ]
-  },
-  {
-    id: "electrical_engineering", name: "Electrical Engineering", degree: "B.S.",
-    college: "Herbert Wertheim College of Engineering", total_credits: 128, min_gpa: 2.0,
-    critical_tracking: { min_gpa: 2.0, courses: [
-      {code:"MAC 2311",name:"Calculus 1",credits:4,required_by_semester:2},
-      {code:"PHY 2048C",name:"Physics 1",credits:4,required_by_semester:2},
-      {code:"EEL 3111C",name:"Circuits 1",credits:3,required_by_semester:3}
-    ]},
-    required_courses: [
-      {code:"MAC 2311",name:"Calculus 1",credits:4,category:"math"},
-      {code:"MAC 2312",name:"Calculus 2",credits:4,category:"math"},
-      {code:"MAC 2313",name:"Calculus 3",credits:4,category:"math"},
-      {code:"PHY 2048C",name:"Physics with Calculus 1",credits:4,category:"science"},
-      {code:"PHY 2049C",name:"Physics with Calculus 2",credits:4,category:"science"},
-      {code:"EEL 3111C",name:"Circuits 1",credits:3,category:"core"},
-      {code:"EEL 3112",name:"Circuits 2",credits:3,category:"core"},
-      {code:"EEL 4309",name:"Electronics 1",credits:3,category:"core"},
-      {code:"EEL 3701C",name:"Digital Logic",credits:3,category:"core"},
-      {code:"COP 3502C",name:"CS 1",credits:3,category:"core"},
-      {code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"}
-    ],
-    model_plan: [
-      {semester:1,courses:["ENC 1101","MAC 2311","PHY 2048C"],credits:11},
-      {semester:2,courses:["MAC 2312","PHY 2049C","EEL 3111C"],credits:10},
-      {semester:3,courses:["MAC 2313","EEL 3112","EEL 3701C"],credits:10},
-      {semester:4,courses:["EEL 4309","COP 3502C","Elective"],credits:9}
-    ]
-  },
-  {
-    id: "industrial_systems_engineering", name: "Industrial & Systems Engineering", degree: "B.S.",
-    college: "Herbert Wertheim College of Engineering", total_credits: 128, min_gpa: 2.0,
-    critical_tracking: { min_gpa: 2.0, courses: [
-      {code:"MAC 2311",name:"Calculus 1",credits:4,required_by_semester:2},
-      {code:"STA 3032",name:"Engineering Statistics",credits:3,required_by_semester:3}
-    ]},
-    required_courses: [
-      {code:"MAC 2311",name:"Calculus 1",credits:4,category:"math"},
-      {code:"MAC 2312",name:"Calculus 2",credits:4,category:"math"},
-      {code:"STA 3032",name:"Engineering Statistics",credits:3,category:"core"},
-      {code:"ISE 3213",name:"Engineering Economy",credits:3,category:"core"},
-      {code:"ISE 4234",name:"Production Systems",credits:3,category:"core"},
-      {code:"EGN 3613",name:"Engineering Economic Analysis",credits:3,category:"core"},
-      {code:"COP 3502C",name:"CS 1",credits:3,category:"core"},
-      {code:"PHY 2048C",name:"Physics 1",credits:4,category:"science"},
-      {code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"}
-    ],
-    model_plan: [
-      {semester:1,courses:["ENC 1101","MAC 2311","PHY 2048C"],credits:11},
-      {semester:2,courses:["MAC 2312","COP 3502C","STA 3032"],credits:10},
-      {semester:3,courses:["ISE 3213","ISE 4234","Elective"],credits:9},
-      {semester:4,courses:["EGN 3613","Elective","Elective"],credits:9}
-    ]
-  },
-  {
-    id: "biomedical_engineering", name: "Biomedical Engineering", degree: "B.S.",
-    college: "Herbert Wertheim College of Engineering", total_credits: 128, min_gpa: 2.0,
-    critical_tracking: { min_gpa: 2.0, courses: [
-      {code:"MAC 2311",name:"Calculus 1",credits:4,required_by_semester:2},
-      {code:"CHM 2045",name:"General Chemistry 1",credits:3,required_by_semester:2},
-      {code:"PHY 2048C",name:"Physics 1",credits:4,required_by_semester:3}
-    ]},
-    required_courses: [
-      {code:"MAC 2311",name:"Calculus 1",credits:4,category:"math"},
-      {code:"MAC 2312",name:"Calculus 2",credits:4,category:"math"},
-      {code:"CHM 2045",name:"General Chemistry 1",credits:3,category:"science"},
-      {code:"CHM 2046",name:"General Chemistry 2",credits:3,category:"science"},
-      {code:"PHY 2048C",name:"Physics 1",credits:4,category:"science"},
-      {code:"PHY 2049C",name:"Physics 2",credits:4,category:"science"},
-      {code:"BSC 2010C",name:"Biology 1",credits:3,category:"science"},
-      {code:"BME 3403",name:"Intro to Biomedical Engineering",credits:3,category:"core"},
-      {code:"EGM 3520",name:"Mechanics of Materials",credits:3,category:"core"},
-      {code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"}
-    ],
-    model_plan: [
-      {semester:1,courses:["ENC 1101","MAC 2311","CHM 2045"],credits:10},
-      {semester:2,courses:["MAC 2312","PHY 2048C","BSC 2010C"],credits:11},
-      {semester:3,courses:["CHM 2046","PHY 2049C","BME 3403"],credits:10},
-      {semester:4,courses:["EGM 3520","Elective","Elective"],credits:9}
-    ]
-  },
-  {
-    id: "civil_engineering", name: "Civil Engineering", degree: "B.S.",
-    college: "Herbert Wertheim College of Engineering", total_credits: 128, min_gpa: 2.0,
-    critical_tracking: { min_gpa: 2.0, courses: [
-      {code:"MAC 2311",name:"Calculus 1",credits:4,required_by_semester:2},
-      {code:"PHY 2048C",name:"Physics 1",credits:4,required_by_semester:2}
-    ]},
-    required_courses: [
-      {code:"MAC 2311",name:"Calculus 1",credits:4,category:"math"},
-      {code:"MAC 2312",name:"Calculus 2",credits:4,category:"math"},
-      {code:"MAC 2313",name:"Calculus 3",credits:4,category:"math"},
-      {code:"PHY 2048C",name:"Physics 1",credits:4,category:"science"},
-      {code:"CHM 2045",name:"General Chemistry 1",credits:3,category:"science"},
-      {code:"EGM 2511",name:"Engineering Mechanics 1",credits:3,category:"core"},
-      {code:"CEG 3012C",name:"Soil Mechanics",credits:4,category:"core"},
-      {code:"CES 3100",name:"Structural Analysis",credits:3,category:"core"},
-      {code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"}
-    ],
-    model_plan: [
-      {semester:1,courses:["ENC 1101","MAC 2311","PHY 2048C"],credits:11},
-      {semester:2,courses:["MAC 2312","CHM 2045","EGM 2511"],credits:10},
-      {semester:3,courses:["MAC 2313","CEG 3012C","Elective"],credits:11},
-      {semester:4,courses:["CES 3100","Elective","Elective"],credits:9}
-    ]
-  },
-  // ── BUSINESS ──────────────────────────────────────────────────────────
-  {
-    id: "information_systems", name: "Information Systems & Operations Mgmt", degree: "B.S.B.A.",
-    college: "Warrington College of Business", total_credits: 120, min_gpa: 2.0,
-    critical_tracking: { min_gpa: 2.0, courses: [
-      {code:"CGS 2100",name:"Microcomputer Applications",credits:3,required_by_semester:2},
-      {code:"ISM 3004",name:"Intro to Information Systems",credits:3,required_by_semester:2},
-      {code:"QMB 3250",name:"Statistics for Business",credits:3,required_by_semester:3},
-      {code:"ISM 3113",name:"Systems Analysis & Design",credits:3,required_by_semester:4}
-    ]},
-    required_courses: [
-      {code:"CGS 2100",name:"Microcomputer Applications",credits:3,category:"core"},
-      {code:"ISM 3004",name:"Intro to Information Systems",credits:3,category:"core"},
-      {code:"ISM 3113",name:"Systems Analysis & Design",credits:3,category:"core"},
-      {code:"ISM 4300",name:"IT Management",credits:3,category:"core"},
-      {code:"ISM 4212",name:"Database Management",credits:3,category:"core"},
-      {code:"ISM 4220",name:"Business Data Comm & Networks",credits:3,category:"core"},
-      {code:"QMB 3250",name:"Statistics for Business",credits:3,category:"core"},
-      {code:"ACG 2021",name:"Financial Accounting",credits:3,category:"business"},
-      {code:"ECO 2013",name:"Macroeconomics",credits:3,category:"business"},
-      {code:"ECO 2023",name:"Microeconomics",credits:3,category:"business"},
-      {code:"MAN 3025",name:"Principles of Management",credits:3,category:"business"},
-      {code:"MAR 3023",name:"Basic Marketing",credits:3,category:"business"},
-      {code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"},
-      {code:"ENC 1102",name:"Composition 2",credits:3,category:"gen_ed"}
-    ],
-    model_plan: [
-      {semester:1,courses:["ENC 1101","CGS 2100","ECO 2013"],credits:9},
-      {semester:2,courses:["ENC 1102","ISM 3004","ACG 2021","ECO 2023"],credits:12},
-      {semester:3,courses:["ISM 3113","QMB 3250","MAN 3025"],credits:9},
-      {semester:4,courses:["ISM 4300","ISM 4212","ISM 4220","MAR 3023"],credits:12}
-    ]
-  },
-  {
-    id: "finance", name: "Finance", degree: "B.S.B.A.",
-    college: "Warrington College of Business", total_credits: 120, min_gpa: 2.0,
-    critical_tracking: { min_gpa: 2.0, courses: [
-      {code:"ACG 2021",name:"Financial Accounting",credits:3,required_by_semester:2},
-      {code:"ECO 2013",name:"Macroeconomics",credits:3,required_by_semester:2},
-      {code:"FIN 3403",name:"Business Finance",credits:3,required_by_semester:3}
-    ]},
-    required_courses: [
-      {code:"ACG 2021",name:"Financial Accounting",credits:3,category:"core"},
-      {code:"ACG 2071",name:"Managerial Accounting",credits:3,category:"core"},
-      {code:"FIN 3403",name:"Business Finance",credits:3,category:"core"},
-      {code:"FIN 4414",name:"Advanced Financial Management",credits:3,category:"core"},
-      {code:"FIN 4604",name:"International Financial Management",credits:3,category:"core"},
-      {code:"ECO 2013",name:"Macroeconomics",credits:3,category:"business"},
-      {code:"ECO 2023",name:"Microeconomics",credits:3,category:"business"},
-      {code:"QMB 3250",name:"Statistics for Business",credits:3,category:"core"},
-      {code:"MAN 3025",name:"Principles of Management",credits:3,category:"business"},
-      {code:"MAR 3023",name:"Basic Marketing",credits:3,category:"business"},
-      {code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"},
-      {code:"ENC 1102",name:"Composition 2",credits:3,category:"gen_ed"}
-    ],
-    model_plan: [
-      {semester:1,courses:["ENC 1101","ACG 2021","ECO 2013"],credits:9},
-      {semester:2,courses:["ENC 1102","ACG 2071","ECO 2023"],credits:9},
-      {semester:3,courses:["FIN 3403","QMB 3250","MAN 3025"],credits:9},
-      {semester:4,courses:["FIN 4414","FIN 4604","MAR 3023"],credits:9}
-    ]
-  },
-  {
-    id: "management", name: "Management", degree: "B.S.B.A.",
-    college: "Warrington College of Business", total_credits: 120, min_gpa: 2.0,
-    critical_tracking: { min_gpa: 2.0, courses: [
-      {code:"ACG 2021",name:"Financial Accounting",credits:3,required_by_semester:2},
-      {code:"MAN 3025",name:"Principles of Management",credits:3,required_by_semester:3}
-    ]},
-    required_courses: [
-      {code:"ACG 2021",name:"Financial Accounting",credits:3,category:"core"},
-      {code:"MAN 3025",name:"Principles of Management",credits:3,category:"core"},
-      {code:"MAN 4301",name:"Human Resource Management",credits:3,category:"core"},
-      {code:"MAN 4504",name:"Operations Management",credits:3,category:"core"},
-      {code:"GEB 3213",name:"Business Communication",credits:3,category:"core"},
-      {code:"ECO 2013",name:"Macroeconomics",credits:3,category:"business"},
-      {code:"ECO 2023",name:"Microeconomics",credits:3,category:"business"},
-      {code:"QMB 3250",name:"Statistics for Business",credits:3,category:"core"},
-      {code:"MAR 3023",name:"Basic Marketing",credits:3,category:"business"},
-      {code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"}
-    ],
-    model_plan: [
-      {semester:1,courses:["ENC 1101","ACG 2021","ECO 2013"],credits:9},
-      {semester:2,courses:["ECO 2023","QMB 3250","MAN 3025"],credits:9},
-      {semester:3,courses:["GEB 3213","MAN 4301","MAR 3023"],credits:9},
-      {semester:4,courses:["MAN 4504","Elective","Elective"],credits:9}
-    ]
-  },
-  {
-    id: "marketing", name: "Marketing", degree: "B.S.B.A.",
-    college: "Warrington College of Business", total_credits: 120, min_gpa: 2.0,
-    critical_tracking: { min_gpa: 2.0, courses: [
-      {code:"MAR 3023",name:"Basic Marketing",credits:3,required_by_semester:2},
-      {code:"ECO 2013",name:"Macroeconomics",credits:3,required_by_semester:2}
-    ]},
-    required_courses: [
-      {code:"MAR 3023",name:"Basic Marketing",credits:3,category:"core"},
-      {code:"MAR 3231",name:"Marketing Communication",credits:3,category:"core"},
-      {code:"MAR 3611",name:"International Marketing",credits:3,category:"core"},
-      {code:"MAR 4156",name:"Marketing Research",credits:3,category:"core"},
-      {code:"ACG 2021",name:"Financial Accounting",credits:3,category:"business"},
-      {code:"ECO 2013",name:"Macroeconomics",credits:3,category:"business"},
-      {code:"ECO 2023",name:"Microeconomics",credits:3,category:"business"},
-      {code:"QMB 3250",name:"Statistics for Business",credits:3,category:"core"},
-      {code:"MAN 3025",name:"Principles of Management",credits:3,category:"business"},
-      {code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"}
-    ],
-    model_plan: [
-      {semester:1,courses:["ENC 1101","MAR 3023","ECO 2013"],credits:9},
-      {semester:2,courses:["ACG 2021","ECO 2023","MAR 3231"],credits:9},
-      {semester:3,courses:["QMB 3250","MAR 3611","MAN 3025"],credits:9},
-      {semester:4,courses:["MAR 4156","Elective","Elective"],credits:9}
-    ]
-  },
-  {
-    id: "accounting", name: "Accounting", degree: "B.S.A.",
-    college: "Fisher School of Accounting", total_credits: 120, min_gpa: 2.5,
-    critical_tracking: { min_gpa: 2.5, courses: [
-      {code:"ACG 2021",name:"Financial Accounting",credits:3,required_by_semester:2},
-      {code:"ACG 2071",name:"Managerial Accounting",credits:3,required_by_semester:3},
-      {code:"ACG 3101",name:"Intermediate Accounting 1",credits:3,required_by_semester:4}
-    ]},
-    required_courses: [
-      {code:"ACG 2021",name:"Financial Accounting",credits:3,category:"core"},
-      {code:"ACG 2071",name:"Managerial Accounting",credits:3,category:"core"},
-      {code:"ACG 3101",name:"Intermediate Accounting 1",credits:3,category:"core"},
-      {code:"ACG 3111",name:"Intermediate Accounting 2",credits:3,category:"core"},
-      {code:"ACG 4401",name:"Accounting Information Systems",credits:3,category:"core"},
-      {code:"ACG 4632",name:"Auditing 1",credits:3,category:"core"},
-      {code:"TAX 4001",name:"Individual Income Tax",credits:3,category:"core"},
-      {code:"ECO 2013",name:"Macroeconomics",credits:3,category:"business"},
-      {code:"QMB 3250",name:"Statistics for Business",credits:3,category:"core"},
-      {code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"}
-    ],
-    model_plan: [
-      {semester:1,courses:["ENC 1101","ACG 2021","ECO 2013"],credits:9},
-      {semester:2,courses:["ACG 2071","QMB 3250","Elective"],credits:9},
-      {semester:3,courses:["ACG 3101","ACG 4401","Elective"],credits:9},
-      {semester:4,courses:["ACG 3111","ACG 4632","TAX 4001"],credits:9}
-    ]
-  },
-  // ── LIBERAL ARTS & SCIENCES ───────────────────────────────────────────
-  {
-    id: "mathematics", name: "Mathematics", degree: "B.S.",
-    college: "College of Liberal Arts and Sciences", total_credits: 120, min_gpa: 2.0,
-    critical_tracking: { min_gpa: 2.0, courses: [
-      {code:"MAC 2311",name:"Calculus 1",credits:4,required_by_semester:1},
-      {code:"MAC 2312",name:"Calculus 2",credits:4,required_by_semester:2},
-      {code:"MAS 3114",name:"Computational Linear Algebra",credits:3,required_by_semester:3}
-    ]},
-    required_courses: [
-      {code:"MAC 2311",name:"Calculus 1",credits:4,category:"math"},
-      {code:"MAC 2312",name:"Calculus 2",credits:4,category:"math"},
-      {code:"MAC 2313",name:"Calculus 3",credits:4,category:"math"},
-      {code:"MAP 2302",name:"Differential Equations",credits:3,category:"math"},
-      {code:"MAS 3114",name:"Computational Linear Algebra",credits:3,category:"core"},
-      {code:"MAD 2104",name:"Discrete Mathematics 1",credits:3,category:"core"},
-      {code:"MAS 4105",name:"Linear Algebra 1",credits:4,category:"core"},
-      {code:"MAA 4211",name:"Advanced Calculus 1",credits:4,category:"core"},
-      {code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"},
-      {code:"ENC 1102",name:"Composition 2",credits:3,category:"gen_ed"}
-    ],
-    model_plan: [
-      {semester:1,courses:["ENC 1101","MAC 2311","MAD 2104"],credits:10},
-      {semester:2,courses:["ENC 1102","MAC 2312","MAS 3114"],credits:10},
-      {semester:3,courses:["MAC 2313","MAP 2302","Elective"],credits:11},
-      {semester:4,courses:["MAS 4105","MAA 4211","Elective"],credits:11}
-    ]
-  },
-  {
-    id: "statistics", name: "Statistics", degree: "B.S.",
-    college: "College of Liberal Arts and Sciences", total_credits: 120, min_gpa: 2.0,
-    critical_tracking: { min_gpa: 2.0, courses: [
-      {code:"MAC 2311",name:"Calculus 1",credits:4,required_by_semester:1},
-      {code:"STA 2023",name:"Statistics 1",credits:3,required_by_semester:2},
-      {code:"STA 3024",name:"Statistics 2",credits:3,required_by_semester:3}
-    ]},
-    required_courses: [
-      {code:"MAC 2311",name:"Calculus 1",credits:4,category:"math"},
-      {code:"MAC 2312",name:"Calculus 2",credits:4,category:"math"},
-      {code:"STA 2023",name:"Statistics 1",credits:3,category:"core"},
-      {code:"STA 3024",name:"Statistics 2",credits:3,category:"core"},
-      {code:"STA 4210",name:"Regression Analysis",credits:3,category:"core"},
-      {code:"STA 4211",name:"Design of Experiments",credits:3,category:"core"},
-      {code:"STA 4321",name:"Mathematical Statistics 1",credits:3,category:"core"},
-      {code:"COP 3502C",name:"CS 1",credits:3,category:"core"},
-      {code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"},
-      {code:"ENC 1102",name:"Composition 2",credits:3,category:"gen_ed"}
-    ],
-    model_plan: [
-      {semester:1,courses:["ENC 1101","MAC 2311","STA 2023"],credits:10},
-      {semester:2,courses:["ENC 1102","MAC 2312","STA 3024"],credits:10},
-      {semester:3,courses:["COP 3502C","STA 4210","Elective"],credits:9},
-      {semester:4,courses:["STA 4211","STA 4321","Elective"],credits:9}
-    ]
-  },
-  {
-    id: "data_science", name: "Data Science", degree: "B.S.",
-    college: "College of Liberal Arts and Sciences", total_credits: 120, min_gpa: 2.0,
-    critical_tracking: { min_gpa: 2.0, courses: [
-      {code:"MAC 2311",name:"Calculus 1",credits:4,required_by_semester:2},
-      {code:"COP 3502C",name:"CS 1",credits:3,required_by_semester:2},
-      {code:"STA 2023",name:"Statistics 1",credits:3,required_by_semester:3}
-    ]},
-    required_courses: [
-      {code:"MAC 2311",name:"Calculus 1",credits:4,category:"math"},
-      {code:"MAC 2312",name:"Calculus 2",credits:4,category:"math"},
-      {code:"STA 2023",name:"Statistics 1",credits:3,category:"core"},
-      {code:"STA 4210",name:"Regression Analysis",credits:3,category:"core"},
-      {code:"COP 3502C",name:"CS 1",credits:3,category:"core"},
-      {code:"COP 3503C",name:"CS 2",credits:3,category:"core"},
-      {code:"COP 4530",name:"Data Structures",credits:3,category:"core"},
-      {code:"CAP 4630",name:"Artificial Intelligence",credits:3,category:"core"},
-      {code:"CIS 4301",name:"Information & Database Systems",credits:3,category:"core"},
-      {code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"},
-      {code:"ENC 1102",name:"Composition 2",credits:3,category:"gen_ed"}
-    ],
-    model_plan: [
-      {semester:1,courses:["ENC 1101","MAC 2311","COP 3502C"],credits:10},
-      {semester:2,courses:["ENC 1102","MAC 2312","STA 2023","COP 3503C"],credits:13},
-      {semester:3,courses:["COP 4530","STA 4210","Elective"],credits:9},
-      {semester:4,courses:["CAP 4630","CIS 4301","Elective"],credits:9}
-    ]
-  },
-  {
-    id: "digital_arts_sciences", name: "Digital Arts & Sciences", degree: "B.S.",
-    college: "College of Liberal Arts and Sciences", total_credits: 120, min_gpa: 2.0,
-    critical_tracking: { min_gpa: 2.0, courses: [
-      {code:"DIG 2000",name:"Intro to Digital Studies",credits:3,required_by_semester:2},
-      {code:"COP 3502C",name:"CS 1",credits:3,required_by_semester:3}
-    ]},
-    required_courses: [
-      {code:"DIG 2000",name:"Intro to Digital Studies",credits:3,category:"core"},
-      {code:"COP 3502C",name:"CS 1",credits:3,category:"core"},
-      {code:"COP 3503C",name:"CS 2",credits:3,category:"core"},
-      {code:"DIG 3134",name:"Authoring for New Media",credits:3,category:"core"},
-      {code:"DIG 4401",name:"Digital Humanities",credits:3,category:"core"},
-      {code:"ART 2203C",name:"Design 1",credits:3,category:"core"},
-      {code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"},
-      {code:"ENC 1102",name:"Composition 2",credits:3,category:"gen_ed"}
-    ],
-    model_plan: [
-      {semester:1,courses:["ENC 1101","DIG 2000","ART 2203C"],credits:9},
-      {semester:2,courses:["ENC 1102","COP 3502C","DIG 3134"],credits:9},
-      {semester:3,courses:["COP 3503C","DIG 4401","Elective"],credits:9},
-      {semester:4,courses:["Elective","Elective","Elective"],credits:9}
-    ]
-  },
-  {
-    id: "economics", name: "Economics", degree: "B.S.",
-    college: "College of Liberal Arts and Sciences", total_credits: 120, min_gpa: 2.0,
-    critical_tracking: { min_gpa: 2.0, courses: [
-      {code:"ECO 2013",name:"Macroeconomics",credits:3,required_by_semester:2},
-      {code:"ECO 2023",name:"Microeconomics",credits:3,required_by_semester:2},
-      {code:"STA 2023",name:"Statistics 1",credits:3,required_by_semester:3}
-    ]},
-    required_courses: [
-      {code:"ECO 2013",name:"Macroeconomics",credits:3,category:"core"},
-      {code:"ECO 2023",name:"Microeconomics",credits:3,category:"core"},
-      {code:"STA 2023",name:"Statistics 1",credits:3,category:"core"},
-      {code:"ECO 3101",name:"Intermediate Microeconomic Theory",credits:3,category:"core"},
-      {code:"ECO 3203",name:"Intermediate Macroeconomic Theory",credits:3,category:"core"},
-      {code:"ECO 4400",name:"Game Theory",credits:3,category:"elective"},
-      {code:"MAC 2233",name:"Survey of Calculus",credits:3,category:"math"},
-      {code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"},
-      {code:"ENC 1102",name:"Composition 2",credits:3,category:"gen_ed"}
-    ],
-    model_plan: [
-      {semester:1,courses:["ENC 1101","ECO 2013","MAC 2233"],credits:9},
-      {semester:2,courses:["ENC 1102","ECO 2023","STA 2023"],credits:9},
-      {semester:3,courses:["ECO 3101","ECO 3203","Elective"],credits:9},
-      {semester:4,courses:["ECO 4400","Elective","Elective"],credits:9}
-    ]
-  },
-  {
-    id: "biology", name: "Biology", degree: "B.S.",
-    college: "College of Liberal Arts and Sciences", total_credits: 120, min_gpa: 2.0,
-    critical_tracking: { min_gpa: 2.0, courses: [
-      {code:"BSC 2010C",name:"Biology 1",credits:3,required_by_semester:2},
-      {code:"BSC 2011C",name:"Biology 2",credits:3,required_by_semester:2},
-      {code:"CHM 2045",name:"General Chemistry 1",credits:3,required_by_semester:2}
-    ]},
-    required_courses: [
-      {code:"BSC 2010C",name:"Biology 1",credits:3,category:"core"},
-      {code:"BSC 2011C",name:"Biology 2",credits:3,category:"core"},
-      {code:"CHM 2045",name:"General Chemistry 1",credits:3,category:"science"},
-      {code:"CHM 2046",name:"General Chemistry 2",credits:3,category:"science"},
-      {code:"CHM 2210",name:"Organic Chemistry 1",credits:3,category:"science"},
-      {code:"MAC 2311",name:"Calculus 1",credits:4,category:"math"},
-      {code:"STA 2023",name:"Statistics 1",credits:3,category:"math"},
-      {code:"PCB 3023",name:"Cell Biology",credits:3,category:"core"},
-      {code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"},
-      {code:"ENC 1102",name:"Composition 2",credits:3,category:"gen_ed"}
-    ],
-    model_plan: [
-      {semester:1,courses:["ENC 1101","BSC 2010C","CHM 2045"],credits:9},
-      {semester:2,courses:["ENC 1102","BSC 2011C","CHM 2046"],credits:9},
-      {semester:3,courses:["MAC 2311","CHM 2210","STA 2023"],credits:10},
-      {semester:4,courses:["PCB 3023","Elective","Elective"],credits:9}
-    ]
-  },
-  {
-    id: "psychology", name: "Psychology", degree: "B.S.",
-    college: "College of Liberal Arts and Sciences", total_credits: 120, min_gpa: 2.0,
-    critical_tracking: { min_gpa: 2.0, courses: [
-      {code:"PSY 2012",name:"General Psychology",credits:3,required_by_semester:2},
-      {code:"STA 2023",name:"Statistics 1",credits:3,required_by_semester:3}
-    ]},
-    required_courses: [
-      {code:"PSY 2012",name:"General Psychology",credits:3,category:"core"},
-      {code:"STA 2023",name:"Statistics 1",credits:3,category:"core"},
-      {code:"PSY 3213C",name:"Research Methods",credits:3,category:"core"},
-      {code:"PSY 3604",name:"Brain and Behavior",credits:3,category:"core"},
-      {code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"},
-      {code:"ENC 1102",name:"Composition 2",credits:3,category:"gen_ed"}
-    ],
-    model_plan: [
-      {semester:1,courses:["ENC 1101","PSY 2012"],credits:6},
-      {semester:2,courses:["ENC 1102","STA 2023"],credits:6},
-      {semester:3,courses:["PSY 3213C","PSY 3604"],credits:6}
-    ]
-  },
-  // ── JOURNALISM & COMMUNICATIONS ───────────────────────────────────────
-  {
-    id: "telecommunication", name: "Telecommunication", degree: "B.S.T.",
-    college: "College of Journalism and Communications", total_credits: 120, min_gpa: 2.0,
-    critical_tracking: { min_gpa: 2.0, courses: [
-      {code:"MMC 1009",name:"Introduction to Media",credits:3,required_by_semester:2},
-      {code:"RTV 3305",name:"Principles of Electronic Media",credits:3,required_by_semester:3}
-    ]},
-    required_courses: [
-      {code:"MMC 1009",name:"Introduction to Media",credits:3,category:"core"},
-      {code:"RTV 3305",name:"Principles of Electronic Media",credits:3,category:"core"},
-      {code:"RTV 3320",name:"History of Broadcasting",credits:3,category:"core"},
-      {code:"RTV 4300",name:"Media Regulation",credits:3,category:"core"},
-      {code:"RTV 4446",name:"Digital Media Strategy",credits:3,category:"core"},
-      {code:"STA 2023",name:"Statistics 1",credits:3,category:"math"},
-      {code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"},
-      {code:"ENC 1102",name:"Composition 2",credits:3,category:"gen_ed"}
-    ],
-    model_plan: [
-      {semester:1,courses:["ENC 1101","MMC 1009","Elective"],credits:9},
-      {semester:2,courses:["ENC 1102","RTV 3305","STA 2023"],credits:9},
-      {semester:3,courses:["RTV 3320","RTV 4300","Elective"],credits:9},
-      {semester:4,courses:["RTV 4446","Elective","Elective"],credits:9}
-    ]
-  },
-  {
-    id: "journalism", name: "Journalism", degree: "B.S.J.C.",
-    college: "College of Journalism and Communications", total_credits: 120, min_gpa: 2.0,
-    critical_tracking: { min_gpa: 2.0, courses: [
-      {code:"MMC 1009",name:"Introduction to Media",credits:3,required_by_semester:2},
-      {code:"JOU 3101",name:"News Reporting",credits:3,required_by_semester:3}
-    ]},
-    required_courses: [
-      {code:"MMC 1009",name:"Introduction to Media",credits:3,category:"core"},
-      {code:"JOU 3101",name:"News Reporting",credits:3,category:"core"},
-      {code:"JOU 3301",name:"News Writing",credits:3,category:"core"},
-      {code:"JOU 4204",name:"Multimedia Journalism",credits:3,category:"core"},
-      {code:"STA 2023",name:"Statistics 1",credits:3,category:"math"},
-      {code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"},
-      {code:"ENC 1102",name:"Composition 2",credits:3,category:"gen_ed"}
-    ],
-    model_plan: [
-      {semester:1,courses:["ENC 1101","MMC 1009","Elective"],credits:9},
-      {semester:2,courses:["ENC 1102","JOU 3101","STA 2023"],credits:9},
-      {semester:3,courses:["JOU 3301","JOU 4204","Elective"],credits:9},
-      {semester:4,courses:["Elective","Elective","Elective"],credits:9}
-    ]
-  },
-  // ── HEALTH ────────────────────────────────────────────────────────────
-  {
-    id: "health_science", name: "Health Science", degree: "B.H.S.",
-    college: "College of Public Health and Health Professions", total_credits: 120, min_gpa: 2.5,
-    critical_tracking: { min_gpa: 2.5, courses: [
-      {code:"HSC 3537",name:"Pathophysiology 1",credits:3,required_by_semester:3},
-      {code:"STA 2023",name:"Statistics 1",credits:3,required_by_semester:2}
-    ]},
-    required_courses: [
-      {code:"HSC 3537",name:"Pathophysiology 1",credits:3,category:"core"},
-      {code:"HSC 4555",name:"Community Health",credits:3,category:"core"},
-      {code:"HCA 3002",name:"Intro to Health Care Administration",credits:3,category:"core"},
-      {code:"STA 2023",name:"Statistics 1",credits:3,category:"core"},
-      {code:"BSC 2010C",name:"Biology 1",credits:3,category:"science"},
-      {code:"CHM 2045",name:"General Chemistry 1",credits:3,category:"science"},
-      {code:"ENC 1101",name:"Composition 1",credits:3,category:"gen_ed"},
-      {code:"ENC 1102",name:"Composition 2",credits:3,category:"gen_ed"}
-    ],
-    model_plan: [
-      {semester:1,courses:["ENC 1101","BSC 2010C","CHM 2045"],credits:9},
-      {semester:2,courses:["ENC 1102","STA 2023","HCA 3002"],credits:9},
-      {semester:3,courses:["HSC 3537","HSC 4555","Elective"],credits:9},
-      {semester:4,courses:["Elective","Elective","Elective"],credits:9}
-    ]
-  }
-];
-
-// ═══════════════════════════════════════════════════════════════════════════
-//  INIT
-// ═══════════════════════════════════════════════════════════════════════════
-loadData().then(() => {
-  renderAdvisorTable();
-});
-
-
-// ═══════════════════════════════════════════════════════════════════════════
-//  AUDIO SYSTEM — Background Music + Welcome Narration
-// ═══════════════════════════════════════════════════════════════════════════
-let audioCtx = null;
-let masterGain = null;
-let musicPlaying = false;
-let audioEnabled = false;
-let oscillators = [];
-let chordTimer = null;
-
-// Gentle Am → F → C → G chord progression (frequencies in Hz)
-const CHORDS = [
-  [220.00, 261.63, 329.63],  // Am  (A3 C4 E4)
-  [174.61, 220.00, 261.63],  // F   (F3 A3 C4)
-  [130.81, 164.81, 196.00],  // C   (C3 E3 G3)
-  [146.83, 196.00, 246.94],  // G   (D3 G3 B3)
-];
-let chordIdx = 0;
-
-function initAudioCtx() {
-  if (audioCtx) return;
-  audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-  masterGain = audioCtx.createGain();
-  masterGain.gain.setValueAtTime(0, audioCtx.currentTime);
-  masterGain.connect(audioCtx.destination);
-}
-
-function startBackgroundMusic() {
-  initAudioCtx();
-  if (musicPlaying) return;
-  musicPlaying = true;
-  masterGain.gain.cancelScheduledValues(audioCtx.currentTime);
-  masterGain.gain.linearRampToValueAtTime(0.10, audioCtx.currentTime + 2.5);
-  playNextChord();
-}
-
-function playNextChord() {
-  if (!musicPlaying) return;
-  const DURATION = 4.5;
-  const chord = CHORDS[chordIdx % CHORDS.length];
-  chordIdx++;
-
-  // Clean up old oscillators
-  oscillators.forEach(function(o){ try { o.stop(audioCtx.currentTime + 0.6); } catch(e){} });
-  oscillators = [];
-
-  chord.forEach(function(freq, i) {
-    // Sine pad — main harmonic
-    const osc = audioCtx.createOscillator();
-    const g   = audioCtx.createGain();
-    osc.type = 'sine';
-    osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-    g.gain.setValueAtTime(0, audioCtx.currentTime);
-    g.gain.linearRampToValueAtTime(0.28 - i * 0.04, audioCtx.currentTime + 0.8);
-    g.gain.linearRampToValueAtTime(0.28 - i * 0.04, audioCtx.currentTime + DURATION - 0.8);
-    g.gain.linearRampToValueAtTime(0, audioCtx.currentTime + DURATION);
-    osc.connect(g); g.connect(masterGain);
-    osc.start(); osc.stop(audioCtx.currentTime + DURATION + 0.1);
-    oscillators.push(osc);
-
-    // Triangle sub-octave — warmth
-    const sub = audioCtx.createOscillator();
-    const gs  = audioCtx.createGain();
-    sub.type = 'triangle';
-    sub.frequency.setValueAtTime(freq / 2, audioCtx.currentTime);
-    gs.gain.setValueAtTime(0, audioCtx.currentTime);
-    gs.gain.linearRampToValueAtTime(0.10, audioCtx.currentTime + 1.2);
-    gs.gain.linearRampToValueAtTime(0.10, audioCtx.currentTime + DURATION - 1.0);
-    gs.gain.linearRampToValueAtTime(0, audioCtx.currentTime + DURATION);
-    sub.connect(gs); gs.connect(masterGain);
-    sub.start(); sub.stop(audioCtx.currentTime + DURATION + 0.1);
-    oscillators.push(sub);
-  });
-
-  chordTimer = setTimeout(playNextChord, (DURATION - 0.3) * 1000);
-}
-
-function stopBackgroundMusic() {
-  musicPlaying = false;
-  if (chordTimer) { clearTimeout(chordTimer); chordTimer = null; }
-  if (masterGain) {
-    masterGain.gain.cancelScheduledValues(audioCtx.currentTime);
-    masterGain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 1.2);
-  }
-  oscillators.forEach(function(o){ try { o.stop(audioCtx.currentTime + 1.3); } catch(e){} });
-  oscillators = [];
-}
-
-function speakWelcome() {
-  if (!('speechSynthesis' in window)) return;
-  window.speechSynthesis.cancel();
-  const script = [
-    "Welcome to DegreeMap — the University of Florida Graduation Navigator.",
-    "Here is how it works.",
-    "Step 1: Select your current major from the dropdown.",
-    "Step 2: Enter all the courses you have already completed.",
-    "Step 3: Click Analyze My Path — and I will show you exactly where you stand.",
-    "You will see your graduation status, critical tracking requirements, remaining courses, and even other UF majors where your credits transfer best.",
-    "Whether you are on track or considering a switch — DegreeMap has you covered.",
-    "Go Gators!"
-  ];
-  let i = 0;
-  function speakNext() {
-    if (i >= script.length || !audioEnabled) return;
-    const utt = new SpeechSynthesisUtterance(script[i++]);
-    utt.rate = 0.93; utt.pitch = 1.05; utt.volume = 0.95;
-    const voices = window.speechSynthesis.getVoices();
-    const pick = voices.find(function(v){ return /google us english|samantha|karen|alex/i.test(v.name); })
-                 || voices.find(function(v){ return v.lang === 'en-US'; })
-                 || voices[0];
-    if (pick) utt.voice = pick;
-    utt.onend = speakNext;
-    window.speechSynthesis.speak(utt);
-  }
-  const go = function() { speakNext(); };
-  if (window.speechSynthesis.getVoices().length) go();
-  else window.speechSynthesis.addEventListener('voiceschanged', go, { once: true });
-}
-
-function narrateResult(statusText) {
-  if (!audioEnabled || !('speechSynthesis' in window)) return;
-  window.speechSynthesis.cancel();
-  const utt = new SpeechSynthesisUtterance(statusText);
-  utt.rate = 0.94; utt.pitch = 1.0; utt.volume = 0.9;
-  const voices = window.speechSynthesis.getVoices();
-  const pick = voices.find(function(v){ return /google us english|samantha|karen|alex/i.test(v.name); }) || voices[0];
-  if (pick) utt.voice = pick;
-  window.speechSynthesis.speak(utt);
-}
-
-function toggleAudio() {
-  audioEnabled = !audioEnabled;
-  const btn = document.getElementById('music-btn');
-  if (audioEnabled) {
-    btn.textContent = '🎵 Sound On';
-    btn.classList.add('music-on');
-    startBackgroundMusic();
-    setTimeout(speakWelcome, 2800);
-  } else {
-    btn.textContent = '🔇 Sound Off';
-    btn.classList.remove('music-on');
-    stopBackgroundMusic();
-    if (window.speechSynthesis) window.speechSynthesis.cancel();
-  }
-}
-
-// Allow pressing Enter in course input
-document.addEventListener('DOMContentLoaded', () => {
-  const ci = document.getElementById('course-input');
-  if (ci) ci.addEventListener('keypress', e => e.key === 'Enter' && addCourse());
-});
 </script>
 </body>
 </html>
