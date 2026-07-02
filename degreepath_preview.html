@@ -3111,6 +3111,46 @@ function filterElectives(el, tag, majorId) {
   });
 }
 
+/* ── Narration ── */
+let _narrationEnabled = false;
+
+function toggleAudio() {
+  _narrationEnabled = !_narrationEnabled;
+  const btn = document.getElementById('music-btn');
+  if (!btn) return;
+  if (_narrationEnabled) {
+    btn.textContent = '🔊 Sound On';
+    btn.classList.add('music-on');
+    // Welcome message on first enable
+    narrateResult('Welcome to DegreePath. Select a major and enter your info to get started.');
+  } else {
+    btn.textContent = '🔇 Sound Off';
+    btn.classList.remove('music-on');
+    if (window.speechSynthesis) window.speechSynthesis.cancel();
+  }
+}
+
+function narrateResult(text) {
+  if (!_narrationEnabled) return;
+  if (!window.speechSynthesis) return;
+  window.speechSynthesis.cancel();
+  const utt = new SpeechSynthesisUtterance(text);
+  utt.rate  = 1.0;
+  utt.pitch = 1.0;
+  utt.volume = 1.0;
+  // Prefer a natural-sounding English voice if available
+  const voices = window.speechSynthesis.getVoices();
+  const preferred = voices.find(v => /en(-US)?/i.test(v.lang) && /samantha|google us|natural/i.test(v.name))
+    || voices.find(v => /en(-US)?/i.test(v.lang));
+  if (preferred) utt.voice = preferred;
+  window.speechSynthesis.speak(utt);
+}
+
+// Voices may load async — pre-load them
+if (window.speechSynthesis) {
+  window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
+}
+
 loadData();
 </script>
 </body>
