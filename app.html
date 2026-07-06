@@ -1144,6 +1144,10 @@ async function loadData() {
     const json = await r.json();
     DB.majors = (json.majors && json.majors.length >= DEMO_MAJORS.length) ? json.majors : DEMO_MAJORS;
     DB.gen_ed = json.gen_ed_requirements || {};
+    // Attach major-related elective lists from majors.json (works for json and demo majors)
+    const em = json.elective_courses || {};
+    (json.majors || []).forEach(jm => { if (jm.elective_courses && !em[jm.id]) em[jm.id] = jm.elective_courses; });
+    DB.majors.forEach(m => { if (!m.elective_courses && em[m.id]) m.elective_courses = em[m.id]; });
   } catch(e) {
     DB.majors = DEMO_MAJORS;
   }
