@@ -2106,5 +2106,671 @@
         }
       ]
     }
-  ]
+  ],
+  "elective_courses": {
+    "computer_science": [
+      {
+        "code": "CAP 4630",
+        "name": "Artificial Intelligence",
+        "credits": 3,
+        "category": "elective"
+      },
+      {
+        "code": "CAP 4770",
+        "name": "Introduction to Data Science",
+        "credits": 3,
+        "category": "elective"
+      },
+      {
+        "code": "CIS 4301",
+        "name": "Information and Database Systems",
+        "credits": 3,
+        "category": "elective"
+      },
+      {
+        "code": "CNT 4007",
+        "name": "Computer Network Fundamentals",
+        "credits": 3,
+        "category": "elective"
+      },
+      {
+        "code": "CEN 4072",
+        "name": "Software Testing",
+        "credits": 3,
+        "category": "elective"
+      },
+      {
+        "code": "CAP 4410",
+        "name": "Computer Vision",
+        "credits": 3,
+        "category": "elective"
+      }
+    ],
+    "computer_engineering": [
+      {
+        "code": "EEL 4712",
+        "name": "Digital Design",
+        "credits": 4,
+        "category": "elective"
+      },
+      {
+        "code": "EEL 4744",
+        "name": "Microprocessor Applications",
+        "credits": 4,
+        "category": "elective"
+      },
+      {
+        "code": "CNT 4007",
+        "name": "Computer Network Fundamentals",
+        "credits": 3,
+        "category": "elective"
+      },
+      {
+        "code": "CAP 4630",
+        "name": "Artificial Intelligence",
+        "credits": 3,
+        "category": "elective"
+      },
+      {
+        "code": "EEL 4930",
+        "name": "Special Topics in Electrical Engineering",
+        "credits": 3,
+        "category": "elective"
+      }
+    ],
+    "electrical_engineering": [
+      {
+        "code": "EEL 4657",
+        "name": "Linear Control Systems",
+        "credits": 3,
+        "category": "elective"
+      },
+      {
+        "code": "EEL 4712",
+        "name": "Digital Design",
+        "credits": 4,
+        "category": "elective"
+      },
+      {
+        "code": "EEL 4744",
+        "name": "Microprocessor Applications",
+        "credits": 4,
+        "category": "elective"
+      },
+      {
+        "code": "EEL 4514",
+        "name": "Communication Systems",
+        "credits": 3,
+        "category": "elective"
+      },
+      {
+        "code": "EEL 4930",
+        "name": "Special Topics in Electrical Engineering",
+        "credits": 3,
+        "category": "elective"
+      }
+    ],
+    "industrial_systems_engineering": [
+      {
+        "code": "ESI 4312",
+        "name": "Deterministic Methods in Operations Research",
+        "credits": 3,
+        "category": "elective"
+      },
+      {
+        "code": "EIN 4333",
+        "name": "Production and Inventory Control",
+        "credits": 3,
+        "category": "elective"
+      },
+      {
+        "code": "EIN 4354",
+        "name": "Engineering Economy",
+        "credits": 3,
+        "category": "elective"
+      },
+      {
+        "code": "ESI 4523",
+        "name": "Industrial Systems Simulation",
+        "credits": 3,
+        "category": "elective"
+      }
+    ],
+    "biomedical_engineering": [
+      {
+        "code": "BME 4409",
+        "name": "Quantitative Physiology",
+        "credits": 3,
+        "category": "elective"
+      },
+      {
+        "code": "BME 4503",
+        "name": "Biomedical Instrumentation",
+        "credits": 3,
+        "category": "elective"
+      },
+      {
+        "code": "BME 4531",
+        "name": "Medical Imaging",
+        "credits": 3,
+        "category": "elective"
+      },
+      {
+        "code": "BME 4930",
+        "name": "Special Topics in Biomedical Engineering",
+        "credits": 3,
+        "category": "elective"
+      }
+    ],
+    "civil_engineering": [
+      {
+        "code": "TTE 4004",
+        "name": "Transportation Engineering",
+        "credits": 3,
+        "category": "elective"
+      },
+      {
+        "code": "ENV 3001",
+        "name": "Introduction to Environmental Engineering",
+        "credits": 3,
+        "category": "elective"
+      },
+      {
+        "code": "CES 4702",
+        "name": "Reinforced Concrete Design",
+        "credits": 3,
+        "category": "elective"
+      },
+      {
+        "code": "CWR 4202",
+        "name": "Hydraulic Engineering",
+        "credits": 3,
+        "category": "elective"
+      },
+      {
+        "code": "SUR 3641",
+        "name": "Surveying and Mapping",
+        "credits": 3,
+        "category": "elective"
+      }
+    ],
+    "information_systems": [
+      {
+        "code": "ISM 4113",
+        "name": "Systems Analysis and Design",
+        "credits": 3,
+        "category": "elective"
+      },
+      {
+        "code": "ISM 4210",
+        "name": "Database Management",
+        "credits": 3,
+        "category": "elective"
+      },
+      {
+        "code": "ISM 4220",
+        "name": "Business Data Communications",
+        "credits": 3,
+        "category": "elective"
+      },
+      {
+        "code": "ISM 4330",
+        "name": "Information Systems Strategy",
+        "credits": 3,
+        "category": "elective"
+      }
+    ],
+    "finance": [
+      {
+        "code": "FIN 4243",
+        "name": "Debt and Money Markets",
+        "credits": 3,
+        "category": "elective"
+      },
+      {
+        "code": "FIN 4414",
+        "name": "Financial Management",
+        "credits": 3,
+        "category": "elective"
+      },
+      {
+        "code": "FIN 4504",
+        "name": "Equity and Capital Markets",
+        "credits": 3,
+        "category": "elective"
+      },
+      {
+        "code": "REE 3043",
+        "name": "Introduction to Real Estate",
+        "credits": 3,
+        "category": "elective"
+      }
+    ],
+    "management": [
+      {
+        "code": "MAN 4143",
+        "name": "Leadership",
+        "credits": 3,
+        "category": "elective"
+      },
+      {
+        "code": "MAN 4301",
+        "name": "Human Resource Management",
+        "credits": 3,
+        "category": "elective"
+      },
+      {
+        "code": "MAN 4720",
+        "name": "Strategic Management",
+        "credits": 3,
+        "category": "elective"
+      },
+      {
+        "code": "ENT 3003",
+        "name": "Principles of Entrepreneurship",
+        "credits": 3,
+        "category": "elective"
+      }
+    ],
+    "marketing": [
+      {
+        "code": "MAR 4613",
+        "name": "Marketing Research",
+        "credits": 3,
+        "category": "elective"
+      },
+      {
+        "code": "MAR 4231",
+        "name": "Retail Management",
+        "credits": 3,
+        "category": "elective"
+      },
+      {
+        "code": "MAR 4803",
+        "name": "Marketing Management",
+        "credits": 3,
+        "category": "elective"
+      },
+      {
+        "code": "MAR 4721",
+        "name": "Digital Marketing",
+        "credits": 3,
+        "category": "elective"
+      }
+    ],
+    "accounting": [
+      {
+        "code": "ACG 4111",
+        "name": "Financial Reporting 2",
+        "credits": 3,
+        "category": "elective"
+      },
+      {
+        "code": "TAX 4001",
+        "name": "Federal Income Taxation",
+        "credits": 3,
+        "category": "elective"
+      },
+      {
+        "code": "ACG 4632",
+        "name": "Introduction to Auditing",
+        "credits": 3,
+        "category": "elective"
+      },
+      {
+        "code": "ACG 4501",
+        "name": "Governmental and Nonprofit Accounting",
+        "credits": 3,
+        "category": "elective"
+      }
+    ],
+    "mathematics": [
+      {
+        "code": "MAS 4105",
+        "name": "Linear Algebra 1",
+        "credits": 4,
+        "category": "elective"
+      },
+      {
+        "code": "MAA 4102",
+        "name": "Advanced Calculus 1",
+        "credits": 3,
+        "category": "elective"
+      },
+      {
+        "code": "MAS 4301",
+        "name": "Abstract Algebra 1",
+        "credits": 3,
+        "category": "elective"
+      },
+      {
+        "code": "MAP 4305",
+        "name": "Differential Equations for Engineers",
+        "credits": 3,
+        "category": "elective"
+      }
+    ],
+    "statistics": [
+      {
+        "code": "STA 4210",
+        "name": "Regression Analysis",
+        "credits": 3,
+        "category": "elective"
+      },
+      {
+        "code": "STA 4321",
+        "name": "Mathematical Statistics 1",
+        "credits": 3,
+        "category": "elective"
+      },
+      {
+        "code": "STA 4504",
+        "name": "Categorical Data Analysis",
+        "credits": 3,
+        "category": "elective"
+      },
+      {
+        "code": "STA 4702",
+        "name": "Multivariate Statistical Methods",
+        "credits": 3,
+        "category": "elective"
+      }
+    ],
+    "data_science": [
+      {
+        "code": "CAP 4770",
+        "name": "Introduction to Data Science",
+        "credits": 3,
+        "category": "elective"
+      },
+      {
+        "code": "CAP 4630",
+        "name": "Artificial Intelligence",
+        "credits": 3,
+        "category": "elective"
+      },
+      {
+        "code": "CIS 4301",
+        "name": "Information and Database Systems",
+        "credits": 3,
+        "category": "elective"
+      },
+      {
+        "code": "STA 4241",
+        "name": "Statistical Learning",
+        "credits": 3,
+        "category": "elective"
+      }
+    ],
+    "economics": [
+      {
+        "code": "ECO 4400",
+        "name": "Games and Decisions",
+        "credits": 3,
+        "category": "elective"
+      },
+      {
+        "code": "ECO 4713",
+        "name": "International Macroeconomics",
+        "credits": 3,
+        "category": "elective"
+      },
+      {
+        "code": "ECP 3703",
+        "name": "Managerial Economics",
+        "credits": 3,
+        "category": "elective"
+      },
+      {
+        "code": "ECO 4934",
+        "name": "Special Topics in Economics",
+        "credits": 3,
+        "category": "elective"
+      }
+    ],
+    "biology": [
+      {
+        "code": "PCB 3063",
+        "name": "Genetics",
+        "credits": 4,
+        "category": "elective"
+      },
+      {
+        "code": "PCB 4674",
+        "name": "Evolution",
+        "credits": 3,
+        "category": "elective"
+      },
+      {
+        "code": "PCB 3043",
+        "name": "Introduction to Ecology",
+        "credits": 4,
+        "category": "elective"
+      },
+      {
+        "code": "MCB 3020",
+        "name": "Basic Biology of Microorganisms",
+        "credits": 3,
+        "category": "elective"
+      },
+      {
+        "code": "ZOO 3713",
+        "name": "Functional Vertebrate Anatomy",
+        "credits": 4,
+        "category": "elective"
+      }
+    ],
+    "psychology": [
+      {
+        "code": "SOP 3004",
+        "name": "Social Psychology",
+        "credits": 3,
+        "category": "elective"
+      },
+      {
+        "code": "DEP 3053",
+        "name": "Developmental Psychology",
+        "credits": 3,
+        "category": "elective"
+      },
+      {
+        "code": "CLP 3144",
+        "name": "Abnormal Psychology",
+        "credits": 3,
+        "category": "elective"
+      },
+      {
+        "code": "EXP 3604",
+        "name": "Cognitive Psychology",
+        "credits": 3,
+        "category": "elective"
+      },
+      {
+        "code": "PSB 3002",
+        "name": "Physiological Psychology",
+        "credits": 3,
+        "category": "elective"
+      },
+      {
+        "code": "INP 3004",
+        "name": "Industrial and Organizational Psychology",
+        "credits": 3,
+        "category": "elective"
+      }
+    ],
+    "journalism": [
+      {
+        "code": "JOU 4308",
+        "name": "Magazine and Feature Writing",
+        "credits": 3,
+        "category": "elective"
+      },
+      {
+        "code": "PUR 3000",
+        "name": "Principles of Public Relations",
+        "credits": 3,
+        "category": "elective"
+      },
+      {
+        "code": "MMC 4200",
+        "name": "Law of Mass Communication",
+        "credits": 3,
+        "category": "elective"
+      },
+      {
+        "code": "MMC 4302",
+        "name": "Global Media Systems",
+        "credits": 3,
+        "category": "elective"
+      }
+    ],
+    "telecommunication": [
+      {
+        "code": "RTV 3320",
+        "name": "Electronic Field Production",
+        "credits": 3,
+        "category": "elective"
+      },
+      {
+        "code": "MMC 4200",
+        "name": "Law of Mass Communication",
+        "credits": 3,
+        "category": "elective"
+      },
+      {
+        "code": "RTV 4432",
+        "name": "Media Programming and Management",
+        "credits": 3,
+        "category": "elective"
+      },
+      {
+        "code": "DIG 3110",
+        "name": "Interactive Media Design",
+        "credits": 3,
+        "category": "elective"
+      }
+    ],
+    "health_science": [
+      {
+        "code": "HSC 3502",
+        "name": "Survey of Human Diseases",
+        "credits": 3,
+        "category": "elective"
+      },
+      {
+        "code": "HSA 3111",
+        "name": "US Health Care System",
+        "credits": 3,
+        "category": "elective"
+      },
+      {
+        "code": "PHC 4101",
+        "name": "Introduction to Public Health",
+        "credits": 3,
+        "category": "elective"
+      },
+      {
+        "code": "HSC 4184",
+        "name": "Health and Medical Terminology",
+        "credits": 3,
+        "category": "elective"
+      }
+    ],
+    "digital_arts_sciences": [
+      {
+        "code": "DIG 3110",
+        "name": "Interactive Media Design",
+        "credits": 3,
+        "category": "elective"
+      },
+      {
+        "code": "CAP 4053",
+        "name": "AI for Game Programming",
+        "credits": 3,
+        "category": "elective"
+      },
+      {
+        "code": "DIG 4634",
+        "name": "Game Design and Development",
+        "credits": 3,
+        "category": "elective"
+      },
+      {
+        "code": "DIG 4715",
+        "name": "Game Systems Development",
+        "credits": 3,
+        "category": "elective"
+      }
+    ],
+    "business_administration": [
+      {
+        "code": "ENT 3003",
+        "name": "Principles of Entrepreneurship",
+        "credits": 3,
+        "category": "elective"
+      },
+      {
+        "code": "MAR 3023",
+        "name": "Principles of Marketing",
+        "credits": 3,
+        "category": "elective"
+      },
+      {
+        "code": "REE 3043",
+        "name": "Introduction to Real Estate",
+        "credits": 3,
+        "category": "elective"
+      },
+      {
+        "code": "BUL 4310",
+        "name": "The Legal Environment of Business",
+        "credits": 3,
+        "category": "elective"
+      },
+      {
+        "code": "FIN 4504",
+        "name": "Equity and Capital Markets",
+        "credits": 3,
+        "category": "elective"
+      },
+      {
+        "code": "MAN 3240",
+        "name": "Organizations: Structure and Behavior",
+        "credits": 3,
+        "category": "elective"
+      }
+    ],
+    "mechanical_engineering": [
+      {
+        "code": "EML 4312",
+        "name": "Control of Mechanical Systems",
+        "credits": 3,
+        "category": "elective"
+      },
+      {
+        "code": "EML 4507",
+        "name": "Finite Element Analysis and Design",
+        "credits": 3,
+        "category": "elective"
+      },
+      {
+        "code": "EML 4321",
+        "name": "Manufacturing Engineering",
+        "credits": 3,
+        "category": "elective"
+      },
+      {
+        "code": "EAS 4101",
+        "name": "Fundamentals of Aerodynamics",
+        "credits": 3,
+        "category": "elective"
+      },
+      {
+        "code": "EML 4220",
+        "name": "Mechanical Vibrations",
+        "credits": 3,
+        "category": "elective"
+      }
+    ]
+  }
 }
