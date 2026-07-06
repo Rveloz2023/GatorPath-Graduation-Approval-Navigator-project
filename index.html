@@ -4,10 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>DegreePath — Graduate Faster. Plan Smarter.</title>
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="512x512" href="/logo.png">
+<link rel="apple-touch-icon" href="/logo.png">
 <meta name="description" content="Stop guessing what you need to graduate. DegreePath maps your fastest path to your diploma — free, in under 2 minutes.">
 <meta property="og:title" content="DegreePath — Graduate Faster. Plan Smarter.">
 <meta property="og:description" content="Your personal degree command center. Map your fastest path to graduation.">
 <meta property="og:url" content="https://degreepath.org">
+<meta property="og:image" content="https://degreepath.org/logo.png">
 <meta name="theme-color" content="#16A37F">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -33,6 +37,7 @@ button{cursor:pointer;font-family:var(--font)}
 .nav-inner{max-width:1120px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:64px}
 .nav-logo{display:flex;align-items:center;gap:10px;font-size:1.15rem;font-weight:800;color:var(--black);letter-spacing:-.5px}
 .logo-icon{width:32px;height:32px;background:var(--green);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.logo-img{width:34px;height:34px;object-fit:contain;display:block}
 .nav-links{display:flex;align-items:center;gap:2rem;list-style:none}
 .nav-links a{font-size:.875rem;font-weight:500;color:var(--gray-700);transition:color .15s}
 .nav-links a:hover{color:var(--black)}
@@ -179,12 +184,7 @@ footer{background:#060606;padding:3rem 2rem;border-top:1px solid rgba(255,255,25
 <nav class="nav">
   <div class="nav-inner">
     <a href="/" class="nav-logo">
-      <div class="logo-icon">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-          <path d="M12 3L2 8l10 5 10-5-10-5z" fill="white" opacity=".95"/>
-          <path d="M2 14l10 5 10-5" stroke="white" stroke-width="2" stroke-linecap="round" opacity=".6"/>
-        </svg>
-      </div>
+      <img class="logo-img" src="/logo.png" alt="DegreePath logo">
       DegreePath
     </a>
     <ul class="nav-links">
