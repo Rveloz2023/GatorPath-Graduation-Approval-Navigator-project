@@ -2372,6 +2372,15 @@ function renderPensum(majorId) {
     groups[cat].push(c);
   });
 
+  // Major-related electives — student-selected add-ons (excluded from course count and Add All)
+  (major.elective_courses || []).forEach(c => {
+    const n = normalizeCode(c.code);
+    if (reqCodes.has(n)) return;
+    reqCodes.add(n);
+    if (!groups.elective) groups.elective = [];
+    groups.elective.push({ ...c, category: 'elective' });
+  });
+
   const allCodes = allCourses.map(c=>c.code);
 
   let html = `<div class="pensum-major-label">
