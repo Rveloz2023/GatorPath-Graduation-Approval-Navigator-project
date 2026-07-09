@@ -1,0 +1,65 @@
+name: Update UF catalog data
+
+on:
+  schedule:
+    - cron: '0 6 1 * *'  # monthly, 1st of the month 06:00 UTC
+  workflow_dispatch:      # manual run button
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install -r scraper/requirements.txt
+
+      - name: Backup current data
+        run: cp data/majors.json /tmp/majors_before.json
+
+      - name: Run scraper
+        working-directory: scraper
+        run: python scrape_uf_catalog.py
+
+      - name: Validate output and preserve elective lists
+        run: |
+          python - << 'EOF'
+          import json
+          new = json.load(open('data/majors.json'))
+          old = json.load(open('/tmp/majors_before.json'))
+          majors = new.get('majors', [])
+          assert len(majors) >= 7, f'Sanity check failed: only {len(majors)} majors scraped'
+          for m in majors:
+              assert m.get('required_courses'), f"Major {m.get('id')} has no required_courses"
+          # Preserve curated elective data if the scraper output lacks it
+          if 'elective_courses' not in new and 'elective_courses' in old:
+              new['elective_courses'] = old['elective_courses']
+          old_by_id = {m['id']: m for m in old.get('majors', [])}
+          for m in majors:
+              if 'elective_courses' not in m and m['id'] in old_by_id and 'elective_courses' in old_by_id[m['id']]:
+                  m['elective_courses'] = old_by_id[m['id']]['elective_courses']
+          with open('data/majors.json', 'w', encoding='utf-8') as f:
+              json.dump(new, f, indent=2, ensure_ascii=False)
+          print('Validation OK:', len(majors), 'majors')
+          EOF
+
+      - name: Open pull request for review
+        uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: 'chore: refresh UF catalog data (automated scrape)'
+          title: 'Catalog refresh: majors.json updated from catalog.ufl.edu'
+          body: |
+            Automated catalog scrape. Review this diff carefully before merging -
+            merging updates the degree requirements used by the live app.
+            If the diff looks wrong, close this PR and the current data stays untouched.
+          branch: auto/catalog-refresh
+          delete-branch: true
+
