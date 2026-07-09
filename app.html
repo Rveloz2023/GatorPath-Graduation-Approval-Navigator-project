@@ -1146,7 +1146,11 @@ async function loadData() {
   try {
     const r = await fetch('data/majors.json');
     const json = await r.json();
-    DB.majors = (json.majors && json.majors.length >= DEMO_MAJORS.length) ? json.majors : DEMO_MAJORS;
+    // Curated majors.json entries are authoritative; demo majors fill the gaps
+    const curated = json.majors || [];
+    const curatedIds = new Set(curated.map(m => m.id));
+    DB.majors = [...curated, ...DEMO_MAJORS.filter(m => !curatedIds.has(m.id))];
+    DB.meta = json.metadata || null;
     DB.gen_ed = json.gen_ed_requirements || {};
     // Attach major-related elective lists from majors.json (works for json and demo majors)
     const em = json.elective_courses || {};
@@ -1273,14 +1277,25 @@ function removeCourse(code) {
 }
 function quickAdd(codes) { codes.forEach(c => completedCourses.add(normalizeCode(c))); renderCourseTags(); }
 function renderCourseTags() {
-  document.getElementById('course-tags').innerHTML = [...completedCourses].map(c =>
-    `<span class="tag">${c}<span class="tag-remove" onclick="removeCourse('${c}')">✕</span></span>`
-  ).join('');
+  const mSel = DB.majors.find(m => m.id === (document.getElementById('stu-major')||{}).value);
+  const known = new Set();
+  if (mSel) [...(mSel.required_courses||[]), ...((mSel.critical_tracking||{}).courses||[]), ...(mSel.elective_courses||[])].forEach(c => known.add(normalizeCode(c.code)));
+  document.getElementById('course-tags').innerHTML = [...completedCourses].map(c => {
+    const unknown = mSel && !known.has(c);
+    return `<span class="tag" ${unknown ? 'style="border:1.5px dashed #c05621" title="Not found in this major catalog — counted as 3 credits"' : ''}>${unknown ? '⚠ ' : ''}${c}<span class="tag-remove" onclick="removeCourse('${c}')">✕</span></span>`;
+  }).join('');
 }
 
 function analyzeStudent() {
   const majorId = document.getElementById('stu-major').value;
-  const totalCredits = parseInt(document.getElementById('stu-total-credits').value) || completedCourses.size * 3;
+  let totalCredits = parseInt(document.getElementById('stu-total-credits').value);
+  if (!totalCredits) {
+    // No credits entered — derive from catalog credits of the marked courses
+    const mSel = DB.majors.find(m => m.id === document.getElementById('stu-major').value);
+    const creditMap = {};
+    if (mSel) [...(mSel.required_courses||[]), ...((mSel.critical_tracking||{}).courses||[]), ...(mSel.elective_courses||[])].forEach(c => { creditMap[normalizeCode(c.code)] = c.credits || 3; });
+    totalCredits = [...completedCourses].reduce((s, c) => s + (creditMap[c] || 3), 0);
+  }
   const gpa = parseFloat(document.getElementById('stu-gpa').value) || 0;
   if (!majorId) { alert('Please select your major.'); return; }
   const analysis = analyzePath(majorId, completedCourses, totalCredits, gpa);
@@ -1308,7 +1323,7 @@ function renderStudentResults(a, totalCredits, gpa) {
   document.getElementById('stat-boxes').innerHTML = `
     <div class="stat-box"><div class="stat-value">${a.pct}%</div><div class="stat-label">Degree Complete</div></div>
     <div class="stat-box"><div class="stat-value">${totalCredits}/${a.major.total_credits}</div><div class="stat-label">Credits</div></div>
-    <div class="stat-box"><div class="stat-value">${a.semestersLeft}</div><div class="stat-label">Semesters Left (est.)</div></div>
+    <div class="stat-box"><div class="stat-value">${a.semestersLeft}</div><div class="stat-label">Semesters Left (est. @ 15 cr/sem)</div></div>
     <div class="stat-box"><div class="stat-value">${gpa>0?gpa.toFixed(2):'—'}</div><div class="stat-label">GPA (min ${a.major.min_gpa})</div></div>
   `;
 
@@ -2375,7 +2390,7 @@ function renderPensum(majorId) {
   };
   const groups = {};
   allCourses.forEach(c => {
-    const cat = c.category || 'other';
+    const cat = catOrder.includes(c.category) ? c.category : 'other';
     if (!groups[cat]) groups[cat] = [];
     groups[cat].push(c);
   });
@@ -2392,7 +2407,7 @@ function renderPensum(majorId) {
   const allCodes = allCourses.map(c=>c.code);
 
   let html = `<div class="pensum-major-label">
-    <span>📋 ${major.name} — ${allCourses.length} courses · ${major.total_credits} total credits</span>
+    <span>📋 ${major.name} — ${allCourses.length} courses · ${major.total_credits} total credits${DB.meta && DB.meta.catalog_year ? ' · ' + DB.meta.catalog_year + ' catalog' : ''}</span>
     <div style="display:flex;gap:5px;align-items:center">
       <button class="add-all-btn" onclick="addAllPensum(${JSON.stringify(allCodes)})">+ Add All</button>
       <button class="add-all-btn" style="background:#fff;border:1.5px solid var(--dp);color:var(--dp-dk)"
