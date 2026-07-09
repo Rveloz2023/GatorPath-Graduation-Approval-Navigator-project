@@ -8,6 +8,8 @@
 <link rel="icon" type="image/x-icon" href="favicon.ico">
 <link rel="apple-touch-icon" href="icon-192.png">
 <meta name="theme-color" content="#16A37F">
+<meta name="description" content="Free degree planner for students: mark completed courses, track critical milestones, and see your estimated graduation date — no account required.">
+<link rel="canonical" href="https://degreepath.org/app.html">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -301,6 +303,7 @@ tr:hover td{background:var(--gray-lt)}
 .pensum-chip[data-cat="ct_only"] {border-left:3px solid #F87171}
 .pensum-chip[data-cat="elective"]{border-left:3px solid #A78BFA}
 .pensum-chip[data-cat="other"]   {border-left:3px solid #CBD5E1}
+.pensum-chip:focus-visible{outline:2.5px solid #34D399;outline-offset:2px}
 .pensum-placeholder{font-size:.8rem;color:#aaa;padding:.5rem 0}
 
 /* ── Upgraded Course Status ── */
@@ -548,7 +551,7 @@ tr:hover td{background:var(--gray-lt)}
         <a href="#app" class="btn-hero">Plan my graduation →</a>
         <a href="#app" class="btn-ghost-hero">Open the planner ↓</a>
       </div>
-      <p class="hero-note">Works with any college or university &nbsp;·&nbsp; 20+ majors &nbsp;·&nbsp; No account required</p>
+      <p class="hero-note">Built on the University of Florida catalog — more schools coming &nbsp;·&nbsp; 20+ majors &nbsp;·&nbsp; No account required</p>
     </div>
 
     <div>
@@ -892,8 +895,8 @@ tr:hover td{background:var(--gray-lt)}
         <button class="load-btn" id="btn-upload" onclick="setLoadMethod('upload')">
           <div class="load-btn-icon">📄</div>
           <div class="load-btn-text">
-            <strong>Upload Transcript</strong>
-            <span>Drag & drop a PDF, screenshot, or degree audit export</span>
+            <strong>Upload Transcript <span style="font-size:.68em;background:#fef0eb;color:#c05621;border-radius:8px;padding:1px 8px;vertical-align:middle;letter-spacing:.5px">COMING SOON</span></strong>
+            <span>OCR parsing ships in the next release — use Manual Entry for now</span>
           </div>
         </button>
       </div>
@@ -992,7 +995,7 @@ tr:hover td{background:var(--gray-lt)}
     </div>
 
     <!-- Results -->
-    <div id="student-results" style="display:none">
+    <div id="student-results" style="display:none" aria-live="polite">
       <div class="stats" id="stat-boxes"></div>
       <div id="gpa-gauge"></div>
       <div id="graduation-alert"></div>
@@ -2443,7 +2446,7 @@ function renderPensum(majorId) {
     const added = completedCourses.has(n);
     return `<span class="pensum-chip ${added?'added':''}" data-cat="${cat}"
       data-code="${c.code}" data-norm="${n}"
-      id="chip-${n}"
+      id="chip-${n}" role="button" tabindex="0" aria-pressed="${added}" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();togglePensumCourse('${c.code}','${n}')}"
       onclick="togglePensumCourse('${c.code}','${n}')"
       title="${c.name} · ${c.credits} cr">
       ${c.code}<span style="opacity:.5;font-size:.6rem;margin-left:.2rem">${c.credits}cr</span>
@@ -2458,10 +2461,10 @@ function togglePensumCourse(code, normCode) {
   const chip = document.getElementById('chip-' + normCode);
   if (completedCourses.has(normCode)) {
     completedCourses.delete(normCode);
-    if (chip) chip.classList.remove('added');
+    if (chip) { chip.classList.remove('added'); chip.setAttribute('aria-pressed', 'false'); }
   } else {
     completedCourses.add(normCode);
-    if (chip) chip.classList.add('added');
+    if (chip) { chip.classList.add('added'); chip.setAttribute('aria-pressed', 'true'); }
   }
   renderCourseTags();
 }
