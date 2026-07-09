@@ -381,7 +381,8 @@
           "credits": 3,
           "category": "elective"
         }
-      ]
+      ],
+      "school": "uf"
     },
     {
       "id": "computer_engineering",
@@ -684,7 +685,8 @@
           "credits": 3,
           "category": "elective"
         }
-      ]
+      ],
+      "school": "uf"
     },
     {
       "id": "biology",
@@ -993,7 +995,8 @@
           "credits": 4,
           "category": "elective"
         }
-      ]
+      ],
+      "school": "uf"
     },
     {
       "id": "psychology",
@@ -1221,7 +1224,8 @@
           "credits": 3,
           "category": "elective"
         }
-      ]
+      ],
+      "school": "uf"
     },
     {
       "id": "business_administration",
@@ -1491,7 +1495,8 @@
           "credits": 3,
           "category": "elective"
         }
-      ]
+      ],
+      "school": "uf"
     },
     {
       "id": "civil_engineering",
@@ -1794,7 +1799,8 @@
           "credits": 3,
           "category": "elective"
         }
-      ]
+      ],
+      "school": "uf"
     },
     {
       "id": "mechanical_engineering",
@@ -2104,7 +2110,8 @@
           "credits": 3,
           "category": "elective"
         }
-      ]
+      ],
+      "school": "uf"
     }
   ],
   "elective_courses": {
@@ -2772,5 +2779,91 @@
         "category": "elective"
       }
     ]
-  }
+  },
+  "schools": [
+    {
+      "id": "uf",
+      "name": "University of Florida",
+      "short": "UF",
+      "city": "Gainesville",
+      "system": "State University System of Florida"
+    },
+    {
+      "id": "fsu",
+      "name": "Florida State University",
+      "short": "FSU",
+      "city": "Tallahassee",
+      "system": "State University System of Florida"
+    },
+    {
+      "id": "ucf",
+      "name": "University of Central Florida",
+      "short": "UCF",
+      "city": "Orlando",
+      "system": "State University System of Florida"
+    },
+    {
+      "id": "usf",
+      "name": "University of South Florida",
+      "short": "USF",
+      "city": "Tampa",
+      "system": "State University System of Florida"
+    },
+    {
+      "id": "fiu",
+      "name": "Florida International University",
+      "short": "FIU",
+      "city": "Miami",
+      "system": "State University System of Florida"
+    },
+    {
+      "id": "fau",
+      "name": "Florida Atlantic University",
+      "short": "FAU",
+      "city": "Boca Raton",
+      "system": "State University System of Florida"
+    },
+    {
+      "id": "unf",
+      "name": "University of North Florida",
+      "short": "UNF",
+      "city": "Jacksonville",
+      "system": "State University System of Florida"
+    },
+    {
+      "id": "fgcu",
+      "name": "Florida Gulf Coast University",
+      "short": "FGCU",
+      "city": "Fort Myers",
+      "system": "State University System of Florida"
+    },
+    {
+      "id": "famu",
+      "name": "Florida A&M University",
+      "short": "FAMU",
+      "city": "Tallahassee",
+      "system": "State University System of Florida"
+    },
+    {
+      "id": "uwf",
+      "name": "University of West Florida",
+      "short": "UWF",
+      "city": "Pensacola",
+      "system": "State University System of Florida"
+    },
+    {
+      "id": "ncf",
+      "name": "New College of Florida",
+      "short": "NCF",
+      "city": "Sarasota",
+      "system": "State University System of Florida"
+    },
+    {
+      "id": "flpoly",
+      "name": "Florida Polytechnic University",
+      "short": "Florida Poly",
+      "city": "Lakeland",
+      "system": "State University System of Florida"
+    }
+  ]
 }
