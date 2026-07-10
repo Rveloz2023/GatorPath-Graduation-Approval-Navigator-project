@@ -936,6 +936,11 @@ tr:hover td{background:var(--gray-lt)}
             <input id="stu-name" type="text" placeholder="e.g. A12345678" maxlength="12" autocomplete="off">
           </div>
           <div class="form-group">
+            <label>Your School</label>
+            <select id="stu-school" onchange="onSchoolChange(this.value)"><option value="">— loading schools —</option></select>
+            <div id="school-note" style="display:none;margin-top:6px;font-size:.8rem;padding:.5rem .7rem;background:#fef0eb;color:#c05621;border-radius:8px;line-height:1.4"></div>
+          </div>
+          <div class="form-group">
             <label>Current Major</label>
             <select id="stu-major" onchange="renderPensum(this.value)"><option value="">— loading majors —</option></select>
           </div>
@@ -1136,6 +1141,7 @@ async function loadData() {
     const curatedIds = new Set(curated.map(m => m.id));
     DB.majors = [...curated, ...DEMO_MAJORS.filter(m => !curatedIds.has(m.id))];
     DB.meta = json.metadata || null;
+    DB.schools = json.schools || [];
     DB.gen_ed = json.gen_ed_requirements || {};
     // Attach major-related elective lists from majors.json (works for json and demo majors)
     const em = json.elective_courses || {};
@@ -1144,7 +1150,7 @@ async function loadData() {
   } catch(e) {
     DB.majors = DEMO_MAJORS;
   }
-  populateMajorSelects();
+  populateSchoolSelect();
 }
 
 function saveStudents() { localStorage.setItem('degreepath_students', JSON.stringify(students)); }
@@ -1814,17 +1820,40 @@ function switchMode(mode) {
   if(mode==='advisor') renderAdvisorTable();
 }
 
-function populateMajorSelects() {
-  const opts=DB.majors.map(m=>`<option value="${m.id}">${m.name} (${m.degree}) — ${m.college}</option>`).join('');
-  document.getElementById('stu-major').innerHTML='<option value="">— Select your major —</option>'+opts;
-  // Also populate desired-major selector (same list)
-  const dmSel = document.getElementById('stu-desired-major');
-  if (dmSel) {
-    dmSel.innerHTML = '<option value="">— pick a target major to compare —</option>' +
-      DB.majors.map(m => `<option value="${m.id}">${m.name} (${m.degree})</option>`).join('');
+var currentSchool = 'uf';
+function schoolMajors() { return DB.majors.filter(m => (m.school || 'uf') === currentSchool); }
+function populateSchoolSelect() {
+  const sel = document.getElementById('stu-school');
+  if (!sel) { populateMajorSelects(); return; }
+  const schools = (DB.schools && DB.schools.length) ? DB.schools : [{id:'uf',name:'University of Florida',city:'Gainesville'}];
+  sel.innerHTML = schools.map(s => '<option value="' + s.id + '">' + s.name + (s.city ? ' — ' + s.city : '') + '</option>').join('');
+  const withData = schools.find(s => DB.majors.some(m => (m.school||'uf') === s.id)) || schools[0];
+  currentSchool = withData.id; sel.value = currentSchool; onSchoolChange(currentSchool);
+}
+function onSchoolChange(sid) {
+  currentSchool = sid;
+  populateMajorSelects();
+  const stu = document.getElementById('stu-major'); if (stu) stu.value = '';
+  if (typeof renderPensum === 'function') renderPensum('');
+  const note = document.getElementById('school-note');
+  if (note) {
+    const list = schoolMajors();
+    if (sid && list.length === 0) {
+      const s = (DB.schools||[]).find(x => x.id === sid);
+      note.style.display = 'block';
+      note.innerHTML = '⚠ Requirement maps for <strong>' + (s ? s.name : 'this school') + '</strong> are being added. Fully available today: University of Florida. Always verify with your academic advisor.';
+    } else { note.style.display = 'none'; }
   }
-  document.getElementById('adv-stu-major').innerHTML='<option value="">— Select major —</option>'+opts;
-  document.getElementById('adv-filter-major').innerHTML='<option value="">All Majors</option>'+DB.majors.map(m=>`<option value="${m.id}">${m.name}</option>`).join('');
+}
+function populateMajorSelects() {
+  const sm = schoolMajors();
+  const stuOpts = sm.map(m => '<option value="' + m.id + '">' + m.name + ' (' + m.degree + ') — ' + m.college + '</option>').join('');
+  document.getElementById('stu-major').innerHTML = '<option value="">— Select your major —</option>' + stuOpts;
+  const dmSel = document.getElementById('stu-desired-major');
+  if (dmSel) { dmSel.innerHTML = '<option value="">— pick a target major to compare —</option>' + sm.map(m => '<option value="' + m.id + '">' + m.name + ' (' + m.degree + ')</option>').join(''); }
+  const allOpts = DB.majors.map(m => '<option value="' + m.id + '">' + m.name + ' (' + m.degree + ') — ' + m.college + '</option>').join('');
+  document.getElementById('adv-stu-major').innerHTML = '<option value="">— Select major —</option>' + allOpts;
+  document.getElementById('adv-filter-major').innerHTML = '<option value="">All Majors</option>' + DB.majors.map(m => '<option value="' + m.id + '">' + m.name + '</option>').join('');
 }
 
 // ═══════════════════════════════════════════════════════════════════
