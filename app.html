@@ -1870,7 +1870,9 @@ function saveStudents() { localStorage.setItem('degreepath_students', JSON.strin
 // ═══════════════════════════════════════════════════════════════════
 //  CORE ENGINE
 // ═══════════════════════════════════════════════════════════════════
-function normalizeCode(code) { return (code||'').toUpperCase().replace(/\s+/g,'').trim(); }
+function normalizeCode(code) { return (code||'').toUpperCase().replace(/[^A-Z0-9]/g,''); }
+function escapeHtml(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+
 function coursePrefix(code) { const m=(code||'').match(/^([A-Z]{2,4})/); return m?m[1]:''; }
 
 // ─── Cross-institution course matcher ────────────────────────────
@@ -2384,7 +2386,7 @@ function renderCourseTags() {
       : isTR
       ? 'background:#D1FAE5;color:#065F46;border:1px solid #6EE7B7'
       : '';
-    return `<span class="tag" style="${style}">${c}${badge}<span class="tag-remove" onclick="removeCourse('${c}')">✕</span></span>`;
+    return `<span class="tag" style="${style}">${escapeHtml(c)}${badge}<span class="tag-remove" onclick="removeCourse('${c}')">✕</span></span>`;
   }).join('');
 }
 
@@ -3184,10 +3186,10 @@ function renderAdvisorTable() {
       const pct = a?a.pct:0;
       const ctBadge = a?(a.ctOK?'<span class="badge badge-green">✅ On Track</span>':'<span class="badge badge-red">⚠️ At Risk</span>'):'—';
       return `<tr>
-        <td><strong>${s.name}</strong></td>
-        <td>${s.id||'—'}</td>
-        <td>${major?major.name:s.majorId||'—'}</td>
-        <td>${s.gpa||'—'}</td>
+        <td><strong>${escapeHtml(s.name)}</strong></td>
+        <td>${escapeHtml(s.id||'—')}</td>
+        <td>${major?escapeHtml(major.name):escapeHtml(s.majorId||'—')}</td>
+        <td>${escapeHtml(s.gpa||'—')}</td>
         <td>${s.credits||0}</td>
         <td><div class="progress-wrap" style="height:8px;width:100px"><div class="progress-bar" style="width:${pct}%"></div></div><span style="font-size:.75rem;color:#888">${pct}%</span></td>
         <td>${ctBadge}</td>
@@ -3271,7 +3273,7 @@ function viewStudentDetail(key) {
       <div class="stat-box"><div class="stat-value">${a.pct}%</div><div class="stat-label">Progress</div></div>
       <div class="stat-box"><div class="stat-value">${s.credits||0}/${a.major.total_credits}</div><div class="stat-label">Credits</div></div>
       <div class="stat-box"><div class="stat-value">${a.semestersLeft}</div><div class="stat-label">Semesters Left</div></div>
-      <div class="stat-box"><div class="stat-value">${s.gpa||'—'}</div><div class="stat-label">GPA</div></div>
+      <div class="stat-box"><div class="stat-value">${escapeHtml(s.gpa||'—')}</div><div class="stat-label">GPA</div></div>
     </div>
     <div class="two-col">
       <div>
